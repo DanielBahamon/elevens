@@ -1,0 +1,113 @@
+<% content_for :page_name, "Presupuesto del duelo" %>
+
+<%= render 'duels/layout/one' %>
+
+<section class="_console _1 _newduel">
+  <aside class="_1">
+    <%= simple_form_for([@club, @duel]) do |f| %>
+      <div class="row">
+        <div class="col-lg-12 _1">
+          <aside>
+            <header class="_header_console _1">
+              <div class="_in">
+                <div class="_titles">
+                  <h1 class="_title">
+                    <%= link_to conditions_club_duel_path(@club, @duel) do %>
+                      <%= @duel.sport %>
+                    <% end %>
+                  </h1>
+                  <i class="far fa-chevron-right"></i>
+                  <h1 class="_title _current">
+                    <span><i>Presupuesto</i></span>
+                  </h1>
+                </div>
+              </div>
+            </header>
+            <div class="_body_console _1">
+              <div class="_cont">
+                <div class="_aspects">
+                  <div class="_aspectselect">
+                    <div class="_data">
+                    	<i class="fad fa-money-bill-wave"></i>
+                      <p>Apuesta</p>
+                    </div>
+                    <div class="_selectactions">
+                      <span class="_symbol">$</span>
+                      <%= f.number_field :price, class: "form-control price-duel", required: true, placeholder: "$0.00", min: 1, onchange: "calculateTotal()" %>
+                    </div>
+                  </div>
+                  <div class="_aspectselect">
+                    <div class="_data">
+                    	<i class="fad fa-futbol"></i>
+                      <p>Cancha</p>
+                    </div>
+                    <div class="_selectactions">
+                      <span class="_symbol">$</span>
+                      <%= f.number_field :budget_place, class: "form-control budget_place-duel", placeholder: "$0.00", min: 0, onchange: "calculateTotal()" %>
+                    </div>
+                  </div>
+                  <div class="_aspectselect">
+                    <div class="_data">
+                    	<i class="fad fa-tshirt"></i>
+                      <p>Equipamento</p>
+                    </div>
+                    <div class="_selectactions">
+                      <span class="_symbol">$</span>
+                      <%= f.number_field :budget_equipment, class: "form-control budget_equipment-duel", placeholder: "$0.00", min: 0, onchange: "calculateTotal()" %>
+                    </div>
+                  </div>
+                  <div class="_aspectselect">
+                    <div class="_data">
+                    	<i class="fad fa-sack-dollar"></i>
+                      <p>Total</p>
+                    </div>
+                    <div class="_selectactions">
+                      <span class="_symbol">$</span>
+                      <%= f.number_field :budget, class: "form-control budget-duel", placeholder: "$0.00", min: 0, disabled: "disabled" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+      <!-- Campo oculto para almacenar el valor total del presupuesto -->
+      <%= f.hidden_field :budget, class: "form-control budget-duel", id: "duel_budget_hidden" %>
+    <% end %>
+  </aside>
+</section>
+<%= render 'duels/layout/two' %>
+
+<script type="text/javascript">
+  function getPrice() {
+    var price = parseFloat(document.getElementById('duel_price').value) || 0;
+    return price;
+  }
+
+  function getPlace() {
+    var place = parseFloat(document.getElementById('duel_budget_place').value) || 0;
+    return place;
+  }
+
+  function getEquipment() {
+    var equipment = parseFloat(document.getElementById('duel_budget_equipment').value) || 0;
+    return equipment;
+  }
+
+  function calculateTotal() {
+    var total = getPrice() + getPlace() + getEquipment();
+    document.getElementById('duel_budget').value = total.toFixed(2);
+
+    // Actualizar el campo oculto con el valor total del presupuesto
+    document.getElementById('duel_budget_hidden').value = total.toFixed(2);
+
+    // Habilitar el botón de guardar si el valor total es mayor a 0
+    var saveButton = document.querySelector('.hidden-save-button');
+    if (total > 0) {
+      saveButton.disabled = false;
+    } else {
+      saveButton.disabled = true;
+    }
+  }
+</script>

@@ -1,0 +1,227 @@
+<% content_for :page_name, "Condiciones del encuentro" %>
+
+<%= render 'duels/layout/one' %>
+
+		<section class="_console _1 _assingment">
+			<aside class="_1">
+					<div class="row">
+			      <% if @duel.members.present? %>
+					    <div class="col-lg-12 _1">
+								<aside>
+									<header class="_header_console _1">
+										<div class="_in">
+											<div class="_titles">
+												<h1 class="_title">
+													<%= link_to members_club_duel_path(@club, @duel) do %>
+														Asistencia
+													<% end %>
+												</h1>
+												<i class="far fa-chevron-right"></i>
+												<h1 class="_title">
+													<%= link_to formation_club_duel_path(@club, @duel) do %>
+														Formación
+													<% end %>
+												</h1>
+												<i class="far fa-chevron-right"></i>
+												<h1 class="_title _current">
+													<span><i>Asignación</i></span>
+												</h1>
+											</div>
+										</div>
+									</header>
+									<div class="_body_console _1">
+										<div class="_cont">
+											<% if @local_users_approved.present? %>
+					              <div class="_cancha_1">
+					              	<div class="_formations">
+					              		<% if @duel.sport == 'Kings' || @duel.sport == 'Legends' %>
+														  <% max_players = @duel.members %>
+														<% else %>
+														  <% max_players = (@duel.members - 1) %>
+														<% end %>
+
+														<fieldset class="_formation _<%= @duel.formation %>">
+														  <div class="_cancha">
+														    <div>
+														      <% (1..max_players).each do |player_number| %>
+														        <% position = @formaciones[@formacion_actual][player_number] || 'POR' %>
+														        <% member_with_position = @local_users_approved.find { |member| member.lines.exists?(position: position.split(',').map(&:strip)) } %>
+														        <span class="_player _<%= player_number %> <% unless member_with_position.present? %>push<% end %>"
+														              data-position="<%= position %>"
+														              data-bs-toggle="modal" data-bs-target="#player_<%= player_number %>">
+														          <% if member_with_position.present? %>
+														          	<div class="_minuser">
+														          		<%= image_tag member_with_position.avatar.url(:medium), class: "_avatar _5" %>
+														          	</div>
+														          <% end %>
+														        </span>
+														      <% end %>
+														      <% unless @duel.sport == 'Kings' || @duel.sport == 'Legends' %>
+														        <% position = 'POR' %>
+														        <% member_with_mi_position = @local_users_approved.find { |member| member.lines.exists?(position: position.split(',').map(&:strip)) } %>
+														        <span class="_player _11"
+														              data-position="POR"
+														              data-bs-toggle="modal" data-bs-target="#player_11">
+														          <% if member_with_mi_position.present? %>
+														            <%= member_with_mi_position.firstname %>
+														          <% end %>
+														        </span>
+														      <% end %>
+														    </div>
+														  </div>
+														</fieldset>
+
+													</div>
+					              </div>
+				              <% else %>
+				              	<div class="_jumbo">
+				              		<h1>Sin confirmados aun</h1>
+				              	</div>
+				              <% end %>
+										</div>
+										<div class="_action">
+						    			<div class="_cont">
+						    				<div class="row nom">
+						    					<div class="col-3">
+														<%= link_to formation_club_duel_path(@club, @duel), class: 'button--naira _1 _bigbtn' do %>
+													    <span>Volver</span>
+													    <i class="button__icon fal fa-arrow-left"></i>
+														<% end %>
+						    					</div>
+						    					<div class="col-9">
+														<% if @local_users_approved.present? %>
+							    						<% position = 'DFC, DFD, DFI, DFCI, DFCD, MI, MCI, MCD, MC, MD, EI, EC, ED, ECD, ECI, DI, DCI, DCD, DD, DC, POR' %> 
+															<% if @local_users_approved.all? { |member| member.lines.exists?(position: position.split(',').map(&:strip)) } %>
+															  <%= simple_form_for([@club, @duel]) do |f| %>
+															    <%= f.hidden_field :showformation, value: true %>
+															    <button type="submit" class="button--naira _1 _bigbtn">
+															      <span>Publicar</span>
+															      <i class="button__icon fad fa-rocket"></i>
+															    </button>
+															  <% end %>
+															<% end %>
+														<% end %>
+
+						    					</div>
+						    				</div>
+						    			</div>
+										</div>
+									</div>
+								</aside>
+					    </div>
+					  <% else %>
+						  <div class="col-12">
+						  	<div class="jumbotron _jumbot _1">
+						  		<div class="_in">
+						  			<h2>Falta un paso</h2>
+						  			<p class="_mutted _slug">Debes condicionar la cantidad de jugadores por equipo antes agregar la titularidad.</p>
+						  			<hr>
+						  			<%= link_to conditions_club_duel_path(@club, @duel), class:"button--naira _1 fit _btnnext" do %>
+								    	<span>Condiciones</span>
+											<i class="button__icon fad fa-check-circle"></i>
+						  			<% end %>
+						  		</div>
+						  	</div>
+						  </div>
+					  <% end %>
+				  </div>
+			</aside>
+		</section>
+
+	<!-- MODALS -->
+	  <% if @duel.sport == 'Kings' || @duel.sport == 'Legends' %>
+	    <% max_players = @duel.members %>
+	  <% else %>
+	    <% max_players = (@duel.members - 1) %>
+	  <% end %>
+
+	  <% (1..max_players).each do |player_number| %>
+	    <div class="modal fade" id="player_<%= player_number %>" tabindex="-1" aria-labelledby="player_<%= player_number %>Label" aria-hidden="true">
+	      <div class="modal-dialog">
+	        <div class="modal-content">
+	          <div class="modal-body">
+	            <% @local_us.each do |member| %>
+	            	<% positiony = @formaciones[@formacion_actual][player_number] || 'POR' %>
+	              <div class="_itemember">
+	                <div class="_number">
+	                  <h1><%= member.number %></h1>
+	                </div>
+	                <div class="_image">
+	                  <figure class="_avatar _1 m-left">
+	                    <%= image_tag member.avatar.url(:medium), class: "_avatar" %>
+	                  </figure>
+	                </div>
+	                <div class="_info">
+	                  <p class="_name"><%= member.firstname %> <%= member.lastname %></p>
+	                  <small class="_username"><%= member.slug %></small>
+	                </div>
+	                <div class="_action">
+
+				          <% line_to_update = member.lines.first %>
+				          <% if line_to_update.present? %>
+				            <%= simple_form_for([@local, @duel, line_to_update], url: club_duel_line_path(@local, @duel, line_to_update), method: :put) do |f| %>
+				              <%= f.hidden_field :position, value: positiony %>
+				              <div class="_action text-center">
+				                <button type="submit" class="_btn">
+				                  <span><i class="fad fa-plus-circle"></i></span>
+				                </button>
+				              </div>
+				            <% end %>
+				          <% end %>
+	                </div>
+	              </div>
+	            <% end %>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  <% end %>
+		<div class="modal fade" id="player_11" tabindex="-1" aria-labelledby="player_11Label" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-body">
+		          <% positiony = 'POR' %>
+		          <% line_to_update = @local_us.find { |member| member.lines.exists?(position: positiony) } %>
+		          <% if line_to_update.present? %>
+		            <div class="_itemember">
+		              <div class="_number">
+		                <h1><%= line_to_update.member.number %></h1>
+		              </div>
+		              <div class="_image">
+		                <figure class="_avatar _1 m-left">
+		                  <%= image_tag line_to_update.member.avatar.url(:medium), class: "_avatar" %>
+		                </figure>
+		              </div>
+		              <div class="_info">
+		                <p class="_name"><%= line_to_update.member.firstname %> <%= line_to_update.member.lastname %></p>
+		                <small class="_username"><%= line_to_update.member.slug %></small>
+		              </div>
+		              <div class="_action">
+		                <%= simple_form_for([@local, @duel, line_to_update], url: club_duel_line_path(@local, @duel, line_to_update), method: :put) do |f| %>
+		                  <%= f.hidden_field :position, value: positiony %>
+		                  <div class="_action text-center">
+		                    <button type="submit" class="_btn">
+		                      <span><i class="fad fa-plus-circle"></i></span>
+		                    </button>
+		                  </div>
+		                <% end %>
+		              </div>
+		            </div>
+		          <% end %>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+<%= render 'duels/layout/two' %>
+
+<script type="text/javascript">
+	document.querySelectorAll('._option input[type="radio"]').forEach(function(radio) {
+	  radio.addEventListener('click', function() {
+	    document.querySelectorAll('._option').forEach(function(sport) {
+	      sport.classList.remove('selected');
+	    });
+	    this.closest('._option').classList.add('selected');
+	  });
+	});
+</script>

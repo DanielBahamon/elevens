@@ -1,0 +1,33 @@
+<main class="_fully _container _1">
+  <main class="_layout _1<% if current_page?(console_path) %> console<% end %>">
+    <aside class="_1">
+      <div class="_cont">
+        <div class="_in">
+          <%= render 'shared/navs/side' %>
+        </div>
+      </div>
+    </aside>
+    <aside class="_2">
+      <%= yield %>
+      <div class="_create_action d-xl-none">
+        <div class="_options">
+        </div>
+        <div class="collapse" id="collapseCreate">
+          <div class="card-body">
+            <div class="_buttons">
+              <%= link_to battle_path, class: "button--sacnite _3 _invert _btn _medium m-0-auto", 'data-bs-toggle': "tooltip", 'data-bs-title': "¡Crea un nuevo Torneo!", 'data-bs-placement': "left" do %>
+                <i class="fad fa-trophy-alt button__icon"></i>
+              <% end %>
+              <%= link_to battle_path, class: "button--sacnite _3 _invert _btn _medium m-0-auto", 'data-bs-toggle': "tooltip", 'data-bs-title': "¡Crea un nuevo Equipo!", 'data-bs-placement': "left" do %>
+                <i class="fad fa-users button__icon"></i>
+              <% end %>
+              <%= link_to battle_path, class: "button--sacnite _3 _invert _btn _medium m-0-auto", 'data-bs-toggle': "tooltip", 'data-bs-title': "¡Crea un nuevo Duelo!", 'data-bs-placement': "left" do %>
+                <i class="fad fa-futbol button__icon"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>  
+        <a class="_morebtn button--sacnite _2 _btn m-0-auto close _big" id="_btn_more_create" data-bs-toggle="collapse" href="#collapseCreate" role="button" aria-expanded="false" aria-controls="collapseCreate">
+          <i class="fas fa-plus button__icon"></i>
+        </a>
+      </div>

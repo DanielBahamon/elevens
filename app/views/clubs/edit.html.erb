@@ -1,0 +1,666 @@
+<% content_for :page_name, "Edit #{@club.club_name} - Entornes" %>
+
+<%= render 'clubs/layout/one' %>
+	<% if @undo.present? %>
+			<%= render 'shared/cards/duels/undo', duel: @undo %>
+  <% end %>
+	<section class="_console _1 _club">
+		<aside class="_1">
+			<%= simple_form_for @club do |f| %>
+				<div class="row">
+					<div class="col-12">
+						<aside>
+							<header class="_header_console _1">
+								<div class="_in">
+									<div class="_info">
+										<div>
+											<div class="_infoclub">
+												<h2 class="_title"> 
+													<span>Edición de <%= @club.club_name %></span>
+												</h2>
+											</div>
+										</div>
+									</div>
+									<div class="_action">
+                    <button class="button--naira _1" type="submit">
+								    	<span>Guardar</span>
+										  <i class="button__icon far fa-save"></i>
+                    </button>
+									</div>
+								</div>
+							</header>
+						</aside>
+					</div>
+					<div class="col-lg-7 _1">
+							<div class="row">
+								<div class="col-lg-6 _1">
+									<aside>
+										<header class="_header_console _1">
+											<div class="_in">
+												<div class="_info">
+													<div>
+														<div class="_infoclub">
+															<h3 class="_title"> 
+																<span>Beneficios</span>
+															</h3>
+														</div>
+													</div>
+												</div>
+											</div>
+										</header>
+										<div class="_body_console _1">
+											<div class="_cont _1">
+												<div class="form-check form-switch">
+													<i class="fad fa-tshirt"></i>
+												  <%= f.check_box :uniform, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_uniform" for="club_uniform">Uniformes</label>
+												  <label class="_hidelabel" for="club_uniform"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-users-class"></i>
+												  <%= f.check_box :staff, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_staff" for="club_staff">Equipo tecnico</label>
+												  <label class="_hidelabel" for="club_staff"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-money-check-edit-alt"></i>
+												  <%= f.check_box :payroll, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_payroll" for="club_payroll">Nomina</label>
+												  <label class="_hidelabel" for="club_payroll"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-bus"></i>
+												  <%= f.check_box :transport, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_transport" for="club_transport">Transporte</label>
+												  <label class="_hidelabel" for="club_transport"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-plane-alt"></i>
+												  <%= f.check_box :perdiem, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_perdiem" for="club_perdiem">Viaticos</label>
+												  <label class="_hidelabel" for="club_perdiem"></label>
+												</div>
+											</div>
+										</div>
+									</aside>
+								</div>
+								<div class="col-lg-6 _2">
+									<aside>
+										<header class="_header_console _1">
+											<div class="_in">
+												<div class="_info">
+													<div>
+														<div class="_infoclub">
+															<h3 class="_title"> 
+																<span>Entrenamientos</span>
+															</h3>
+														</div>
+													</div>
+												</div>
+											</div>
+										</header>
+										<div class="_body_console _1">
+											<div class="_cont _2">
+												<div class="form-check form-switch">
+													<i class="fad fa-user-clock"></i>
+												  <%= f.check_box :training, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_training" for="club_training">Frecuentes</label>
+												  <label class="_hidelabel" for="club_training"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-parking"></i>
+												  <%= f.check_box :parking, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_parking" for="club_parking">Parqueaderos</label>
+												  <label class="_hidelabel" for="club_parking"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-shield-check"></i>
+												  <%= f.check_box :private, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_private" for="club_private">Privados</label>
+												  <label class="_hidelabel" for="club_private"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-user-shield"></i>
+												  <%= f.check_box :owner, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_owner" for="club_owner">Canchas privadas</label>
+												  <label class="_hidelabel" for="club_owner"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-chimney"></i>
+												  <%= f.check_box :roof, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_roof" for="club_roof">Canchas cubiertas</label>
+												  <label class="_hidelabel" for="club_roof"></label>
+												</div>
+											</div>
+										</div>
+									</aside>
+								</div>
+								<div class="col-lg-6 _3">
+									<aside>
+										<header class="_header_console _1">
+											<div class="_in">
+												<div class="_info">
+													<div>
+														<div class="_infoclub">
+															<h3 class="_title"> 
+																<span>Servicios</span>
+															</h3>
+														</div>
+													</div>
+												</div>
+											</div>
+										</header>
+										<div class="_body_console _1">
+											<div class="_cont _1">
+												<div class="form-check form-switch">
+													<i class="fad fa-toilet-paper"></i>
+												  <%= f.check_box :bathrooms, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_bathrooms" for="club_bathrooms">Baños</label>
+												  <label class="_hidelabel" for="club_bathrooms"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-shower"></i>
+												  <%= f.check_box :showers, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_showers" for="club_showers">Duchas</label>
+												  <label class="_hidelabel" for="club_showers"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-glass-citrus"></i>
+												  <%= f.check_box :hydration, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_hydration" for="club_hydration">Hidratación</label>
+												  <label class="_hidelabel" for="club_hydration"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-backpack"></i>
+												  <%= f.check_box :lockers, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_lockers" for="club_lockers">Casilleros</label>
+												  <label class="_hidelabel" for="club_lockers"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-popcorn"></i>
+												  <%= f.check_box :snacks, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_snacks" for="club_snacks">Snacks</label>
+												  <label class="_hidelabel" for="club_snacks"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-signal"></i>
+												  <%= f.check_box :wifi, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_wifi" for="club_wifi">WIFI</label>
+												  <label class="_hidelabel" for="club_wifi"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-medkit"></i>
+												  <%= f.check_box :assistance, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_assistance" for="club_assistance">Primeros Auxilios</label>
+												  <label class="_hidelabel" for="club_assistance"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-dumbbell"></i>
+												  <%= f.check_box :gym, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_gym" for="club_gym">Gimnasio</label>
+												  <label class="_hidelabel" for="club_gym"></label>
+												</div>
+
+											</div>
+										</div>
+									</aside>	
+								</div>
+								<div class="col-lg-6 _4">
+									<aside>
+										<header class="_header_console _1 d-none d-lg-block">
+											<div class="_in">
+												<div class="_info">
+													<div>
+														<div class="_infoclub">
+															<h3 class="_title"> 
+															</h3>
+														</div>
+													</div>
+												</div>
+											</div>
+										</header>
+										<div class="_body_console _1">
+											<div class="_cont _1">
+												<div class="form-check form-switch">
+													<i class="fad fa-burger-soda"></i>
+												  <%= f.check_box :lunch, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_lunch" for="club_lunch">Alimentos</label>
+													  <label class="_hidelabel" for="club_lunch"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-washer"></i>
+												  <%= f.check_box :washers, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_washers" for="club_washers">Lavanderia</label>
+													  <label class="_hidelabel" for="club_washers"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-temperature-hot"></i>
+												  <%= f.check_box :heating, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_heating" for="club_heating">Calefacción</label>
+												  <label class="_hidelabel" for="club_heating"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-temperature-frigid"></i>
+												  <%= f.check_box :air, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_air" for="club_air">Aire condicionado</label>
+												  <label class="_hidelabel" for="club_air"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-gamepad"></i>
+												  <%= f.check_box :videogames, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_videogames" for="club_videogames">Videojuegos</label>
+												  <label class="_hidelabel" for="club_videogames"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-swimmer"></i>
+												  <%= f.check_box :pools, class: "form-check-input", role: "switch" %>
+												  <label class="form-check-label" id="club_pools" for="club_pools">Piscinas</label>
+												  <label class="_hidelabel" for="club_pools"></label>
+												</div>
+												<div class="form-check form-switch">
+													<i class="fad fa-graduation-cap"></i>
+													<%= f.check_box :courses, class: "form-check-input #{'on' if @club.courses == true}", role: "switch" %>
+												  <label class="form-check-label" id="club_courses" for="club_courses">Aprendizaje</label>
+												  <label class="_hidelabel" for="club_courses"></label>
+												</div>
+											</div>
+										</div>
+									</aside>
+								</div>
+							</div>
+							<%= f.hidden_field :amenities, value: true %>
+					</div>
+					<div class="col-lg-5 _2">
+						<aside>
+							<div class="_body_console _1">
+						  	<section class="_club _1">
+						  		<aside class="_clubcover splide">
+									  <div class="splide__arrows">
+											<button class="splide__arrow splide__arrow--prev d-none"></button>
+											<button class="splide__arrow splide__arrow--next d-none"></button>
+									  </div>
+										<div class="splide__track">
+										  <ul class="splide__list">
+										  	<% if @club_photos.count > 0 %>
+											  	<% @club_photos.each do |photo| %>
+										        <li class="splide__slide <%= 'active' if photo.id == @club_photos[0].id %>" >
+										          <%= image_tag photo.image.url(), class: "_coverpic" %>
+										        </li>
+										      <% end %>
+									      <% else %>
+									      	<li class="splide__slide">
+									      		<img src="https://dfqckra2c3mhq.cloudfront.net/assets/bg_coverpage.jpg">
+									      	</li>
+									      <% end %>
+										  </ul>
+										</div>
+										<a class="_coverlink" data-bs-toggle="modal" data-bs-target="#coverModal">
+											<i class="bi bi-pencil-square"></i>
+										</a>
+									</aside>
+									<aside class="_info">
+										<div class="row _1 _cover">
+											<div class="col-md-4 _1 offset-md-4">
+												<aside class="_in">
+													<%= image_tag @club.avatar.url(:medium), class: "_shield" %>
+													<a class="_coverlink" data-bs-toggle="modal" data-bs-target="#avatarModal">
+														<i class="bi bi-pencil-square "></i>
+													</a>
+												</aside>
+											</div>
+										</div>
+										<div class="row _2 _details m-0">
+											<div class="col-12 _1 p-0">
+												<div class="_in ">
+													<div class="_stars text-center">
+														<i class="fas fa-star"></i>
+														<i class="fas fa-star"></i>
+														<i class="fas fa-star"></i>
+														<i class="fas fa-star"></i>
+														<i class="fas fa-star"></i>
+													</div>
+							    				<h3 class="_title_edit text-center ">
+							    					<div class="input-group input-group-sm mb-3">
+				  										<a class="btn _title_edit_link_cancel">
+							    							<i class="bi bi-chevron-left"></i>
+				  										</a>
+							    						<h2 class="_clubtitle _1 mb-0"><%= @club.club_name %></h2>
+				  										<a class="btn _title_edit_link">
+				  											<i class="bi bi-pencil-square "></i>
+				  										</a>
+							    						<%= f.text_field :club_name, class: "form-control _input_title_edit", placeholder: "#{@club.club_name}" %>
+				  										<button class="_btn button--aylen _2 fit" type="submit">
+				  											<span>Guardar</span>
+				  										</button>
+														</div>
+							    				</h3>
+							    				<h6 class="_slug_edit">
+							    					<div class="input-group input-group-sm ">
+				  										<a class="btn _slug_edit_link_cancel">
+							    							<i class="bi bi-chevron-left"></i>
+				  										</a>
+															<p class="_clubsubtitle _1 mb-0">@<%= @club.slug %></p>
+				  										<a class="btn _slug_edit_link">
+				  											<i class="bi bi-pencil-square "></i>
+				  										</a>
+				  										<span class="_findstatus">
+				  											<span class="_status _club_status" style="right: 6px; top:7px;">
+						                      <span id="valid-clubname" class="valid-clubname"><i class="bi bi-check2"></i></span>
+						                      <span id="invalid-clubname" class="invalid-clubname"><i class="bi bi-x-lg"></i></span>
+						                    </span>
+				  										</span>
+					                    <%= f.text_field :slug, class: "_input _2 form-control _input_slug_edit", required: true,
+					                          id: "club_clubname", placeholder: "#{@club.slug} " %>
+				  										<button class="_btn button--aylen _2 fit" type="submit">
+				  											<span>Guardar</span>
+				  										</button>
+														</div>
+							    				</h6>
+													<div class="_data text-center">
+														<p class="_location"><%= @club.city %>, <%= @club.country %></p>
+			  										<a class="btn _location_edit_link" data-bs-toggle="modal" data-bs-target="#locationModal">
+			  											<i class="bi bi-pencil-square "></i>
+			  										</a>
+													</div>
+												</div>
+											</div>
+										</div>
+						  			<div class="row _3 _data m-0">
+						  				<div class="col-4 p-0 text-center">
+						  					<aside>
+						  						<h4>1.3M</h4>
+						  						<p>Fans</p>
+						  					</aside>
+						  				</div>
+						  				<div class="col-4 p-0 text-center">
+						  					<aside>
+						  						<h4>120.4k</h4>
+						  						<p>Duelos Ganados</p>
+						  					</aside>
+						  				</div>
+						  				<div class="col-4 p-0 text-center">
+						  					<aside>
+						  						<h4>158</h4>
+						  						<p>Torneos Ganados</p>
+						  					</aside>
+						  				</div>
+						  			</div>
+						  			<div class="row _4 _description m-0">
+											<div class="_cont _2">
+									    		<div class="row m-0">
+									    			<div class="col-12 p-0">
+														<div class="input-group mb-3">
+														  	<%= f.select( :sport_type, [
+												  						 ["Tipo de deporte", ""],
+												  						 ["Fútbol", "Football"],
+												  						 ["Fútsal", "Showbol"],
+												  						 ["Microfutbol", "Micro"],
+												  						 ["Futvóley", "Footvoley"], 
+												  						 ["Fútbol-Tenis", "Tenis"],
+												  						 ["Banquitas", "Benches"]],
+												  						 {required: true}, 
+												  						 {class: 'form-select'}) %>
+
+														</div>
+									    			</div>
+									    			<div class="col-12 p-0">
+									    				<div class="input-group mb-5">
+									    					<%= f.text_area :summary, rows: 7, class: "form-control", placeholder: "¿Qué diferencia a tu equipo del resto?" %>
+									    				</div>
+									    			</div>
+									    			<div class="col-12 p-0 _action_save">
+									    			</div>
+									    		</div>
+											</div>
+						  			</div>
+									</aside>
+						  	</section>
+							</div>
+						</aside>
+					</div>
+				</div>
+			<% end %>
+		</aside>
+	</section>
+ <%= render 'clubs/layout/two' %>
+
+
+	<!-- MODAL -->
+	<div class="modal fade" id="coverModal" tabindex="-1" aria-labelledby="coverModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      	<h5 style="margin-bottom: 0;">Portada</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="_cont">
+
+	      		<%= form_for @club, url: club_club_photos_path(@club), method: 'post', html: {multipart: true} do |f| %>
+			    		<div class="row">
+			    			<div class="col-md-12">
+									<div class="input-group mb-3">
+									  <%= file_field_tag "images[]", type: :file, multiple: true, class: "form-control" %>
+									  <%= f.submit "Guardar", class: "btn btn-outline-secondary" %>
+									</div>
+			    			</div>
+			    		</div>
+	    				<aside class="_images row" id="club_photos">
+	    					<%= render 'club_photos/photos' %>
+	    				</aside>
+			    	<% end %>
+	      	</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="modal fade" id="avatarModal" tabindex="-1" aria-labelledby="avatarModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      	<h5 style="margin-bottom: 0;">Avatar</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="_cont">
+
+	      		<%= form_for @club, html: { multipart: true } do |f| %>
+			    		<div class="row">
+			    			<div class="col-md-12">
+									<div class="input-group mb-3">
+              			<%= f.file_field :avatar, class: "form-control", id: "upload_picture_1" %>
+										<%= f.hidden_field :front, value: true %>
+									  <%= f.submit "Guardar", class: "btn btn-outline-secondary" %>
+									</div>
+			    			</div>
+			    		</div>
+			    	<% end %>
+	      	</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="_cont">
+	      		<%= simple_form_for @club do |f| %>
+			    		<div class="row">
+			    			<div class="col-md-6">
+									<div class="input-group mb-3">
+										<label>País</label>
+						  			<%= f.text_field :country, class: "form-control", placeholder: "País" %>
+									</div>
+			    			</div>
+			    			<div class="col-md-6">
+			    				<div class="input-group mb-3">
+										<label>Ciudad</label>
+						  			<%= f.text_field :city, class: "form-control", placeholder: "Ciudad" %>
+			    				</div>
+			    			</div>
+			    			<div class="col-md-6">
+			    				<div class="input-group mb-3">
+										<label>Distrito/Barrio/Zona</label>
+						  			<%= f.text_field :neighborhood, class: "form-control", placeholder: "Barrio / Distrito" %>
+			    				</div>
+			    			</div>
+			    			<div class="col-md-6">
+			    				<div class="input-group mb-3">
+										<label>Dirección</label>
+						  			<%= f.text_field :address, class: "form-control", placeholder: "Dirección" %>
+			    				</div>
+								  <%= f.hidden_field :latitude, value: current_user.clubs[0].latitude || 37.7749 %>
+								  <%= f.hidden_field :longitude, value: current_user.clubs[0].longitude || -122.4194 %>
+			    			</div>
+			    			<div class="col-12">
+					        <div id="map_club" style="width:100%; height: 300px;"></div>
+					        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz-J87QC1qvkimHdAE55GcV4Qpt8STDzc"></script>
+					        <script type="text/javascript">
+					          function initialize() {
+									    <% if @club.latitude.blank? || @club.latitude.blank? %>
+									    // Obtener la ubicación actual del usuario
+									    if (navigator.geolocation) {
+									      navigator.geolocation.getCurrentPosition(function(position) {
+									        var location = { lat: position.coords.latitude, lng: position.coords.longitude };
+									        map.setCenter(location);
+									        marker.setPosition(location);
+									      }, function() {
+									        console.log('The Geolocation service failed.');
+									      });
+
+									    } else {
+									      var location = {lat: position.coords.latitude, lng: position.coords.longitude};
+									      console.log('Your browser doesnt support geolocation.');
+									    }
+									    <% else %>
+									    var location = {lat: <%= @club.latitude %>, lng: <%= @club.longitude %>};
+									    <% end %>
+
+									    var map = new google.maps.Map(document.getElementById('map_club'), {
+									      center: location,
+									      zoom: 14
+									    });
+
+									    var marker = new google.maps.Marker({
+									      position: location,
+									      map: map,
+									      draggable: true
+									    });
+
+									    var geocoder = new google.maps.Geocoder();
+
+									    google.maps.event.addListener(marker, 'dragend', function() {
+									      geocoder.geocode({ 'location': marker.getPosition() }, function(results, status) {
+									        if (status == google.maps.GeocoderStatus.OK) {
+									          document.getElementById('club_address').value = results[0].formatted_address;
+									          document.getElementById('club_city').value = getFieldValueFromAddressComponent(results[0], 'locality');
+									          document.getElementById('club_neighborhood').value = getFieldValueFromAddressComponent(results[0], 'sublocality') || getFieldValueFromAddressComponent(results[0], 'neighborhood');
+
+									          document.getElementById('club_country').value = getFieldValueFromAddressComponent(results[0], 'country');
+									          document.getElementById('club_latitude').value = marker.getPosition().lat();
+									          document.getElementById('club_longitude').value = marker.getPosition().lng();
+									        } else {
+									          alert('Geocode was not successful for the following reason: ' + status);
+									        }
+									      });
+									    });
+
+									    function getFieldValueFromAddressComponent(address, component) {
+									      for (var i = 0; i < address.address_components.length; i++) {
+									        var addressType = address.address_components[i].types[0];
+									        if (addressType == component) {
+									          return address.address_components[i].long_name;
+									        }
+									      }
+									      return "";
+									    }
+
+										  function updateMarkerLocation(address, city, country, latitude, longitude) {
+										    var geocoder = new google.maps.Geocoder();
+										    var addressString = address + ', ' + city + ', ' + country;
+										    geocoder.geocode({ address: addressString }, function(results, status) {
+										      if (status == google.maps.GeocoderStatus.OK) {
+										        var location = results[0].geometry.location;
+										        map.setCenter(location);
+										        marker.setPosition(location);
+										        document.getElementById('club_latitude').value = location.lat();
+										        document.getElementById('club_longitude').value = location.lng();
+										      } else {
+										        alert('Geocode was not successful for the following reason: ' + status);
+										      }
+										    });
+										  }
+
+									    document.getElementById('club_country').addEventListener('change', function() {
+									      var country = this.value;
+									      var city = document.getElementById('club_city').value;
+									      var address = document.getElementById('club_address').value;
+									      var neighborhood = document.getElementById('club_neighborhood').value;
+									      updateMarkerLocation(address, city, country, marker, map);
+									    });
+									    document.getElementById('club_city').addEventListener('change', function() {
+									      var country = document.getElementById('club_country').value;
+									      var city = this.value;
+									      var address = document.getElementById('club_address').value;
+									      var neighborhood = document.getElementById('club_neighborhood').value;
+									      updateMarkerLocation(address, city, country, marker, map);
+									    });
+									    document.getElementById('club_address').addEventListener('change', function() {
+									      var country = document.getElementById('club_country').value;
+									      var city = document.getElementById('club_city').value;
+									      var neighborhood = document.getElementById('club_neighborhood').value;
+									      var address = this.value;
+									      updateMarkerLocation(address, city, country, marker, map);
+									    });
+
+					          }
+					          google.maps.event.addDomListener(window, 'load', initialize);
+					        </script>
+			    			</div>
+			    			<div class="col-12">
+			    				<br>
+                  <button class="button--naira _1 _bigbtn" type="submit">
+							    	<span>Guardar</span>
+									  <i class="button__icon fad fa-save"></i>
+                  </button>
+			    			</div>
+			    		</div>
+			    	<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+	  document.addEventListener( 'DOMContentLoaded', function() {
+	    var splide = new Splide( '._clubcover', {
+			  type   : 'loop',
+			  perPage: 1,
+			  perMove: 1,
+			height : '15rem',
+	    } );
+	    splide.mount();
+
+	  });
+		$(document).ready(function() {
+		  $("._title_edit_link").click(function() {
+		    $("._title_edit").toggleClass("active");
+		  });
+		  $("._title_edit_link_cancel").click(function() {
+		    $("._title_edit").toggleClass("active");
+		  });
+		  /* -------------  */
+		  $("._slug_edit_link").click(function() {
+		    $("._slug_edit").toggleClass("active");
+		  });
+		  $("._slug_edit_link_cancel").click(function() {
+		    $("._slug_edit").toggleClass("active");
+		  });
+		});
+	</script>

@@ -1,0 +1,35 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  championship_name: MyString
+  championship_type: MyString
+  sport: MyString
+  sport_type: MyString
+  price: 1
+  award: 1
+  competitors: 1
+  summary: MyText
+  address: MyString
+  active: false
+  city: MyString
+  country: MyString
+  private: false
+  rounds: 1
+  user: one
+
+two:
+  championship_name: MyString
+  championship_type: MyString
+  sport: MyString
+  sport_type: MyString
+  price: 1
+  award: 1
+  competitors: 1
+  summary: MyText
+  address: MyString
+  active: false
+  city: MyString
+  country: MyString
+  private: false
+  rounds: 1
+  user: two

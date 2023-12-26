@@ -1,0 +1,11 @@
+<%= link_to user_path(member), class: '_mini_user _1', target: '_blank' do %>
+	<div class="_in">
+		<figure>
+			<%= image_tag member.avatar.url(:medium), class: "_avatar _2" %>
+		</figure>
+		<div class="_info">
+			<h6 class="_title"><%= member.firstname %> <%= member.lastname %></h6>
+			<p class="_subtitle"><%= member.slug %></p>
+		</div>
+	</div>
+<% end %>

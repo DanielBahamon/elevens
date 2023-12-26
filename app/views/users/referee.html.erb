@@ -1,0 +1,139 @@
+<% content_for :page_name, "#{@user.slug.capitalize} - Entornes" %>
+
+
+<%= render 'shared/layout/one' %>
+	<section class="_console _1 _referi _user">
+		<aside class="_1">
+			<div class="row">
+				<div class="col-lg-6 _1">
+					<aside>
+						<header class="_header_console _1">
+							<div class="_in">
+								<div class="_info">
+									<div>
+										<div class="_infoclub">
+											<div class="_title_icon">
+												<div class="__data">
+													<h3 class="_title"> 
+														<span>Consola de Referí</span>
+													</h3>
+													<p class="_mutted">Estas actuando como juez de duelos:</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="_action">
+				         <%= link_to user_path(current_user), class: "_minilink" do %>
+				           Ver perfil
+				         <% end %>
+								</div>
+							</div>
+						</header>
+						<div class="_body_console _1">
+							<div class="_cont _1">
+							<% if @duels.exists? %>
+								<% @duels.each do |duel| %>
+									<%= render 'shared/cards/duels/prev', duel: duel %>
+								<% end %>
+							<% elsif @duel %>
+								<%= render 'clubs/shared/cards/new', duel: @duel %>
+							<% else %>
+								<figure class="_nothing">
+									<div class="_1">
+										<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/illustrations/Coach_Flatline.svg">
+									</div>
+								</figure>
+							<% end %>
+							</div>
+						</div>
+					</aside>
+					<script>
+					  document.addEventListener( 'DOMContentLoaded', function() {
+					    var splide = new Splide( '._usercover', {
+					      type   : 'loop',
+					      height : '15rem',
+					      perPage: 1,
+					      perMove: 1
+					    } );
+					    splide.mount();
+
+					    // ==========================================
+
+					    var splide2 = new Splide( '._amenities_slide', {
+					      type   : 'slide',
+					      perPage: 3,
+					      perMove: 1,
+					    } );
+					    splide2.mount();
+					  });
+					</script>
+
+				</div>
+				<div class="col-lg-6 _2">
+					<aside>
+						<header class="_header_console _1">
+							<div class="_in">
+								<div class="_info">
+									<h3 class="_title">Última actividad como juez</h3>
+								</div>
+								<div class="_action">
+									<%= link_to notifications_path, class: "_minilink" do %>
+										Ver todos
+									<% end %>
+								</div>
+							</div>
+						</header>
+						<div class="_body_console _1">
+							<div class="_notifications">
+								<% if @notifications.exists? %>
+									<% @notifications.each do |notification| %>
+						        <%= render 'shared/news/notification', notification: notification %>
+							    <% end %>
+							  <% else %>
+									<figure class="_nothing">
+										<div class="_1">
+											<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/illustrations/Empty+Inbox+_Flatline.svg">
+										</div>
+									</figure>
+						    <% end %>
+							</div>
+						</div>
+					</aside>
+					<aside>
+						<header class="_header_console _1">
+							<div class="_in">
+								<div class="_info">
+									<div>
+										<div class="_infoclub">
+											<h3 class="_title m">Duelos pitados</h3>
+											<p class="_text">Los encuentros que haz concretado:</p>
+									</div>
+									</div>
+								</div>
+								<div class="_action">
+								</div>
+							</div>
+						</header>
+						<div class="_body_console _1">
+							<div class="_clubs">
+								<% if @pasts.exists? %>
+									<% @pasts.each do |duel| %>
+								    <%= render 'shared/cards/duels/view', duel: duel %>
+								  <% end %>
+							  <% else %>
+									<figure class="_nothing">
+										<div class="_1">
+											<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/illustrations/Football+club_Flatline.svg">
+										</div>
+									</figure>
+							  <% end %>
+							</div>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</aside>
+	</section>
+
+<%= render 'shared/layout/two' %>

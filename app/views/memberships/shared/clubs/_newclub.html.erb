@@ -1,0 +1,21 @@
+<article class="_cardclub">
+	<div class="row m-0">
+		<div class="col-auto">
+			<figure class="_shield">
+				<%= image_tag club.avatar.url(:medium), class: "_shield _2" %>
+			</figure>
+		</div>
+		<div class="col _data">
+			<div>
+				<h4 class="_title"><%= club.club_name %> </h4>
+				<small class="_captain"><span>desea disponer de tu talento</span></small>
+			</div>
+		</div>
+		<div class="col-auto _action">
+			<div class="_in">
+				<i class="far fa-arrow-right"></i>
+			</div>
+		</div>
+	</div>
+	<%= link_to club_path(club), class: '_link_hide' do %><% end %>
+</article>

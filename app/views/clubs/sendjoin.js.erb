@@ -1,0 +1,7 @@
+<% if @membership.persisted? %>
+  // Reemplaza el botón de unión con el icono de reloj para indicar que está pendiente
+  $("#_invitation_<%= @membership.user_id %>").replaceWith('<div class="_iconlist"><i class="fal fa-clock"></i></div>');
+<% else %>
+  // Manejo de errores, por ejemplo, mostrar un mensaje
+  alert('No se pudo enviar la invitación');
+<% end %>

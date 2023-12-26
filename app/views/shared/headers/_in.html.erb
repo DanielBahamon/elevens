@@ -1,0 +1,24 @@
+<header class="_head">
+  <% if user_signed_in? %>
+    <div class="_user">
+      <%= link_to current_user, class: "_contavatar" do %>
+        <%= image_tag current_user.avatar.url(:medium), class: "_avatar _2" %>
+      <% end %>
+      <div class="_data">
+        <b><%= current_user.firstname %> <%= current_user.lastname %></b>
+        <small>@<%= current_user.slug %></small>
+        <%= link_to current_user, class: "_link_hide" do %><% end %>
+      </div>
+    </div>
+    <div class="_actions">
+      <%= link_to notifications_path, class: "_iconbtn" do %>
+        <i class="bi bi-bell"></i>
+        <span class="_count"></span>
+      <% end %>
+      <%= link_to battle_path, class: "_iconbtn" do %>
+        <i class="bi bi-plus-circle"></i>
+        <span class="_count"></span>
+      <% end %>
+    </div>
+  <% end %>
+</header>

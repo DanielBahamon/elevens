@@ -1,0 +1,13 @@
+<%= simple_form_for([club, duel, Line.new]) do |f| %>
+  <% @membership = Membership.where("memberships.user_id == '#{member.id}'").first %>
+  <%= f.hidden_field :club_id, value: @local.id %>
+  <%= f.hidden_field :duel_id, value: @duel.id %>
+  <%= f.hidden_field :user_id, value: member.id %>
+  <%= f.hidden_field :membership, value: @membership.id %>
+  <%= f.hidden_field :status, value: 'Invoke' %>
+  <div class="_action text-center">
+    <button type="submit" class="_btn">
+      <span><i class="fad fa-plus-circle"></i></span>
+    </button>
+  </div>
+<% end %>

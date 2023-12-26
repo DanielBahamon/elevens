@@ -1,0 +1,29 @@
+<section class="_newduel _visual _1">
+	<div class="_cont _1">
+		<aside class="_in _1">
+		</aside>
+		<aside class="_in _2">
+			<div class="_contain row">
+				<div class="col-md-auto  _1">
+					<%= render 'duels/shared/menu_duel' %>
+				</div>
+				<div class="col-md _2">
+			    	<%= form_for ([@club, @duel]), url: club_duel_duel_photos_path(@club, @duel), method: 'post', html: {multipart: true} do |f| %>
+			    		<div class="row">
+			    			<div class="col-md-6">
+								<div class="input-group mb-3">
+								  <%= file_field_tag "images[]", type: :file, multiple: true, class: "form-control" %>
+								  <%= f.submit "Guardar", class: "btn btn-outline-secondary" %>
+								</div>
+			    			</div>
+			    		</div>
+	    				<aside class="_images row" id="duel_photos">
+	    					<%= render 'duel_photos/photos' %>
+	    				</aside>
+			    	<% end %>
+				</div>
+			</div>
+		</aside>
+	</div>
+</section>
+ 

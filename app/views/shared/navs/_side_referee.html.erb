@@ -1,0 +1,15 @@
+<nav class="_navside">
+  <div class="_cont _1">
+    <%= link_to root_path, class: "_logo _1" do %>
+      <%= image_tag '//d4s5cnqwbwfuf.cloudfront.net/assets/brands/v1/11_dark.svg', class: "_light", alt: 'Entornes'%>
+    <% end %>
+    <% if user_signed_in? && current_user.referee_confirmation %>
+      <%= link_to referee_user_path(current_user), class: "_item #{'active' if current_page?(referee_user_path(current_user))}" do %>
+        <i class="far fa-arrow-left"></i>
+        <span class="_1">Volver</span>
+      <% end %>
+    <% end %>
+
+  </div>
+</nav>
+<%= render "shared/navs/foot" %>

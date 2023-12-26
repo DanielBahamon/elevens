@@ -1,0 +1,181 @@
+<% content_for :page_name, "Condiciones del encuentro" %>
+
+<%= render 'duels/layout/one' %>
+
+	<section class="_console _1 _newduel">
+		<aside class="_1">
+				<div class="row">
+					<% if @duel.rival_id.blank? %>
+						<% if current_user == @club.user %> 
+							<div class="col-12 _1">
+								<aside>
+									<header class="_header_console _1">
+										<div class="_in">
+											<div class="_titles">
+												<h1 class="_title _stroke">
+													<span><i>Clubes</i></span>
+												</h1>
+											</div>
+											<div class="_action">
+						            <button class="button--naira _1 _bigbtn" type="submit" data-bs-toggle="modal" data-bs-target="#modalInvitation">
+						              <span>Invitar</span>
+						              <i class="button__icon fad fa-paper-plane"></i>
+						            </button>
+											</div>
+										</div>
+									</header>
+									<div class="_body_console _1">
+										<div class="_cont">
+											<% if @available_clubs.present? %>
+											  <div class="_clubs">
+											    <% @available_clubs.each do |rival| %>
+											      <div class="_club">
+											      	<aside>
+											      		<div class="_1">
+												          <figure class="_shield">
+												            <%= image_tag rival.avatar.url(:medium), class: "_shield _1" %>
+												          </figure>
+												        </div>
+												        <div class="_2">
+												          <h4 class="_name"><%= rival.club_name %></h4>
+												          <p class="_location"><%= rival.city %>, <%= rival.country %></p>
+												        </div>
+											      	</aside>
+											      	<aside>
+											      		<div class="_3">
+												          <%= link_to challenge_club_duel_rivals_path(club_id: @club.id, duel_id: @duel.id, id: @duel.id, rival_id: rival.id), class: "_morebtn button--sacnite _2 _btn m-0-auto close _small _btn_more_create", method: :post do %>
+												            <i class="fal fa-plus button__icon"></i>
+												          <% end %>
+												        </div>
+											      	</aside>
+											      </div>
+											    <% end %>
+											  </div>
+											  <%= will_paginate @available_clubs %>
+											<% end %>
+
+											<% if @unchallengers.count > 0 %>
+											  <p class="_mutted _slug">Desafiados:</p>
+											  <div class="_clubs">
+											    <% @unchallengers.each do |rival| %>
+											      <div class="_club">
+											        <div class="_1">
+											          <figure class="_shield">
+											            <%= image_tag rival.avatar.url(:medium), class: "_shield _1" %>
+											          </figure>
+											        </div>
+											        <div class="_2">
+											          <h4 class="_name"><%= rival.club_name %></h4>
+											          <p class="_location"><%= rival.city %>, <%= rival.country %></p>
+											        </div>
+											        <div class="_3">
+											          <%= link_to club_path(@club), class: "_morebtn button--sacnite _1 _btn m-0-auto close _small _btn_more_create" do %>
+											            <i class="fad fa-eye button__icon"></i>
+											          <% end %>
+											        </div>
+											      </div>
+											    <% end %>
+											  </div>
+											  <%= will_paginate @unchallengers %>
+											<% end %>
+
+										</div>
+										<div class="_cont">
+											<div class="modal fade" id="modalInvitation" tabindex="-1" aria-labelledby="modalInvitationLabel" aria-hidden="true">
+											  <div class="modal-dialog modal-dialog-centered">
+											    <div class="modal-content">
+											      <div class="modal-header">
+											      	<span></span>
+											        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											      </div>
+											      <div class="modal-body">
+											        <%= render 'invitations/shared/new' %>
+											      </div>
+											    </div>
+											  </div>
+											</div>
+										</div>
+									</div>
+								</aside>
+					    </div>
+						<% elsif @sender_users.include?(current_user) %>
+					    <div class="col-lg-12">
+								<div class="_body_console _1">
+									<div class="_cont">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="jumbotron _jumbo_1">
+													<div class="_in text-center">
+														<%= image_tag @club.avatar.url(:medium), class: "_shield _2 m-0-auto" %>
+														<br>
+														<div class="_infoclub">
+															<h1 class="_title"> 
+																<span>¡<%= @club.club_name %> <br class="d-none d-lg-block"> te ha desafiado!</span>
+															</h1>
+														</div>
+														<p class="_mutted _slug">Prepara a tu equipo si crees que es capaz:</p>
+														<%= simple_form_for([@club, @duel]) do |f| %>
+															<% clubs = current_user.clubs.where("clubs.id != '#{@club.id}'") %>
+															<hr>
+															<%= f.select :rival_id, clubs.map {|key, value| [key.club_name, key.id]}, {}, class: "form-select form-select-lg" %>
+															<br>
+											    		<button type="submit" class="button--naira _1 fit _btnnext m-0-auto">
+													    	<span>Aceptar</span>
+																<i class="button__icon fad fa-check-circle"></i>
+											    		</button>
+															<br>
+														<% end %>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+					    </div>
+						<% else %>
+					    <div class="col-lg-12">
+					    </div>
+						<% end %>
+					<% else %>
+				    <div class="col-lg-12">
+							<div class="_body_console _1">
+								<div class="_cont">
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="jumbotron _jumbo_1">
+												<div class="_in text-center">
+													<br>
+													<div class="_infoclub">
+														<h1 class="_title"> 
+															<span>¡Duelo casado!</span>
+														</h1>
+													</div>
+													<p class="_mutted _slug">¡Asegurate de estar listo!</p>
+													<hr>
+													<div class="_flex _shields">
+														<%= link_to club_path(@local) do %>
+															<%= image_tag @local.avatar.url(:medium), class: "_shield _2 m-0-auto" %>
+														<% end %>
+														<h2>vs</h2>
+														<%= link_to club_path(@guess) do %>
+															<%= image_tag @guess.avatar.url(:medium), class: "_shield _2 m-0-auto" %>
+														<% end %>
+													</div>
+													<br>
+													<%= link_to club_duel_path(@club, @duel), class: "button--naira _1 fit _btnnext m-0-auto" do %>
+											    	<span>Ver</span>
+														<i class="button__icon fad fa-check-circle"></i>
+													<% end %>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+				    </div>
+					<% end %>
+			  </div>
+		</aside>
+	</section>
+
+<%= render 'duels/layout/two' %>

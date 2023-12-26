@@ -1,0 +1,74 @@
+
+<% content_for :page_name, "#{@club.club_name.upcase}" %>
+
+<%= render 'users/layout/one' %>
+  <section class="_console _1 _members">
+    <aside class="_1">
+      <div class="row">
+        <% if current_user.memberships.exists?(club_id: @club.id, status: 'Pending') %>
+          <div class="col-12 _1">
+            <aside>
+              <div class="_body_console _1 _nothing">
+                  <div class="_jumbo _newmembership">
+                    <div class="_in">
+                      <h1 class="_f700 _oswald _title _uppercase letter-1 text-center"><i>¡Felicidades te han fichado!</i></h1>
+                      <br>
+                        <%= render 'memberships/shared/clubs/newclub', club: @club %>
+                      <hr>
+                      <div class="row nom">
+                        <div class="col-lg-12 _1">
+                          <% if current_user.memberships.exists?(club_id: @club.id, status: 'Pending') %>
+                            <%= link_to approve_club_membership_path(@club, @membership), class: '_btn m-0-auto button--naira _1' do %>
+                              <span>Aceptar</span>
+                              <i class="button__icon fad fa-users-medical"></i>
+                            <% end %>
+                            <%= link_to club_membership_path(@club, current_user.memberships.find_by(club_id: @club.id, status: 'Pending')), method: :delete, data: { confirm: '¿Seguro que deseas eliminar tu membresía?' }, class: '_link_btn' do %>
+                              <span>Rechazar</span>
+                            <% end %>
+                          <% end %>
+                            
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+              </div>
+            </aside>
+          </div>
+        <% elsif current_user.memberships.exists?(club_id: @club.id, status: 'Approved') %>
+          <div class="col-12 _1">
+            <aside>
+              <div class="_body_console _1 _nothing">
+                  <div class="jumbotron _jumbo">
+                    <div class="_in text-center">
+                      <h1 class="_title">Eres miembro de <%= @club.club_name %></h1>
+                      <hr>
+                      <div class="row nom">
+                        <div class="col-lg-12 _1">
+                          <%= link_to club_path(@club), class: 'button--naira _1 _btn m-0-auto _bigbtn' do %>
+                            <span>Visitar</span>
+                            <i class="button__icon fad fa-users"></i>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+              </div>
+            </aside>
+          </div>
+        <% else %>
+          <div class="col-12">
+            <aside>
+              <div class="_body_console _1 _nothing">
+                <%= render 'shared/tutos/clubs/welcome' %>
+              </div>
+            </aside>
+          </div>
+        <% end %>
+      </div>
+    </aside>
+  </section>
+<%= render 'users/layout/two' %>
+
+

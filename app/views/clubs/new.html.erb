@@ -1,0 +1,378 @@
+<% content_for :page_name, "Nuevo equipo - Entornes" %>
+<div class="_newclub">
+	<div class="_progress">
+	  <div id="_progress-bar" class="_progress-bar"></div>
+	</div>
+	<%= link_to console_path, class: '_close_newclub _btn button--sacnite _1 _invert' do %>
+		<i class="button__icon bi bi-x-lg"></i>
+	<% end %>
+	<%= simple_form_for @club, class: "_steps " do |f| %>
+	  <%= f.hidden_field :user_id, value: current_user.id %>
+		<%= f.hidden_field :captain, value: current_user.slug %>
+	  <%= f.hidden_field :latitude, value: current_user.latitude || 37.7749 %>
+	  <%= f.hidden_field :longitude, value: current_user.longitude || -122.4194 %>
+
+	  <fieldset class="step active p-3">
+			<aside class="_back">
+	  		<a href="#" class="_btn button--sacnite prev">
+					<i class="bi bi-chevron-left"></i>
+				</a>
+			</aside>
+			<aside class="_content">
+				<div class="_head">
+				  <div class="_in">
+				    <h1 class="display-6">Bautiza a tu Club</h1>
+				    <p class="lead">En este primer paso, debes elegir un buen nombre para tu club:</p>
+				  </div>
+				</div>
+				<div class="_body_console">
+					<%= f.text_field :club_name, class: "form-control", placeholder: "Entornes F.C.", required: true %>
+				</div>
+				<div class="_action">
+					<div class="_btns">
+				    <p></p>
+				    <a href="#" class="button--naira _1 fit next" id="follow-button">
+				    	<span>Siguiente</span>
+							<i class="button__icon bi bi-check2"></i>
+				  	</a>
+					</div>
+				</div>
+			</aside>
+	  </fieldset>
+	  <fieldset class="step p-3">
+			<aside class="_content">
+				<div class="_head">
+				  <div class="_in">
+				    <h1 class="display-6">¿Cúal es tu país origen?</h1>
+				  </div>
+				</div>
+				<div class="_body_console">
+					<div class="input-group mb-3">
+					  <%= f.text_field :country, class: "_input_text _1 form-control inputhide", placeholder: "Pais", required: true %>
+				  	<div id="club_country-dropdown"></div>
+					</div>
+				</div>
+				<div class="_action">
+			    <a href="#" class="button--naira _1 fit prev" id="follow-button">
+			    	<span>Anterior</span>
+						<i class="button__icon bi bi-check2"></i>
+			  	</a>
+			    <a href="#" class="button--naira _1 fit next" id="follow-button">
+			    	<span>Siguiente</span>
+						<i class="button__icon bi bi-check2"></i>
+			  	</a>
+				</div>
+			</aside>
+	  </fieldset>
+	  <fieldset class="step p-3">
+			<aside class="_content">
+				<div class="_head">
+				  <div class="_in">
+				    <h1 class="display-6">¿Qué ciudad que representara tu club?</h1>
+				  </div>
+				</div>
+				<div class="_body_console">
+					<div class="input-group mb-3">
+					  <%= f.text_field :city, class: "_input_text _1 form-control", placeholder: "Tu ciudad", required: true %>
+				  	<div id="club_city-dropdown"></div>
+					</div>
+				</div>
+				<div class="_action">
+			    <a href="#" class="button--naira _1 fit prev" id="follow-button">
+			    	<span>Anterior</span>
+						<i class="button__icon bi bi-check2"></i>
+			  	</a>
+			    <a href="#" class="button--naira _1 fit next" id="follow-button">
+			    	<span>Siguiente</span>
+						<i class="button__icon bi bi-check2"></i>
+			  	</a>
+				</div>
+			</aside>
+	  </fieldset>
+	  <fieldset class="step p-3">
+			<aside class="_content">
+				<div class="_head">
+				  <div class="_in">
+				    <h1 class="display-6">Especifica la ubicación de tu club</h1>
+				  </div>
+				</div>
+				<div class="_body_console">
+					<div class="input-group mb-3">
+					  <%= f.text_field :address, class: "_input_text _1 form-control", placeholder: "Dirección", required: true %>
+				  	<div id="club_address-dropdown"></div>
+					</div>
+				</div>
+				<div class="_action">
+			    <a href="#" class="button--naira _1 fit prev" id="follow-button">
+			    	<span>Anterior</span>
+						<i class="button__icon bi bi-check2"></i>
+			  	</a>
+			    <a href="#" class="button--naira _1 fit next" id="follow-button">
+			    	<span>Siguiente</span>
+						<i class="button__icon bi bi-check2"></i>
+			  	</a>
+				</div>
+			</aside>
+	  </fieldset>
+	  <fieldset class="step p-3">
+			<aside class="_content">
+				<div class="_head">
+				  <div class="_in">
+				    <h1 class="display-6">Confirma</h1>
+				  </div>
+				</div>
+				<div class="_body_console">
+					<div class="_in">
+						<p class="lead">Confirma la ubicación exacta del duelo, puedes mover el icono dentro del mapa:</p>
+		        <div class="_map" id="map_club"></div>
+						<div class="_action_btns">
+						</div>
+					</div>
+				</div>
+				<div class="_action">
+					<button class="button--naira _2 fit prev " type="button" id="button-addon3">
+			    	<span>Atras</span>
+						<i class="button__icon fas fa-arrow-left"></i>
+					</button>
+				  <button class="button--naira _1 fit" type="submit">
+			    	<span>Confirmar y guardar</span>
+						<i class="button__icon fas fa-arrow-right"></i>
+				  </button>
+				</div>
+			</aside>
+	  </fieldset>
+	<% end %>
+</div>
+	
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz-J87QC1qvkimHdAE55GcV4Qpt8STDzc"></script>
+<script type="text/javascript">
+	  function initialize() {
+	    var map; // Declara la variable "map" al principio de la función
+	    var marker; // Declara la variable "marker" al principio de la función
+	    var location; // Declara la variable "location" al principio de la función
+
+	    <% if @club.latitude.blank? || @club.latitude.blank? %>
+	      // Obtener la ubicación actual del usuario
+	      if (navigator.geolocation) {
+	        navigator.geolocation.getCurrentPosition(function(position) {
+	          location = { lat: position.coords.latitude, lng: position.coords.longitude };
+	          map.setCenter(location);
+	          marker.setPosition(location);
+	        }, function() {
+	          console.log('El servicio de geolocalización falló.');
+	        });
+	      } else {
+	        location = { lat: 0, lng: 0 }; // Otra ubicación predeterminada si no se admite la geolocalización
+	        console.log('Tu navegador no admite geolocalización.');
+	      }
+	    <% else %>
+	      location = {lat: <%= @club.latitude %>, lng: <%= @club.longitude %>};
+	    <% end %>
+
+	    map = new google.maps.Map(document.getElementById('map_club'), {
+	      center: location,
+	      zoom: 14
+	    });
+
+	    marker = new google.maps.Marker({
+	      position: location,
+	      map: map,
+	      draggable: true
+	    });
+
+
+	    var geocoder = new google.maps.Geocoder();
+
+	    google.maps.event.addListener(marker, 'dragend', function() {
+	      geocoder.geocode({ 'location': marker.getPosition() }, function(results, status) {
+	        if (status == google.maps.GeocoderStatus.OK) {
+	          document.getElementById('club_address').value = results[0].formatted_address;
+	          document.getElementById('club_city').value = getFieldValueFromAddressComponent(results[0], 'locality');
+
+	          document.getElementById('club_country').value = getFieldValueFromAddressComponent(results[0], 'country');
+	          document.getElementById('club_latitude').value = marker.getPosition().lat();
+	          document.getElementById('club_longitude').value = marker.getPosition().lng();
+	        } else {
+	          alert('Geocode was not successful for the following reason: ' + status);
+	        }
+	      });
+	    });
+
+	    function getFieldValueFromAddressComponent(address, component) {
+	      for (var i = 0; i < address.address_components.length; i++) {
+	        var addressType = address.address_components[i].types[0];
+	        if (addressType == component) {
+	          return address.address_components[i].long_name;
+	        }
+	      }
+	      return "";
+	    }
+
+	    function updateMarkerLocation(address, city, country, latitude, longitude) {
+	      var geocoder = new google.maps.Geocoder();
+	      var addressString = address + ', ' + city + ', ' + country;
+	      geocoder.geocode({ address: addressString }, function(results, status) {
+	        if (status == google.maps.GeocoderStatus.OK) {
+	          location = results[0].geometry.location;
+	          map.setCenter(location);
+	          marker.setPosition(location);
+	          document.getElementById('club_latitude').value = location.lat();
+	          document.getElementById('club_longitude').value = location.lng();
+	        } else {
+	          alert('La geocodificación no tuvo éxito por la siguiente razón: ' + status);
+	        }
+	      });
+	    }
+
+	    document.getElementById('club_address').addEventListener('change', function() {
+	      var country = document.getElementById('club_country').value;
+	      var city = document.getElementById('club_city').value;
+	      var address = this.value;
+	      updateMarkerLocation(address, city, country, marker, map);
+	    });
+
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+	  $('#club_country').geocomplete({
+	    types: ['(regions)'],
+	    details: '#club_country-dropdown'
+	  });
+	  $('#club_city').geocomplete({
+	    types: ['(cities)'],
+	    details: '#club_city-dropdown'
+	  });
+	  $('#club_address').geocomplete({
+	    types: ['geocode'],
+	    details: '#club_address-dropdown'
+	  });
+	});
+</script>
+<script type="text/javascript">
+	
+
+	/* ========================================= */
+
+	$(document).ready(function() {
+	  var currentStep = 0;
+	  var $form = $('#new_club');
+	  var $steps = $form.find('.step');
+	  var numSteps = $steps.length;
+	  var $progressBar = $('._progress-bar');
+	  var $fields = $form.find('input._process');
+	  var numFields = $fields.length;
+
+	  function showStep(step) {
+	    $steps.removeClass('active');
+	    $steps.eq(step).addClass('active');
+	    if (step === 0) {
+	      $form.find('.prev').hide();
+	    } else {
+	      $form.find('.prev').show();
+	    }
+	    if (step === numSteps - 1) {
+	      $form.find('.next').hide();
+	    } else {
+	      $form.find('.next').show();
+	    }
+	  }
+
+	  showStep(currentStep);
+
+	  $form.find('.next').click(function() {
+	    var $currentStep = $steps.eq(currentStep);
+	    var isValid = true;
+
+	    $currentStep.find('input, select').each(function() {
+	      if ($(this).prop('required') && $(this).val() === '') {
+	        isValid = false;
+	        $(this).addClass('error');
+	      } else {
+	        $(this).removeClass('error');
+	      }
+	    });
+
+	    // Check if the club_name field is empty
+	    if (currentStep === 0) {
+	      var clubNameField = $currentStep.find('input[required="true"]');
+	      if (clubNameField.val() === '') {
+	        isValid = false;
+	        clubNameField.addClass('error');
+	      }
+	    }
+
+	    if (isValid) {
+	      $currentStep.fadeOut(500).promise().done(function() {
+	        currentStep++;
+	        showStep(currentStep);
+	        $steps.eq(currentStep).fadeIn(500);
+	      });
+	    }
+	  });
+
+	  $form.find('.prev').click(function() {
+	    $steps.eq(currentStep).fadeOut(500).promise().done(function() {
+	      currentStep--;
+	      showStep(currentStep);
+	      $steps.eq(currentStep).fadeIn(500);
+	    });
+	  });
+
+	  function updateProgress() {
+	    var numCompletedFields = $fields.filter(function() {
+	      return $(this).val() !== '';
+	    }).length;
+
+	    var percent = parseFloat((100 / numFields) * numCompletedFields).toFixed(2);
+	    $progressBar.attr('aria-valuenow', percent).css('width', numCompletedFields + '%');
+	  }
+
+	  $fields.change(function() {
+	    updateProgress();
+	  });
+
+	  // Call updateProgress initially to set the progress bar to 0%
+	  updateProgress();
+	});
+
+	function updateProgressBar() {
+	  var steps = document.querySelectorAll('.step');
+	  var progress = document.getElementById('_progress-bar');
+	  var stepCount = steps.length;
+	  var currentStep = 0;
+
+	  // Encontrar el paso actual
+	  for (var i = 0; i < steps.length; i++) {
+	    if (steps[i].classList.contains('active')) {
+	      currentStep = i;
+	      break;
+	    }
+	  }
+
+	  // Actualizar la barra de progreso
+	  var percent = ((currentStep + 1) / stepCount) * 100;
+	  progress.style.width = percent + '%';
+	}
+
+	var nextButtons = document.querySelectorAll('.next');
+	for (var i = 0; i < nextButtons.length; i++) {
+	  nextButtons[i].addEventListener('click', function() {
+	    updateProgressBar();
+	  });
+	}
+
+	/* ========================================= */
+
+	$(document).ready(function() {
+	  $('form input').keypress(function(e) {
+	    if (e.which == 13) {
+	      e.preventDefault();
+	      return false;
+	    }
+	  });
+	});
+</script>

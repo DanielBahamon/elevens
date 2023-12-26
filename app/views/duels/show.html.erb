@@ -1,0 +1,327 @@
+<% content_for :page_name, "Duelo #{@duel.name} - Entornes" %>
+
+<%= render 'duels/layout/one' %>
+		<section class="_duel">
+			<aside class="_1">
+				<aside class="_cont _1">
+					<div class="row _1 nav-tabs" role="tablist">
+						<div class="col-4 _1 text-center">
+							<div class="_in">
+								<div class="_1">
+			            <%= link_to club_path(@local.slug), class: "_shield" do %>
+										<img src="<%= @local.avatar %>">
+			            <% end %>
+			            <%= link_to club_path(@local.slug), class: "_data" do %>
+										<b class="_clubname"><%= @local.club_name %></b>
+			            	<p class="_stars">
+			            		<i class="bi bi-star-fill"></i>
+			            		<i class="bi bi-star-fill"></i>
+			            		<i class="bi bi-star-fill"></i>
+			            		<i class="bi bi-star-fill"></i>
+			            		<i class="bi bi-star-fill"></i>
+			            	</p>
+										<p><small class="_location"><%= @local.city %>, <%= @local.country %></small></p>
+			            <% end %>
+								</div>
+							</div>
+						</div>
+						<div class="col-4 _2 text-center">
+							<div class="_result">
+								<div class="row m-0">
+									<div class="col-auto _1 _score">
+										<h1><span><%= @duel.local_score %></span></h1>
+									</div>
+									<div class="col-auto _2 _type">
+										<% if @duel.duel_type == "Friendly" %>
+											<i class="fal fa-handshake"></i>
+										<% elsif @duel.duel_type == "Bet" %>
+											<i class="fal fa-sack-dollar"></i>
+										<% elsif @duel.duel_type == "Tournament" %>
+											<i class="fal fa-trophy-alt"></i>
+										<% elsif @duel.duel_type == "League" %>
+											<i class="fal fa-trophy"></i>
+										<% elsif @duel.duel_type == "Mundial" %>
+											<i class="fal fa-globe-americas"></i>
+										<% end %>
+									</div>
+									<div class="col-auto _3 _score">
+										<h1><span><%= @duel.rival_score %></span></h1>
+									</div>
+								</div>
+							</div>
+							<div class="_infoduel">
+								<div class="row m-0">
+									<div class="col-12 text-center">
+										<br/>
+										<p class="_time"><%= @duel.start_date.strftime("%I:%M %p") %></p>
+										<p class="_date"><%= @duel.start_date.strftime("%B %d, %Y") %></p>
+										<p class="_location"><%= @duel.city %>, <%= @duel.country %></p>
+										<br/>
+										<% if user_signed_in? && current_user == @club.user %>
+											<%= link_to panel_club_duel_path, class: "_btn button--sacnite m-0-auto" do %>
+												<i class="far fa-edit"></i>
+											<% end %>
+										<% end %>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-4 _3 text-center">
+							<div class="_in">
+								<div class="_1">
+									<% if @duel.rival_id.present? %>
+										<%= link_to club_path(@guess.slug), class: "_shield" do %>
+											<img src="<%= @guess.avatar %>">
+				            <% end %>
+				            <%= link_to club_path(@guess.slug), class: "_data" do %>
+											<b class="_clubname"><%= @guess.club_name %></b>
+				            	<p class="_stars">
+				            		<i class="bi bi-star-fill"></i>
+				            		<i class="bi bi-star-fill"></i>
+				            		<i class="bi bi-star-fill"></i>
+				            		<i class="bi bi-star-fill"></i>
+				            		<i class="bi bi-star-fill"></i>
+				            	</p>
+											<p><small class="_location"><%= @guess.city %>, <%= @guess.country %></small></p>
+				            <% end %>
+									<% end %>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row _2">
+						<div class="col-12">
+						</div>
+					</div>
+				</aside>
+				<aside class="_cont _2">
+					<div class="row m-0">
+						<div class="col-12 _1">
+					  	<div class="_cont">
+					  		
+							</div>
+						</div>
+					</div>
+				</aside>
+				<aside class="_cont _3">
+					<div class="row m-0">
+						<div class="col-6 _1">
+					  	<div class="_cont">
+								<div class="_header">
+									<p class="_title"><%= @local.slug %></p>
+								</div>
+								<div class="_body">
+									<div class="table-responsive">
+										<table class="table align-middle _list_members table-borderless">
+										  <tbody>
+												<% @locals.each do |member| %>
+											    <tr>
+											      <th class="_number text-center" scope="row" ><%= member.number %></th>
+											      <td class="_avatary text-center">
+											      	<figure class="_avatar">
+												  			<%= image_tag member.avatar.url(:medium), class: "_avatar" %>
+												  		</figure>
+											      </td>
+											      <td class="_info">
+											      	<p class="_name"><%= member.firstname %> <%= member.lastname %></p>
+												  		<small class="_username"><%= member.slug %></small>
+											      </td>
+											      <td class="_position text-center"><%= member.position %></td>
+											      <td>
+				      								<%= link_to user_path(member), class: "_link_hide", target: "_blank" do %><% end %>
+											      </td>
+											    </tr>
+												<% end %>
+										  </tbody>
+										</table>
+									</div>
+								</div>
+								<div class="_foot text-center">
+									<% if current_user == @local.user %>
+										<button type="button" class="btn  m-0-auto border-0" data-bs-toggle="modal" data-bs-target="#modalLinesLocal">
+											<i class="fal fa-plus-circle"></i>
+										</button>
+									<% end %>
+								</div>
+							</div>
+						</div>
+						<div class="col-6 _2">
+							<div class="_cont">
+								<div class="_header">
+									<% if @duel.rival_id.present? %>
+										<p class="_title"><%= @guess.slug %></p>
+									<% end %>
+								</div>
+								<div class="_body">
+									<div class="table-responsive">
+										<table class="table align-middle _list_members table-borderless">
+										  <tbody>
+											<% if @duel.rival_id.present? %>
+												<% @guesses.each do |member| %>
+											    <tr>
+											      <th class="_number text-center" scope="row" ><%= member.number %></th>
+											      <td class="_avatary text-center">
+											      	<figure class="_avatar">
+												  			<%= image_tag member.avatar.url(:medium), class: "_avatar" %>
+												  		</figure>
+											      </td>
+											      <td class="_info">
+											      	<p class="_name"><%= member.firstname %> <%= member.lastname %></p>
+												  		<small class="_username"><%= member.slug %></small>
+											      </td>
+											      <td class="_position text-center"><%= member.position %></td>
+											      <td>
+											      	<%= link_to user_path(member), class: "_link_hide", target: "_blank" do %><% end %>
+											      </td>
+											    </tr>
+												<% end %>
+											<% end %>
+										  </tbody>
+										</table>
+									</div>
+								</div>
+								<div class="_foot text-center">
+									<% if @duel.rival_id.present? %>
+										<% if current_user == @guess.user %>
+											<button type="button" class="btn m-0-auto border-0" data-bs-toggle="modal" data-bs-target="#modalLinesGuess">
+												<i class="fal fa-plus-circle"></i>
+											</button>
+										<% end %>
+									<% end %>
+								</div>
+							</div>
+						</div>
+					</div>
+				</aside>
+			</aside>
+		  <aside class="_2">
+		  	<section class="_cont _1">
+			    <div class="_maps">
+						<div id="map_club" class="map" style="width:100%; height: 300px;"></div>
+						<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz-J87QC1qvkimHdAE55GcV4Qpt8STDzc"></script>
+						<script>
+							function initialize() {
+								var location = {lat: <%= @duel.latitude %>, lng: <%= @duel.longitude %>};
+								var map = new google.maps.Map(document.getElementById('map_club'), {
+									center: location,
+									zoom: 14
+								});
+
+								var marker = new google.maps.Marker({
+									position: location,
+									map: map
+								});
+
+								var infoWindow = new google.maps.InfoWindow({
+									content: '<div id="content"><b><%= @local.slug %> VS <% if @duel.rival_id.present? %><%= @guess.slug %><% end %></b></div>'
+								});
+
+								infoWindow.open(map, marker);
+							}
+
+							google.maps.event.addDomListener(window, 'load', initialize);
+						</script>
+			    </div>
+		  	</section>
+		  	<section class="_cont _2">
+		  		<div class="nearby">
+						<% if @duel.nearbys(10).present? %>
+						  <% for @duely in @duel.nearbys(10) %>
+						    <%= render 'shared/cards/duels/duel', duel: @duely %>
+						  <% end %>
+						<% end %>
+
+			    </div>
+		  	</section>
+		  </aside>
+		</section>
+			
+<%= render 'duels/layout/two' %>
+
+<style type="text/css">
+	.bg_local {
+    background: #dc3545;
+	}
+	.bg_guess {
+    background: #53a1d7;
+	}
+</style>
+
+<% if current_user == @local.user %>
+	<div class="modal fade" id="modalLinesLocal" tabindex="-1" aria-labelledby="modalLinesLocalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">Titulares de <%= @club.club_name %></h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+
+					<div class="table-responsive">
+						<table class="table align-middle _list_members table-borderless">
+						  <tbody>
+								<% @local_users.each do |member| %>
+							    <tr>
+							      <th scope="row" class="text-center"><%= member.number %></th>
+							      <td class="text-center">
+							      	<figure class="_avatar">
+								  			<%= image_tag member.avatar.url(:medium), class: "_avatar" %>
+								  		</figure>
+							      </td>
+							      <td>
+							      	<p class="_name"><%= member.firstname %> <%= member.lastname %></p>
+								  		<small class="_username"><%= member.slug %></small>
+							      </td>
+							      <td class="text-center"><%= member.position %></td>
+							      <td class="text-center">
+							      	3.5
+							      </td>
+							      <td class="text-center">
+					  					<%= link_to "Convocar", joinlines_club_duel_line_path(@club.id, @duel, member.id), class: 'btn btn-outline-primary' %>
+							      </td>
+							      <td>
+							      	<%= link_to user_path(member), class: "_link_hide", target: "_blank" do %><% end %>
+							      </td>
+							    </tr>
+								<% end %>
+						  </tbody>
+						</table>
+					</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+<% end %>
+<% if @duel.rival_id.present? %>
+	<% if current_user == @guess.user %>
+		<div class="modal fade" id="modalLinesGuess" tabindex="-1" aria-labelledby="modalLinesGuessLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="exampleModalLabel">Titulares de <%= @guess.club_name %></h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+						<ul class="list-group">
+							<% @guess_users.each do |member| %>
+							  <li class="list-group-item">
+							  	<%= member.slug %> 
+							  	<%= link_to "Convocar", joinlines_club_duel_line_path(@guess.id, @duel, member.id) %>
+							  </li>
+							<% end %>
+						</ul>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	<% end %>
+<% end %>
+<script type="text/javascript">
+	$(document).ready(function() {
+	  $('._action_aside').on('click', function() {
+	    $('main._layout._1 > ._3').toggleClass('active');
+	    $(this).toggleClass('active');
+	    $('body').toggleClass('no-overflow');
+	  });
+	});
+</script>

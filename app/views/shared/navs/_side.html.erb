@@ -1,0 +1,68 @@
+<nav class="_navside">
+  <div class="_cont _1">
+    <% if user_signed_in? %>
+      <%= link_to authenticated_root_path, data: { no_turbolink: true }, class: "_logo _1" do %>
+        <%= image_tag '//d4s5cnqwbwfuf.cloudfront.net/assets/brands/v1/11_dark.svg', class: "_light", alt: 'Entornes'%>
+      <% end %>
+    <% else %>
+      <%= link_to unauthenticated_root_path, data: { no_turbolink: true }, class: "_logo _1" do %>
+        <%= image_tag '//d4s5cnqwbwfuf.cloudfront.net/assets/brands/v1/11_dark.svg', class: "_light", alt: 'Entornes'%>
+      <% end %>
+    <% end %>
+      
+    <% if user_signed_in? %>
+      <%= link_to authenticated_root_path, class: "_item #{'active' if current_page?(console_path) || current_page?(authenticated_root_path) }" do %>
+        <i class="fal fa-tachometer-alt"></i>
+        <span class="_1">Consola</span>
+      <% end %>
+      <%= link_to notifications_path, class: "_item #{'active' if current_page?(notifications_path)}" do %>
+        <i class="fal fa-bell-school"></i>
+        <span> Notificaciones</span>
+      <% end %>
+      <% if current_user.clubs.count > 0 || !current_user.memberships.exists? && !current_user.notifications.exists? %>
+        <%= link_to calledup_user_path(current_user), class: "_item #{'active' if current_page?(calledup_user_path(current_user))}" do %>
+          <i class="fal fa-history"></i>
+          <span>Historia</span> 
+        <% end %>
+      <% end %>
+      <%= link_to user_path(current_user), class: "_item #{'active' if current_page?(user_path(current_user))}" do %>
+        <i class="fal fa-user-circle"></i>
+        <span>Mi cuenta</span>
+      <% end %>
+      <hr>
+    <% end %>
+    <% if user_signed_in? %>
+      <%= link_to radar_path, class: "_item #{'active' if current_page?(radar_path)}" do %>
+        <i class="fal fa-street-view"></i>
+        <span class="_1">Radar</span>
+      <% end %>
+    <% else %>
+      <%= link_to unauthenticated_root_path, class: "_item #{'active' if current_page?(unauthenticated_root_path)}" do %>
+        <i class="fal fa-street-view"></i>
+        <span class="_1">Radar</span>
+      <% end %>
+    <% end %>
+    <%= link_to live_path, class: "_item #{'active' if current_page?(live_path)}" do %>
+      <i class="fal fa-satellite"></i>
+      <span class="_1">En vivo</span>
+    <% end %>
+    <%= link_to explore_path, class: "_item #{'active' if current_page?(explore_path)}" do %>
+      <i class="fal fa-globe-americas"></i> 
+      <span class="_1">Explorar</span>
+    <% end %>
+    <hr>
+    <% if user_signed_in? %>
+      <%= link_to new_club_path, class: "_item #{'active' if current_page?(new_club_path)}" do %>
+        <i class="fal fa-users"></i>
+        <span class="_1">Nuevo club</span>
+      <% end %>
+      <% if current_user.clubs.count > 0 %>
+        <%= link_to battle_path, class: "_item #{'active' if current_page?(battle_path)}" do %>
+          <i class="fal fa-futbol"></i>
+          <span class="_1">Nuevo partido</span>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</nav>
+<%= render "shared/navs/foot" %>

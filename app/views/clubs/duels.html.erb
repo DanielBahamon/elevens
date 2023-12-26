@@ -1,0 +1,115 @@
+<% content_for :page_name, "Edit #{@club.club_name} - Entornes" %>
+
+
+<%= render 'clubs/layout/one' %>
+	<% if @undo.present? %>
+			<%= render 'shared/cards/duels/undo', duel: @undo %>
+  <% end %>
+	<section class="_console _1 _members">
+		<aside class="_1">
+			<div class="row">
+				<% if @soonduel.present? && @duels.count > 0 || @previa.present? && @duels.count > 0 %>
+					<div class="col-lg-7 col-xl-8 _1">
+						<aside>
+							<header class="_header_console _1">
+								<div class="_in">
+									<div class="_info">
+										<div>
+											<%= link_to control_club_path(@club), class: "_linkback" do %>
+												<i class="bi bi-chevron-left"></i>
+											<% end %>
+											<%= image_tag @club.avatar.url(:medium), class: "_shield _1" %>
+											<div class="_infoclub">
+												<h3 class="_title"> 
+													<span>Encuentros</span>
+												</h3>
+												<p class="_mutted">Tus proximos duelos:</p>
+											</div>
+										</div>
+									</div>
+									<div class="_action">
+			              <%= link_to battle_path, class: "button--sacnite _2 _btn _medium m-0-auto" do %>
+			                <i class="fas fa-plus button__icon"></i>
+			              <% end %>
+									</div>
+								</div>
+							</header>
+							<div class="_body_console _1">
+								<% if @soonduel.present? || @previa.present? %>
+									<div class="_cont">
+										<% if @soonduel.present? %>
+											<%= render 'shared/cards/duels/view', duel: @soonduel %>	
+										<% end %>
+										<% if @soonduel.present? && @previa.present? %>
+											<hr>
+										<% end %>
+										<% if @previa.present? %>
+											<%= render 'clubs/shared/cards/new', duel: @previa %>
+										<% end %>
+									</div>
+								<% else %>
+									<div class="_cont _1">
+										<div class="_in _noitems">
+											<div class="_inter">
+												<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+												<lottie-player src="https://assets3.lottiefiles.com/packages/lf20_IwKi9V.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;" loop  autoplay></lottie-player>
+												<h6 class="_mininotice">No tienes eventos</h6>
+											</div>
+										</div>
+									</div>
+								<% end %>
+							</div>
+						</aside>	
+					</div>
+					<div class="col-lg-5 col-xl-4 _1">
+						<aside>
+							<header class="_header_console _1">
+								<div class="_in">
+									<div class="_info">
+										<div>
+											<div class="_infoclub">
+												<h3 class="_title"> 
+													<span>Historial</span>
+												</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+							</header>
+							<div class="_body_console _1">
+								<% if @duels.count > 0 %>
+									<div class="_cont">
+										<% @duels.each do |duel| %>
+											<%= render 'shared/cards/duels/duel', duel: duel %>	
+										<% end %>
+									</div>
+								<% else %>
+									<div class="_cont _1">
+										<div class="_in _noitems">
+											<div class="_inter">
+												<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+												<lottie-player src="https://assets3.lottiefiles.com/packages/lf20_IwKi9V.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;" loop  autoplay></lottie-player>
+												<h6 class="_mininotice">No tienes eventos</h6>
+											</div>
+										</div>
+									</div>
+								<% end %>
+							</div>
+						</aside>	
+					</div>
+				<% else %>
+					<div class="col-12 _1">
+						<aside>
+							<div class="_body_console _1">
+								<div class="_cont _1">
+									<%= render 'shared/tutos/duels/firstduel', club: @club %>
+								</div>
+							</div>
+						</aside>
+					</div>
+				<% end %>
+			</div>
+		</aside>
+	</section>
+<%= render 'clubs/layout/two' %>
+

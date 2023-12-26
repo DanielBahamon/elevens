@@ -1,0 +1,61 @@
+<nav class="_navsidefoot">
+  <div class="_cont _1">
+    <% if user_signed_in? %>
+      <div class="_item _icon_action _userlink d-xxl-none">
+        <%= image_tag current_user.avatar.url(:medium), class: "_avatar _3" %>
+        <span class="_1">Mi cuenta</span>
+        <div class="_cont _1 _user">
+          <div class="_1">
+            <%= link_to current_user do %>
+              <%= image_tag current_user.avatar.url(:medium), class: "_avatar _1" %>
+            <% end %>
+          </div>
+          <div class="_2">
+            <%= link_to current_user, class: "_name" do %>
+              <%= current_user.firstname.capitalize if current_user.firstname? %> 
+              <%= current_user.lastname.capitalize if current_user.lastname? %>
+            <% end %>
+            <%= link_to current_user, class: "_username" do %>
+              <%= current_user.slug %>
+            <% end %>
+          <br>  
+          </div>
+          <div class="_3">
+          </div>
+          <div class="_items">
+            <%= link_to "Partidos jugados", calledup_user_path(current_user) %>
+            <%= link_to "Convocatorias", calledup_user_path(current_user) %>
+            <%= link_to "Mis equipos", clubs_user_path(current_user) %>
+            <%= link_to "Mi perfil", user_path(current_user) %>
+            <hr clas="p-0 m-0">
+            <div class="_icons">
+              <div class="_1">
+                <%= link_to edit_user_registration_path(current_user), class: "_settings button--sacnite" do %>
+                  <i class="far fa-cogs"></i>
+                <% end %>
+              </div>
+              <div class="_2">
+                <%= link_to destroy_user_session_path, class: "_logout button--sacnite", method: :delete do  %>
+                  <i class="far fa-sign-out"></i>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%= link_to destroy_user_session_path, class: "_item d-xxl-flex d-none _logout", method: :delete do  %>
+        <figure class="_icon_logout">
+          <i class="fad fa-sign-out"></i>
+        </figure>
+        <span class="_1">Salir</span>
+      <% end %>
+    <% else %>
+      <%= link_to new_user_session_path, class: "_item d-xxl-flex d-none _logout" do  %>
+        <figure class="_icon_logout">
+          <i class="fad fa-sign-in"></i>
+        </figure>
+        <span class="_1">Entrar</span>
+      <% end %>
+    <% end %>
+  </div>
+</nav>

@@ -1,0 +1,13 @@
+    </aside><!-- ASIDE _2 -->
+    <aside class="_3">
+      <div class="_cont">
+        <% if user_signed_in? && current_user == @club.user %>
+          <%= render 'shared/navs/club', club: @club %>
+        <% elsif user_signed_in? && current_user.referee && current_user.referee_confirmation %>
+          <%= render 'shared/navs/referee' %>
+        <% else %>
+        <% end %>
+      </div>
+    </aside>
+  </main>
+</main>

@@ -1,0 +1,6 @@
+<!-- En tu vista show -->
+<% if @user_has_permission %>
+	<%= render 'duels/shared/forms/rival' %>
+<% else %>
+	<%= render 'form' %>
+<% end %>

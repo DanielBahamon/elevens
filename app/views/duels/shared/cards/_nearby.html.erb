@@ -1,0 +1,76 @@
+<% @guessy = club.where("clubs.id = '#{duel.rival_id}'")[0] %>
+<% @localy = club.where("clubs.id = '#{duel.club_id}'")[0] %>
+
+<aside class="_duel" id="_duel-<%= duel.id %>">
+	<section class="_cont _1">
+		<div class="_1">
+			<aside class="_2">
+				<div class="row _1">
+					<div class="col-4 _1 text-center">
+						<div class="_in">
+							<div class="_1">
+		            <%= link_to club_duel_path(@localy.id, duel), class: "_shield" do %>
+									<img src="<%= @localy.avatar %>">
+		            <% end %>
+		            <%= link_to club_duel_path(@localy.id, duel), class: "_name" do %>
+									<small class="_clubname"><%= @localy.slug %></small>
+		            <% end %>
+							</div>
+						</div>
+					</div>
+					<div class="col-4 _2 text-center">
+						<div class="_inside">
+							<div class="row ">
+								<div class="col-auto _2">
+									<%= link_to club_duel_path(@localy.id, duel), class: "_typematch" do %>
+										<% if duel.duel_type == "Friendly" %>
+											<i class="fal fa-handshake"></i>
+										<% elsif duel.duel_type == "Bet" %>
+											<i class="fal fa-sack-dollar"></i>
+										<% elsif duel.duel_type == "Tournament" %>
+											<i class="fal fa-trophy-alt"></i>
+										<% elsif duel.duel_type == "League" %>
+											<i class="fal fa-trophy"></i>
+										<% elsif duel.duel_type == "Mundial" %>
+											<i class="fal fa-globe-americas"></i>
+										<% end %>
+									<% end %>
+								</div>
+							</div>
+							<%= link_to club_duel_path(@localy.id, duel), class: "_time" do %>
+								<small><%= duel.start_date.strftime("%I:%M %p") %></small>
+							<% end %>
+							<%= link_to club_duel_path(@localy.id, duel), class: "_date" do %>
+								<small><%= duel.start_date.strftime("%B %d, %Y") %></small>
+							<% end %>
+							<div class="text-center mt-2">
+								<span class="badge rounded-pill pill-outline-primary"><%= duel.distance.round(2) %>km</span>
+							</div>
+						</div>
+					</div>
+					<div class="col-4 _3 text-center">
+						<div class="_in">
+							<div class="_1">
+								<%= link_to club_duel_path(@localy.id, duel), class: "_shield" do %>
+									<img src="<%= @guessy.avatar %>">
+			      		<% end %>
+		            <%= link_to club_duel_path(@localy.id, duel), class: "_name" do %>
+									<small class="_clubname"><%= @guessy.slug %></small>
+		            <% end %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</aside>
+		</div>
+	</section>
+  
+	<%= link_to club_duel_path(@localy.id, duel), class: "_link_hide" do %><% end %>
+</aside>
+
+<script>    
+    $('._opencard_duel-<%= duel.id %>').on('click', function(e) {
+      $('#_duel-<%= duel.id %>').toggleClass("open"); //you can list several class names 
+      e.preventDefault();
+    });
+</script>

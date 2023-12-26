@@ -1,0 +1,180 @@
+<% content_for :page_name, "Arbitraje del duelo" %>
+
+<%= render 'duels/layout/one' %>
+
+	<section class="_console _1 _newduel _location">
+		<aside class="_1">
+			<div class="row">
+				<div class="col-12 _1">
+          <header class="_header_console _1">
+            <div class="_in">
+              <div class="_titles">
+                <h1 class="_title">
+                  <%= link_to panel_club_duel_path(@club, @duel) do %>
+                    <%= @duel.sport %>
+                  <% end %>
+                </h1>
+                <i class="far fa-chevron-right"></i>
+                <h1 class="_title _current">
+                  <span><i>Arbitraje</i></span>
+                </h1>
+              </div>
+            </div>
+          </header>
+          <div class="_body_console _1">
+            <div class="_cont">
+							<div class="jumbotron _jumbo_1">
+								<div class="_in ">
+
+									<% if @duel.referee == true && @duel.referee_id.present? %>
+										<div class="row nom">
+											<div class="col-xl-5 col-lg-6 _1">
+												<figure>
+													<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/nillustrations/1/World+wide+web_Flatline.svg">
+												</figure>
+											</div>
+											<div class="col-xl-7 col-lg-6 _2">
+												<div class="_cont">
+													<h3 class="display-6">Arbitraje</h3>
+													<div class="_referee_profile">
+														<div class="_1">
+															<%= link_to user_path(@referee) do %>
+										            <%= image_tag @referee.avatar.url(:medium), class: "_avatar _4" %>
+										            <p class="_name"><%= @referee.firstname %> <%= @referee.lastname %></p>
+										            <p class="_username"><%= @referee.slug %></p>
+										            <div class="text-center mt-1">
+										              <span class="badge _1 pill-outline-secondary"><%= @referee.position_name %></span>
+										            </div>
+															<% end %>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									<% elsif @duel.referee == true && !@duel.referee_id.present? %>
+										<div class="jumbotron _jumbo_1">
+											<div class="_in text-center">
+												<%= render 'reservations/shared/form' %>
+											</div>
+										</div>
+									<% else %>
+										<div class="jumbotron _jumbo_1">
+											<div class="_in text-center">
+												<h1 class="mb-4">Firma de responsabilidad como Capitán</h1>
+												<p class="lead">Al elegir no contar con un árbitro en tu duelo, asumes una gran responsabilidad como Capitán. Es vital que entiendas que tanto tú como el otro Capitán serán responsables de asegurar que el juego sea justo y se respeten las reglas. En caso de cualquier disputa, las sanciones pueden afectar a todo el equipo y a ambos capitanes.</p>
+												<hr>
+												<p class="text-center">Por favor, confirma que comprendes estas responsabilidades adicionales y estás dispuesto a aceptar las consecuencias que se aplicarán en caso de cualquier incumplimiento.</p>
+												<br>
+												<div class="_action _grid _center">
+													<%= simple_form_for([@club, @duel]) do |f| %>
+														<%= f.hidden_field :referee, value: true %>
+														<button type="submit" class="button--naira _2 _outline fit m-0-auto" name="commit" value="Update Duel">
+												    	<span>Solicitar referí</span>
+															<i class="button__icon fad fa-pennant"></i>
+														</button>
+													<% end %>
+													<% unless @duel.responsibility == true %>
+														<%= simple_form_for([@club, @duel]) do |f| %>
+															<%= f.hidden_field :responsibility, value: true %>
+															<button type="submit" class="button--naira _1 fit m-0-auto" name="commit" value="Update Duel">
+													    	<span>Acepto la responsabilidad</span>
+																<i class="button__icon far fa-check-circle"></i>
+															</button>
+														<% end %>
+													<% else %>
+														<p class="_approve"><i class="bi bi-check2-circle"></i> <span>Has aceptado</span> </p>
+													<% end %>
+												</div>
+											</div>
+										</div>
+									<% end %>
+								</div>
+							</div>
+            </div>
+            <div class="_cont">
+            	
+            </div>
+          </div>
+				</div>
+			</div>
+		</aside>
+	</section>
+<%= render 'duels/layout/two' %>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Arbitros disponibles</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+				<% if @duel.referee_name.blank? %>
+					<div class="_cont _1">
+						<%= render 'reservations/shared/form' %>
+					</div>
+				<% else %>
+					<%= simple_form_for([@club, @duel]) do |f| %>
+						<div class="row">
+							<div class="col-12">
+								<% if @duel.referee = true %>
+										<label class="form-label">Arbitraje </label>
+										<div class="input-group mb-3">
+											<% if @duel.referee == true %>
+												<%= f.text_field :referee_name, class: "form-control-plaintext", required: true, placeholder: "@username", value: "@#{current_user.slug}" %>
+											<% else %>
+												<%= f.text_field :referee_name, class: "form-control",  required: true, placeholder: "@username" %>
+										  <% end %>
+										</div>
+										<label class="form-label">Tarifa arbitraje <span class="_optional">Opcional</span></label>
+										<div class="input-group mb-3">
+											<span class="input-group-text" id="basic-addon2">USD $ </span>
+											<%= f.number_field :referee_price, class: "form-control", placeholder: "", min: 0 %>
+											<span class="input-group-text" id="basic-addon2">.00</span>
+										</div>
+										<div class="input-group mb-3">
+											<span class="input-group-text" id="basic-addon2">Tipo de arbitraje</span>
+											<%= f.select( :referee_type, [
+																		 ["", ""],
+																		 ["Juez", "judge"], 
+																		 ["Testigo", "witness"]],
+																		 {required: true}, 
+																		 {class: 'form-select'}) %>
+											<%= f.submit "Guardar", class: "btn btn-outline-secondary" %>
+										</div>
+								<% else %>
+									<label class="form-label">Arbitraje </label>
+									<div class="input-group mb-3">
+										<% if @duel.referee == true %>
+											<%= f.text_field :referee_name, class: "form-control-plaintext", required: true, placeholder: "@username", value: "@#{current_user.slug}" %>
+										<% else %>
+											<span class="input-group-text" id="basic-addon2">@</span>
+											<%= f.text_field :referee_name, class: "form-control", required: true, placeholder: "@username" %>
+										<% end %>
+									</div>
+									<label class="form-label">Tarifa arbitraje <span class="_optional">Opcional</span></label>
+									<div class="input-group mb-3">
+										<span class="input-group-text" id="basic-addon2">USD $ </span>
+										<%= f.number_field :referee_price, class: "form-control", placeholder: "", min: 0 %>
+										<span class="input-group-text" id="basic-addon2">.00</span>
+									</div>
+									<div class="input-group mb-3">
+										<span class="input-group-text" id="basic-addon2">Tipo de arbitraje</span>
+										<%= f.select( :referee_type, [
+																	 ["", ""],
+																	 ["Capitanes", "captains"]],
+																	 {required: true},
+																	 {class: 'form-select'}) %>
+										<%= f.submit "Guardar", class: "btn btn-outline-secondary" %>
+									</div>
+								<% end %>
+							</div>
+						</div>
+					<% end %>
+				<% end %>
+      </div>
+    </div>
+  </div>
+</div>

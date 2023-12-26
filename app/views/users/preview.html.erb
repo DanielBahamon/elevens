@@ -1,0 +1,136 @@
+<%= render 'shared/layout/one' %>
+	<section class="_console _1 _user">
+		<aside class="_1">
+			<div class="row">
+        <div class="col-12 _1">
+          <aside>
+						<header class="_header_console _1">
+							<div class="_in">
+								<div class="_titles">
+									<h1 class="_title _stroke">
+										<%= link_to user_path(current_user) do %>
+											<i class="fas fa-chevron-left"></i> <i>Volver</i>
+										<% end %>
+									</h1>
+								</div>
+							</div>
+						</header>	
+            <div class="_body_console _1">
+              <section class="_user _1">
+                <aside class="_usercover splide">
+                  <div class="splide__arrows">
+                    <button class="splide__arrow splide__arrow--prev d-none">
+                    </button>
+                    <button class="splide__arrow splide__arrow--next d-none">
+                    </button>
+                  </div>
+                  <div class="splide__track">
+                    <ul class="splide__list">
+                      <li class="splide__slide" >
+                        <%= image_tag @user.coverpage.url(:large), class: "_coverpic" %>
+                      </li>
+                    </ul>
+                  </div>
+                </aside>
+                <aside class="_info">
+                  <div class="row _1 _cover nom">
+                    <div class="col-12 col-sm-auto _1">
+                      <aside class="_in">
+                        <figure class="_avatar_cont">
+                          <%= image_tag @user.avatar.url(:medium), class: "_avatar" %>
+                        </figure>
+                      </aside>
+                    </div>
+                    <div class="col-12 col-sm _2">
+                      <div class="_in ">
+                          <h3 class="_title_edit text-center ">
+                            <div class="input-group input-group-sm mb-3">
+                              <h2 class="_clubtitle _1 mb-0"><%= @user.firstname %> <%= @user.lastname %></h2>
+                            </div>
+                          </h3>
+                          <h6 class="_slug_edit">
+                            <div class="input-group input-group-sm ">
+                              <p class="_clubsubtitle _1 mb-0">@<%= @user.slug %></p>
+                            </div>
+                          </h6>
+                      </div>
+                    </div>
+                    <div class="col _3">
+                      <div class="_in">
+                        <div class="_actions">
+													<a class="_btn btn btn-outline-primary"><i class="bi bi-info-circle"></i></a>
+                          <a class="_btn btn btn-primary disabled" disabled>Seguir</a>
+                          <a class="_btn btn btn-outline-primary disabled" disabled>Invitar</a>
+                          <a class="btn btn btn-outline-secondary disabled" disabled><i class="bi bi-info-circle"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row _3 _data m-0">
+                    <div class="col-4 p-0 text-center">
+                      <aside>
+                        <h4>1.3M</h4>
+                        <p>Fans</p>
+                      </aside>
+                    </div>
+                    <div class="col-4 p-0 text-center">
+                      <aside>
+                        <h4>120.4k</h4>
+                        <p>Duelos Ganados</p>
+                      </aside>
+                    </div>
+                    <div class="col-4 p-0 text-center">
+                      <aside>
+                        <h4>158</h4>
+                        <p>Torneos Ganados</p>
+                      </aside>
+                    </div>
+                  </div>
+                  <div class="row _4 _teams">
+                  	
+										<table class="table table-hover align-middle">
+										  <tbody>
+											  <% @clubs.each do |club| %>
+												  <tr>
+											      <td scope="row"><%= image_tag club.avatar.url(:medium), class: "_shield" %></th>
+											      <td><%= club.club_name %></td>
+											      <td><%= club.champions %></td>
+											      <td>Seguir</td>
+											      <td><%= link_to club_path(club), class: "_link_hide" do%><% end %></td>
+											    </tr>
+											  <% end %>
+										  </tbody>
+										</table>
+
+										<h2>Equipos creados por <%= @user.firstname %> :</h2>
+										<ul>
+										  <% @myclubs.each do |club| %>
+										    <li><%= link_to club_path(club)  do%><%= club.club_name %><% end %></li>
+										  <% end %>
+										</ul>
+                  </div>
+                </aside>
+              </section>
+            </div>
+          </aside>
+        </div>
+			</div>
+		</aside>
+	</section>
+<%= render 'shared/layout/two' %>
+
+
+
+
+<script type="text/javascript">
+  document.addEventListener( 'DOMContentLoaded', function() {
+    var splide = new Splide( '._usercover', {
+      type   : 'loop',
+      height : '15rem',
+      perPage: 1,
+      perMove: 1
+    } );
+    splide.mount();
+
+  });
+</script>

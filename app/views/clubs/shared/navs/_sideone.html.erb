@@ -1,0 +1,47 @@
+<nav class="_navside _club">
+  <div class="_cont _1">
+    <%= link_to console_path, class: "_item #{'active' if current_page?(console_path(@club))}" do %>
+      <i class="far fa-arrow-left"></i>
+      <span class="_1">Consola</span>
+    <% end %>
+    <% if user_signed_in? %>
+      <hr>
+      <%= link_to dashboard_club_path(@club), class: "_item #{'ready' if @club.memberships.where(active: true).count > 0 } #{'active' if current_page?(dashboard_club_path(@club))}" do %>
+        <i class="fad fa-chalkboard-teacher"></i>
+        <span>Pizarra</span> 
+      <% end %>
+      <%= link_to members_club_path(@club), class: "_item #{'active' if current_page?(members_club_path(@club))}" do %>
+        <i class="fad fa-users"></i>
+        <span>Miembros</span> 
+      <% end %>
+      <%= link_to duels_club_path(@club), class: "_item #{'active' if current_page?(duels_club_path(@club))}" do %>
+        <i class="fad fa-history"></i>
+        <span>Historial</span> 
+      <% end %>
+      <%= link_to scouting_club_path(@club), class: "_item #{'active' if current_page?(scouting_club_path(@club))}" do %>
+        <i class="fad fa-paw-claws"></i>
+        <span>Reclutar</span> 
+      <% end %>
+      <%= link_to edit_club_path(@club), class: "_item #{'active' if current_page?(edit_club_path(@club))}" do %>
+        <i class="fad fa-pencil-alt"></i>
+        <span>Editar</span> 
+      <% end %>
+    <% end %>
+
+    <% is_ready = !@club.price.blank? && !@club.captain.blank? && !@club.avatar.blank? && !@club.sport_type.blank? && !@club.amenities.blank? && !@club.address.blank? && !@club.city.blank? && !@club.country.blank? && @club.memberships.where(active: true).count > 0  %>
+    <% if is_ready %>
+      <%= simple_form_for @club do |f| %>
+        <%= f.hidden_field :active, value: true %>
+        <% unless @club.active == true %>
+          <button type="submit" class="_item _icon_action button--aylen _2 d-none d-xxl-block <%= 'disabled' unless is_ready %>" data-text="Publicando...">
+            <span>Publicar</span>
+          </button>
+          <button type="submit" class="_item _icon_action button--aylen _2 _item d-xxl-none <%= 'disabled' unless is_ready %>" data-text="Publicando...">
+            <span>Publicar</span>
+          </button>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</nav>
+<%= render "shared/navs/foot" %>

@@ -1,0 +1,57 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  height: MyString
+  members: MyString
+  duration_active: false
+  duration_goals: false
+  goals: 1
+  place: MyString
+  place_type: MyString
+  referee: false
+  referee_type: MyString
+  lockers: false
+  showerbath: false
+  audience: false
+  audience_type: MyString
+  name: MyString
+  location: MyString
+  listing: MyString
+  summary: MyText
+  is_internet: false
+  refreshment: false
+  refreshment_summary: false
+  active: false
+  status: MyString
+  class: MyString
+  price: 1
+  user: one
+
+two:
+  type: 
+  height: MyString
+  members: MyString
+  duration_active: false
+  duration_goals: false
+  goals: 1
+  place: MyString
+  place_type: MyString
+  referee: false
+  referee_type: MyString
+  lockers: false
+  showerbath: false
+  audience: false
+  audience_type: MyString
+  name: MyString
+  location: MyString
+  listing: MyString
+  summary: MyText
+  is_internet: false
+  refreshment: false
+  refreshment_summary: false
+  active: false
+  status: MyString
+  class: MyString
+  price: 1
+  user: two

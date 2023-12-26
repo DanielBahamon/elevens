@@ -1,0 +1,60 @@
+<% content_for :page_name, "Nuevo duelo - Entornes" %>
+<%= render 'shared/layout/one' %>
+	<section class="_clubedit _newclub">
+		<aside class="_1">
+			<div class="_cont _1">
+				<div class="row">
+    			<% unless current_user.clubs.count > 0 %>
+						<div class="col-12 _1">
+							<aside>
+								<div class="_body_console _1">
+									<div class="_cont">
+										<div class="jumbotron _jumbo_ _jumboresponsibility1">
+											<div class="_in text-center">
+												<h1 class="display-4 _title">¡Crea tu primer equipo!</h1>
+												<p class="lead">Antes de crear un duelo, es necesario que crees un club.</p>
+												<hr>
+												<%= link_to new_club_path, class: "_1 _bigbtn _fullwidth button--naira m-0-auto" do %>
+										    	<span>Nuevo Club</span>
+												  <i class="button__icon fad fa-paw-claws"></i>
+												<% end %>
+											</div>
+										</div>
+									</div>
+								</div>
+							</aside>
+						</div>
+    			<% else %>
+						<div class="col-12 _1">
+							<aside>
+								<div class="_body_console _1">
+									<div class="_cont">
+										<div class="jumbotron _jumbo_ _jumboresponsibility1">
+											<div class="_in text-center">
+												<h1 class="display-4 _title">¡Comienza tu aventura!</h1>
+								  			<p class="lead">Elige con cuál de tus clubes te gustaría empezar.</p>
+												<hr>
+												<div class="_clubs">
+												  <table class="table align-middle _list_clubs table-hover table-borderless">
+												    <tbody>
+												      <% @clubs.each do |club| %>
+												      	<%= render 'clubs/shared/cards/battle', club: club %>
+												      <% end %>
+												    </tbody>
+												  </table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</aside>
+						</div>
+					<% end %>
+				</div>
+			</div>
+			<br>
+			<div class="_cont _2">
+			</div>
+		</aside>
+	</section> 
+<%= render 'shared/layout/two' %>

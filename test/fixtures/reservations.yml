@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  duel: one
+  start_date: 2023-04-30 01:10:11
+  end_date: 2023-04-30 01:10:11
+  price: 1
+  total: 1
+
+two:
+  user: two
+  duel: two
+  start_date: 2023-04-30 01:10:11
+  end_date: 2023-04-30 01:10:11
+  price: 1
+  total: 1

@@ -1,0 +1,19 @@
+<% content_for :page_name, "Nuevo Juez " %>
+
+	<%= render 'shared/layout/one' %>
+		<section class="_console _1">
+			<aside class="_1">
+				<div class="row">
+					<div class="col-12">
+						<aside>
+							<div class="_body_console">
+								<%= render 'referees/shared/new', referee: @referee %>
+								<%= link_to 'Back', referees_path %>
+							</div>
+						</aside>
+					</div>
+				</div>
+			</aside>
+		</section>
+
+<%= render 'shared/layout/two' %>

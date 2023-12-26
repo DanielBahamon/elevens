@@ -1,0 +1,432 @@
+<%= simple_form_for([@club, @duel], class: "_steps new_duel_schedule"	)  do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :time_type, value: 'Schedule' %>
+
+  <fieldset class="step active p-3">
+    <aside class="_content">
+      <div class="_head">
+        <div class="_in">
+          <h1 class="display-6">Selecciona la disciplina para tu duelo</h1>
+        </div>
+      </div>
+      <div class="_sports _options">
+        <% sports = [
+				  ["Futbol 11", "Futbol11", 11],
+				  ["Futbol 10", "Futbol10", 10],
+				  ["Futbol 9", "Futbol9", 9],
+				  ["Futbol 8", "Futbol8", 8],
+				  ["Futbol 7", "Futsal7", 7],
+				  ["Futsal", "Futsal", 6],
+				  ["Microfutbol", "Microfutbol", 5],
+				  ["Bancas", "Bancas", 4],
+				  ["Kings", "Kings", 2],
+				  ["Legends", "Legends", 1]
+				].reverse %>
+				<% approved_members_count = @club.memberships.where(status: 1).count %>
+				<div class="_sports _options">
+				  <% sports.each do |sport| %>
+				    <% sport_name, sport_id, members_required = sport %>
+				    <% disable_sport = approved_members_count < members_required %>
+				    <div class="_sport _option <% if disable_sport %> blocked <% end %>">
+				      <div class="_info">
+				        <div class="_data">
+				          <figure class="_icon">
+				            <img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/futicons/<%= sport_id %>.png">
+				          </figure>
+				          <div class="_description">
+			          		<div class="_inner">
+			          			<h5 class="m-0"><%= sport_name %></h5>
+					            <p>
+												<% case sport_id %>
+													<% when "Legends" %>
+														1 x 1
+													<% when "Kings" %>
+														2 x 2
+													<% when "Futenis" %>
+														2 x 2
+													<% when "Futvoley" %>
+														2 x 2
+													<% when "Bancas" %>
+														4 x 4
+													<% when "Microfutbol" %>
+														5 x 5
+													<% when "Futsal" %>
+														6 x 6
+													<% when "Futbol7" %>
+														7 x 7
+													<% when "Futbol8" %>
+														8 x 8
+													<% when "Futbol9" %>
+														9 x 9
+													<% when "Futbol10" %>
+														10 x 10
+													<% when "Futbol11" %>
+														11 x 11
+												<% end %>
+											</p>
+			          		</div>
+				          </div>
+				        </div>
+				      </div>
+				      <%= f.radio_button :sport, sport_id, {class: 'form-check-input next', required: true, id: "duel_sport_#{sport_id}", disabled: disable_sport } %>
+							<div class="_note">
+								<% if disable_sport %>
+									<p>No tienes jugadores suficientes</p>
+								<% else %>
+									<p>Seleccionar</p>
+								<% end %>
+							</div>
+				    </div>
+				  <% end %>
+				</div>
+      </div>
+			<div class="_action text-center">
+				<button class="_back_step button--shikoba _2">
+					<span>Volver</span>
+					<i class="button__icon fal fa-arrow-left"></i>
+				</button>
+			</div>
+    </aside>
+  </fieldset>
+	
+  <fieldset class="step p-3">
+		<aside class="_back">
+		</aside>
+  	<aside class="_content _scheduled_time">
+  		<div class="_head">
+		    <div class="_in">
+		      <h1 class="display-6">Selecciona la fecha y hora de tu duelo</h1>
+		      <p class="lead">¡Genial! Ya elegiste la disciplina para tu duelo. Ahora, necesitamos saber la fecha y hora de tu duelo. Por favor, selecciona una fecha y hora que funcione para ti y tu equipo. Asegúrate de elegir una fecha que permita suficiente tiempo para prepararte para el duelo.</p>
+		    </div>
+		  </div>
+		  <div class="_body">
+	      <div class="input-group mb-3">
+	        <%= f.datetime_field :start_date, placeholder: "DD/MM/AAAA", class: "form-control _process", id: "start-date" %>
+	      </div>
+		  </div>
+		  <div class="_foot"></div>
+			<div class="_action">
+				<button type="button" class="prev button--shikoba _2">
+					<span>Anterior</span>
+					<i class="button__icon fal fa-arrow-left"></i>
+				</button>
+				<button type="button" class="next button--shikoba _2" id="follow-button">
+					<span>Siguiente</span>
+					<i class="button__icon fal fa-arrow-right"></i>
+				</button>
+			</div>
+  	</aside>
+  </fieldset>
+  
+  <fieldset class="step p-3">
+		<aside class="_back">
+  		<a href="#" class="_btn button--sacnite prev">
+				<i class="bi bi-chevron-left"></i>
+			</a>
+		</aside>
+		<aside class="_content">
+			<div class="_head">
+				<div class="_in">
+				  <h1 class="display-6">Determina la duración del duelo</h1>
+				  <p class="lead">¡Estupendo! Ahora, necesitamos determinar cuánto tiempo tomará el duelo. Selecciona la duración del duelo en minutos para asegurarte de que ambos equipos tengan tiempo suficiente para competir y demostrar su habilidad:</p>
+				</div>
+		  </div>
+	    <div class="_body">
+	      <div class="mb-3">
+	      	<div class="_inputactions">
+	      		<a href="#" class="_btn button--sacnite _btn-minus-time_2">
+		      		<i class="bi bi-dash"></i>
+						</a>
+						<div class="_input_number">
+							<%= f.number_field :duration_time, placeholder: "1", class: "form-control _process", id: "duration-time", min: "30", placeholder: "90", max: "360" %>
+							<div class="_block"></div>
+						</div>
+						<a href="#" class="_btn button--sacnite _btn-plus-time_2">
+		      		<i class="bi bi-plus-lg"></i>
+						</a>
+	      	</div>
+	    		<%= f.datetime_field :end_date, id: "end-date", class: "_process d-none" %>
+	      </div>
+	    </div>
+			<div class="_foot">
+			  <div class="alert alert-info" role="alert">
+				  ¡Cada minuto cuenta! Ingresa la duración aproximada de tu duelo en minutos. Recuerda que deben ser al menos 30 minutos, pero no más de 6 horas (360 minutos) para que tu duelo sea válido.
+				</div>
+			</div>
+			<div class="_action">
+				<div></div>
+				<div class="_btns">
+			    <a href="#" class="button--naira _1 fit _btnnext next">
+			    	<span>Siguiente</span>
+						<i class="button__icon bi bi-check2"></i>
+			  	</a>
+				</div>
+			</div>
+		</aside>
+  </fieldset>
+  
+  <fieldset class="step p-3">
+		<aside class="_back">
+  		<a href="#" class="_btn button--sacnite prev">
+				<i class="bi bi-chevron-left"></i>
+			</a>
+		</aside>
+		<aside class="_content">
+			<div class="_head">
+				<div class="_in">
+				  <h1 class="display-6">¿Deseas un árbitro para tu duelo?</h1>
+				  <p class="lead">En este paso, debes decidir si deseas un árbitro para tu duelo. Un árbitro puede ayudar a garantizar que el juego sea justo y seguro para todos los participantes. </p>
+				</div>
+		  </div>
+		  <div class="_body">
+				<div class="_referees _options">
+		    	<% referees = [["Solicitar un arbitro", true ], ["Sin arbitro", false]] %>
+			    <% referees.each do |referee| %>
+			      <div class="_referee _option">
+		      		<div class="_info">
+		      			<div class="_data">
+		      				<figure class="_icon">
+			      				<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/futicons/<%= referee[0].downcase.gsub(" ", "-") %>.png">
+			      			</figure>
+			      			<div class="_data">
+			      				<h5 class="m-0"><%= referee[0] %></h5>
+				      			<p></p>
+			      			</div>
+		      			</div>
+		      			<div class="_action">
+				    			<i class="far fa-arrow-right"></i>
+				    		</div>
+		      		</div>
+							<%= f.radio_button :referee, referee[1], {class: 'next', required: true, id: "duel_referee_#{referee[1]}" } %>
+			      </div>
+					<% end %>
+				</div>
+		  </div>
+			<div class="_foot">
+				  <div class="alert alert-info" role="alert">
+					  Si decides no tener un árbitro, asegúrate de leer y entender las responsabilidades adicionales que tendrás como capitán. 
+					</div>
+			</div>
+		</aside>
+  </fieldset>
+  
+  <fieldset class="step p-3">
+		<aside class="_back">
+  		<a href="#" class="_btn button--sacnite prev">
+				<i class="bi bi-chevron-left"></i>
+			</a>
+		</aside>
+		<aside class="_content">
+			<div class="_head">
+				<div class="_in">
+				  <h1 class="display-6">¿Deseas que tu duelo sea amistoso o de apuesta?</h1>
+				  <p class="lead">En este paso, debes decidir si deseas que tu duelo sea amistoso o de apuesta. Selecciona una opción a continuación: </p>
+				</div>
+		  </div>
+		  <div class="_body">
+				<div class="_types _options">
+		    	<% types = [["Duelo amistoso", "Friendly"], ["Duelo de apuesta", "Bet"]] %>
+			    <% types.each do |type| %>
+			      <div class="_type _option">
+		      		<div class="_info">
+		      			<div class="_data">
+		      				<figure class="_icon">
+			      				<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/futicons/<%= type[1] %>.png">
+			      			</figure>
+			      			<div class="_data">
+			      				<h5 class="m-0"><%= type[0] %></h5>
+				      			<p></p>
+			      			</div>
+		      			</div>
+		      			<div class="_action">
+				    			<i class="far fa-arrow-right"></i>
+				    		</div>
+		      		</div>
+							<%= f.radio_button :duel_type, type[1], {class: 'next', required: true, id: "duel_type_#{type[1]}" } %>
+			      </div>
+					<% end %>
+				</div>
+		  </div>
+			<div class="_foot">
+			  <div class="alert alert-info" role="alert">
+				  Si eliges un duelo de apuesta por favor, ten en cuenta que los duelos de apuesta no están disponibles en todas las ubicaciones y están sujetos a las leyes y regulaciones locales.
+				</div>
+			</div>
+		</aside>
+  </fieldset>
+
+  <fieldset class="step p-3">
+		<aside class="_back">
+  		<a href="#" class="_btn button--sacnite prev">
+				<i class="bi bi-chevron-left"></i>
+			</a>
+		</aside>
+		<aside class="_content">
+			<div class="_head">
+				<div class="_in">
+				  <h1 class="display-6">Responsabilidades adicionales como capitán</h1>
+				  <p class="lead">Si decides no tener un árbitro para tu duelo, es importante que entiendas que tú y el otro capitán serán responsables de garantizar que el juego sea justo y que se respeten las reglas. En caso de cualquier conflicto, se aplicarán sanciones al equipo y a ambos capitanes. Por favor, confirma que entiendes estas responsabilidades adicionales antes de continuar:</p>
+				</div>
+		  </div>
+		  <div class="_body"></div>
+		  <div class="_foot"></div>
+			<div class="_action">
+				<div></div>
+				<div class="_btns">
+	    		<button type="submit" class="button--naira _1 fit _btnnext">
+			    	<span>Crear duelo</span>
+						<i class="button__icon bi bi-check2-all"></i>
+	    		</button>
+				</div>
+			</div>
+		</aside>
+  </fieldset>
+
+<% end %>
+
+
+<script type="text/javascript">
+	(function() {
+		/* ================== DATETIME I ======================= */
+			$(function() {
+				const startDate = $('#start-date');
+				const durationHours = $('#duration-time');
+				const endDate = $('#end-date');
+
+				function updateEndDate() {
+					if (!startDate.val()) {
+						console.error('La fecha de inicio no está establecida');
+						return;
+					}
+				
+					const start = new Date(startDate.val() + 'Z');
+					const duration = parseInt(durationHours.val());
+				
+					if (isNaN(start.getTime())) {
+						console.error('La fecha de inicio no es válida');
+						return;
+					}
+				
+					if (isNaN(duration)) {
+						console.error('La duración no es válida');
+						return;
+					}
+				
+					const end = new Date(start.getTime() + duration * 60 * 1000);
+					// Ajusta la fecha y hora a la zona horaria del navegador
+					const offset = start.getTimezoneOffset();
+					start.setMinutes(start.getMinutes() - offset);
+					startDate.val(start.toISOString().slice(0, 16))
+
+					end.setMinutes(end.getMinutes() - offset);
+					endDate.val(end.toISOString().slice(0, 16));
+				}
+
+				startDate.on('input', updateEndDate);
+				durationHours.on('input', updateEndDate);
+
+				$('._btn-minus-time_2').on('click', function() {
+					var val = parseInt(durationHours.val()) || 30;
+					val = Math.max(30, val - 10); // Establecer un mínimo de 30 minutos
+					durationHours.val(val);
+					updateEndDate();
+				});
+
+				$('._btn-plus-time_2').on('click', function() {
+					var val = parseInt(durationHours.val()) || 360;
+					val = Math.min(360, val + 10); // Establecer un máximo de 360 minutos
+					durationHours.val(val);
+					updateEndDate();
+				});
+			});
+		/* ==================== END DATETIME I ===================== */
+
+		/* ==================== BARRA DE PROGRESO ===================== */
+			$(document).ready(function() {
+				var currentStep = 0;
+				var $form = $('.tab_schedule .new_duel');
+				var $steps = $form.find('.step');
+				var numSteps = $steps.length;
+
+				function showStep(step) {
+						$steps.removeClass('active');
+						$steps.eq(step).addClass('active');
+						if (step === 0) {
+								$form.find('.prev').hide();
+						} else {
+								$form.find('.prev').show();
+						}
+						if (step === numSteps - 1) {
+								$form.find('.next').hide();
+						} else {
+								$form.find('.next').show();
+						}
+				}
+
+				showStep(currentStep);
+
+				$form.find('.next').click(function() {
+					var $currentStep = $steps.eq(currentStep);
+					var isValid = true;
+			
+					// Check if there are radio buttons in the current step
+					var $radioButtons = $currentStep.find('input[type="radio"]');
+					if ($radioButtons.length > 0) {
+							// Check if a radio button is selected
+							var $selectedRadio = $radioButtons.filter(':checked');
+							if ($selectedRadio.length === 0) {
+									isValid = false;
+									$radioButtons.addClass('error');
+							} else {
+									$radioButtons.removeClass('error');
+							}
+					}
+			
+					if (isValid) {
+							$currentStep.fadeOut(500).promise().done(function() {
+									currentStep++;
+									showStep(currentStep);
+									$steps.eq(currentStep).fadeIn(500);
+							});
+					}
+			});
+
+				$form.find('.prev').click(function() {
+						$steps.eq(currentStep).fadeOut(500).promise().done(function() {
+								currentStep--;
+								showStep(currentStep);
+								$steps.eq(currentStep).fadeIn(500);
+						});
+				});
+			});
+
+			function updateProgressBar() {
+					var steps = document.querySelectorAll('.step');
+					var progress = document.getElementById('_progress-bar');
+					var stepCount = steps.length;
+					var currentStep = 0;
+
+					// Encontrar el paso actual
+					for (var i = 0; i < steps.length; i++) {
+							if (steps[i].classList.contains('active')) {
+							currentStep = i;
+							break;
+							}
+					}
+
+					// Actualizar la barra de progreso
+					var percent = ((currentStep + 1) / stepCount) * 100;
+					progress.style.width = percent + '%';
+			}
+
+			var nextButtons = document.querySelectorAll('.next');
+			for (var i = 0; i < nextButtons.length; i++) {
+				nextButtons[i].addEventListener('click', function() {
+						updateProgressBar();
+				});
+			}
+
+		/* ==================== END BARRA DE PROGRESO ===================== */
+		
+	})();
+</script>

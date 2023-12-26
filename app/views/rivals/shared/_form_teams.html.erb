@@ -1,0 +1,5 @@
+<%= simple_form_for([@club, @rival]) do |f| %>
+	<%= f.hidden_field :rival_id, value: current_user.id  %>
+	<%= f.submit "Crear", class: "btn btn-outline-secondary" %>
+	<br>
+<% end %>

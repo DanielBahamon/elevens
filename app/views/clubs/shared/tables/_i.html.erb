@@ -1,0 +1,37 @@
+<tr class="_club">
+  <th scope="row" class="text-center">
+    <figure class="_shield">
+      <%= image_tag club.avatar.url(:medium), class: "_shield _3" %>
+    </figure>
+  </th>
+  <td>
+    <p class="_name"><%= club.club_name %></p>
+    <small class="_username"><%= club.slug %></small>
+  </td>
+  <td class="text-center">
+    <span>4.6</span>
+    <i class="bi bi-star-fill"></i>
+  </td>
+  <td class="text-center">
+    <span><%= club.champions %></span>
+    <i class="fas fa-trophy"></i>
+  </td>
+  <td class="text-center">
+    <span><%= club.winners %></span>
+    <i class="fas fa-medal"></i>
+  </td>
+  <td class="text-center">
+    <span><%= club.duels.count %></span>
+    <i class="fas fa-futbol"></i>
+  </td>
+  <td class="text-center">
+    <span>303.5k</span>
+    <i class="bi bi-people-fill"></i>
+  </td>
+  <td class="text-center">
+    <button type="button" class="btn _btnfirst">Seguir</button>
+  </td>
+  <td>
+    <%= link_to members_club_path(club), class: "_link_hide", target: "_blank" do %><% end %>
+  </td>
+</tr>

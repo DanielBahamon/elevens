@@ -1,0 +1,35 @@
+<% if current_user == @club.user %>
+	<% @no_members.each do |member| %>
+		<tr>
+		  <th class="text-center">
+		  	<figure class="_avatar">
+				<%= image_tag member.avatar.url(:medium), class: "_avatar _1" %>
+			</figure>
+		  </th>
+		  <td>
+		  	<%= link_to user_path(member), class:"_name" do %>
+		  		<%= member.firstname %> <%= member.lastname %>
+		  	<% end %>
+		  	<%= link_to user_path(member), class:"_username" do %>
+				<%= member.slug %>
+			<% end %>
+
+		  </td>
+		  <td class="_number">
+		  	<h2><%= member.number %></h2>
+		  </td>
+		  <td class="text-center">
+		  	<% @clubembers = member.memberships.where("memberships.status == 0 AND memberships.club_id == '#{@club.id}'") %>
+		    <% @clubembers.each do |membership| %>
+		        <%= link_to approve_club_membership_path(@club, membership), class:"_btnapprove", method: :post do %>
+		          <i class="bi bi-check-lg"></i>
+		        <% end %> 
+		        <%= link_to decline_club_membership_path(@club, membership), class:"_btncancel", method: :post do %>
+		          <i class="bi bi-x-lg"></i>
+		        <% end %>
+		    <% end %>
+		  </td>
+		</tr>
+		
+	<% end %>
+<% end %>

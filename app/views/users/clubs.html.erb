@@ -1,0 +1,51 @@
+<% content_for :page_name, "Convocatorias de @#{current_user.slug}" %>
+
+<%= render 'users/layout/one' %>
+	<section class="_console _1 _members">
+		<aside class="_1">
+			<div class="row">
+				<% if @clubs.present? %>
+					<div class="col-12 _1">
+						<aside>
+							<header class="_header_console _1">
+								<div class="_in">
+									<div class="_info">
+										<div>
+											<div class="_infoclub">
+												<h3 class="_title"> 
+													<span>Mis Clubes</span>
+												</h3>
+											</div>
+										</div>
+									</div>
+									<div class="_action">
+					         <%= link_to new_club_path, class: "button--sacnite _2 _btn _medium m-0-auto" do %>
+					           <i class="fas fa-plus button__icon"></i>
+					         <% end %>
+									</div>
+								</div>
+							</header>
+							<div class="_body_console _1">
+								<div class="_cont _1">
+									<ul class="list-group list-group-flush">
+										<% @clubs.each do |club| %>
+											<%= render 'clubs/shared/lists/clubs/private', club: club %>
+										<% end %>
+									</ul>
+								</div>
+							</div>
+						</aside>
+					</div>
+				<% else %>
+					<div class="col-12">
+						<aside>
+							<div class="_body_console _1 _nothing">
+								<%= render 'shared/tutos/clubs/welcome' %>
+							</div>
+						</aside>
+					</div>
+				<% end %>
+			</div>
+		</aside>
+	</section>
+<%= render 'users/layout/two' %>

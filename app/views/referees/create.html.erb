@@ -1,0 +1,9 @@
+<%= form_for @referee, url: '/referees' do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :firstname, value: current_user.firstname %>
+  <%= f.hidden_field :lastname, value: current_user.lastname %>
+  <%= f.hidden_field :slug, value: current_user.slug %>
+  <%= f.hidden_field :position, value: current_user.position %>
+  <%= f.hidden_field :active, value: current_user.active %>
+  <%= f.submit 'Crear árbitro' %>
+<% end %>

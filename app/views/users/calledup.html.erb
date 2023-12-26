@@ -1,0 +1,42 @@
+<% content_for :page_name, "Convocatorias de @#{current_user.slug}" %>
+<%= render 'shared/layout/one' %>
+	<section class="_console _1 _user">
+		<aside class="_1">
+			<div class="row">
+				<div class="col-lg-8 _1 offset-lg-2">
+					<aside>
+						<header class="_header_console _1">
+							<div class="_in">
+								<div class="_info">
+									<div>
+										<div class="_infoclub">
+											<h3 class="_title"> 
+												<span>Historia</span>
+											</h3>
+											<p class="_mutted">Mira tu historia futbolistica:</p>
+										</div>
+									</div>
+								</div>
+								<div class="_action">
+				         <%= link_to battle_path, class: "_minilink" do %>
+				           Nuevo duelo
+				         <% end %>
+								</div>
+							</div>
+						</header>
+						<div class="_body_console _1">
+							<div class="_cont _1">
+								<div class="_duels">
+									<% @duels.each do |duel| %>
+										<%= render 'shared/cards/duels/view', duel: duel %>
+									<% end %>
+								</div>
+							</div>
+						</div>
+					</aside>
+					
+				</div>
+			</div>
+		</aside>
+	</section>
+<%= render 'shared/layout/two' %>

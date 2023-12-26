@@ -1,0 +1,27 @@
+<% if @club_photos.count > 0 %>
+	<div class="splide splide_photos_edit">
+		<div class="splide__track">
+			<div class="splide__list">
+				<% @club_photos.each do |photo| %>
+					<div class="splide__slide _imgeditclub">
+			  		<%= image_tag photo.image.url(), class: "card-img-top" %>
+				  	<%= link_to club_club_photo_path(photo.club_id, photo), remote: true, method: :delete, data: {confirm: "¿Ultima palabra?"} do %>
+				  		<i class="bi bi-trash"></i>
+				    <% end %>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+<% end %>
+
+<script>
+  document.addEventListener( 'DOMContentLoaded', function() {
+    var splide = new Splide( '.splide_photos_edit', {
+		  type   : 'slide',
+		  perPage: 1,
+		  perMove: 1
+    } );
+    splide.mount();
+  });
+</script>

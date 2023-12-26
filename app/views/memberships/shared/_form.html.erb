@@ -1,0 +1,11 @@
+<% if current_user == @club.user  %>
+	<%= simple_form_for([@club, @membership]) do |f| %>
+		<div class="input-group mb-3">
+			<label class="input-group-text" for="inputGroupSelect01">Concovar a </label>
+			<%= f.select :user_id, no_members.map {|key, value| [key.slug, key.user_id]}, {}, class: "form-select form-select-lg" %>
+			<%= f.submit "Crear", class: "btn btn-outline-secondary" %>
+		</div>
+	<% end %>
+<% else %> 
+	<h1>NO haces parte del equipo</h1>
+<% end %>

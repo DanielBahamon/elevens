@@ -1,0 +1,53 @@
+<% content_for :page_name, "Login - Entornes" %>
+
+<section class="_session">
+  <aside class="_login">
+    <% if user_signed_in? %>
+      <%= link_to authenticated_root_path, data: { no_turbolink: true }, class: "_brand" do %>
+      <img src="//d4s5cnqwbwfuf.cloudfront.net/assets/brands/v1/11_dark.svg">
+      <% end %>
+    <% else %>
+      <%= link_to unauthenticated_root_path, data: { no_turbolink: true }, class: "_brand" do %>
+        <%= image_tag '//d4s5cnqwbwfuf.cloudfront.net/assets/brands/v1/11_dark.svg', class: "_light", alt: 'Entornes'%>
+      <% end %>
+    <% end %>
+    <br>
+    <%= link_to user_google_oauth2_omniauth_authorize_path, class: "_btn _fullwidth _session _google" do %>
+    <span><i class="fab fa-google"></i></span> <span>Continuar con Google</span>
+    <% end %>
+    <%= link_to user_facebook_omniauth_authorize_path, class: "_btn _fullwidth _session _facebook" do %>
+      <span><i class="fab fa-facebook-f"></i></span> <span>Continuar con Facebook</span>
+    <% end %>
+    <small class="text-muted d-none">O</small>
+    <a class="_btn _fullwidth _session _email" data-bs-toggle="collapse" href="#collapseEmail" role="button" aria-expanded="false" aria-controls="collapseEmail">
+      <span><i class="far fa-envelope"></i></span> <span>Continuar con Email</span>
+    </a>
+    <div class="collapse" id="collapseEmail">
+      <div class="card-body">
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-inputs">
+            <%= f.input :login,
+                        required: true,
+                        placeholder: 'Correo electrónico' %>
+            <%= f.input :password,
+                        required: true,
+                        placeholder: 'Contraseña',
+                        input_html: { autocomplete: "current-password" } %>
+            <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+          </div>
+          
+          <div class="form-actions">
+            <button type="submit" class="_btn _btn_1 _fullwidth">
+              <span>Entrando...</span>
+            </button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <small class="text-muted _line">O</small>
+    <div class="_actions">
+      <%= render "devise/shared/links" %>
+    </div>
+  </aside>
+</section>
+

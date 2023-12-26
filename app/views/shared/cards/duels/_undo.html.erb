@@ -1,0 +1,58 @@
+<% local = Club.find_by(id: duel.club_id) %>
+<article class="_undo" id="_prev-<%= duel.id %>">
+	<section class="_cont _1">
+    <div class="_1">
+      <div class="_i">
+				<p class="_mutted">Caduca en <%= calculate_event_time(@undo) || @undo.start_date.strftime("%H:%M %p - %B %d, %Y") %></p>
+      </div>
+      <div class="_ii">
+				<p class="_mutted"><%= duel.sport %></p>
+      </div>
+    </div>
+		<div class="_2">
+      <div class="_i">
+      	<div class="_in">
+					<%= link_to panel_club_duel_path(local, duel), class: "_typematch", target: "_blank" do %>
+						<h3 class="_title">Concretar nuevo evento</h3>
+					<% end %>
+      	</div>
+      </div>
+      <div class="_ii">
+				<%= link_to panel_club_duel_path(local, duel), class: "button--shikoba _1" do %>
+					<i class="button__icon fad fa-external-link"></i>
+      		<span>Completar</span>
+				<% end %>
+      </div>
+		</div>
+		<div class="_3">
+			<div class="_i">
+	      <div class="_data">
+					<%= link_to panel_club_duel_path(local, duel), class: "_typematch", target: "_blank" do %>
+						<% if duel.duel_type == "Friendly" %>
+		          <figure>
+								<i class="fad fa-handshake-alt"></i>
+		          </figure>
+		          <p class="_annun">Evento amistoso</p>
+						<% elsif duel.duel_type == "Bet" %>
+		          <figure>
+								<i class="fad fa-sack-dollar"></i>
+		          </figure>
+		          <p class="_annun">Evento de apuesta</p>
+						<% elsif duel.duel_type == "Tournament" %>
+		          <figure>
+								<i class="fad fa-trophy-alt"></i>
+		          </figure>
+		          <p class="_annun">Evento de torneo</p>
+						<% elsif duel.duel_type == "League" %>
+		          <figure>
+								<i class="fad fa-award"></i>
+		          </figure>
+		          <p class="_annun">Evento de liga</p>
+						<% end %>
+					<% end %>
+	      </div>
+			</div>
+			<div class="_ii"></div>
+		</div>
+	</section>
+</article>

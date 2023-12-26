@@ -1,0 +1,18 @@
+<% content_for :page_name, "Entornes" %>
+<%= render 'shared/layout/one' %>
+  <header class="_head d-sm-none">
+  </header>
+  <aside class="_notifications">
+    <section class="_cont _1">
+      <% @notifications.each do |notification| %>
+        <div class="notification">
+          <p><%= notification.recipient.slug %> <%= notification.content %></p>
+          <p><%= time_ago_in_words(notification.created_at) %> ago</p>
+          <% if notification.url %>
+            <%= link_to "Ver", notification.url %>
+          <% end %>
+        </div>
+      <% end %>
+    </section>
+  </aside> 
+<%= render 'shared/layout/two' %>

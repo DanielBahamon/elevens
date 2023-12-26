@@ -1,0 +1,410 @@
+<% content_for :page_name, "#{@user.slug.capitalize} - Entornes" %>
+
+
+<%= render 'shared/layout/one' %>
+	<section class="_console _1 _user">
+		<aside class="_1">
+			<div class="row">
+				<% if user_signed_in? && current_user.id == @user.id %>
+					<div class="col-12">
+						<aside>
+							<header class="_header_console _1">
+								<div class="_in">
+									<div class="_info">
+										<div>
+											<div class="_infoclub">
+												<h3 class="_title"> 
+													<span>¡Hola <%= current_user.firstname %>!</span>
+												</h3>
+												<p class="_mutted">Sigue tu progreso de cuenta aquí:</p>
+											</div>
+										</div>
+									</div>
+									<div class="_action">
+					         <%= link_to preview_user_path(current_user), class: "_minilink" do %>
+					           Ver perfil
+					         <% end %>
+									</div>
+								</div>
+							</header>
+							<div class="_body_console _1">
+								<div class="_cont _1 _datas">
+									<div class="_in">
+										<div class="_data _1">
+											<figure>
+												<i class="fad fa-trophy"></i>	
+											</figure>
+											<div class="_info">
+												<b>Copas</b>
+												<div class="_numb">
+													<h2>18</h2>
+													<div class="_moving">
+														<div class="_up">
+															<i class="fad fa-sort-up"></i>
+															Ultimo ganado
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="_data _2">
+											<figure>
+												<i class="fad fa-futbol"></i>
+											</figure>
+											<div class="_info">
+												<b>Encuentros</b>
+												<div class="_numb">
+													<h2>94</h2>
+													<div class="_moving">
+														<div class="_down">
+															<i class="fad fa-sort-down"></i>
+															Ultimo perdido
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="_data _3">
+											<figure>
+												<i class="fad fa-futbol"></i>
+											</figure>
+											<div class="_info">
+												<b>Seguidores</b>
+												<div class="_numb">
+													<h2><%= current_user.followers.count %></h2>
+													<div class="_moving">
+														<div class="_up">
+															<i class="fad fa-sort-up"></i>
+															+ 10 este mes
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="_data _4">
+											<figure>
+												<i class="fad fa-hands-heart"></i>
+											</figure>
+											<div class="_info">
+												<b>Elogios</b>
+												<div class="_numb">
+													<h2>123.4k</h2>
+													<div class="_moving">
+														<div class="_up">
+															<i class="fad fa-sort-up"></i>
+															+ 100 este mes
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</aside>
+					</div>
+					<div class="col-12 _1">
+						<aside>
+							<div class="_body_console _1">
+								<div class="_cont _1">	
+									<section class="_user _leader">
+										<aside class="_1">
+										</aside>
+										<aside class="_2">
+											<div class="_cont _1">
+												<h6>Parte de</h6>
+												<table class="table table-hover align-middle">
+												  <tbody>
+
+													  <% @clubs.each do |club| %>
+														  <tr>
+													      <td scope="row"><%= image_tag club.avatar.url(:medium), class: "_shield" %></th>
+													      <td><%= club.club_name %></td>
+													      <td><%= club.champions %></td>
+													      <td>Seguir</td>
+													      <td><%= link_to club_path(club), class: "_link_hide" do%><% end %></td>
+													    </tr>
+													  <% end %>
+												  </tbody>
+												</table>
+											</div>
+											<h2>Equipos creados por <%= @user.firstname %> :</h2>
+											<ul>
+											  <% @myclubs.each do |club| %>
+											    <li><%= link_to club_path(club)  do%><%= club.club_name %><% end %></li>
+											  <% end %>
+											</ul>
+
+										</aside>
+									</section>
+								</div>
+							</div>
+						</aside>
+						<script>
+						  document.addEventListener( 'DOMContentLoaded', function() {
+						    var splide = new Splide( '._usercover', {
+						      type   : 'loop',
+						      height : '15rem',
+						      perPage: 1,
+						      perMove: 1
+						    } );
+						    splide.mount();
+
+						    // ==========================================
+
+						    var splide2 = new Splide( '._amenities_slide', {
+						      type   : 'slide',
+						      perPage: 3,
+						      perMove: 1,
+						    } );
+						    splide2.mount();
+						  });
+						</script>
+
+					</div>
+				<% else %>
+					<div class="col-12">
+						<aside>
+							<div class="_body_console _1">
+									<div class="_cont _1 _datas">
+										<div class="_in">
+											<div class="_data _1">
+												<figure>
+													<i class="fad fa-trophy"></i>	
+												</figure>
+												<div class="_info">
+													<b>Copas</b>
+													<div class="_numb">
+														<h2>18</h2>
+														<div class="_moving">
+															<div class="_up">
+																<i class="fad fa-sort-up"></i>
+																Ultimo ganado
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="_data _2">
+												<figure>
+													<i class="fad fa-futbol"></i>
+												</figure>
+												<div class="_info">
+													<b>Encuentros</b>
+													<div class="_numb">
+														<h2>94</h2>
+														<div class="_moving">
+															<div class="_down">
+																<i class="fad fa-sort-down"></i>
+																Ultimo perdido
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="_data _3">
+												<figure>
+													<i class="fad fa-futbol"></i>
+												</figure>
+												<div class="_info">
+													<b>Seguidores</b>
+													<div class="_numb">
+														<h2><%= current_user.followers.count %></h2>
+														<div class="_moving">
+															<div class="_up">
+																<i class="fad fa-sort-up"></i>
+																+ 10 este mes
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="_data _4">
+												<figure>
+													<i class="fad fa-hands-heart"></i>
+												</figure>
+												<div class="_info">
+													<b>Elogios</b>
+													<div class="_numb">
+														<h2>123.4k</h2>
+														<div class="_moving">
+															<div class="_up">
+																<i class="fad fa-sort-up"></i>
+																+ 100 este mes
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+							</div>
+						</aside>
+					</div>
+					<div class="col-12 _1">
+						<aside>
+							<header class="_header_console _1">
+								<div class="_in">
+									<div class="_info">
+										<div>
+											<div class="_infoclub">
+												<h3 class="_title"> 
+													<span>¡Hola <%= current_user.firstname %>!</span>
+												</h3>
+												<p class="_mutted">Sigue tu progreso de cuenta aquí:</p>
+											</div>
+										</div>
+									</div>
+									<div class="_action">
+					         <%= link_to user_path(current_user), class: "_minilink" do %>
+					           Ver perfil
+					         <% end %>
+									</div>
+								</div>
+							</header>
+							<div class="_body_console _1">
+								<div class="_cont _1">	
+									<section class="_user _1">
+										<aside class="_usercover splide">
+										  <div class="splide__arrows">
+												<button class="splide__arrow splide__arrow--prev d-none">
+												</button>
+												<button class="splide__arrow splide__arrow--next d-none">
+												</button>
+										  </div>
+											<div class="splide__track">
+											  <ul class="splide__list">
+									        <li class="splide__slide" >
+									          <%= image_tag @user.coverpage.url(:large), class: "_coverpic" %>
+									        </li>
+											  </ul>
+											</div>
+										</aside>
+										<aside class="_info">
+											<div class="row _1 _cover">
+												<div class="col-4 col-xl-3 _1">
+													<aside class="_in">
+														<%= image_tag @user.avatar.url(:medium), class: "_avatar" %>
+													</aside>
+												</div>
+												<div class="col-8 col-xl-9 _2">
+													<aside class="_in">
+														<div class="_actions">
+															<% if user_signed_in?  %>
+																<% if current_user.following?(@user) %>
+																  <%= button_to "Dejar de seguir", unfollow_user_path(@user), method: :put, remote: true, class: "_btn btn btn-outline-danger _unfollow" %>
+																<% else %>
+																  <%= button_to "Seguir", follow_user_path(@user), method: :put, remote: true, class: "_btn btn btn-outline-primary _follow" %>
+																<% end %>
+															<% else %>
+																<button class="_btn btn btn-outline-primary">
+																	Seguir
+																</button>
+															<% end %>
+															<%= link_to "Invitar", join_club_path(@user), class: "_btn btn btn-outline-primary" %>
+															<a class="_btn btn btn-outline-primary"><i class="bi bi-info-circle"></i></a>
+															<% if user_signed_in? && current_user.id == @user.id %>
+																<%= link_to edit_user_registration_path, class: "_btn btn btn-outline-primary" do %>
+																	<i class="bi bi-pencil-square"></i>
+																<% end %>
+															<% end %>
+														</div>
+													</aside>
+												</div>
+											</div>
+											<div class="row _2 _details">
+												<div class="col-xl-8 _1">
+													<div class="_in">
+														<h3><%= @user.firstname %> <%= @user.lastname %></h3>
+														<small class="text-muted">@<%= @user.slug %></small>
+													</div>
+												</div>
+												<div class="col-xl-4 _2">
+													<div class="_in">
+														<figure class="_followers">
+															<i class="bi bi-people-fill"></i> <span>303.5k</span>
+														</figure>
+														<figure class="_rank">
+															<i class="bi bi-star-fill"></i> <span>4.8</span> 
+														</figure>
+													</div>
+												</div>
+											</div>
+											<div class="row _3 _data">
+												<div class="col-4">
+													<aside>
+														<h4>120.4k</h4>
+														<p>Duelos Ganados</p>
+													</aside>
+												</div>
+												<div class="col-4">
+													<aside>
+														<h4>158</h4>
+														<p>Torneos Ganados</p>
+													</aside>
+												</div>
+											</div>
+
+										</aside>
+									</section>
+									<section class="_user _leader">
+										<aside class="_1">
+										</aside>
+										<aside class="_2">
+											<div class="_cont _1">
+												<h6>Parte de</h6>
+												<table class="table table-hover align-middle">
+												  <tbody>
+
+													  <% @clubs.each do |club| %>
+														  <tr>
+													      <td scope="row"><%= image_tag club.avatar.url(:medium), class: "_shield" %></th>
+													      <td><%= club.club_name %></td>
+													      <td><%= club.champions %></td>
+													      <td>Seguir</td>
+													      <td><%= link_to club_path(club), class: "_link_hide" do%><% end %></td>
+													    </tr>
+													  <% end %>
+												  </tbody>
+												</table>
+											</div>
+											<h2>Equipos creados por <%= @user.firstname %> :</h2>
+											<ul>
+											  <% @myclubs.each do |club| %>
+											    <li><%= link_to club_path(club)  do%><%= club.club_name %><% end %></li>
+											  <% end %>
+											</ul>
+
+										</aside>
+									</section>
+								</div>
+							</div>
+						</aside>
+						<script>
+						  document.addEventListener( 'DOMContentLoaded', function() {
+						    var splide = new Splide( '._usercover', {
+						      type   : 'loop',
+						      height : '15rem',
+						      perPage: 1,
+						      perMove: 1
+						    } );
+						    splide.mount();
+
+						    // ==========================================
+
+						    var splide2 = new Splide( '._amenities_slide', {
+						      type   : 'slide',
+						      perPage: 3,
+						      perMove: 1,
+						    } );
+						    splide2.mount();
+						  });
+						</script>
+
+					</div>
+				<% end %>
+			</div>
+		</aside>
+	</section>
+
+<%= render 'shared/layout/two' %>

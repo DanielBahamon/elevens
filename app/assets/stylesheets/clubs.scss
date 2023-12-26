@@ -1,0 +1,621 @@
+// Place all the styles related to the clubs controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+/* SHOW */
+	section._club img._coverpic{
+		width:100%;
+		height: 100%;
+		object-fit:cover;
+	}
+	section._club ._members>ul>li.list-group-item {
+	    padding: 10px 0;
+	    display: flex;
+    	align-items: center;
+	    justify-content: space-between;
+	}
+	section._club ._members > ul > li.list-group-item ._in {
+	    display: block;
+	}
+	section._club ._members > ul > li.list-group-item ._in>a {
+	    display: block;
+	}
+	section._club aside._info img._shield {
+    border-radius: 9px;
+    width: 180px;
+    height: 180px;
+    -o-object-fit: contain;
+    object-fit: contain;
+    object-position: center;
+    max-width: 100%;
+	}
+	section._club > aside._info figure._rank {
+   		text-align: center;
+	}
+	section._club._1 ._info ._details form {
+	  width: 400px;
+	  max-width: 100%;
+	  margin: 0 auto;
+	}
+	section._club._1 ._info ._details form .input-group {
+    align-items: center;
+	}
+	section._club._1 ._info ._details ._location>a {
+    margin: 20px auto 0;
+	}
+	section._club._1 ._info ._details ._slug_edit {
+    margin-bottom: 0;
+	}
+	section._club._1 {
+	    margin-bottom: 30px;
+	}
+	section._club._1 h3 {
+	    font-family: 'Causten', 'Sofia', sans-serif;
+	    font-weight: 800;
+	    margin-bottom: 5px;
+	    line-height: 1;
+	    display: block;
+	}
+	section._club._1 small{
+	    font-family: 'Causten', 'Sofia', sans-serif;
+	    font-weight: 700;
+	    line-height: 1;
+	    display: block;
+	}
+	section._club._1 > ._info > .row._1 > div._2 {
+	    align-self: center;
+	    padding-top: 1.5rem;
+	    padding-bottom: 1.5rem;
+	    padding-right: 0;
+	}
+	section._club._1 > ._info > .row._1 > div._2 ._actions{
+    	text-align: right;
+	}
+	section._club._1 > aside._info {
+	    position: relative;
+	    z-index: 2;
+	}
+	section._club._1 aside._info > .row._3 > div {
+	    align-self: center;
+	}
+	section._club._1 aside._info > .row._2 {
+	    margin-bottom: 25px;
+	}
+	section._club._1 ._data aside > p {
+	    font-family: 'Rubik', sans-serif;
+	    text-transform: uppercase;
+	    font-size: 0.7rem;
+	    text-overflow: ellipsis;
+	    width: 100%;
+	    display: block;
+	    margin-bottom: 0;
+	}
+	body._light select.form-select,
+	body._light input.form-control,
+	body._light textarea.form-control{
+		border:1px solid #0f1419 !important;
+	}
+	body select.form-select,
+	body input.form-control {
+    border-radius: 0;
+    padding: 20px 30px;
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+	}
+	body textarea.form-control {
+    border-radius: 0;
+    padding: 30px;
+    font-family: 'Abel', sans-serif;
+	}
+	section._club._1 ._data > div {
+		min-height: 90px;
+		display:flex;
+		align-items:center;
+    justify-content: center;
+	}
+	section._club._1 ._data aside > h4 {
+	    margin-bottom: 0;
+	}
+	section._club._1 aside._info ._details > ._2 {
+		margin-top:15px;
+	}
+	section._club._1 aside._info ._details > ._2 > ._in {
+	    display: flex;
+	    grid-gap: 20px;
+	    flex-wrap: wrap;
+	}
+	section._club._1 > aside._info>div {
+    padding-bottom: 15px;
+	}
+	section._club._1 > aside._info ._details ._title_edit {
+	}
+	main._layout._1 ._noitems > ._inter {
+    text-align: center;
+    width: max-content;
+    margin: 0 auto;
+	}
+	main._layout._1 ._noitems > ._inter lottie-player {
+	  margin: 0 auto;
+	  max-width: 100%;
+	}
+	section._console._members._1 > aside._1 ._body_console._1 > ._cont{
+		height:100%;
+	}
+	section._club._2 > ._tabs > ul {
+	    justify-content: space-evenly;
+	}
+	._members > .list-group ._item_user_club > ._1 > h4 > span.badge {
+	    min-width: 70px;
+	    padding: 10px;
+	    display: flex;
+	    justify-content: center;
+    	grid-gap: 5px;
+	}
+	._item_user_club .badge > span._line {
+	    background: #ffffff;
+	    height: 19px;
+	    width: 2px;
+	    display: flex;
+	}
+	._item_user_club > ._1 > b > span._number {
+	    padding-left: 5px;
+	}
+	._item_user_club > ._1 > b > span._line {
+	    height: 60%;
+	    background: white;
+	    width: 1px;
+	    position: absolute;
+	    display: inline-flex;
+	    bottom: 0;
+	    top: 0;
+	    margin: auto;
+	}
+	._item_user_club > ._2 > ._info {
+	    display: flex;
+	    align-items: center;
+    	grid-gap: 10px;
+	}
+	main._layout._1 > aside > section aside ._description form.edit_club{
+		padding:0;
+	}
+	main._layout._1 > aside > section._clubedit {
+	  align-items: stretch;
+	}
+	main._layout._1 > aside > section._clubedit ._jumbo ._clubs {
+	}
+/* END SHOW */
+
+/* EDIT */
+
+  body._light main._layout._1 > aside._2 > section._clubedit > aside {
+    padding:0;
+  }
+  main._layout._1 > aside._2 > section._clubedit > aside > ._cont,
+  main._layout._1 > aside._2 > section._clubedit > aside > form > ._cont{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  main._layout._1 > aside._2 > section._clubedit > aside > ._cont._1,
+  main._layout._1 > aside._2 > section._clubedit > aside > form > ._cont._1{
+  }
+  main._layout._1 > aside._2 > section._clubedit > aside{
+  	position: relative;
+  	z-index: 1;
+    padding: 25px;
+    border-radius: 15px;
+  }
+  main._layout._1 > aside._2 > section._clubedit._front > aside{
+    padding: 0px;
+  }
+	main._layout._1 > aside._2 > section._clubedit > aside._1 {
+		width: 60%;
+		max-width: 100%;
+	}
+
+	main._layout._1 > aside._2 > section._clubedit > aside._2 {
+		width: calc(40% - 25px);
+		max-width: 100%;
+		padding:0;
+	}
+  main._layout ._navside .edit_club ._item._icon_action {
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    display: block;
+  }
+  main._layout._1 > aside._2 > section._clubedit._front ._clubcover a._coverlink{
+  	border-radius:10px 10px 0 0;
+  }
+  main._layout._1 > aside._2 > section._clubedit > aside._1 > section._club._1 > aside.splide {
+	  border-radius: 15px 15px 0 0;
+	  overflow: hidden;
+	}
+	main._layout._1 > aside._2 > section._clubedit > aside._1 > section._club._1 > aside._info{
+		padding: 1.5em 2em;
+	}
+	main._layout._1 > aside._2 > section._clubedit > aside._1 > section._club._1 > aside._info > ._details {
+	  padding: 1rem 0;
+	}
+	body._light main._layout._1 > aside._2 section._clubedit table._list_members .dropstart > a {
+    color: #071015;
+	}
+  ._clubedit ._clubcover {
+    position: relative;
+	}
+	._clubedit ._clubcover a._coverlink {
+    position: absolute;
+    z-index: 2;
+    inset: 0 0 0 0;
+    background: #00000082;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor:pointer;
+    font-size: 30px;
+	}
+
+
+
+/* NEW club */
+	main._layout._1 > aside._2 > section._newclub > aside._1 {
+  	width: 100%;
+	}
+	._list_clubs figure._shield {
+    height: 70px;
+    width: 70px;
+    overflow: hidden;
+    border-radius: 5px;
+	}
+	._list_clubs figure._shield > img{
+		width:100%;
+		height:100%;
+		object-fit:contain;
+	}
+	._list_clubs ._name {
+    margin-bottom: 0;
+    line-height:1;
+    font-family: 'Causten', 'Sofia', sans-serif;
+    font-weight: 800;
+	}
+
+/* FORM */
+	._imgeditclub > img {
+	  height: 250px;
+	  width: 100%;
+	  object-fit: cover;
+    position: relative;
+    z-index: 0;
+	}
+	._imgeditclub > a[data-method="delete"]{
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    background: white;
+    right: 0;
+    padding: 10px;
+    border-radius: 0 0 0 10px;
+	}
+	._coverinput{
+		position: absolute;
+		z-index: 1;
+	}
+	._coverinput > ._in{
+		position: relative;
+	}
+	._coverinput > ._in > input{
+		position: absolute;
+	}
+	section._club._1 > aside._info > ._cover > ._1 > ._in {
+    position: relative;
+    width: max-content;
+    overflow: hidden;
+    border-radius: 10px;
+    margin: -5.4rem auto 1rem;
+	}
+	section._club._1 > aside._info > ._cover > ._1 > ._in > img {
+    position: relative;
+    z-index: 0;
+	}
+	section._club ._title_edit .input-group,
+	section._club ._slug_edit .input-group{
+    justify-content: center;
+    text-align: center;
+    position: relative;
+	}
+	._coverlink {
+    position: absolute;
+    z-index: 2;
+    inset: 0 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0000004a;
+    color: white;
+    font-size: 23px;
+    cursor:pointer;
+	}
+
+	._title_edit .input-group input,
+	._title_edit .input-group button {
+	  display: none;
+	}
+	._title_edit .input-group ._title_edit_link_cancel {
+	  display: none;
+	}
+
+	._title_edit.active .input-group input,
+	._title_edit.active .input-group button {
+	  display: flex;
+	}
+	._title_edit.active .input-group ._title_edit_link_cancel {
+	  display: flex;
+	}
+
+	._title_edit.active .input-group>._1,
+	._title_edit.active .input-group ._title_edit_link {
+	  display: none;
+	}
+	._clubedit > aside._1 > section._club._1 {
+	  margin-bottom: 0 !important;
+	}
+	._title_edit > .input-group.input-group-sm.mb-3 {
+    margin-bottom: 0 !important;
+	}
+
+
+
+
+
+	._slug_edit .input-group input,
+	._slug_edit .input-group button {
+	  display: none;
+	}
+	._slug_edit .input-group ._slug_edit_link_cancel {
+	  display: none;
+	}
+
+	._slug_edit.active .input-group input,
+	._slug_edit.active .input-group button {
+	  display: flex;
+	}
+	._slug_edit.active .input-group ._slug_edit_link_cancel {
+	  display: flex;
+	}
+
+	._slug_edit.active .input-group>._1,
+	._slug_edit.active .input-group ._slug_edit_link {
+	  display: none;
+	}
+	._slug_edit > .input-group.input-group-sm.mb-3 {
+    margin-bottom: 0 !important;
+	}
+	._slug_edit span._status {
+    position: relative;
+    order: 4;
+    width: 30px;
+    top: 0 !important;
+    left: 0;
+	}
+
+/* TABLE */
+	.table-hover>tbody>tr:hover>*{
+    background-color: #f5fdff !important;
+    --bs-table-accent-bg: #f5fdff !important;
+	}
+	section._clubedit._members table._list_members ._btnfirst {
+		position: relative;
+		z-index: 3;
+	}
+	section._clubedit._members table._list_members .dropdown,
+	section._clubedit._members table._list_members .dropup {
+		position: relative;
+		z-index: 3;
+	}
+	section._clubedit._members table._list_members tbody tr,
+	section._clubedit._members table._list_members tbody td{
+		position: relative;
+		z-index: 0;
+	}
+	section._clubedit._members table._list_members tbody tr .dropdown-menu:focus,
+	section._clubedit._members table._list_members tbody td .dropdown-menu:focus,
+	section._clubedit._members table._list_members tbody tr .dropdown-menu:hover,
+	section._clubedit._members table._list_members tbody td .dropdown-menu:hover{
+		z-index: 3;
+	}
+	main._layout._1 ._noitems {
+		height: 100%;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		text-align: center;
+	}
+	main._layout._1 ._noitems > ._inter{
+		width:100%;
+	}
+	main._layout._1 > aside._2 > section._clubedit > aside._2 > div{
+		height: 100%;
+		width: 100%;
+	}
+	section._console._1 > aside._1 ._body_console._1 ._in._noitems{
+    padding-top: 50px;
+    padding-bottom: 50px;
+	}
+
+	
+	.modal .form-control {
+    border-radius: 0;
+    padding: 20px 30px;
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+	}
+
+	body._light .modal .form-control{
+    border: 1px solid #0f1419 !important;
+	}
+	body._light .modal ._input_number .form-control {
+    border: 0 !important;
+	}
+	div#locationModal .modal-dialog {
+    width: 900px;
+    max-width: 80%;
+	}
+	.input-group>label {
+    position: absolute;
+    z-index: 2;
+    left: 25px;
+    font-family: 'Barlow Condensed', sans-serif;
+    top: -11px;
+    font-weight: 800;
+    font-style: italic;
+	}
+	body._light .input-group>label {
+    background: #FFF;
+    padding: 0 5px;
+	}
+	._close_newclub {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+	}
+	._newclub .new_club {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 40px);
+	}
+	._newclub ._close_newclub {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+	}
+	._newclub ._close_newclub i {
+    font-size: 16px;
+	}
+	._newclub ._head{
+	  text-align: center;
+	}
+	._newclub ._head h1 {
+	  font-family: 'Barlow Condensed', sans-serif;
+	  text-transform: uppercase;
+	  font-style: italic;
+	  letter-spacing: 1px;
+	}
+	._newclub ._body_console input {
+
+    margin: 0 auto;
+    border: 1px solid;
+    border-radius: 0;
+	}
+	._newclub ._action ._btns {
+	  justify-content: center;
+	  margin: 0 auto;
+	}
+	._newclub .step ._content {
+    width: 600px;
+    margin: 0 auto;
+	}
+	body._light ._newclub ._body_console input,
+	body._light ._newclub ._body_console input:focus {
+		border-color: #0f1419 !important;
+	}
+	.inputhide {
+    display: none;
+	}
+	div#map_club {
+	  height: 500px;
+	}
+	._cta._1 {
+    display: block;
+    text-decoration: none;
+    border-radius: 9px;
+    transition: all 0.2s ease;
+	}
+	._cta._1:hover {
+    transform: scale(1.04);
+	}
+	._cta._1 ._inner{
+    padding:50px 30px;
+    display: flex;
+    grid-gap: 15px;
+    align-items: center;
+    justify-content: space-between;
+	}
+	._cta._1 ._inner ._sup {
+    color: #FFF;
+    font-family: 'Abel', sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    font-size: 20px;
+	}
+	._cta._1 h3 {
+    margin: 0;
+    font-family: 'Oswald','Rubik', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+	}
+	body._light ._cta._1{
+    background: linear-gradient(to right, #232526, #414345);
+	}
+	body._light ._cta._1 h3,
+	body._light ._cta._1 i{
+		color:#fdfeff;
+	}
+	._cta._1 i{
+    font-size: 25px;
+	}
+	._cta._1 a {
+	  text-decoration: none;
+	}
+	._action_save {
+    position: sticky;
+    bottom: 10px;
+	}
+	.jumbotron ._title {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+	}
+	._btn_club_new {
+	  width: 70px;
+	  height: 70px;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  text-align: center;
+	  margin: 0 auto;
+	  text-decoration: none;
+	  border-radius: 9px;
+	}
+	body._light ._btn_club_new{
+	  background: #e9eef3;
+	  color: #2125294f;
+	}
+	._btn_club_new ._in {
+    display: block;
+	}
+	._btn_club_new ._in i {
+    display: block;
+    width: 100%;
+    font-size: 27px;
+	}
+/* RESPONSIVE */
+
+	@media(min-width:1200px){
+		section._club._1 aside._info ._details > ._2 {
+		    padding: 0;
+		}
+		section._club._1 aside._info ._details > ._2 > ._in {
+	    	justify-content: flex-end;
+		}
+		body._light main._layout._1 > aside._2 > section._clubedit._members > aside.col-xl-12 {
+			width: 100%;
+			max-width: 100%;
+		}
+	}
+
+	.jumbotron._jumbo_{
+    position: relative;
+	}

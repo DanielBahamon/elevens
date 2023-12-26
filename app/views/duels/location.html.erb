@@ -1,0 +1,621 @@
+<% content_for :page_name, "Ubicación del duelo" %>
+
+<%= render 'duels/layout/one' %>
+	<%= render 'duels/shared/navs/header' %>
+
+	<section class=" _console _1 _newduel _location">
+		<aside class="_1">
+		  <%= simple_form_for([@club, @duel]) do |f| %>
+			  <%= f.hidden_field :latitude, value: current_user.clubs[0].latitude || 37.7749 %>
+			  <%= f.hidden_field :longitude, value: current_user.clubs[0].longitude || -122.4194 %>
+				<div class="row">
+					<div class="col-lg-12 _1">
+						<div class="_body_console _1">
+							<div class="_cont">
+								<div class="jumbotron _jumbo_1">
+									<div class="_in ">
+										<% if !@duel.latitude.present? && !@duel.rival_id.present? %>
+											<fieldset class="step active">
+												<div class="row nom">
+													<div class="col-xl-5 col-lg-6 _1">
+														<figure>
+															<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/nillustrations/1/World+wide+web_Flatline.svg">
+														</figure>
+													</div>
+													<div class="col-xl-7 col-lg-6 _2">
+														<div class="_cont">
+															<h2 class="_title"><span>Ubicación del Duelo</span></h2>
+															<p class="lead"> Antes de publicar el duelo, asegúrate de agregar la ubicación exacta del encuentro. Esto permitirá que los equipos y los árbitros sepan dónde se llevará a cabo el enfrentamiento.</p>
+															<br>
+															<a class="button--naira _1 _bigbtn fit next" >
+															  <span>Agregar</span>
+															  <i class="fad fa-map-marker-alt button__icon text-cente"></i>
+															</a>
+														</div>
+													</div>
+												</div>
+											</fieldset>
+										  <fieldset class="step">
+												<aside class="_content">
+													<div class="_body">
+														<div class="row nom">
+															<div class="col-xl-5 col-lg-6 _1">
+																<figure>
+																	<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/nillustrations/1/Sydney+_Flatline.svg">
+																</figure>
+															</div>
+															<div class="col-xl-7 col-lg-6 _2">
+																<div class="_cont">
+																	<h2 class="_title"><span>¿En dónde es el encuentro?</span></h2>
+																	<div class="input-group mb-3">
+																	  <%= f.text_field :country, class: "_input_text _1 form-control", placeholder: "País" %>
+																  	<div id="duel_country-dropdown"></div>
+																	</div>
+																	<div class="_action_btns">
+																		<span></span>
+																	  <button class="button--naira _1 fit next" type="button" id="button-addon1">
+																    	<span>Continuar</span>
+																			<i class="button__icon fas fa-arrow-right"></i>
+																	  </button>
+																	</div>
+																</div>
+															</div>
+														</div>
+														
+													</div>
+												</aside>
+										  </fieldset>
+										  <fieldset class="step">
+										  	<aside class="_content">
+													<div class="_body">
+														<div class="row nom">
+															<div class="col-xl-5 col-lg-6 _1">
+																<figure>
+																	<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/nillustrations/1/Statue+of+liberty_Flatline.svg">
+																</figure>
+															</div>
+															<div class="col-xl-7 col-lg-6 _2">
+																<div class="_cont">
+																	<h2 class="_title"><span>¿En qué ciudad es el encuentro?</span></h2>
+																	<div class="input-group mb-3">
+															  		<%= f.text_field :city, class: "_input_text _1 form-control _process", placeholder: "Ciudad" %>
+													  				<div id="duel_city-dropdown"></div>
+																	</div>
+																	<div class="_action_btns">
+															  		<button class="button--naira _2 fit prev " type="button" id="button-addon1">
+																    	<span>Atras</span>
+																			<i class="button__icon fas fa-arrow-left"></i>
+																		</button>
+																	  <button class="button--naira _1 fit next" type="button" id="button-addon2">
+																    	<span>Continuar</span>
+																			<i class="button__icon fas fa-arrow-right"></i>
+																	  </button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+										  	</aside>
+										  </fieldset>
+										  <fieldset class="step">
+										  	<aside class="_content">
+													<div class="_body">
+														<div class="row nom">
+															<div class="col-xl-5 col-lg-6 _1">
+																<figure>
+																	<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/nillustrations/1/City+buildings+_Flatline.svg">
+																</figure>
+															</div>
+															<div class="col-xl-7 col-lg-6 _2">
+																<div class="_cont">
+																	<h2 class="_title"><span>¿Conoces la zona o el barrio?</span></h2>
+																	<div class="input-group mb-3">
+													  				<%= f.text_field :neighborhood, class: "_input_text _1", placeholder: "Barrio / Zona / Comuna" %>
+																	</div>
+																	<div class="_action_btns">
+																		<button class="button--naira _2 fit prev " type="button" id="button-addon2">
+																    	<span>Atras</span>
+																			<i class="button__icon fas fa-arrow-left"></i>
+																		</button>
+																	  <button class="button--naira _1 fit next" type="button" id="button-addon3">
+																    	<span>Continuar</span>
+																			<i class="button__icon fas fa-arrow-right"></i>
+																	  </button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+										  	</aside>
+										  </fieldset>
+										  <fieldset class="step">
+										  	<aside class="_content">
+													<div class="_body">
+														<div class="row nom">
+															<div class="col-xl-5 col-lg-6 _1">
+																<figure>
+																	<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/nillustrations/1/Scooter_Flatline.svg">
+																</figure>
+															</div>
+															<div class="col-xl-7 col-lg-6 _2">
+																<div class="_cont">
+																	<h2 class="_title"><span>¿Cómo llegar?</span></h2>
+																	<div class="input-group mb-3">
+														  			<%= f.text_field :address, class: "_input_text _1", placeholder: "Dirección" %>
+													  				<div id="duel_address-dropdown"></div>
+																	</div>
+																	<div class="_action_btns">
+																		<button class="button--naira _2 fit prev " type="button" id="button-addon3">
+																    	<span>Atras</span>
+																			<i class="button__icon fas fa-arrow-left"></i>
+																		</button>
+																	  <button class="button--naira _1 fit next" type="button" id="button-addon4">
+																    	<span>Continuar</span>
+																			<i class="button__icon fas fa-arrow-right"></i>
+																	  </button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+										  	</aside>
+										  </fieldset>
+										  <fieldset class="step">
+										  	<asied class="_content _maps" >
+										  		<div class="_body">
+														<div class="row nom">
+															<div class="col-12">
+																<div class="_in">
+																	<p class="lead">Confirma la ubicación exacta del duelo, puedes mover el icono dentro del mapa:</p>
+													        <div class="_map" id="map_duel"></div>
+																	<div class="_action_btns">
+																		<button class="button--naira _2 fit prev " type="button" id="button-addon3">
+																    	<span>Atras</span>
+																			<i class="button__icon fas fa-arrow-left"></i>
+																		</button>
+																	  <button class="button--naira _1 fit" type="submit">
+																    	<span>Confirmar y guardar</span>
+																			<i class="button__icon fas fa-arrow-right"></i>
+																	  </button>
+																	</div>
+																</div>
+															</div>
+														</div>
+										  		</div>
+										  	</asied>
+										  </fieldset>
+										<% elsif @duel.latitude.present? && !@duel.rival_id.present? %>
+											<fieldset class="step active">
+												<div class="row nom">
+													<div class="col-12 col-md-6 offset-md-3 _1">
+														<figure>
+															<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/nillustrations/1/World+wide+web_Flatline.svg">
+														</figure>
+													</div>
+													<div class="col-12 _2">
+														<div class="_cont text-center">
+															<h2 class="_title"><span>Todo listo por aqui!</span></h2>
+															<p>Ya has agregado la ubicación del duelo pero aun puedes <a class="next">confirmarla</a>.</p>
+															<br>
+														</div>
+													</div>
+												</div>
+											</fieldset>
+										  <fieldset class="step">
+												<aside class="_content">
+													<div class="_body">
+														<div class="row nom">
+															<div class="col-xl-5 col-lg-6 _1">
+																<figure>
+																	<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/nillustrations/1/Sydney+_Flatline.svg">
+																</figure>
+															</div>
+															<div class="col-xl-7 col-lg-6 _2">
+																<div class="_cont">
+																	<h2 class="_title"><span>¿En dónde es el encuentro?</span></h2>
+																	<div class="input-group mb-3">
+																	  <%= f.text_field :country, class: "_input_text _1 form-control", placeholder: "País" %>
+																  	<div id="duel_country-dropdown"></div>
+																	</div>
+																	<div class="_action_btns">
+																		<button class="button--naira _1 _bigbtn _btn fit next" type="button" id="button-addon1">
+																		  <span>Continuar</span>
+																		  <i class="button__icon fal fa-arrow-right"></i>
+																		</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+														
+													</div>
+												</aside>
+										  </fieldset>
+										  <fieldset class="step">
+										  	<aside class="_content">
+													<div class="_body">
+														<div class="row nom">
+															<div class="col-xl-5 col-lg-6 _1">
+																<figure>
+																	<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/nillustrations/1/Statue+of+liberty_Flatline.svg">
+																</figure>
+															</div>
+															<div class="col-xl-7 col-lg-6 _2">
+																<div class="_cont">
+																	<h2 class="_title"><span>¿En qué ciudad es el encuentro?</span></h2>
+																	<div class="input-group mb-3">
+															  		<%= f.text_field :city, class: "_input_text _1 form-control _process", placeholder: "Ciudad" %>
+													  				<div id="duel_city-dropdown"></div>
+																	</div>
+																	<div class="_action_btns">
+																		<button class="button--naira _1 _midbtn _btn fit prev" type="button" id="button-addon1">
+																		  <span>Atras</span>
+																			<i class="button__icon fal fa-arrow-left"></i>
+																		</button>
+																		<button class="button--naira _1 _midbtn _btn fit next" type="button" id="button-addon2">
+																		  <span>Continuar</span>
+																			<i class="button__icon fal fa-arrow-right"></i>
+																		</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+										  	</aside>
+										  </fieldset>
+										  <fieldset class="step">
+										  	<aside class="_content">
+													<div class="_body">
+														<div class="row nom">
+															<div class="col-xl-5 col-lg-6 _1">
+																<figure>
+																	<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/nillustrations/1/City+buildings+_Flatline.svg">
+																</figure>
+															</div>
+															<div class="col-xl-7 col-lg-6 _2">
+																<div class="_cont">
+																	<h2 class="_title"><span>¿Conoces la zona o el barrio?</span></h2>
+																	<div class="input-group mb-3">
+													  				<%= f.text_field :neighborhood, class: "_input_text _1", placeholder: "Barrio / Zona / Comuna" %>
+																	</div>
+																	<div class="_action_btns">
+																		<button class="button--naira _1 _midbtn _btn fit prev" type="button" id="button-addon2">
+																		  <span>Atras</span>
+																			<i class="button__icon fal fa-arrow-left"></i>
+																		</button>
+																		<button class="button--naira _1 _midbtn _btn fit next" type="button" id="button-addon3">
+																		  <span>Continuar</span>
+																			<i class="button__icon fal fa-arrow-right"></i>
+																		</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+										  	</aside>
+										  </fieldset>
+										  <fieldset class="step">
+										  	<aside class="_content">
+													<div class="_body">
+														<div class="row nom">
+															<div class="col-xl-5 col-lg-6 _1">
+																<figure>
+																	<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/nillustrations/1/Scooter_Flatline.svg">
+																</figure>
+															</div>
+															<div class="col-xl-7 col-lg-6 _2">
+																<div class="_cont">
+																	<h2 class="_title"><span>¿Cómo llegar?</span></h2>
+																	<div class="input-group mb-3">
+														  			<%= f.text_field :address, class: "_input_text _1", placeholder: "Dirección" %>
+													  				<div id="duel_address-dropdown"></div>
+																	</div>
+																	<div class="_action_btns">
+																		<button class="button--naira _1 _midbtn _btn fit prev" type="button" id="button-addon3">
+																		  <span>Atras</span>
+																			<i class="button__icon fal fa-arrow-left"></i>
+																		</button>
+																		<button class="button--naira _1 _midbtn _btn fit next" type="button" id="button-addon4">
+																		  <span>Continuar</span>
+																			<i class="button__icon fal fa-arrow-right"></i>
+																		</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+										  	</aside>
+										  </fieldset>
+										  <fieldset class="step">
+										  	<asied class="_content _maps" >
+										  		<div class="_body">
+														<div class="row nom">
+															<div class="col-12">
+																<div class="_in">
+																	<h2 class="_title"><span>Confirma la ubicación</span></h2>
+																	<p class="lead">Por favor, confirma la ubicación exacta del encuentro moviendo el icono dentro del mapa de abajo:</p>
+													        <div class="_map" id="map_duel"></div>
+																	<div class="_action_btns">
+																		<button class="button--naira _1 _midbtn _btn fit prev" type="button" id="button-addon3">
+																		  <span>Atras</span>
+																			<i class="button__icon fal fa-arrow-left"></i>
+																		</button>
+																		<button class="button--naira _1 _midbtn _btn fit next" type="submit">
+																		  <span>Confirmar y guardar</span>
+																			<i class="button__icon fad fa-thumbs-up"></i>
+																		</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+										  		</div>
+										  	</asied>
+										  </fieldset>
+										<% else %>
+											<div class="_info">
+												<div class="row nom">
+													<div class="col-xl-5 col-lg-6 _1">
+														<figure>
+															<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/illustrations/Startup_Flatline.svg">
+														</figure>
+													</div>
+													<div class="col-xl-7 col-lg-6 _2">
+														<div class="_cont">
+															<h3 class="_title"><span>¡Todo esta confirmado!</span></h3>
+															<p class="lead"> La ubicación del duelo ha sido agregada exitosamente. Ahora los equipos y los árbitros estarán informados sobre dónde se llevará a cabo el enfrentamiento. ¡Prepárate para vivir una emocionante competencia en este lugar especial.</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										<% end %>
+											
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		  <% end %>
+		</aside>
+	</section>
+<%= render 'duels/layout/two' %>
+
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz-J87QC1qvkimHdAE55GcV4Qpt8STDzc"></script>
+<script type="text/javascript">
+	  function initialize() {
+	    var map; // Declara la variable "map" al principio de la función
+	    var marker; // Declara la variable "marker" al principio de la función
+	    var location; // Declara la variable "location" al principio de la función
+
+	    <% if @duel.latitude.blank? || @duel.latitude.blank? %>
+	      // Obtener la ubicación actual del usuario
+	      if (navigator.geolocation) {
+	        navigator.geolocation.getCurrentPosition(function(position) {
+	          location = { lat: position.coords.latitude, lng: position.coords.longitude };
+	          map.setCenter(location);
+	          marker.setPosition(location);
+	        }, function() {
+	          console.log('El servicio de geolocalización falló.');
+	        });
+	      } else {
+	        location = { lat: 0, lng: 0 }; // Otra ubicación predeterminada si no se admite la geolocalización
+	        console.log('Tu navegador no admite geolocalización.');
+	      }
+	    <% else %>
+	      location = {lat: <%= @duel.latitude %>, lng: <%= @duel.longitude %>};
+	    <% end %>
+
+	    map = new google.maps.Map(document.getElementById('map_duel'), {
+	      center: location,
+	      zoom: 14
+	    });
+
+	    marker = new google.maps.Marker({
+	      position: location,
+	      map: map,
+	      draggable: true
+	    });
+
+
+	    var geocoder = new google.maps.Geocoder();
+
+	    google.maps.event.addListener(marker, 'dragend', function() {
+	      geocoder.geocode({ 'location': marker.getPosition() }, function(results, status) {
+	        if (status == google.maps.GeocoderStatus.OK) {
+	          document.getElementById('duel_address').value = results[0].formatted_address;
+	          document.getElementById('duel_city').value = getFieldValueFromAddressComponent(results[0], 'locality');
+	          document.getElementById('duel_neighborhood').value = getFieldValueFromAddressComponent(results[0], 'sublocality') || getFieldValueFromAddressComponent(results[0], 'neighborhood');
+
+	          document.getElementById('duel_country').value = getFieldValueFromAddressComponent(results[0], 'country');
+	          document.getElementById('duel_latitude').value = marker.getPosition().lat();
+	          document.getElementById('duel_longitude').value = marker.getPosition().lng();
+	        } else {
+	          alert('Geocode was not successful for the following reason: ' + status);
+	        }
+	      });
+	    });
+
+	    function getFieldValueFromAddressComponent(address, component) {
+	      for (var i = 0; i < address.address_components.length; i++) {
+	        var addressType = address.address_components[i].types[0];
+	        if (addressType == component) {
+	          return address.address_components[i].long_name;
+	        }
+	      }
+	      return "";
+	    }
+
+	    function updateMarkerLocation(address, city, country, latitude, longitude) {
+	      var geocoder = new google.maps.Geocoder();
+	      var addressString = address + ', ' + city + ', ' + country;
+	      geocoder.geocode({ address: addressString }, function(results, status) {
+	        if (status == google.maps.GeocoderStatus.OK) {
+	          location = results[0].geometry.location;
+	          map.setCenter(location);
+	          marker.setPosition(location);
+	          document.getElementById('duel_latitude').value = location.lat();
+	          document.getElementById('duel_longitude').value = location.lng();
+	        } else {
+	          alert('La geocodificación no tuvo éxito por la siguiente razón: ' + status);
+	        }
+	      });
+	    }
+
+	    document.getElementById('duel_country').addEventListener('change', function() {
+	      var country = this.value;
+	      var city = document.getElementById('duel_city').value;
+	      var address = document.getElementById('duel_address').value;
+	      var neighborhood = document.getElementById('duel_neighborhood').value;
+	      updateMarkerLocation(address, city, country, marker, map);
+	    });
+	    document.getElementById('duel_city').addEventListener('change', function() {
+	      var country = document.getElementById('duel_country').value;
+	      var city = this.value;
+	      var address = document.getElementById('duel_address').value;
+	      var neighborhood = document.getElementById('duel_neighborhood').value;
+	      updateMarkerLocation(address, city, country, marker, map);
+	    });
+	    document.getElementById('duel_address').addEventListener('change', function() {
+	      var country = document.getElementById('duel_country').value;
+	      var city = document.getElementById('duel_city').value;
+	      var neighborhood = document.getElementById('duel_neighborhood').value;
+	      var address = this.value;
+	      updateMarkerLocation(address, city, country, marker, map);
+	    });
+
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+	  $('#duel_country').geocomplete({
+	    types: ['(regions)'],
+	    details: '#duel_country-dropdown'
+	  });
+	  $('#duel_city').geocomplete({
+	    types: ['(cities)'],
+	    details: '#duel_city-dropdown'
+	  });
+	  $('#duel_address').geocomplete({
+	    types: ['geocode'],
+	    details: '#duel_address-dropdown'
+	  });
+	});
+</script>
+<script type="text/javascript">
+	
+
+	/* ========================================= */
+
+	$(document).ready(function() {
+	  var currentStep = 0;
+	  var $form = $('#edit_duel_<%= @duel.id %>');
+	  var $steps = $form.find('.step');
+	  var numSteps = $steps.length;
+	  // var $progressBar = $('._progress-bar');
+	  var $fields = $form.find('input._process');
+	  var numFields = $fields.length;
+
+	  function showStep(step) {
+	    $steps.removeClass('active');
+	    $steps.eq(step).addClass('active');
+	    if (step === 0) {
+	      $form.find('.prev').hide();
+	    } else {
+	      $form.find('.prev').show();
+	    }
+	    if (step === numSteps - 1) {
+	      // $form.find('.next').hide();
+	    } else {
+	      // $form.find('.next').show();
+	    }
+	  }
+
+	  showStep(currentStep);
+
+	  $form.find('.next').click(function() {
+	    var $currentStep = $steps.eq(currentStep);
+	    var isValid = true;
+
+	    $currentStep.find('input, select').each(function() {
+	      if ($(this).prop('required') && $(this).val() === '') {
+	        isValid = false;
+	        $(this).addClass('error');
+	      } else {
+	        $(this).removeClass('error');
+	      }
+	    });
+
+	    // Check if all inputs with class "_process" are completed
+	    var $requiredFields = $currentStep.find('input._process');
+	    $requiredFields.each(function() {
+	      if ($(this).val() === '') {
+	        isValid = false;
+	        $(this).addClass('error');
+	      } else {
+	        $(this).removeClass('error');
+	      }
+	    });
+
+	    if (isValid) {
+	      $currentStep.fadeOut(500).promise().done(function() {
+	        currentStep++;
+	        showStep(currentStep);
+	        $steps.eq(currentStep).fadeIn(500);
+	      });
+	    }
+	  });
+
+	  $form.find('.prev').click(function() {
+	    $steps.eq(currentStep).fadeOut(500).promise().done(function() {
+	      currentStep--;
+	      showStep(currentStep);
+	      $steps.eq(currentStep).fadeIn(500);
+	    });
+	  });
+
+		// var nextButtons = document.querySelectorAll('.next');
+		// for (var i = 0; i < nextButtons.length; i++) {
+		//   nextButtons[i].addEventListener('click', function() {
+		//     updateProgressBar();
+		//   });
+		// }
+
+	  // function updateProgress() {
+	  //   var numCompletedFields = $fields.filter(function() {
+	  //     return $(this).val() !== '';
+	  //   }).length;
+
+	  //   var percent = parseFloat((100 / numFields) * numCompletedFields).toFixed(2);
+	  //   $progressBar.attr('aria-valuenow', percent).css('width', numCompletedFields + '%');
+	  // }
+
+	  // $fields.change(function() {
+	  //   updateProgress();
+	  // });
+
+	  //Call updateProgress initially to set the progress bar to 0%
+	  // updateProgress();
+	});
+
+	// function updateProgressBar() {
+	//   var steps = document.querySelectorAll('.step');
+	//   var progress = document.getElementById('_progress-bar');
+	//   var stepCount = steps.length;
+	//   var currentStep = 0;
+
+	  //   // Encontrar el paso actual
+	  // for (var i = 0; i < steps.length; i++) {
+	  //   if (steps[i].classList.contains('active')) {
+	  //     currentStep = i;
+	  //     break;
+	  //   }
+	  // }
+
+	//   // Actualizar la barra de progreso
+	  // var percent = ((currentStep + 1) / stepCount) * 100;
+	//   progress.style.width = percent + '%';
+	// }
+</script>

@@ -1,0 +1,17 @@
+<% content_for :page_name, "Nuevo duelo - Entornes" %>
+<%= render 'shared/layout/one' %>
+
+	<section class="_clubedit _newclub">
+		<aside class="_1">
+			<div class="_cont _1">
+				<% @players.each do |player| %>
+					<li>
+						<%= player.slug %>
+					</li>
+				<% end %>
+			</div>
+		</aside>
+	</section>
+
+
+<%= render 'shared/layout/two' %>

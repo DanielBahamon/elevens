@@ -1,0 +1,44 @@
+<% local = Club.find_by(id: duel.club_id) %>
+<% if duel.rival_id.present? %>
+	<% guess = Club.find_by(id: duel.rival_id) %>
+<% end %>
+<article class="_duel _prev" id="_prev-<%= duel.id %>">
+	<section class="_cont _1">
+    <div class="_1">
+      <div class="_i">
+        <p class="_mutted"><%= duel.city %>, <%= duel.country %></p>
+      </div>
+      <div class="_ii">
+        <p class="_mutted">en <%= duel.time_remaining %></p>
+      </div>
+    </div>
+		<div class="_2">
+			<div class="_i">
+				<div class="_in">
+	        <%= link_to club_duel_path(local.id, duel) do %>
+						<img src="<%= local.avatar %>" class="_shield _1">
+	        <% end %>
+				</div>
+			</div>
+			<div class="_iii">
+	      <%= link_to club_duel_path(local.id, duel) do %>
+					<p class="_date"><%= duel.start_date.strftime("%B %d, %Y") %></p>
+					<p class="_time"><%= duel.start_date.strftime("%I:%M %p") %></p>
+				<% end %>
+			</div>
+			<div class="_ii">
+				<div class="_in">
+					<% if duel.rival_id.present? %>
+		        <%= link_to club_duel_path(guess.id, duel) do %>
+							<img src="<%= guess.avatar %>" class="_shield _1">
+		        <% end %>
+					<% else %>
+		        <%= link_to club_duel_rivals_path(@club, duel), class: "button--sacnite _2 _btn m-left _big" do %>
+							<i class="fad fa-users button__icon"></i>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</section>
+</article>

@@ -1,0 +1,652 @@
+<% content_for :page_name, "Condiciones del encuentro" %>
+<% if @duel.referee == false %>
+  <% is_ready = !@duel.members.blank? && !@duel.price.blank? && !@duel.referee_name.blank? && !@duel.address.blank? && !@duel.referee_id.blank? && !@duel.address.blank? %>
+<% else %>
+  <% is_ready = !@duel.members.blank? && !@duel.price.blank? && !@duel.responsibility == false && !@duel.address.blank? && !@duel.referee_id.blank? && !@duel.address.blank? %>
+<% end %>
+
+<%= render 'duels/layout/one' %>
+	<%= render 'duels/shared/navs/header' %>
+	<section class="_console _1 _panel_duel">
+			<aside class="_1">
+			  <%= simple_form_for([@club, @duel]) do |f| %>
+			  	<div class="row">
+						<div class="col-lg-12">
+							<aside>
+								<% if !@duel.referee == true && !@duel.responsibility == true %>
+									<div class="_body_console _1">
+										<div class="_cont">
+											<div class="jumbotron _jumbo_ _jumboresponsibility1">
+												<div class="_in text-center">
+													<h1 class="mb-4 display-2 _title">Firma de responsabilidad</h1>
+													<p class="lead mb-0">Al elegir no contar con un árbitro en tu duelo, asumes una gran responsabilidad como Capitán. </p>
+													<p class="lead">Por favor, confirma que comprendes estas responsabilidades adicionales y estás dispuesto a aceptar las consecuencias que se aplicarán en caso de cualquier incumplimiento.</p>
+													<br>
+													<div class="_action _flex ">
+														<%= simple_form_for([@club, @duel]) do |f| %>
+															<%= f.hidden_field :responsibility, value: true %>
+															<button type="submit" class="button--naira _1 fit m-0-auto" name="commit">
+													    	<span>Acepto la responsabilidad</span>
+																<i class="button__icon fas fa-signature	"></i>
+															</button>
+														<% end %>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								<% end %>
+								<% if @duel.responsibility == true || @duel.referee == true %>
+									<div class="_body_console _2">
+										<div class="_cont">
+											<div class="_flexy">
+											  	<div class="_cardy _fullduel _one _action <% if !@duel.rival_id.present? %>noready<% end %>">
+														<div class="_cont">
+															<aside>
+																<% local = Club.find_by(id: @duel.club_id) %>
+																<% if @duel.rival_id.present? %>
+																	<% guess = Club.find_by(id: @duel.rival_id) %>
+																<% end %>
+																<div class="row">
+																	<div class="col-6 col-lg-4 _1">
+																		<div class="_inner">
+															        <%= link_to club_duel_path(local.id, @duel) do %>
+																        <h1 class="_uppercase _avant m-0 _line1"><%= local.club_name %></h1>
+																        <p class="_uppercase _abel"><%= local.country %></p>
+															        <% end %>
+																		</div>
+																	</div>
+																	<div class="d-none d-lg-flex col-lg-4 _2">
+																		<div class="_inner">
+																      <%= link_to club_duel_path(local, @duel) do %>
+																				<p class="_date"><small>Caduca el</small></p>
+																				<p class="_date"><%= @duel.start_date.strftime("%B %d, %Y") %></p>
+																				<p class="_time"><%= @duel.start_date.strftime("%I:%M %p") %></p>
+																			<% end %>
+																		</div>
+																	</div>
+																	<div class="col-6 col-lg-4 _3 text-end">
+																		<div class="_inner ">
+																			<% if @duel.rival_id.present? %>
+																        <%= link_to club_duel_path(guess, @duel) do %>
+																	        <h1 class="_uppercase _avant m-0 _line1"><%= guess.club_name %></h1>
+																	        <p class="_uppercase _abel"><%= guess.country %></p>
+																        <% end %>
+																			<% else %>
+																        <%= link_to club_duel_rivals_path(@club, @duel), class: "button--shikoba _2 _fit" do %>
+																			    <span>Desafiar</span>
+																			    <i class="button__icon fad fa-bullseye-arrow"></i>
+																				<% end %>
+																			<% end %>
+																		</div>
+																	</div>
+																</div>
+															</aside>
+																
+														</div>
+
+														<figure class="_media _local">
+															<img src="<%= local.avatar %>">
+														</figure>
+														<% if @duel.rival_id.present? %>
+															<figure class="_media _guess">
+																<img src="<%= guess.avatar %>">
+															</figure>
+														<% end %>
+											  	</div>
+													<div class="_cardy _team _two _action <% unless @local_users_approved.count >= @duel.members %>noready<% end %>" data-bs-toggle="modal" data-bs-target="#teamModal">
+														<div class="_cont _alignend">
+															<div class="_in _1">
+																<div class="_data">
+																	<div class="_image">
+																		<img src="https://d4s5cnqwbwfuf.cloudfront.net/assets/icons/3d/i/futbol-2-94.png">
+																	</div>
+																	<div class="_1">
+																  	<h2 class="_text _avant _uppercase">Formación</h2>
+																  	<p class="_paragraph">Miembros del club que asistiran</p>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="_cardy _type _two _action <% if @duel.duel_type == 'Bet' && !@duel.price.present? %>noready<% end %>" <% if @duel.duel_type == 'Bet' %> data-bs-toggle="modal" data-bs-target="#budgetModal"<% end %> >
+														<div class="_cont _alignend">
+															<div class="_in _1">
+																<% duel_type_icons = {
+																  "Friendly" => "apreton-de-manos-94.png",
+																  "Bet" => "bolsa-de-dinero-94.png",
+																  "Tournament" => "trofeo-94.png",
+																  "Mundial" => "america-94.png",
+																  "League" => "premio-94"
+																} %>
+
+																<% duel_type = @duel.duel_type %>
+																<% icon_class = duel_type_icons[duel_type] || "" %>
+																<% bet_duel_type = duel_type.gsub('Bet', 'Apuesta').titleize %>
+
+																<div class="_data">
+																	<div class="_image">
+																		<img src="https://d4s5cnqwbwfuf.cloudfront.net/assets/icons/3d/i/<%= icon_class %>">
+																	</div>
+																	<div class="_1">
+																		<% if @duel.duel_type == 'Friendly' %>
+																			<h2 class="_text _avant _uppercase">Amistoso</h2>
+																  		<p class="_paragraph">Un encuentro con amigos.</p>
+																		<% elsif @duel.duel_type == 'Bet' %>
+																  		<h2 class="_text _avant _uppercase"><%= bet_duel_type.titleize %> <% if @duel.price.present? %>| $<%= number_with_delimiter(@duel.price.to_i, delimiter: '.', separator: ',') %><% end %></h2>
+																  		<p class="_paragraph">¡Apostando por la victoria!</p>
+																		<% elsif @duel.duel_type == 'Tournament' %>
+																			<h2 class="_text _avant _uppercase">Torneo</h2>
+																			<p class="_paragraph">¡Demuestra tu habilidad y avanza!</p>
+																		<% elsif @duel.duel_type == 'Mundial' %>
+																			<h2 class="_text _avant _uppercase">Mundial</h2>
+																			<p class="_paragraph">¡Un duelo épico a nivel mundial!</p>
+																		<% elsif @duel.duel_type == 'League' %>
+																			<h2 class="_text _avant _uppercase">Liga</h2>
+																			<p class="_paragraph">¡Compite por la supremacía!</p>
+																  	<% end %>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="_cardy _referee _three _action <% if @duel.referee == true && !@duel.referee_id.present? || !@duel.responsibility == true %>noready<% end %>" <% if @duel.referee == true %> data-bs-toggle="modal" data-bs-target="#judgeModal" <% end %>>
+														<div class="_cont _alignend">
+															<div class="_in _1">
+																<% if @duel.referee == true %>
+																	<% if @duel.referee_id.present? %>
+																		<div class="_data">
+																			<div class="_image">
+																				<%= image_tag @referee.avatar.url(:medium), class: "_avatar" %>
+																			</div>
+																			<div class="_1">
+																				<h2 class="_text _avant _uppercase"><%= @referee.firstname %> <%= @referee.lastname %></h2>
+																		  	<p class="_paragraph">Referí del duelo</p>
+																			</div>
+																		</div>
+																	<% else %>
+																		<div class="_data">
+																			<div class="_image">
+																				<img src="https://d4s5cnqwbwfuf.cloudfront.net/assets/icons/3d/i/ley-94.png">
+																			</div>
+																			<div class="_1">
+																		  	<h2 class="_text _avant _uppercase">Sin juez</h2>
+																		  	<p class="_paragraph">Solicitar un referí</p>
+																			</div>	
+																		</div>
+																	<% end %>
+																<% else %>
+																	<div class="_data">
+																		<div class="_image">
+																			<img src="https://d4s5cnqwbwfuf.cloudfront.net/assets/icons/3d/i/de-acuerdo-94.png">
+																		</div>
+																		<div class="_1">
+																	  	<h2 class="_text _avant _uppercase">A tu cargo</h2>
+																	  	<p class="_paragrah">Este duelo es tu responsabilidad.</p>
+																		</div>
+																	</div>
+																<% end %>
+															</div>
+														</div>
+													</div>
+													<div class="_cardy _logistic _three _action <% if @duel.address.blank? %>noready<% end %>" data-bs-toggle="modal" data-bs-target="#locationModal">
+														<div class="_cont _alignend">
+															<div class="_in _1">
+																<div class="_data">
+																	<div class="_image">
+																		<img src="https://d4s5cnqwbwfuf.cloudfront.net/assets/icons/3d/i/ubicacion-94.png">
+																	</div>
+																	<div class="_1">
+																		<% if @duel.city.blank? &&  @duel.country.blank? %>
+																  		<h2 class="_text _avant _uppercase">Ubicación</h2>
+																  	<% else %>
+																  		<h2 class="_text _avant _uppercase"><%= @duel.city %>, <%= @duel.country %></h2>
+																  	<% end %>
+																		<% if @duel.address.blank? %>
+																			<p class="_paragraph">Agrega la ubicación de tu duelo</p>
+																  	<% else %>
+																			<p class="_paragraph"><%= @duel.address %></p>
+																  	<% end %>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="_cardy _services _three _action <% unless @duel.serviceconfirmation == true %>noready<% end %>" data-bs-toggle="modal" data-bs-target="#servicesModal">
+														<div class="_cont _alignend">
+															<div class="_in _1">
+																<div class="_data">
+																	<div class="_image">
+																		<img src="https://d4s5cnqwbwfuf.cloudfront.net/assets/icons/3d/i/pesa-94.png">
+																	</div>
+																	<div class="_1">
+																  	<h2 class="_text _avant _uppercase">Adicionales</h2>
+																		<p class="_paragraph">Optimiza tu experiencia</p>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+										  </div>
+										</div>
+									</div>
+								<% end %>
+							</aside>
+				    </div>
+			  	</div>
+			  <% end %>
+			</aside>
+	</section>
+
+<%= render 'duels/layout/two' %>
+
+
+
+<!-- Modal BUDGET -->
+<div class="modal fade" id="budgetModal" tabindex="-1" aria-labelledby="budgetModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <br>
+        <div class="_cont text-center">
+          <% if @duel.rival_id.blank? %>
+          <h1 class="_title _avant _f700 _uppercase">Apuesta</h1>
+            <h3>¿Cuánto vas a apostar?</h3>
+          <% else %>
+            <h3>Apuesta establecida:</h3>
+          <% end %>
+        </div>
+        <%= simple_form_for([@club, @duel]) do |f| %>
+          <div class="_aspects">
+            <div class="_aspectselect">    
+              <div class="_selectactions">
+                <% if @duel.rival_id.blank? %>
+                  <span class="_symbol">$</span>
+                  <%= f.text_field :price, class: "form-control price-duel", required: true, placeholder: "0.00", maxlength: 11, data: { max_value: 99999999 } %>
+                <% else %>
+                  <span>$<%= number_with_delimiter(@duel.price.to_i, delimiter: ',', separator: '.') %></span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <br>
+          <script type="text/javascript">
+						document.addEventListener('DOMContentLoaded', function() {
+						  const amountInput = document.querySelector('.price-duel');
+
+						  amountInput.addEventListener('input', function(e) {
+						    let value = e.target.value.replace(/[^\d]/g, ''); // Elimina todos los caracteres que no sean dígitos
+
+						    // Si no hay valor, coloca 0 para evitar que se muestre vacío
+						    if (value === '') {
+						      value = '0';
+						    }
+
+						    e.target.value = parseInt(value, 10).toLocaleString('en-US', { maximumFractionDigits: 0 }); // Formatea el número sin decimales con separadores de miles
+
+						    // Elimina los separadores de miles para asegurarse de que se almacene como número entero en la base de datos
+						    value = value.replace(/\,/g, '');
+
+						    e.target.setAttribute('data-stored-value', value); // Guarda el valor sin formato como atributo adicional
+						  });
+
+						  amountInput.addEventListener('change', function(e) {
+						    const storedValue = e.target.getAttribute('data-stored-value');
+						    e.target.value = storedValue; // Restaura el valor sin formato al perder el foco del campo
+						  });
+						});
+
+          </script>
+          <% if @duel.rival_id.blank? %>
+            <button class="button--naira _1 _bigbtn" type="submit">
+              <span>Guardar</span>
+              <i class="button__icon fad fa-save"></i>
+            </button>
+          <% else %>
+            <button class="button--naira _1 _bigbtn" type="button" data-bs-dismiss="modal">
+              <span>Entendido</span>
+              <i class="button__icon fad fa-check-circle"></i>
+            </button>
+          <% end %>
+        <% end %>
+        <script type="text/javascript">
+          // Este código se ejecutará cuando la página esté completamente cargada.
+          document.addEventListener('DOMContentLoaded', function() {
+            var priceInput = document.querySelector('.price-duel');
+            
+            priceInput.addEventListener('input', function() {
+              var inputValue = this.value;
+
+              // Elimina todos los caracteres no numéricos, excepto la coma decimal.
+              inputValue = inputValue.replace(/[^0-9,]/g, '');
+
+              // Reemplaza los puntos con comas para separar los miles y asegura una coma decimal.
+              inputValue = inputValue.replace(/\./g, ',');
+
+              this.value = inputValue;
+            });
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal JUDGE -->
+<div class="modal fade" id="judgeModal" tabindex="-1" aria-labelledby="judgeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      	<div class="_cont">
+					<% if @duel.referee == true && !@duel.referee_id.present? %>
+						<% if @duel.referee_name.blank?  %>
+							<%= render 'reservations/shared/form' %>
+						<% end %>
+					<% elsif @duel.referee == true && @duel.referee_id.present? %>
+						<div class="_referee_profile">
+							<div class="_1">
+								<%= link_to user_path(@referee) do %>
+			            <%= image_tag @referee.avatar.url(:medium), class: "_avatar _4" %>
+			            <p class="_name"><%= @referee.firstname %> <%= @referee.lastname %></p>
+			            <p class="_username"><%= @referee.slug %></p>
+			            <div class="text-center mt-1">
+			              <span class="badge _1 pill-outline-secondary"><%= @referee.position_name %></span>
+			            </div>
+								<% end %>
+							</div>
+						</div>
+					<% end %>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal LOCATION -->
+<div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+			  <div class="_cont">
+			  	<div class="text-center">
+			  		<h1 class="_title _avant _f700 _uppercase">Ubicación</h1>
+			  	</div>
+      		<% if @duel.city.blank? || @duel.country.blank? || @duel.address.blank? %>
+	      		<p>Por favor, confirma la ubicación y asegúrate de tener un espacio adecuado reservado para llevar a cabo el duelo de manera exitosa.</p>
+	      		<%= link_to location_club_duel_path(@club, @duel), class: "button--naira _1 _bigbtn" do %>
+					    <span>Ir a Ubicación</span>
+						  <i class="button__icon fad fa-save"></i>
+						<% end %>
+					<% else %>
+						<br>
+						<h3 class="text-center"><%= @duel.city %>, <%= @duel.country %></h3>
+						<p class="text-center"><%= @duel.address %></p>
+						<br>
+	      		<%= link_to location_club_duel_path(@club, @duel), class: "button--naira _1 " do %>
+					    <span>Ir a Ubicación</span>
+						  <i class="button__icon fas fa-map-marked-alt"></i>
+						<% end %>
+					<% end %>
+      	</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal SERVICES -->
+<div class="modal fade" id="servicesModal" tabindex="-1" aria-labelledby="servicesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+			  <div class="_cont">
+			  	<div class="">
+			  		<h1>Aspectos adicionales</h1>
+			  	</div>
+      		<%= simple_form_for([@club, @duel]) do |f| %>
+						<div class="_body_console _1">
+				    	<div class="_cont">
+				    		<div class="row">
+				    			<div class="col-lg-6">
+										<div class="_aspects">
+											<div class="_aspect">
+												<div class="_data">
+													<i class="fad fa-toilet-paper"></i>
+							    				<p>Baños</p>
+												</div>
+								      	<div class="_inputactions">
+								      		<a class="_btn button--sacnite _btn-minus-time" id="bathroom-minus">
+									      		<i class="bi bi-dash"></i>
+													</a>
+													<div class="_input_number">
+														<%= f.number_field :bathrooms, class: "form-control _process", placeholder: "0", id: "bathrooms", min: "0", max: "500" %>
+														<div class="_block"></div>
+													</div>
+													<a class="_btn button--sacnite _btn-plus-time" id="bathroom-plus">
+									      		<i class="bi bi-plus-lg"></i>
+													</a>
+								      	</div>
+											</div>
+											<div class="_aspect">
+												<div class="_data">
+													<i class="fad fa-shower"></i>
+							    				<p>Duchas</p>
+												</div>
+								      	<div class="_inputactions">
+								      		<a class="_btn button--sacnite _btn-minus-time" id="showerbath-minus">
+									      		<i class="bi bi-dash"></i>
+													</a>
+													<div class="_input_number">
+														<%= f.number_field :showerbaths, class: "form-control _process", placeholder: "0", id: "showerbaths", min: "0", max: "50" %>
+														<div class="_block"></div>
+													</div>
+													<a class="_btn button--sacnite _btn-plus-time" id="showerbath-plus">
+									      		<i class="bi bi-plus-lg"></i>
+													</a>
+								      	</div>
+											</div>
+											<div class="form-check form-switch">
+											  <%= f.check_box :snacks, class: "form-check-input", role: "switch" %>
+											  <label class="form-check-label" id="duel_snacks" for="duel_snacks">Hidratación</label>
+								  			<label class="_hidelabel" for="duel_snacks"></label>
+											</div>
+											<div class="form-check form-switch">
+											  <%= f.check_box :lockers, class: "form-check-input", role: "switch" %>
+											  <label class="form-check-label" id="duel_lockers" for="duel_lockers">Casilleros</label>
+								  			<label class="_hidelabel" for="duel_lockers"></label>
+											</div>
+										</div>
+				    			</div>
+				    			<div class="col-lg-6">
+										<div class="form-check form-switch">
+										  <%= f.check_box :sport_bib, class: "form-check-input", role: "switch" %>
+										  <label class="form-check-label" id="duel_sport_bib" for="duel_sport_bib">Petos deportivos</label>
+							  			<label class="_hidelabel" for="duel_sport_bib"></label>
+										</div>
+										<div class="form-check form-switch">
+										  <%= f.check_box :digital_counter, class: "form-check-input", role: "switch" %>
+										  <label class="form-check-label" id="duel_digital_counter" for="duel_digital_counter">Contador Digital</label>
+							  			<label class="_hidelabel" for="duel_digital_counter"></label>
+										</div>
+										<div class="form-check form-switch">
+										  <%= f.check_box :streaming, class: "form-check-input", role: "switch" %>
+										  <label class="form-check-label" id="duel_streaming" for="duel_streaming">Streaming</label>
+							  			<label class="_hidelabel" for="duel_streaming"></label>
+										</div>
+										<div class="form-check form-switch">
+										  <%= f.check_box :is_internet, class: "form-check-input", role: "switch" %>
+										  <label class="form-check-label" id="duel_is_internet" for="duel_is_internet">Wifi</label>
+							  			<label class="_hidelabel" for="duel_is_internet"></label>
+										</div>
+				    			</div>
+				    		</div>
+								<%= f.hidden_field :serviceconfirmation, value: true %>
+								<br>
+							  <button class="button--naira _1 " type="submit">
+							    <span>Guardar</span>
+							    <i class="button__icon fad fa-save"></i>
+							  </button>
+				    	</div>
+				    </div>
+					<% end %>
+			  </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal TEAM -->
+<div class="modal fade" id="teamModal" tabindex="-1" aria-labelledby="teamModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      	<div class="_cont">
+			  	<div class="row">
+	      		<div class="col-md-6 col-lg-auto _1">
+	      			<div class="_inner">
+	      				<% if @duel.showformation == true %>
+				          <div class="_cancha_1">
+				          	<div class="_formations">
+				          		<% if @duel.sport == 'Kings' || @duel.sport == 'Legends' %>
+											  <% max_players = @duel.members %>
+											<% else %>
+											  <% max_players = (@duel.members - 1) %>
+											<% end %>
+
+											<fieldset class="_formation _<%= @duel.formation %>">
+											  <div class="_cancha">
+											    <div>
+											      <% (1..max_players).each do |player_number| %>
+											        <% position = @formaciones[@formacion_actual][player_number] || 'POR' %>
+											        <% member_with_position = @local_available_position.find { |member| member.lines.exists?(position: position.split(',').map(&:strip)) } %>
+
+											        <span class="_player _<%= player_number %>"
+											              data-position="<%= position %>">
+											          <% if member_with_position.present? %>
+											          	<div class="_minuser">
+											          		<%= image_tag member_with_position.avatar.url(:medium), class: "_avatar _2" %>
+											          	</div>
+											          <% end %>
+											        </span>
+											      <% end %>
+											      <% unless @duel.sport == 'Kings' || @duel.sport == 'Legends' %>
+											        <% position = 'POR' %>
+											        <% member_with_mi_position = @local_available_position.find { |member| member.lines.exists?(position: position.split(',').map(&:strip)) } %>
+											        <span class="_player _11"
+											              data-position="POR"
+											              data-bs-toggle="modal" data-bs-target="#player_11">
+											          <% if member_with_mi_position.present? %>
+											            <%= member_with_mi_position.firstname %>
+											          <% end %>
+											        </span>
+											      <% end %>
+											    </div>
+											  </div>
+											</fieldset>
+
+										</div>
+				          </div>
+							  <% end %>
+	      			</div>
+	      		</div>
+	      		<div class="col-md-6 col-lg _2">
+	      			<div class="_inner">
+						  	<div class="">
+						  		<h1 class="_avant _f700 _uppercase"><i>Convocatoria</i></h1>
+						  		<br>
+						  	</div>
+								<div class="_table_members">
+									<ul class="list-group list-group-flush">
+										<% @local_users.each do |member| %>
+												<%= render 'duels/shared/lists/users/private', member: member %>
+										<% end %>
+									</ul>
+								</div>
+								<div class="_action">
+									<div class="row">
+										<div class="col-5 _1">
+											<%= link_to members_club_duel_path(@club, @duel), class: "button--shikoba _2 _bigbtn _outline" do %>
+										    <span>Editar</span>
+										    <i class="button__icon fad fa-pencil-alt"></i>
+										  <% end %>
+										</div>
+										<div class="col-7 _2">
+										  <button class="button--shikoba _2 _bigbtn" type="button" data-bs-dismiss="modal">
+										    <span>Listo</span>
+										    <i class="button__icon fad fa-check-circle"></i>
+										  </button>
+										</div>
+									</div>
+								</div>
+	      			</div>
+	      		</div>
+	      	</div>
+      	</div>
+	      	
+			      	
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script type="text/javascript">
+	$(document).ready(function() {
+
+	  $('#bathrooms').on('input', function() {
+	    // limitar la entrada a números solamente
+	    this.value = this.value.replace(/[^0-9]/g, '');
+	    // limitar la entrada a un mínimo de 30 minutos y un máximo de 360 minutos
+	    // this.value = Math.min(360, Math.max(30, parseInt(this.value))) || '';
+	  });
+
+	  $('#bathroom-minus').on('click', function() {
+	    var val = parseInt($('#bathrooms').val()) || 0;
+	    val = Math.max(0, val - 1); // establecer un mínimo de 30 minutos
+	    $('#bathrooms').val(val);
+	  });
+
+	  $('#bathroom-plus').on('click', function() {
+	    var val = parseInt($('#bathrooms').val()) || 0;
+	    val = Math.min(50, val + 1); // establecer un máximo de 360 minutos
+	    $('#bathrooms').val(val);
+	  });
+
+	  /* ===================================== */
+	  
+	  $('#showerbaths').on('input', function() {
+	    // limitar la entrada a números solamente
+	    this.value = this.value.replace(/[^0-9]/g, '');
+	    // limitar la entrada a un mínimo de 30 minutos y un máximo de 360 minutos
+	    // this.value = Math.min(360, Math.max(30, parseInt(this.value))) || '';
+	  });
+
+	  $('#showerbath-minus').on('click', function() {
+	    var val = parseInt($('#showerbaths').val()) || 0;
+	    val = Math.max(0, val - 1); // establecer un mínimo de 30 minutos
+	    $('#showerbaths').val(val);
+	  });
+
+	  $('#showerbath-plus').on('click', function() {
+	    var val = parseInt($('#showerbaths').val()) || 0;
+	    val = Math.min(50, val + 1); // establecer un máximo de 360 minutos
+	    $('#showerbaths').val(val);
+	  });
+	  /* ===================================== */
+	  
+	});
+</script>

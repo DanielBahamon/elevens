@@ -1,0 +1,152 @@
+<% content_for :page_name, "Edit #{@club.club_name} - Entornes" %>
+
+<%= render 'clubs/layout/one' %>
+	<section class="_clubedit _leader">
+		<aside class="_1">
+		    <%= simple_form_for @club do |f| %>
+					<div class="_cont _1">
+						<div class="_minihead">
+							<h5><i class="fal fa-map-marked"></i> <span>Ubicación</span></h5>
+							<button type="submit" class="button--naira _1 fit">
+								<span>Guardar</span>
+								<i class="button__icon fal fa-save"></i>
+							</button>
+						</div>
+					</div>
+					<div class="_cont _2">
+		    		<div class="row">
+		    			<div class="col-12">
+								<div class="input-group mb-3">
+					  			<%= f.text_field :country, class: "form-control", placeholder: "País" %>
+								</div>
+		    				<div class="input-group mb-3">
+					  			<%= f.text_field :city, class: "form-control", placeholder: "Ciudad" %>
+		    				</div>
+		    				<div class="input-group mb-3">
+					  			<%= f.text_field :neighborhood, class: "form-control", placeholder: "Barrio / Distrito" %>
+		    				</div>
+		    				<div class="input-group mb-3">
+					  			<%= f.text_field :address, class: "form-control", placeholder: "Dirección" %>
+		    				</div>
+							  <%= f.hidden_field :latitude, value: current_user.clubs[0].latitude || 37.7749 %>
+							  <%= f.hidden_field :longitude, value: current_user.clubs[0].longitude || -122.4194 %>
+		    			</div>
+		    		</div>
+					</div>
+					<div class="_cont _3">
+
+		        <div id="map_club" style="width:100%; height: 300px;"></div>
+		        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz-J87QC1qvkimHdAE55GcV4Qpt8STDzc"></script>
+
+		        <script type="text/javascript">
+		          function initialize() {
+						    <% if @club.latitude.blank? || @club.latitude.blank? %>
+						    // Obtener la ubicación actual del usuario
+						    if (navigator.geolocation) {
+						      navigator.geolocation.getCurrentPosition(function(position) {
+						        var location = { lat: position.coords.latitude, lng: position.coords.longitude };
+						        map.setCenter(location);
+						        marker.setPosition(location);
+						      }, function() {
+						        console.log('The Geolocation service failed.');
+						      });
+
+						    } else {
+						      var location = {lat: position.coords.latitude, lng: position.coords.longitude};
+						      console.log('Your browser doesnt support geolocation.');
+						    }
+						    <% else %>
+						    var location = {lat: <%= @club.latitude %>, lng: <%= @club.longitude %>};
+						    <% end %>
+
+						    var map = new google.maps.Map(document.getElementById('map_club'), {
+						      center: location,
+						      zoom: 14
+						    });
+
+						    var marker = new google.maps.Marker({
+						      position: location,
+						      map: map,
+						      draggable: true
+						    });
+
+						    var geocoder = new google.maps.Geocoder();
+
+						    google.maps.event.addListener(marker, 'dragend', function() {
+						      geocoder.geocode({ 'location': marker.getPosition() }, function(results, status) {
+						        if (status == google.maps.GeocoderStatus.OK) {
+						          document.getElementById('club_address').value = results[0].formatted_address;
+						          document.getElementById('club_city').value = getFieldValueFromAddressComponent(results[0], 'locality');
+						          document.getElementById('club_neighborhood').value = getFieldValueFromAddressComponent(results[0], 'sublocality') || getFieldValueFromAddressComponent(results[0], 'neighborhood');
+
+						          document.getElementById('club_country').value = getFieldValueFromAddressComponent(results[0], 'country');
+						          document.getElementById('club_latitude').value = marker.getPosition().lat();
+						          document.getElementById('club_longitude').value = marker.getPosition().lng();
+						        } else {
+						          alert('Geocode was not successful for the following reason: ' + status);
+						        }
+						      });
+						    });
+
+						    function getFieldValueFromAddressComponent(address, component) {
+						      for (var i = 0; i < address.address_components.length; i++) {
+						        var addressType = address.address_components[i].types[0];
+						        if (addressType == component) {
+						          return address.address_components[i].long_name;
+						        }
+						      }
+						      return "";
+						    }
+
+							  function updateMarkerLocation(address, city, country, latitude, longitude) {
+							    var geocoder = new google.maps.Geocoder();
+							    var addressString = address + ', ' + city + ', ' + country;
+							    geocoder.geocode({ address: addressString }, function(results, status) {
+							      if (status == google.maps.GeocoderStatus.OK) {
+							        var location = results[0].geometry.location;
+							        map.setCenter(location);
+							        marker.setPosition(location);
+							        document.getElementById('club_latitude').value = location.lat();
+							        document.getElementById('club_longitude').value = location.lng();
+							      } else {
+							        alert('Geocode was not successful for the following reason: ' + status);
+							      }
+							    });
+							  }
+
+						    document.getElementById('club_country').addEventListener('change', function() {
+						      var country = this.value;
+						      var city = document.getElementById('club_city').value;
+						      var address = document.getElementById('club_address').value;
+						      var neighborhood = document.getElementById('club_neighborhood').value;
+						      updateMarkerLocation(address, city, country, marker, map);
+						    });
+						    document.getElementById('club_city').addEventListener('change', function() {
+						      var country = document.getElementById('club_country').value;
+						      var city = this.value;
+						      var address = document.getElementById('club_address').value;
+						      var neighborhood = document.getElementById('club_neighborhood').value;
+						      updateMarkerLocation(address, city, country, marker, map);
+						    });
+						    document.getElementById('club_address').addEventListener('change', function() {
+						      var country = document.getElementById('club_country').value;
+						      var city = document.getElementById('club_city').value;
+						      var neighborhood = document.getElementById('club_neighborhood').value;
+						      var address = this.value;
+						      updateMarkerLocation(address, city, country, marker, map);
+						    });
+
+		          }
+		          google.maps.event.addDomListener(window, 'load', initialize);
+		        </script>
+
+					</div>
+		    <% end %>
+		</aside>
+		<aside class="_2">
+			<div class="_cont _1">
+				<%= render 'clubs/shared/cards/simple', club: @club %>
+			</div>
+		</aside>
+	</section>
+ <%= render 'clubs/layout/two' %>

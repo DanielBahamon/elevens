@@ -1,0 +1,75 @@
+<div class="notification">
+  <div class="_in">
+    <div class="_1">
+      <div class="_i">
+        <p class="_mutted"><%= notification.category_name %></p>
+      </div>
+      <div class="_ii">
+        <p class="_mutted"><%= time_ago_in_words(notification.created_at) %></p>
+      </div>
+    </div>
+    <div class="_2">
+      <h5 class="_content"><%= notification.content %></h5>
+    </div>
+    <div class="_3">
+      <div class="_data">
+        <% if notification.action_name == 'Amistad' %>
+          <figure>
+            <i class="fad fa-user-friends"></i>
+          </figure>
+          <p class="_annun">Nueva amistad</p>
+        <% elsif notification.action_name == 'Fan' %>
+          <figure>
+            <i class="fad fa-user-plus"></i>
+          </figure>
+          <p class="_annun">Tienes un nuevo fan</p>
+        <% elsif notification.action_name == 'Convocatoria' %>
+          <figure>
+            <i class="fad fa-flag-checkered"></i>
+          </figure>
+          <p class="_annun">Haz sido convocado</p>
+        <% elsif notification.action_name == 'Aceptado' %>
+          <figure>
+            <i class="fad fa-check-circle"></i>
+          </figure>
+          <p class="_annun">Aprobado</p>
+        <% elsif notification.action_name == 'Denegado' %>
+          <figure>
+            <i class="fad fa-times-circle"></i>
+          </figure>
+          <p class="_annun">Denegado</p>
+        <% elsif notification.action_name == 'Suspendido' %>
+          <figure>
+            <i class="fad fa-ghost"></i>
+          </figure>
+          <p class="_annun">Nueva suspención</p>
+        <% elsif notification.action_name == 'Solicitud' %>
+          <figure>
+            <i class="fad fa-hand-peace"></i>
+          </figure>
+          <p class="_annun">Nueva solicitud</p>
+        <% elsif notification.action_name == 'Lesion' %>
+          <figure>
+            <i class="fad fa-user-injured"></i>
+          </figure>
+          <p class="_annun">Alerta de lesión</p>
+        <% elsif notification.action_name == 'Sancion' %>
+          <figure>
+            <i class="fad fa-engine-warning"></i>
+          </figure>
+          <p class="_annun">Alerta de sanción</p>
+        <% elsif notification.action_name == 'Bloqueo' %>
+          <figure>
+            <i class="fad fa-ban"></i>
+          </figure>
+          <p class="_annun">Alerta de bloqueo</p>
+        <% else %>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% if notification.url %>
+    <%= link_to notification.url, class: "_link_hide" do %><% end %>
+  <% end %>
+</div>

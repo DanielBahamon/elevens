@@ -1,0 +1,338 @@
+<% content_for :page_name, "Condiciones del encuentro" %>
+
+<%= render 'duels/layout/one' %>
+
+	<%= simple_form_for([@club, @duel]) do |f| %>
+		<section class="_console _1 _formation_console">
+			<aside class="_1">
+				<div class="row">
+		      <% if @duel.members.present? %>
+			      <div class="col-12 _1">
+			      	<aside>
+								<header class="_header_console _1">
+									<div class="_in">
+										<div class="_titles">
+											<h1 class="_title">
+												<%= link_to members_club_duel_path(@club, @duel) do %>
+													Asistencia
+												<% end %>
+											</h1>
+											<i class="far fa-chevron-right"></i>
+											<h1 class="_title _current">
+												<span><i>Formación</i></span>
+											</h1>
+										</div>
+									</div>
+								</header>
+								<div class="_body_console _1">
+									<div class="_cont">
+										<div class="row">
+											<div class="col-lg-8 _1">
+												<div class="_cancha_1">
+					              	<div class="_formations">
+													  <% if @duel.sport == 'Kings' || @duel.sport == 'Legends' %>
+													    <% max_players = @duel.members %>
+													  <% else %>
+													    <% max_players = (@duel.members - 1) %>
+													  <% end %>
+													  <fieldset class="_formation _<%= @duel.formation %>">
+													    <div class="_cancha">
+													      <div>
+													        <% (1..max_players).each do |player_number| %>
+													          <span class="_player _<%= player_number %>"></span>
+													        <% end %>
+													        <% unless @duel.sport == 'Kings' || @duel.sport == 'Legends' %>
+													          <span class="_player _11"></span>
+													        <% end %>
+													      </div>
+													    </div>
+													  </fieldset>
+				              		</div>
+				              	</div>
+											</div>
+											<div class="col-lg-4 _2">
+												<aside>
+							    				<% common_formations = [
+													  ["4-4-2", "4-4-2"], 
+													  ["4-3-3", "4-3-3"], 
+													  ["4-2-3-1", "4-2-3-1"], 
+													  ["3-5-2", "3-5-2"], 
+													  ["4-1-2-1-2", "4-1-2-1-2"], 
+													  ["4-3-1-2", "4-3-1-2"], 
+													  ["4-4-1-1", "4-4-1-1"], 
+													  ["5-3-2", "5-3-2"], 
+													  ["4-2-4", "4-2-4"], 
+													  ["3-4-3", "3-4-3"],
+													  ["4-4-1-1", "4-4-1-1"],
+													  ["3-5-2", "3-5-2"],
+													  ["3-4-3", "3-4-3"],
+													  ["3-2-4-1", "3-2-4-1"], 
+													  ["4-3-2-1", "4-3-2-1"], 
+													  ["3-1-4-2", "3-1-4-2"]
+													] %>
+													<% sport_formations = {
+													  'Futbol11' => common_formations,
+													  'Futbol10' => [
+													    ["3-2-3-1", "3-2-3-1"], 
+													    ["4-1-2-2", "4-1-2-2"], 
+													    ["3-4-1-1", "3-4-1-1"], 
+													    ["3-2-2-2", "3-2-2-2"], 
+													    ["4-2-1-2", "4-2-1-2"],
+													    ["3-3-2-1", "3-3-2-1"], 
+													    ["4-3-1-1", "4-3-1-1"], 
+													    ["4-1-3-1", "3-1-3-1"], 
+													    ["4-3-2", "2-2-3"], 
+													    ["4-2-3", "4-2-3"], 
+													    ["3-4-2", "3-4-2"]
+													  ],
+													  'Futbol9' => [
+													    ["3-2-2-1", "3-2-2-1"],
+													    ["2-3-1-2", "2-3-1-2"],
+													    ["4-2-1-1", "4-2-1-1"],
+													    ["2-4-1-1", "2-4-1-1"],
+													    ["3-3-2-1", "3-3-2-1"],
+													    ["3-1-3-1", "3-1-3-1"],
+													    ["2-2-3-1", "2-2-3-1"],
+													    ["4-2-2", "4-2-2"],
+													    ["2-4-2", "4-2-2"],
+													    ["3-1-2-1-1", "3-1-2-1-1"], 
+													  ],
+													  'Futbol8' => [
+													    ["3-2-2", "3-2-2"],
+													    ["2-3-1-1", "2-3-1-1"],
+													    ["3-2-1-1", "3-2-1-1"],
+													    ["4-2-1", "4-2-1"],
+													    ["2-4-1", "2-4-1"],
+													    ["3-3-1", "3-3-1"],
+													    ["3-1-3", "3-1-3"],
+													    ["2-2-3", "2-2-3"],
+													    ["1-4-2", "1-4-2"],
+													    ["3-1-2-1", "3-1-2-1"],
+													  ],
+													  'Futbol7' => [
+													    ["2-2-2", "2-2-2"],
+													    ["1-2-1-2", "1-2-1-2"],
+													    ["2-2-1-1", "2-2-1-1"],
+													    ["1-3-2", "1-3-2"],
+													    ["3-1-2", "3-1-2"],
+													    ["1-2-2-1", "1-2-2-1"],
+													    ["2-1-2-1", "2-1-2-1"],
+													    ["3-1-1-1", "3-1-1-1"],
+													    ["2-1-1-2", "2-1-1-2"],
+													  ],
+													  'Futsal' => [
+													    ["2-2-1", "2-2-1"],
+													    ["1-3-1", "1-3-1"],
+													    ["2-1-2", "2-1-2"],
+													    ["3-2", "3-2"],
+													    ["2-3", "2-3"],
+													    ["3-1-1", "3-1-1"],
+													    ["1-1-3", "1-1-3"],
+													    ["1-2-2", "1-2-2"],
+													    ["2-1-1-1", "2-1-1-1"],
+													    ["1-1-2-1", "1-1-2-1"],
+													    ["1-1-1-2", "1-1-1-2"],
+													    ["1-2-1-1", "1-2-1-1"],
+													  ],
+													  'Microfutbol' => [
+													    ["2-2", "2-2"],
+													    ["1-3", "1-3"],
+													    ["2-1-1", "2-1-1"],
+													    ["3-1", "3-1"],
+													    ["1-2-1", "1-2-1"],
+													    ["2-1-1", "2-1-1"],
+													    ["1-1-2", "1-1-2"],
+													  ],
+													  'Bancas' => [
+													    ["2-2", "2-2"],
+													    ["1-3", "1-3"],
+													    ["2-1-1", "2-1-1"],
+													    ["3-1", "3-1"],
+													    ["1-2-1", "1-2-1"],
+													    ["2-1-1", "2-1-1"],
+													    ["1-1-2", "1-1-2"],
+													  ],
+													  'Futvoley' => [
+													    ["2-2", "2-2"],
+													    ["1-3", "1-3"],
+													    ["2-1-1", "2-1-1"],
+													    ["3-1", "3-1"],
+													    ["1-2-1", "1-2-1"],
+													    ["2-1-1", "2-1-1"],
+													    ["1-1-2", "1-1-2"],
+													  ],
+													  'Futenis' => [
+													    ["2-1", "2-1"],
+													    ["1-2", "1-2"],
+													    ["3", "3"],
+													    ["2-1-1", "2-1-1"],
+													    ["1-2-1", "1-2-1"],
+													    ["1-1-2", "1-1-2"],
+													    ["1-1", "1-1"],
+													    ["2", "2"], 
+													  ],
+													  'Kings' => [
+													    ["1-1", "1-1"],
+													    ["2", "2"],
+													  ],
+													  'Legends' => [
+													    ["1", "1"]
+													  ],
+													} %>
+													<% formations = sport_formations[@duel.sport] || [] %>
+												  <div class="_body">
+												    <div class="_in ">
+												      <div class="_nav_formation">
+												        <div class="nav">
+												          <% formations.each do |formation| %>
+												            <button class="formation-button" data-bs-toggle="pill" data-bs-target="#_formation_<%= formation[0] %>" type="button" role="tab" aria-controls="_formation_<%= formation[0] %>" aria-selected="false" data-formation="<%= formation[0] %>">
+												              <span><%= formation[0] %></span>
+												              <%= f.radio_button :formation, formation[1], { class: 'form-check-input next', required: true, id: "duel_sport_#{formation[1]}" } %>
+												            </button>
+												          <% end %>
+												        </div>
+												      </div>
+												    </div>
+												  </div>
+													<script type="text/javascript">
+								    				<% if @duel.formation.blank? %>
+														  $(document).ready(function(){
+														    // Selecciona automáticamente el botón
+														    $('button[data-bs-target="#_formation_<%= formations.first[0] %>"]').click();
+														  });
+														<% else %>
+														  $(document).ready(function(){
+														    // Selecciona automáticamente el botón
+														    $('button[data-bs-target="#_formation_<%= @duel.formation %>"]').click();
+														  });
+														<% end %>
+
+													  $(document).ready(function() {
+													    // Inicializa la variable para el valor de formación actual
+									    				<% if @duel.formation.blank? %>
+														    var currentFormation = "<%= formations.first[0] %>";
+															<% else %>
+														    var currentFormation = "<%= @duel.formation %>";
+															<% end %>
+
+													    // Escucha los clics en los botones
+													    $(".formation-button").on("click", function() {
+													      // Obtén el valor de data-formation del botón clicado
+													      var formationValue = $(this).data("formation");
+
+													      // Si se hace clic en un botón diferente, actualiza la clase
+													      if (formationValue !== currentFormation) {
+													        $("fieldset._formation").removeClass("_" + currentFormation);
+													        $("fieldset._formation").addClass("_" + formationValue);
+													        currentFormation = formationValue;
+													      }
+													    });
+													  });
+													</script>
+													<script type="text/javascript">
+													  $(document).ready(function() {
+													    // Inicializa la variable para el valor de formación actual
+													    var currentFormation = "<%= @duel.formation.present? ? @duel.formation : '' %>";
+
+													    // Encuentra los botones de guardar y asignar
+													    var $saveButton = $("._bigbtn._save");
+													    var $goButton = $("._bigbtn._go");
+
+													    // Inicialmente, oculta el botón de guardar y muestra el botón de asignar si la formación está presente
+													    if (currentFormation !== '') {
+													      $saveButton.hide();
+													      $goButton.show();
+													    } else {
+													      $saveButton.show();
+													      $goButton.hide();
+													    }
+
+													    // Escucha los cambios en los input[radio]
+													    $('input[type="radio"][name="duel[formation]"]').on("change", function() {
+													      // Obtén el valor del input[radio] seleccionado
+													      var selectedFormation = $(this).val();
+
+													      // Comprueba si el valor cambió
+													      if (selectedFormation !== currentFormation) {
+													        // Si cambió, muestra el botón de guardar y oculta el botón de asignar
+													        $saveButton.show();
+													        $goButton.hide();
+													      } else {
+													        // Si no cambió, muestra el botón de asignar y oculta el botón de guardar
+													        $saveButton.hide();
+													        $goButton.show();
+													      }
+
+													      // Actualiza la formación actual
+													      currentFormation = selectedFormation;
+													    });
+													  });
+													</script>
+												</aside>
+											</div>
+										</div>
+		              </div>
+				    			<div class="_action"> 
+				    				<div class="row nom">
+				    					<div class="col-3">
+												<%= link_to members_club_duel_path(@club, @duel), class: 'button--naira _1 _bigbtn' do %>
+											    <span>Volver</span>
+											    <i class="button__icon fal fa-arrow-left"></i>
+												<% end %>
+				    					</div>
+				    					<div class="col-9">
+												<% if @duel.formation.present? %>
+												  <button class="button--naira _1 _bigbtn _save" type="submit">
+												    <span>Guardar</span>
+												    <i class="button__icon fad fa-save"></i>
+												  </button>
+												  <%= link_to assignment_club_duel_path(@club, @duel), class: 'button--naira _1 _bigbtn _go' do %>
+												    <span>Asignar</span>
+												    <i class="button__icon fad fa-users-class"></i>
+												  <% end %>
+												<% else %>
+												  <button class="button--naira _1 _bigbtn" type="submit">
+												    <span>Guardar</span>
+												    <i class="button__icon fad fa-save"></i>
+												  </button>
+												<% end %>
+				    					</div>
+				    				</div>
+									</div>
+		            </div>
+			      	</aside>
+			      </div>
+				  <% else %>
+					  <div class="col-12">
+					  	<div class="jumbotron _jumbot _1">
+					  		<div class="_in">
+					  			<h2>Falta un paso</h2>
+					  			<p class="_mutted _slug">Debes condicionar la cantidad de jugadores por equipo antes agregar la titularidad.</p>
+					  			<hr>
+					  			<%= link_to conditions_club_duel_path(@club, @duel), class:"button--naira _1 fit _btnnext" do %>
+							    	<span>Condiciones</span>
+										<i class="button__icon fad fa-check-circle"></i>
+					  			<% end %>
+					  		</div>
+					  	</div>
+					  </div>
+				  <% end %>
+			  </div>
+			</aside>
+		</section>
+	<% end %>
+
+
+<%= render 'duels/layout/two' %>
+
+
+<script type="text/javascript">
+	document.querySelectorAll('._option input[type="radio"]').forEach(function(radio) {
+	  radio.addEventListener('click', function() {
+	    document.querySelectorAll('._option').forEach(function(sport) {
+	      sport.classList.remove('selected');
+	    });
+	    this.closest('._option').classList.add('selected');
+	  });
+	});
+</script>

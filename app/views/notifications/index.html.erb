@@ -1,0 +1,41 @@
+<%= render 'shared/layout/one' %>
+	<section class="_console _1 _user">
+		<aside class="_1">
+			<div class="row">
+				<div class="col-lg-8 _1 offset-lg-2">
+					<aside>
+						<header class="_header_console _1">
+							<div class="_in">
+								<div class="_info">
+									<div>
+										<div class="_infoclub">
+											<h3 class="_title"> 
+												<span>Notificaciones</span>
+											</h3>
+											<p class="_mutted">Mira tu actividad reciente:</p>
+										</div>
+									</div>
+								</div>
+								<div class="_action">
+				         <%= link_to user_path(current_user), class: "_minilink" do %>
+				           Marcar todas como leidas
+				         <% end %>
+								</div>
+							</div>
+						</header>
+						<div class="_body_console _1">
+							<div class="_cont _1">
+								<div class="_notifications">
+									<% @notifications.each do |notification| %>
+										<%= render 'shared/news/notification', notification: notification %>
+									<% end %>
+								</div>
+							</div>
+						</div>
+					</aside>
+					
+				</div>
+			</div>
+		</aside>
+	</section>
+<%= render 'shared/layout/two' %>

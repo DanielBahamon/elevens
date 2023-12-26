@@ -1,0 +1,30 @@
+<%= search_form_for @search, url: search_path do |f| %>
+	<div class="row _1">
+		<div class="col-lg-6 _1">
+			<div class="input-group mb-3">
+			  	<span class="input-group-text" id="basic-addon1">Precio minimo</span>
+				<%= f.text_field :price_gteq, class: "form-control" %>
+			</div>
+		</div>
+		<div class="col-lg-6 _2">
+			<div class="input-group mb-3">
+			  	<span class="input-group-text" id="basic-addon1">Precio maximo</span>
+				<%= f.text_field :price_lteq, class: "form-control" %>
+			</div>
+		</div>
+	</div>
+	<div class="row _2">
+		<div class="col-lg-6 _1">
+			<div class="input-group mb-3">
+			  	<span class="input-group-text" id="basic-addon1">Fecha de inicio</span>
+				<%= f.text_field :start_date, params[:start_date], placeholder: "Start Date" class: "form-control" %>
+			</div>
+		</div>
+		<div class="col-lg-6 _2">
+			<div class="input-group mb-3">
+			  	<span class="input-group-text" id="basic-addon1">Fecha de finalización</span>
+				<%= f.text_field :end_date, params[:end_date], placeholder: "End Date" class: "form-control" %>
+			</div>
+		</div>
+	</div>
+<% end %>

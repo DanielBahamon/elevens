@@ -1,0 +1,38 @@
+<% club = Club.find_by(id: duel.club_id) %>
+<% rival = Club.find_by(id: duel.rival_id) %>
+
+<article class="_carde">
+	<div class="_inner">
+		<div class="_in _1">
+			<div class="row">
+				<div class="col-12">
+					<div class="_fila">
+						<div class="_1">
+							<div class="_info">
+								<%= link_to club_path(rival), class: "_link" do %>
+									<h3 class="_name"><%= rival.club_name %></h3>
+								<% end %>
+								<p class="_country"><%= rival.city %>, <%= rival.country %></p>
+							</div>
+						</div>
+						<div class="_2 text-center">
+							<p class="_date"><%= duel.start_date.strftime("%B %d, %Y") %></p>
+							<p class="_time"><%= duel.start_date.strftime("%I:%M %p") %></p>
+						</div>
+						<div class="_3 text-center">
+							<h4 class="_bet">
+								<span>$9.000</span>
+							</h4>
+						</div>
+					</div>
+						
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<figure class="_shield">
+		<%= image_tag rival.avatar.url(:medium) %>
+	</figure>
+	<%= link_to club_duel_path(club, duel), class: "_link_hide" do %><% end %>
+</article>

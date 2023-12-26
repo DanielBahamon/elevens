@@ -1,0 +1,135 @@
+<% content_for :page_name, "Cazatalentos - Elleven " %>
+
+<%= render 'clubs/layout/one' %>
+	<% if @undo.present? %>
+			<%= render 'shared/cards/duels/undo', duel: @undo %>
+  <% end %>
+	<section class="_console _1 _scouting">
+		<aside class="_1">
+			<div class="row">
+				<div class="col-12 _1">
+					<aside>
+						<header class="_header_console _1">
+							<div class="_in">
+								<div class="_info">
+									<div>
+										<div class="_infoclub">
+											<h3 class="_title"> 
+												<span>Reclutamiento</span>
+											</h3>
+										</div>
+									</div>
+								</div>
+								<div class="_action">
+			            <button class="button--naira _1	_fullwidth" type="submit" data-bs-toggle="modal" data-bs-target="#modalInvitation">
+			              <span>Invitar</span>
+			              <i class="button__icon fad fa-paper-plane"></i>
+			            </button>
+								</div>
+							</div>
+						</header>
+						<div class="_body_console _1">
+							<div class="_cont _1">
+								<ul class="list-group list-group-flush">
+									<% @players.each do |player| %>
+										<li class="list-group-item d-flex justify-content-between _itemuser">
+											<div class="_i">
+												<figure>
+													<%= link_to user_path(player) do %><%= image_tag player.avatar.url(:medium), class: "_avatar _1" %><% end %>
+													<div class="_status">
+														<% if player.status == true %>
+														  <span class="_pointstatus bg-success"></span>
+														<% else %>
+														  <span class="_pointstatus bg-secondary"></span>
+													  <% end %>
+													</div>
+												</figure>
+												<div class="_data">
+													<h6 class="_name"><%= link_to user_path(player) do %><%= player.firstname %> <%= player.lastname %><% end %></h6>
+													<p class="_slug"><%= player.slug %></p>
+												</div>
+											</div>
+											<div class="_iii">
+												<div class="_clubes">
+														
+												</div>
+											</div>
+												<div class="_ii">
+												  <div class="_position">
+												    <% if player.position.present? %>
+												      <% positions = player.position.split(',') %>
+												      <% positions.first(2).each do |position| %>
+												        <span class="badge outline"><%= position.strip %></span>
+												      <% end %>
+												      <% if positions.count > 2 %>
+												        <span class="badge outline">+<%= positions.count - 2 %></span>
+												      <% end %>
+												    <% else %>
+												      <span class="badge withoutline">No position</span>
+												    <% end %>
+												  </div>
+												</div>
+											<div class="_iv">
+												<div class="_move">
+													<% if @pendings.pluck(:user_id).include?(player.id) %>
+													  <div class="_iconlist _1">
+													    <i class="fal fa-clock"></i>
+													  </div>
+													<% elsif @approveds.pluck(:user_id).include?(player.id) %>
+													  <div class="button--icon _1">
+													    <i class="fal fa-check-circle"></i>
+													  </div>
+													<% else %>
+														<%= link_to club_sendjoin_path(club_id: @club.id, user_id: player.id), method: :post, remote: true, class: "button--icon _1", id: "_invitation_#{player.id}" do %>
+														  <i class="fal fa-user-plus"></i>
+														<% end %>
+													<% end %>
+												</div>
+											</div>
+										</li>
+									<% end %>
+								</ul>
+							</div>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</aside>
+	</section>
+	<div class="modal fade" id="modalInvitation" tabindex="-1" aria-labelledby="modalInvitationLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	      	<span></span>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="_new_ivitation">
+					  <div class="_in">
+					    <h1 class="l">¡Desafia!</h1>
+					    <p class="lead"> ¿Listo para empezar? <br class="d-none d-lg-block" />¡Envía tu primer desafío ahora mismo!</p>
+					  </div>
+					  <div class="_formys">
+					    <div class="accordion accordion-flush" id="accordionChallenge">
+					      <div class="accordion-item">
+					        <h2 class="accordion-header d-none">
+					          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+					            ¡Compartir desafio!
+					          </button>
+					        </h2>
+					        <div id="flush-collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionChallenge">
+					          <div class="accordion-body">
+					          </div>
+					        </div>
+					      </div>
+					    </div>
+					  </div>
+					        
+					</div>
+
+					  
+	      </div>
+	    </div>
+	  </div>
+	</div>
+<%= render 'clubs/layout/two' %>

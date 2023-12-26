@@ -1,0 +1,128 @@
+<% local = club.find_by(id: duel.club_id) %>
+<% if duel.rival_id.present? %>
+	<% guess = club.find_by(id: duel.rival_id) %>
+<% end %>
+<article class="_duel" id="_duel-<%= duel.id %>">
+	<section class="_cont _1">
+    <div class="_1">
+      <div class="_i">
+        <p class="_mutted"><%= duel.city %>, <%= duel.country %></p>
+      </div>
+      <div class="_ii">
+        <p class="_mutted">hace <%= duel.time_remaining %></p>
+      </div>
+    </div>
+		<div class="_2">
+			<div class="_i">
+				<div class="_in">
+	        <%= link_to club_duel_path(local.id, duel) do %>
+						<img src="<%= local.avatar %>" class="_shield _1">
+	        <% end %>
+
+					<% if duel.rival_id.present? %>
+		        <%= link_to club_duel_path(local.id, duel), class: "_info" do %>
+							<h2><span><%= duel.local_score %></span></h2>
+		        <% end %>
+	        <% end %>
+				</div>
+			</div>
+			<div class="_iii">
+	      <%= link_to club_duel_path(local.id, duel) do %>
+					<p class="_date"><%= duel.start_date.strftime("%B %d, %Y") %></p>
+					<p class="_time"><%= duel.start_date.strftime("%I:%M %p") %></p>
+				<% end %>
+			</div>
+			<div class="_ii">
+				<div class="_in">
+					<% if duel.rival_id.present? %>
+		        <%= link_to club_duel_path(guess.id, duel), class: "_info" do %>
+							<h2><span><%= duel.rival_score %></span></h2>
+		        <% end %>
+		        <%= link_to club_duel_path(guess.id, duel) do %>
+							<img src="<%= guess.avatar %>" class="_shield _1">
+		        <% end %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<div class="_3">
+			<div class="_i">
+	      <div class="_data">
+					<%= link_to club_duel_path(local.id, duel), class: "_typematch" do %>
+						<% if duel.duel_type == "Friendly" %>
+		          <figure>
+								<i class="fad fa-handshake-alt"></i>
+		          </figure>
+		          <p class="_annun">Amistoso</p>
+						<% elsif duel.duel_type == "Bet" %>
+		          <figure>
+								<i class="fad fa-sack-dollar"></i>
+		          </figure>
+		          <p class="_annun">Apuesta</p>
+						<% elsif duel.duel_type == "Tournament" %>
+		          <figure>
+								<i class="fad fa-trophy-alt"></i>
+		          </figure>
+		          <p class="_annun">Torneo</p>
+						<% elsif duel.duel_type == "League" %>
+		          <figure>
+								<i class="fad fa-award"></i>
+		          </figure>
+		          <p class="_annun">Liga</p>
+						<% elsif duel.duel_type == "Mundial" %>
+		          <figure>
+								<i class="fal fa-globe-americas"></i>
+		          </figure>
+		          <p class="_annun">Campeonato Mundial</p>
+						<% end %>
+					<% end %>
+	      </div>
+			</div>
+			<div class="_ii">
+				<div class="_result">
+					<% current_club = @club %>
+      		<%= link_to club_duel_path(local.id, duel) do %>
+      			<% if duel.rival_id.present? %>
+							<% if duel.local_score == duel.rival_score %>
+								<div class="_badge _equal">
+									<i class="fad fa-yin-yang"></i>
+									<span>Empate</span>
+								</div>
+							<% elsif duel.local_score > duel.rival_score %>
+								<% if current_club == local %>
+									<div class="_badge _win">
+										<i class="fad fa-medal"></i>
+										<span>Victoria</span>
+									</div>
+								<% else %>
+									<div class="_badge _lost">
+										<i class="fad fa-skull-crossbones"></i>
+										<span>Derrota</span>
+									</div>
+								<% end %>
+							<% else %>
+								<% if current_club == guess %>
+									<div class="_badge _win">
+										<i class="fad fa-medal"></i>
+										<span>Victoria</span>
+									</div>
+								<% else %>
+									<div class="_badge _lost">
+										<i class="fad fa-skull-crossbones"></i>
+										<span>Derrota</span>
+									</div>
+								<% end %>
+							<% end %>
+						<% else %>
+							<div class="_badge _equal">
+								<i class="fad fa-user-minus"></i>
+								<span>Sin rival</span>
+							</div>
+						<% end %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+
+	</section>
+</article>

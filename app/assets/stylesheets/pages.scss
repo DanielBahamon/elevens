@@ -1,0 +1,466 @@
+// Place all the styles related to the Pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+/* SESSION */
+	section._session {
+		height: 100vh;
+		min-height: 600px;
+		position: relative;
+		width: 100vw;
+  	padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	}
+	section._session > aside {
+    width: 350px;
+    max-width: 100%;
+    margin: 0 auto;
+	}
+	section._session ._session {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 15px;
+	}
+	section._session ._session>span:first-of-type {
+    position: absolute;
+    left: 15px;
+	}
+	section._session > aside._login small.text-muted._line {
+    width: 100%;
+    display: flex;
+    text-align: center;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+	}
+	section._session > aside._login small.text-muted._line:before{
+		content:'';
+		position: absolute;
+		left:0;
+		width:45%;
+		height:1px;
+  	background: #315564;
+  	opacity:0.5;
+	}
+	section._session > aside._login small.text-muted._line:after{
+		content:'';
+		position: absolute;
+		right:0;
+		width:45%;
+		height:1px;
+  	background: #315564;
+  	opacity:0.5;
+	}
+  section._session .form-inputs > .form-group input,
+  section._session .form-inputs > .form-group label{
+    font-family: 'Causten', 'Sofia', sans-serif;
+  }
+  section._session .form-inputs > .form-group label{
+  	font-size:14px;
+  }
+  section._session .form-inputs > .form-group input:focus{
+  	box-shadow: 0 0 0 0 !important;
+  	border-color:#315564 !important;
+  }
+  section._session .form-inputs > .form-group {
+    margin-bottom: 15px;
+  }
+	section._session .form-inputs > .form-group input:not(.form-check-input){
+    padding: 0.6em 1em;
+    border-radius: 9px;
+	}
+	section._session .form-inputs > .form-group small {
+	  display: block;
+	  text-align: center;
+	  text-transform: uppercase;
+	  font-size: 11px !important;
+	  font-family: 'Rubik', sans-serif;
+	  font-weight: 500;
+	  letter-spacing: 1px;
+	}
+	section._session ._actions a{
+    color:#2b2b2b;
+    text-decoration: none;
+    opacity: 0.7;
+    font-family: 'Rubik', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 12px;
+    line-height: 1.4;
+    font-weight: 500;
+    display: block;
+    transition:all .3s ease-in-out;
+	}
+	section._session ._actions a:hover{
+		opacity: 1;	
+	}
+	section._session ._actions {
+	  text-align: center;
+	}
+	section._session ._brand {
+	  width: 45px;
+	  margin: 0 auto 20px;
+	  display: block;
+	  max-width: 90%;
+	}
+  section._session > aside > b {
+	  text-align: center;
+	  display: block;
+	  margin-bottom: 15px;
+	}
+
+  section._session > aside > *{
+    font-family: 'Causten', 'Sofia', sans-serif;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+	.modal ._in._noitems ._inter {
+	  width: 400px;
+	  max-width: 100%;
+	  margin: 0 auto;
+    text-align: center;
+	}
+	.modal ._in._noitems ._inter lottie-player {
+    margin: 0 auto;
+	  max-width: 100%;
+	}
+	.btn._title_edit_link_cancel {
+    display: flex;
+    align-items: center;
+	}
+/* END SESSION */
+	body._light main._layout._1 > aside > section._console._1._dashboard ._body_console {
+	  background: #FFF;
+	  border-radius: 12px;
+	}
+	main._layout._1 > aside > section._console._1._dashboard aside {
+	  width: 100%;
+	}
+  body._light main._layout._1 > aside > section._console._1:not(._dashboard) {
+    background: #FFF;
+    border-radius: 12px;
+  }
+  body._light main._layout._1 > aside > section._console._1._panel_duel{
+    background: transparent;
+  }
+/* CONSOLE */
+  section._console._1 > aside._1 {
+    width: 100%;
+  }
+  ._cardy > div ._in._1 ._data ._image ._avatar {
+    border-radius: 999px;
+	}
+  section._console._1 > aside._1 > div > div {
+    padding: 0;
+    position: relative;
+	}
+	section._console._1 > aside._1 ._header_console._1 {
+    padding:15px;
+    display: flex;
+    width: 100%;
+	}
+	section._console._1 > aside._1 ._header_console._1 > ._in{
+    display: flex;
+    width: 100%;
+    min-height: 52px;
+    grid-gap: 15px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+	}
+	section._console._1 > aside._1 ._header_console._1 > ._in > ._info ._title {
+    line-height: 1;
+    text-transform: uppercase;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+	}
+	section._console._1 > aside._1 ._header_console._1 > ._in > ._info ._title,
+	section._console._1 > aside._1 ._header_console._1 > ._in > ._info ._date {
+    margin: 0;
+	}
+	section._console._1 > aside._1 ._header_console._1 > ._in > ._info ._date{
+    font-size: 12px;
+    font-family: 'Abel', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+	}
+	section._console._1 > aside._1 ._header_console._1 > ._in > ._info ._text {
+    margin-top: 3px;
+    margin-bottom: 0;
+    opacity: 0.6;
+	}
+
+
+	._club._1 ._fila._1 {
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+    position: relative;
+    z-index: 3;
+	}
+	._club._1 ._fila._1 ._avatary {
+		margin-right: -15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+	}
+	._club._1 ._fila._1 ._avataries {
+    display: flex;
+    align-items: center;
+	}
+	._avatary_number {
+    width: 30px;
+    height: 30px;
+    background: black;
+    border-radius: 999px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 1;
+    font-family: 'Outfit';
+    font-weight: 600;
+	}
+	body._light ._avatary_number {
+    width: 30px;
+    height: 30px;
+    background: black;
+    border-radius: 999px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 1;
+    font-family: 'Outfit';
+    font-weight: 600;
+	}
+	button.dropdown-toggle._options {
+	  background: transparent;
+	  border: 0;
+	  width: max-content;
+	  padding: 0;
+	  display: block;
+	}
+	button.dropdown-toggle._options:after {
+    opacity: 0;
+    display: none;
+	}
+
+	.link_dropdown {
+	  color: #10151a;
+	  padding: 0;
+	  line-height: 1;
+	  cursor: pointer;
+	  text-decoration: none;
+	}
+	ul.dropdown-menu .dropdown-item:hover {
+    background: #f3f7fb;
+	}
+	._header_console._1 .dropstart ul.dropdown-menu {
+    border-color: #d7d8d9;
+    border-radius:0;
+	}
+	._header_console._1 .dropstart ul.dropdown-menu .dropdown-item {
+	  font-weight: 500 !important;
+	  font-size: 12px !important;
+	}
+	._header_console._1 .dropstart ul.dropdown-menu .dropdown-item:hover{
+    color: #212529;
+	}
+	._header_console._1 .dropstart ul.dropdown-menu > li:not(:last-of-type) {
+    border-bottom: 1px solid #e1e2e3;
+	}
+/* END CONSOLE */
+
+ /* CARD club */
+	body._light article._cardclub{
+    background: #f9f9f9;
+    border: 1px solid #060909;
+    box-shadow: 0px 3px 10px -3px #877e4a5e;
+	}
+	body._light article._cardclub:hover{
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 26px 30px -15px #877e4a5e;
+    border-color: #060909;
+	}
+	body._light article._cardclub > .row > ._action i{
+	  color: #071015;
+	}
+	article._cardclub {
+	  position: relative;
+    margin-bottom: 1em;
+    border-radius: 0;
+    max-width: 100%;
+    padding:10px;
+    box-shadow: 0 0 30px -50px #8d95934a;
+	  transition: transform 0.3s cubic-bezier(0,1.26,.78,1.21);
+	}
+	article._cardclub ._img {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+	}
+	article._cardclub > .row {
+    grid-gap: 10px;
+	}
+
+	article._cardclub ._title {
+    line-height: 1;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 900;
+    letter-spacing: 0px;
+    text-transform: uppercase;
+	}
+	article._cardclub ._captain {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Abel', sans-serif;
+    font-size: 12px;
+    line-height: 1.3 ;
+    display: block;
+	}
+	article._cardclub > .row > ._action {
+    width: 10%;
+    justify-content: center;	
+	}
+	article._cardclub > .row > ._action i{
+	  font-size: 16px;
+	  line-height: 1;
+	  display: block;
+	  transform: translateX(-15px);
+	  transition: all 0.5s cubic-bezier(0,1.26,.78,1.21);
+	  opacity:0;
+	}
+	article._cardclub:hover > .row > ._action i {
+	  transform: translateX(0);
+	  opacity:1;
+	}
+	article._cardclub > .row > div {
+    display: flex;
+    align-items: center;
+	}
+
+
+	@media(min-width:992px){
+	}
+	@media(max-width:991px){
+
+	}
+
+	main._layout._1 > aside > section._myduels > aside {
+	  width: 100%;
+	}
+	main._layout._1 > ._2 ._create_action a#_btn_more_create {
+	  position: fixed;
+	  z-index: 9;
+	  bottom: 15px;
+	  right: 15px;
+	}
+	section._console._1 > aside._1 ._body_console._1 ._clubs {
+    display: flex;
+    flex-wrap: wrap;
+	}
+	section._console._1 > aside._1 ._body_console._1 ._clubs > article{
+    width: 100%;
+	}
+	section._console._1 > aside._1 ._body_console._1 ._shields {
+    display: flex;
+    grid-gap: 15px;
+    flex-wrap: wrap;
+	}
+	section._console._1 > aside._1 ._body_console._1 ._shields > ._shield {
+    padding: 10px;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s cubic-bezier(.01,.32,.29,1.2);
+	}
+	section._console._1 > aside._1 ._body_console._1 ._shields > ._shield:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px -10px #6c7e7ea1;
+	}
+	body._light section._console._1 > aside._1 ._body_console._1 ._shields > ._shield{
+    background: #f3f7fb;
+	}
+	section._console._1 > aside._1 .row:not(.nom){
+		margin: 0 !important;
+	}
+	section._console._1 > aside._1 .row:not(.nom) > div{
+		padding: 0 !important;
+	}
+	._jumbo._newmembership ._link_btn {
+	  text-align: center;
+	  display: block;
+	  text-decoration: none;
+	  font-family: 'Abel', sans-serif;
+	  text-transform: uppercase;
+    padding: 20px;
+    width: max-content;
+    margin: 0 auto 10px;
+	}
+	body._light ._jumbo._newmembership ._link_btn{
+    color: #dc3545;
+	}
+	body._light ._jumbo._newmembership ._link_btn:hover{
+    font-weight:700;
+	}
+	._body_console ._jumbo {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+	}
+	._body_console ._jumbo ._in {
+    width: 720px;
+    max-width: 100%;
+	}
+	.jumbotron._jumbo ._title {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-bottom: 0;
+    line-height: 1;
+	}
+	.jumbotron._jumbo ._subtitle {
+    font-family: 'Outfit', sans-serif;
+    opacity: 0.6;
+    margin-bottom: 30px;
+    display: block;
+    line-height: 1.2;
+    margin-top: 10px;
+	}
+	
+	._body_console._1._notifications {
+	  min-height: calc(100vh - 140px);
+	}
+	.new_duel aside._content ._head h1 {
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+	}
+	.new_duel aside._content ._head p {
+    font-weight: 200;
+	}
+	@media(max-width:575px){
+		section._user._1 > ._info > .row._1 > ._2 {
+	    padding: 20px;
+		}
+	}

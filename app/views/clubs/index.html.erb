@@ -1,0 +1,44 @@
+<% content_for :page_name, "Equipos" %>
+<%= render 'shared/layout/one' %>
+	<section class="_console _1">
+			<aside class="_1">
+				<div class="row">
+					<div class="col-12 _1">
+						<aside>
+							<header class="_header_console _1">
+								<div class="_in">
+									<div class="_info">
+										<div>
+											<div class="_infoclub">
+												<h3 class="_title"> 
+													<span>Clubes</span>
+												</h3>
+											</div>
+										</div>
+									</div>
+									<div class="_action">
+										<%= link_to new_club_path, class: "button--naira _1 _btn _medium m-0-auto" do %>
+											<span>Nuevo club</span>
+			                <i class="fas fa-check button__icon"></i>
+			                <% end %>
+									</div>
+								</div>
+							</header>
+							<div class="_body_console _1">
+								<div class="row">
+									<div class="col-12 _2">
+										<div class="_cont">
+											<% @clubs.each do |club| %>
+												<%= render 'clubs/shared/lists/clubs/public', club: club %>
+											<% end %>
+										</div>
+									</div>
+								</div>
+							</div>
+						</aside>
+					</div>
+				</div>
+			</aside>
+	</section>
+		
+<%= render 'shared/layout/two' %>

@@ -1,0 +1,279 @@
+<% content_for :page_name, "#{@club.club_name} - Entornes" %>
+
+<%= render 'shared/layout/one' %>
+	<section class="_clubedit _leader">
+		<aside class="_1">
+	  	<section class="_club _1">
+	  		<aside class="_clubcover splide" aria-label="Basic Structure Example">
+				  <div class="splide__arrows">
+						<button class="splide__arrow splide__arrow--prev d-none"></button>
+						<button class="splide__arrow splide__arrow--next d-none"></button>
+				  </div>
+					<div class="splide__track">
+					  <ul class="splide__list">
+					  	<% @photos.each do |photo| %>
+				        <li class="splide__slide <%= 'active' if photo.id == @photos[0].id %>" >
+				          <%= image_tag photo.image.url(), class: "_coverpic" %>
+				        </li>
+				      <% end %>
+					  </ul>
+					</div>
+				</aside>
+				<aside class="_info">
+					<div class="row _1 _cover">
+						<div class="col-4 col-xl-3 _1">
+							<aside class="_in">
+								<%= image_tag @club.avatar.url(:medium), class: "_shield" %>
+							</aside>
+						</div>
+						<div class="col-8 col-xl-9 _2">
+							<aside class="_in">
+								<div class="_actions">
+									<%= link_to "Solicitar entrar", join_club_path(@club), class: "_btn btn btn-outline-primary" %>
+									<a class="btn btn btn-outline-secondary"><i class="bi bi-info-circle"></i></a>
+								</div>
+							</aside>
+						</div>
+					</div>
+					<div class="row _2 _details">
+						<div class="col-xl-8 _1">
+							<div class="_in">
+								<h3><%= @club.club_name %></h3>
+								<small class="text-muted">@<%= @club.slug %></small>
+							</div>
+						</div>
+						<div class="col-xl-4 _2">
+							<div class="_in">
+								<figure class="_followers">
+									<i class="bi bi-people-fill"></i> <span>303.5k</span>
+								</figure>
+								<figure class="_rank">
+									<i class="bi bi-star-fill"></i> <span>4.8</span> 
+								</figure>
+							</div>
+						</div>
+					</div>
+	  			<div class="row _3 _data">
+	  				<div class="col-4">
+	  					<aside>
+	  						<h4>120.4k</h4>
+	  						<p>Duelos Ganados</p>
+	  					</aside>
+	  				</div>
+	  				<div class="col-4">
+	  					<aside>
+	  						<h4>158</h4>
+	  						<p>Torneos Ganados</p>
+	  					</aside>
+	  				</div>
+	  			</div>
+					<div class="row _4 _services">
+						<div class="col-12 _1">
+							<aside class="_in">
+								<div class="_amenities">
+						  		<aside class="_amenities_slide splide">
+									  <div class="splide__arrows">
+											<button class="splide__arrow splide__arrow--prev d-none">
+												<i class="bi bi-arrow-left-short"></i>
+											</button>
+											<button class="splide__arrow splide__arrow--next">
+												<i class="bi bi-arrow-right-short"></i>
+											</button>
+									  </div>
+										<div class="splide__track">
+										  <ul class="splide__list">
+										  	<% if @club.uniform = true %>
+									        <li class="splide__slide" >
+									        	<figure>
+									          	<i class="bi bi-pass"></i>
+									          	<p>Uniforme</p>
+									        	</figure>
+									        </li>
+								        <% end %>
+										  	<% unless @club.price.blank? %>
+									        <li class="splide__slide" >
+									        	<figure>
+									          	<i class="bi bi-cash-coin"></i>
+									          	<p>Membresia</p>
+									        	</figure>
+									        </li>
+								        <% end %>
+										  	<% if @club.training = true %>
+									        <li class="splide__slide" >
+									        	<figure>
+									          	<i class="bi bi-clock"></i>
+									          	<p>Entrenamientos Frecuentes</p>
+									        	</figure>
+									        </li>
+								        <% end %>
+										  	<% if @club.hydration = true %>
+									        <li class="splide__slide" >
+									        	<figure>
+									          	<i class="bi bi-droplet"></i>
+									          	<p>Hidratación</p>
+									        	</figure>
+									        </li>
+								        <% end %>
+										  	<% if @club.owner = true %>
+									        <li class="splide__slide" >
+									        	<figure>
+									          	<i class="bi bi-shield-lock"></i>
+									          	<p>Entrenamientos privados</p>
+									        	</figure>
+									        </li>
+								        <% end %>
+										  </ul>
+										</div>
+									</aside>
+								</div>
+							</aside>
+						</div>
+					</div>
+				</aside>
+	  	</section>
+	  	<section class="_club _2">
+				<div id="calendar"></div>
+
+
+				<script type="text/javascript">
+					window.tasks = <%= raw @tasks.to_json %>
+					console.log(tasks)
+
+					$('#calendar').fullCalendar({
+						header: {
+							left: 'title',
+							center: '',
+							right: 'prev,next'
+						},
+						defaultDate: tasks.length > 0 ? new Date(tasks[0].start_date) : new Date(),
+						events: tasks.map(function(task) {
+							return {
+								title: task.description,
+								start: new Date(task.start_date).toISOString(),
+								end: new Date(task.end_date).toISOString()
+							};
+						})
+					});
+				</script>
+	  		<aside class="_tabs">
+	  			<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+					  <li class="nav-item" role="presentation">
+					    <button class="nav-link active" id="pills-duels-tab" data-bs-toggle="pill" data-bs-target="#pills-duels" type="button" role="tab" aria-controls="pills-duels" aria-selected="false">Duelos</button>
+					  </li>
+					  <li class="nav-item" role="presentation">
+					    <button class="nav-link" id="pills-members-tab" data-bs-toggle="pill" data-bs-target="#pills-members" type="button" role="tab" aria-controls="pills-members" aria-selected="true">Miembros</button>
+					  </li>
+					</ul>
+					<div class="tab-content" id="pills-tabContent">
+					  <div class="tab-pane fade show active" id="pills-duels" role="tabpanel" aria-labelledby="pills-duels-tab" tabindex="0">
+					  	<div class="duels">
+								<% if @club.duels.count > 0 %>
+									<% @club.duels.each do |duel| %>
+										<div class="card mb-3">
+										  <div class="card-body">
+										    <h5 class="card-title"><%= duel.name %></h5>
+										    <p class="card-text"><%= duel.summary %></p>
+										    <p class="card-text"><small><%= duel.referee_name %></small></p>
+										    <%= link_to club_duel_path(@club, duel), class: "btn btn-primary" do %>Ver duelo<% end %>
+										  </div>
+										</div>
+									<% end %>
+								<% else %>
+									<h1>Aun no hay duelos</h1>
+								<% end %>
+				  		</div>
+					  </div>
+					  <div class="tab-pane fade" id="pills-members" role="tabpanel" aria-labelledby="pills-members-tab" tabindex="0">
+					  	<div class="_members">
+				  			<ul class="list-group list-group-flush">
+									<%= render 'memberships/shared/members' %>
+								</ul>
+				  		</div>
+					  </div>
+					</div>
+	  		</aside>
+	  	</section>
+		</aside>
+		<aside class="_2">
+	    <div class="_cont _1">
+	      <div class="_maps">
+	      	<h6 class="_h6">Ubicación</h6>
+					<div id="map_club" class="map" style="width:100%; height: 300px;"></div>
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz-J87QC1qvkimHdAE55GcV4Qpt8STDzc"></script>
+					<script>
+						function initialize() {
+							var location = {lat: <%= @club.latitude %>, lng: <%= @club.longitude %>};
+							var map = new google.maps.Map(document.getElementById('map_club'), {
+								center: location,
+								zoom: 14
+							});
+
+							var marker = new google.maps.Marker({
+								position: location,
+								map: map
+							});
+
+							var infoWindow = new google.maps.InfoWindow({
+								content: '<div id="content"><%= image_tag @club.avatar(:thumb), style: "width:100px;height:auto;" %></div>'
+							});
+
+							infoWindow.open(map, marker);
+						}
+
+						google.maps.event.addDomListener(window, 'load', initialize);
+					</script>
+	      </div>
+	      <div class="_clubs_close">
+	      	<h6 class="_h6">Equipos cerca</h6>
+	      	<% if @club.nearbys.present? %>
+						<% for @cluby in @club.nearbys(10) %>
+							<div class="col-md-4">
+								<div class="card mb-3">
+									<div class="row g-0">
+										<div class="col-md-4">	
+											<%= image_tag @cluby.cover_photo(:thumb), class: "img-fluid rounded-start"	 %>
+										</div>
+										<div class="col-md-8">
+											<div class="card-body">
+												<h5 class="card-title"></h5>
+												<p class="card-text"><%= @cluby.summary %></p>
+												<p class="card-text"><small class="text-muted"></small></p>
+												
+												(esta a <%= @cluby.distance.round(2) %> km de este equipo)
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						<% end %>
+					<% end %>
+	      </div>
+	    </div>
+		</aside>
+	</section>
+<%= render 'shared/layout/two' %>
+
+
+<script>
+  document.addEventListener( 'DOMContentLoaded', function() {
+    var splide = new Splide( '._clubcover', {
+		  type   : 'loop',
+			height : '15rem',
+		  perPage: 1,
+		  perMove: 1
+    } );
+    splide.mount();
+
+    // ==========================================
+
+    var splide2 = new Splide( '._amenities_slide', {
+		  type   : 'loop',
+		  perPage: 3,
+  		perMove: 1,
+    } );
+    splide2.mount();
+  });
+</script>
+
+  

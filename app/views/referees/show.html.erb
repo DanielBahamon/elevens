@@ -1,0 +1,31 @@
+<% content_for :page_name, "Juez #{@referee.slug}" %>
+<%= render 'shared/layout/one' %>
+	<section class="_console _1">
+		<aside class="_1">
+			<div class="row">
+				<div class="col-12">
+					<aside>
+						<div class="_body_console">
+							<p><%= link_to 'Back', referees_path %></p>
+
+							<h2>Referee Information</h2>
+
+							<p><strong>ID:</strong> <%= @referee.id %></p>
+							<p><strong>USER ID:</strong> <%= @referee.user_id %></p>
+							<p><strong>User:</strong> <%= @referee.slug %></p>
+							<p><strong>Name:</strong> <%= "#{@referee.firstname} #{@referee.lastname}" %></p>
+							<p><strong>Position:</strong> <%= @referee.position %></p>
+							<p><strong>Active:</strong> <%= @referee.active %></p>
+							<p><strong>Status:</strong> <%= @referee.status %></p>
+
+							<br>
+
+							<%= link_to 'Edit', edit_referee_path(@referee) %> |
+							<%= link_to 'Back', referees_path %>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</aside>
+	</section>
+<%= render 'shared/layout/two' %>

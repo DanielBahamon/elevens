@@ -1,0 +1,145 @@
+<% content_for :page_name, "Edit #{@club.club_name} - Entornes" %>
+
+
+<%= render 'clubs/layout/one' %>
+	<% if @undo.present? %>
+			<%= render 'shared/cards/duels/undo', duel: @undo %>
+  <% end %>
+	<section class="_console _1 _members">
+		<aside class="_1">
+			<div class="row">
+				<div class="col-12 _1">
+					<aside>
+						<header class="_header_console _1">
+							<div class="_in">
+								<div class="_info">
+									<div>
+										<div class="_infoclub">
+											<h3 class="_title"> 
+												<span>Miembros</span>
+											</h3>
+											<p class="_mutted">Protagonistas de <%= @club.club_name %>:</p>
+										</div>
+									</div>
+								</div>
+								<div class="_action">
+									<button type="button" class="button--naira _1	_fullwidth" data-bs-toggle="modal" data-bs-target="#solicitudesModal">
+			              <span>Solicitudes</span>
+	                	<i class="button__icon far fa-users"></i>
+									</button>
+								</div>
+							</div>
+						</header>
+						<div class="_body_console _1">
+							<% if @members.count > 0 %>
+								<div class="_cont _1">
+									<ul class="list-group list-group-flush">
+										<% @members.each do |player| %>
+											<li class="list-group-item d-flex justify-content-between _itemuser">
+												<div class="_i">
+													<figure>
+														<%= link_to user_path(player) do %><%= image_tag player.avatar.url(:medium), class: "_avatar _1" %><% end %>
+														<div class="_status">
+															<% if player.status == true %>
+															  <span class="_pointstatus bg-success"></span>
+															<% else %>
+															  <span class="_pointstatus bg-secondary"></span>
+														  <% end %>
+														</div>
+													</figure>
+													<div class="_data">
+														<h6 class="_name"><%= link_to user_path(player) do %><%= player.firstname %> <%= player.lastname %><% end %></h6>
+														<p class="_slug"><%= player.slug %></p>
+													</div>
+												</div>
+												<div class="_iii">
+													<div class="_clubes">
+															
+													</div>
+												</div>
+													<div class="_ii">
+													  <div class="_position">
+													    <% if player.position.present? %>
+													      <% positions = player.position.split(',') %>
+													      <% positions.first(2).each do |position| %>
+													        <span class="badge outline"><%= position.strip %></span>
+													      <% end %>
+													      <% if positions.count > 2 %>
+													        <span class="badge outline">+<%= positions.count - 2 %></span>
+													      <% end %>
+													    <% else %>
+													      <span class="badge withoutline">No position</span>
+													    <% end %>
+													  </div>
+													</div>
+												<div class="_iv">
+													<div class="_move">
+														<% if @pendings.pluck(:user_id).include?(player.id) %>
+														  <div class="_iconlist _1">
+														    <i class="fal fa-clock"></i>
+														  </div>
+														<% elsif @approveds.pluck(:user_id).include?(player.id) %>
+														  <div class="button--icon _1">
+														    <i class="fal fa-check-circle"></i>
+														  </div>
+														<% else %>
+															<%= link_to club_sendjoin_path(club_id: @club.id, user_id: player.id), method: :post, remote: true, class: "button--icon _1", id: "_invitation_#{player.id}" do %>
+															  <i class="fal fa-user-plus"></i>
+															<% end %>
+														<% end %>
+													</div>
+												</div>
+											</li>
+										<% end %>
+									</ul>
+								</div>
+							<% end %>
+						</div>
+					</aside>	
+				</div>
+			</div>	
+		</aside>
+	</section> 
+ <%= render 'clubs/layout/two' %>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="solicitudesModal" tabindex="-1" aria-labelledby="solicitudesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl	">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="_title" id="solicitudesModalLabel">Solicitudes</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+				<% if @no_members.count > 0 %>
+					<div class="_cont _1">
+						<aside class="_members row" id="members">
+							<table class="table align-middle _list_members table-hover table-borderless">
+							  <tbody>
+									<%= render 'memberships/shared/no_members' %>
+							  </tbody>
+							</table>
+						</aside>
+					</div>
+					<% else %>
+						<div class="_cont _1">
+							<div class="_in _noitems">
+								<div class="_inter">
+									<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+									<lottie-player src="https://assets3.lottiefiles.com/packages/lf20_IwKi9V.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;" loop autoplay></lottie-player>
+									<h6 class="_mininotice">Sin solicitudes</h6>
+								</div>
+							</div>
+						</div>
+					<% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

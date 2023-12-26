@@ -1,0 +1,7 @@
+<% @available_clubs.each do |rival| %>
+  <div>
+    <p><strong><%= rival.club_name %></strong></p>
+    <%= link_to "Desafiar", join_club_duel_path(club_id: @club.id, duel_id: @duel.id, rival_id: rival.id), method: :post %>
+  </div>
+<% end %>
+<%= will_paginate @available_clubs %>

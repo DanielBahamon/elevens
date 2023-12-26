@@ -1,0 +1,49 @@
+<% @members.each do |member| %>
+	<tr>
+	  <th class="text-center">
+	  	<figure class="_avatar">
+				<%= image_tag member.avatar.url(:medium), class: "_avatar _1" %>
+			</figure>
+	  </th>
+	  <th class="_number">
+	  	<h2><%= member.number %></h2>
+	  </th>
+	  <td>
+	  	<%= link_to user_path(member), class:"_name" do %>
+	  		<%= member.firstname %> <%= member.lastname %>
+	  	<% end %>
+	  	<%= link_to user_path(member), class:"_username" do %>
+				<%= member.slug %>
+			<% end %>
+	  </td>
+	  <td>
+			<div class="btn-group dropstart" >
+				<a class="" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+					<i class="bi bi-three-dots-vertical"></i>
+				</a>
+				<% @clubembers = member.memberships.where("memberships.status == 1 AND memberships.club_id == '#{@club.id}'") %>
+				<% @clubembers.each do |membership| %>
+				  <ul class="dropdown-menu">
+				    <li>
+				    	<%= link_to user_path(member), class: "dropdown-item", target: "_blank" do %>
+				    		<span>Ver Perfil</span>
+				    	<% end %>
+				    </li>
+				    <% if current_user == @club.user %>
+					    <li>
+					    	<%= link_to decline_club_membership_path(@club, membership), class:"dropdown-item", method: :post do %>
+				    			<span>Suspender</span>
+					    	<% end %>
+					    </li>
+				    <% end %>
+				    <li>
+				    	<%= link_to decline_club_membership_path(@club, membership), class:"dropdown-item", method: :post do %>
+			    			<span>Reportar</span>
+				    	<% end %>
+				    </li>
+				  </ul>
+				<% end %>
+			</div>
+	  </td>
+	</tr>
+<% end %>

@@ -1,0 +1,20 @@
+<header class="_head">
+	<div class="_user">
+    <%= link_to @club, class: "_contavatar" do %>
+      <%= image_tag @club.avatar.url(:medium), class: "_shield _3" %>
+    <% end %>
+    <div class="_data">
+      <b><%= @club.club_name %></b>
+      <small>@<%= @club.slug %></small>
+    <%= link_to @club, class: "_link_hide" do %><% end %>
+    </div>
+	</div>
+  <div class="_actions">
+    <%= link_to edit_user_registration_path, class: "_iconbtn" do %>
+      <i class="bi bi-person"></i>
+    <% end %>
+    <%= link_to new_user_session_path, class: "_iconbtn" do %>
+      <i class="fal fa-sign-in"></i>
+    <% end %>
+  </div>
+</header>

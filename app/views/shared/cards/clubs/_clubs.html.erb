@@ -1,0 +1,14 @@
+<%= link_to clubs_user_path(current_user) do %><% end %>
+	<div class="_inner _1">
+		<div class="_in _1">
+			<h3>Mis clubes</h3>
+			<p>Equipos a tu cargo</p>
+		</div>
+		<div class="_2">
+			<% clubs.each do |club| %>
+				<%= link_to control_club_path(club) do %>
+        	<%= image_tag club.avatar.url(:medium), class: "_shield _1" %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>

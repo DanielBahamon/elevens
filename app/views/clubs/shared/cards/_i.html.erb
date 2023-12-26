@@ -1,0 +1,249 @@
+<article class="_cardclub">
+	<div class="_cont _1">
+		<aside class="_clubcover_card_<%= club.id %> splide">
+		  <div class="splide__arrows">
+				<button class="splide__arrow splide__arrow--prev d-none"></button>
+				<button class="splide__arrow splide__arrow--next d-none"></button>
+		  </div>
+			<div class="splide__track">
+			  <ul class="splide__list">
+			  	<% if club.club_photos.count > 0 %>
+			  		<% photos = club.club_photos %>
+				  	<% photos.each do |photo| %>
+			        <li class="splide__slide <%= 'active' if photo.id == photos[0].id %>" >
+			          <%= image_tag photo.image.url(), class: "_coverpic" %>
+			        </li>
+			      <% end %>
+		      <% else %>
+			      <li class="splide__slide active">
+			      	<img class="_coverpic" src="https://dfqckra2c3mhq.cloudfront.net/assets/bg_coverpage.jpg">
+			      </li>
+		      <% end %>
+			  </ul>
+			</div>
+		</aside>
+	</div>
+	<div class="_cont _2">
+		<div class="_one">
+			<figure class="_shield">
+				<%= image_tag club.avatar.url(:medium), class: "_shield _4" %>
+			</figure>
+		</div>
+		<div class="_two">
+			<div class="_stars">
+				<i class="bi bi-star-fill"></i>
+				<i class="bi bi-star-fill"></i>
+				<i class="bi bi-star-fill"></i>
+				<i class="bi bi-star-fill"></i>
+				<i class="bi bi-star-fill"></i>
+			</div>
+			<h5><%= club.club_name %></h5>
+			<small><%= club.slug %></small>
+			<div class="_numbers">
+				<div class="_champion">
+					<i class="fas fa-trophy"></i>
+					<span><%= club.champions %></span>
+				</div>
+				<div class="_win">
+					<i class="fas fa-medal"></i>
+					<span>80</span>
+				</div>
+				<div class="_duels">
+					<i class="fas fa-futbol"></i>
+					<span>105</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="_cont _3">
+	</div>
+	<div class="_cont _4">
+		<% if club.uniform == true || club.payroll == true || club.staff == true || club.transport == true || club.perdiem == true %>
+			<h6 class="_subtitle">Dotación</h6>
+			<div class="_amenities _1">
+				<% if club.uniform == true %>
+					<div class="chip _1">
+					  <i class="fal fa-tshirt"></i>
+					  <span>Uniforme</span>
+					</div>
+		    <% end %>
+		  	<% if club.payroll == true %>
+					<div class="chip _1">
+					  <i class="fal fa-money-check-edit-alt"></i>
+					  <span>Nomina</span>
+					</div>
+		    <% end %>
+		  	<% if club.staff == true %>
+					<div class="chip _1">
+					  <i class="fal fa-users-class"></i>
+					  <span>Cuerpo tecnico</span>
+					</div>
+		    <% end %>
+		  	<% if club.transport == true %>
+					<div class="chip _1">
+					  <i class="fal fa-shuttle-van"></i>
+					  <span>Transporte</span>
+					</div>
+		    <% end %>
+		  	<% if club.perdiem == true %>
+					<div class="chip _1">
+					  <i class="fal fa-hand-holding-usd"></i>
+					  <span>Viaticos</span>
+					</div>
+		    <% end %>
+
+			</div>
+			<br/>
+    <% end %>
+		<% if club.training == true || club.private == true || club.roof == true || club.parking == true || club.owner == true %>
+			<h6 class="_subtitle">Entrenamientos</h6>
+			<div class="_amenities _3">
+		  	<% if club.training == true %>
+					<div class="chip _1">
+					  <i class="bi bi-clock"></i>
+					  <span>Frecuentes</span>
+					</div>
+		    <% end %>
+		  	<% if club.private == true %>
+					<div class="chip _1">
+					  <i class="bi bi-lock"></i>
+					  <span>Privados</span>
+					</div>
+		    <% end %>
+		  	<% if club.parking == true %>
+					<div class="chip _1">
+					  <i class="fal fa-parking"></i>
+					  <span>Parqueaderos</span>
+					</div>
+		    <% end %>
+		  	<% if club.roof == true %>
+					<div class="chip _1">
+					  <i class="fal fa-warehouse-alt"></i>
+					  <span>Canchas cubiertas</span>
+					</div>
+		    <% end %>
+		  	<% if club.owner == true %>
+					<div class="chip _1">
+					  <i class="bi bi-flag"></i>
+					  <span>Canchas privadas</span>
+					</div>
+		    <% end %>
+			</div>
+			<br/>
+    <% end %>
+		<% if club.hydration == true || club.lockers == true || club.snacks == true || club.lunch == true || club.bathrooms == true || club.showers == true || club.assistance == true || club.gym == true || club.wifi == true || club.washers == true || club.heating == true || club.air == true || club.videogames == true || club.pools == true || club.courses == true %>
+			<h6 class="_subtitle">Servicios</h6>
+			<div class="_amenities _2">
+		  	<% if club.hydration == true %>
+					<div class="chip _1">
+					  <i class="bi bi-cup-straw"></i>
+					  <span>Hidratación</span>
+					</div>
+		    <% end %>
+		  	<% if club.lockers == true %>
+					<div class="chip _1">
+					  <i class="bi bi-archive"></i>
+					  <span>Casilleros</span>
+					</div>
+		    <% end %>
+		  	<% if club.snacks == true %>
+					<div class="chip _1">
+					  <i class="fal fa-apple-alt"></i>
+					  <span>Snacks</span>
+					</div>
+		    <% end %>
+		  	<% if club.lunch == true %>
+					<div class="chip _1">
+					  <i class="fal fa-soup"></i>
+					  <span>Alimentación</span>
+					</div>
+		    <% end %>
+		  	<% if club.bathrooms == true %>
+					<div class="chip _1">
+					  <i class="fal fa-toilet"></i>
+					  <span>Baños</span>
+					</div>
+		    <% end %>
+		  	<% if club.showers == true %>
+					<div class="chip _1">
+					  <i class="fal fa-shower"></i>
+					  <span>Duchas</span>
+					</div>
+		    <% end %>
+		  	<% if club.assistance == true %>
+					<div class="chip _1">
+					  <i class="fal fa-medkit"></i>
+					  <span>Kit Medico</span>
+					</div>
+		    <% end %>
+		  	<% if club.gym == true %>
+					<div class="chip _1">
+					  <i class="fal fa-dumbbell"></i>
+					  <span>Gimnasio</span>
+					</div>
+		    <% end %>
+		  	<% if club.wifi == true %>
+					<div class="chip _1">
+					  <i class="fal fa-wifi"></i>
+					  <span>WIFI</span>
+					</div>
+		    <% end %>
+		  	<% if club.washers == true %>
+					<div class="chip _1">
+					  <i class="fal fa-washer"></i>
+					  <span>Lavanderia</span>
+					</div>
+		    <% end %>
+		  	<% if club.heating == true %>
+					<div class="chip _1">
+					  <i class="fal fa-fireplace"></i>
+					  <span>Calefaccion</span>
+					</div>
+		    <% end %>
+		  	<% if club.air == true %>
+					<div class="chip _1">
+					  <i class="fal fa-wind"></i>
+					  <span>Aire condicionado</span>
+					</div>
+		    <% end %>
+		  	<% if club.videogames == true %>
+					<div class="chip _1">
+					  <i class="fal fa-gamepad"></i>
+					  <span>Videojuegos</span>
+					</div>
+		    <% end %>
+		  	<% if club.pools == true %>
+					<div class="chip _1">
+					  <i class="fal fa-swimmer"></i>
+					  <span>Piscinas</span>
+					</div>
+		    <% end %>
+		  	<% if club.courses == true %>
+					<div class="chip _1">
+					  <i class="fal fa-graduation-cap"></i>
+					  <span>Aprendizaje</span>
+					</div>
+		    <% end %>
+			</div>
+    <% end %>
+	</div>
+</article>
+<style type="text/css">
+	@keyframes disparais {
+	  to   { visibility: hidden; }
+	}
+</style>
+<script>
+  document.addEventListener( 'DOMContentLoaded', function() {
+    var splide = new Splide( '._clubcover_card_<%= club.id %>', {
+		  type   : 'fade',
+		  perPage: 1,
+		  perMove: 1,
+		  autoplay: true,
+		  rewind: true,
+		  rewindSpeed: 9000,
+			height : '15rem',
+    } );
+    splide.mount();
+  });
+</script>

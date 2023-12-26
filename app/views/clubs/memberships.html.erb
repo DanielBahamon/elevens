@@ -1,0 +1,257 @@
+<% content_for :page_name, "Edit #{@club.club_name} - Entornes" %>
+
+<%= render 'clubs/layout/one' %>
+	<% if @undo.present? %>
+			<%= render 'shared/cards/duels/undo', duel: @undo %>
+  <% end %>
+	<section class="_console _1 _members">
+		<aside class="_1">
+	    <%= simple_form_for @club do |f| %>
+				<div class="row">
+					<div class="col-lg-6 _1">
+						<aside>
+							<header class="_header_console _1">
+								<div class="_in">
+									<div class="_info">
+										<div>
+											<div class="_infoclub">
+												<h3 class="_title"> 
+													<span>Beneficios</span>
+												</h3>
+												<p class="_mutted">Establece los beneficios:</p>
+											</div>
+										</div>
+									</div>
+									<div class="_action">
+										<button class="button--naira _1 _btn _medium m-0-auto" type="submit">
+											<span>Guardar</span>
+			                <i class="fas fa-check button__icon"></i>
+										</button>
+									</div>
+								</div>
+							</header>
+							<div class="_body_console _1">
+								<div class="_cont _1">
+									<div class="form-check form-switch">
+										<i class="fad fa-tshirt"></i>
+									  <%= f.check_box :uniform, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_uniform" for="club_uniform">Uniformes</label>
+									  <label class="_hidelabel" for="club_uniform"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-users-class"></i>
+									  <%= f.check_box :staff, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_staff" for="club_staff">Equipo tecnico</label>
+									  <label class="_hidelabel" for="club_staff"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-money-check-edit-alt"></i>
+									  <%= f.check_box :payroll, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_payroll" for="club_payroll">Nomina</label>
+									  <label class="_hidelabel" for="club_payroll"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-bus"></i>
+									  <%= f.check_box :transport, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_transport" for="club_transport">Transporte</label>
+									  <label class="_hidelabel" for="club_transport"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-plane-alt"></i>
+									  <%= f.check_box :perdiem, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_perdiem" for="club_perdiem">Viaticos</label>
+									  <label class="_hidelabel" for="club_perdiem"></label>
+									</div>
+								</div>
+							</div>
+						</aside>
+					</div>
+					<div class="col-lg-6 _2">
+						<aside>
+							<header class="_header_console _1">
+								<div class="_in">
+									<div class="_info">
+										<div>
+											<div class="_infoclub">
+												<h3 class="_title"> 
+													<span>Entrenamientos</span>
+												</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+							</header>
+							<div class="_body_console _1">
+								<div class="_cont _2">
+									<div class="form-check form-switch">
+										<i class="fad fa-user-clock"></i>
+									  <%= f.check_box :training, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_training" for="club_training">Frecuentes</label>
+									  <label class="_hidelabel" for="club_training"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-parking"></i>
+									  <%= f.check_box :parking, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_parking" for="club_parking">Parqueaderos</label>
+									  <label class="_hidelabel" for="club_parking"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-shield-check"></i>
+									  <%= f.check_box :private, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_private" for="club_private">Privados</label>
+									  <label class="_hidelabel" for="club_private"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-user-shield"></i>
+									  <%= f.check_box :owner, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_owner" for="club_owner">Canchas privadas</label>
+									  <label class="_hidelabel" for="club_owner"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-chimney"></i>
+									  <%= f.check_box :roof, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_roof" for="club_roof">Canchas cubiertas</label>
+									  <label class="_hidelabel" for="club_roof"></label>
+									</div>
+								</div>
+							</div>
+						</aside>
+					</div>
+					<div class="col-lg-6 _3">
+						<aside>
+							<header class="_header_console _1">
+								<div class="_in">
+									<div class="_info">
+										<div>
+											<div class="_infoclub">
+												<h3 class="_title"> 
+													<span>Servicios</span>
+												</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+							</header>
+							<div class="_body_console _1">
+								<div class="_cont _1">
+									<div class="form-check form-switch">
+										<i class="fad fa-toilet-paper"></i>
+									  <%= f.check_box :bathrooms, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_bathrooms" for="club_bathrooms">Baños</label>
+									  <label class="_hidelabel" for="club_bathrooms"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-shower"></i>
+									  <%= f.check_box :showers, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_showers" for="club_showers">Duchas</label>
+									  <label class="_hidelabel" for="club_showers"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-glass-citrus"></i>
+									  <%= f.check_box :hydration, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_hydration" for="club_hydration">Hidratación</label>
+									  <label class="_hidelabel" for="club_hydration"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-backpack"></i>
+									  <%= f.check_box :lockers, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_lockers" for="club_lockers">Casilleros</label>
+									  <label class="_hidelabel" for="club_lockers"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-popcorn"></i>
+									  <%= f.check_box :snacks, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_snacks" for="club_snacks">Snacks</label>
+									  <label class="_hidelabel" for="club_snacks"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-signal"></i>
+									  <%= f.check_box :wifi, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_wifi" for="club_wifi">WIFI</label>
+									  <label class="_hidelabel" for="club_wifi"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-medkit"></i>
+									  <%= f.check_box :assistance, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_assistance" for="club_assistance">Primeros Auxilios</label>
+									  <label class="_hidelabel" for="club_assistance"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-dumbbell"></i>
+									  <%= f.check_box :gym, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_gym" for="club_gym">Gimnasio</label>
+									  <label class="_hidelabel" for="club_gym"></label>
+									</div>
+
+								</div>
+							</div>
+						</aside>	
+					</div>
+					<div class="col-lg-6 _4">
+						<aside>
+							<header class="_header_console _1 d-none d-lg-block">
+								<div class="_in">
+									<div class="_info">
+										<div>
+											<div class="_infoclub">
+												<h3 class="_title"> 
+												</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+							</header>
+							<div class="_body_console _1">
+								<div class="_cont _1">
+									<div class="form-check form-switch">
+										<i class="fad fa-burger-soda"></i>
+									  <%= f.check_box :lunch, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_lunch" for="club_lunch">Alimentos</label>
+										  <label class="_hidelabel" for="club_lunch"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-washer"></i>
+									  <%= f.check_box :washers, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_washers" for="club_washers">Lavanderia</label>
+										  <label class="_hidelabel" for="club_washers"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-temperature-hot"></i>
+									  <%= f.check_box :heating, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_heating" for="club_heating">Calefacción</label>
+									  <label class="_hidelabel" for="club_heating"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-temperature-frigid"></i>
+									  <%= f.check_box :air, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_air" for="club_air">Aire condicionado</label>
+									  <label class="_hidelabel" for="club_air"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-gamepad"></i>
+									  <%= f.check_box :videogames, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_videogames" for="club_videogames">Videojuegos</label>
+									  <label class="_hidelabel" for="club_videogames"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-swimmer"></i>
+									  <%= f.check_box :pools, class: "form-check-input", role: "switch" %>
+									  <label class="form-check-label" id="club_pools" for="club_pools">Piscinas</label>
+									  <label class="_hidelabel" for="club_pools"></label>
+									</div>
+									<div class="form-check form-switch">
+										<i class="fad fa-graduation-cap"></i>
+										<%= f.check_box :courses, class: "form-check-input #{'on' if @club.courses == true}", role: "switch" %>
+									  <label class="form-check-label" id="club_courses" for="club_courses">Aprendizaje</label>
+									  <label class="_hidelabel" for="club_courses"></label>
+									</div>
+								</div>
+							</div>
+						</aside>
+					</div>
+				</div>
+				<%= f.hidden_field :amenities, value: true %>
+	    <% end %>
+		</aside>
+	</section>
+<%= render 'clubs/layout/two' %>

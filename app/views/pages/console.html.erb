@@ -1,0 +1,275 @@
+<% content_for :page_name, "Consola de administración" %>
+<%= render 'shared/layout/one' %>
+	<section class="_console _1 _dashboard">
+		<aside class="_1">
+			<div class="row">
+				<% if @clubs.exists? || @memberships_of_user.exists? %>
+					<div class="col-lg-9 _1">
+						<aside>
+							<header class="_header_console _1">
+								<div class="_in">
+									<div class="_info">
+										<h3 class="_title">Hola, <%= current_user.firstname %></h3>
+										<p class="_date"><%= "Hoy es #{l(Time.now, format: '%A, %d %B %Y')}" %></p>
+									</div>
+									<div class="_action">
+										<% if current_user.clubs.present? %>
+											<% if  @memberships_of_clubs.empty? %>
+											  <%= link_to scouting_club_path(@clubs.first), class: "button--shikoba _1 " do %>
+											  	<span>Reclutar</span>
+											  	<i class="bi bi-plus-circle button__icon"></i>
+											  <% end %>
+											<% else %>
+												<% if current_user.clubs.count == 1 %>
+													<%= link_to new_club_duel_path(@clubs.first), class: "button--shikoba _1 " do %>
+														<span>Nuevo duelo</span>
+														<i class="bi bi-plus-circle button__icon"></i>
+													<% end %>
+												<% else %>
+													<%= link_to battle_path, class: "button--shikoba _1 " do %>
+														<span>Nuevo duelo</span>
+														<i class="bi bi-plus-circle button__icon"></i>
+													<% end %>
+												<% end %>
+
+											<% end %>
+										<% else %>
+											<%= link_to new_club_path, class: "button--shikoba _1 " do %>
+										  	<span>Crear nuevo club</span>
+										  	<i class="bi bi-plus-circle button__icon"></i>
+										  <% end %>
+										<% end %>
+									</div>
+								</div>
+							</header>
+							<div class="_body_console _1">
+								<div class="_inner">
+									<% if current_user.clubs.present? %>
+										<fieldset class="_clubes">
+											<% current_user.clubs.each do |club| %>
+												<div class="_club _1">
+													<div class="_content">
+														<div class="_fila _1">
+															<div class="_1">
+																<div class="_avataries">
+																	<% progress = calculate_progress(club) %> 
+																	<% members = User.joins(:memberships).where("memberships.club_id = ? AND memberships.status = 1", club.id).limit(2) %>
+													    		<% total_members = club.memberships.where(status: 1).count %>
+
+													    		<% if members.exists? %>
+														        <% members.each do |member| %>
+															        <%= link_to user_path(member), class: '_avatary', 'data-bs-toggle': 'tooltip', 'data-bs-placement': 'top', 'data-bs-title': 'Tooltip on top' do %>
+															          <%= image_tag member.avatar.url(:medium), class: "_avatarline"  %>
+															        <% end %>
+														        <% end %>
+														        <% if total_members > 2 %>
+														          <span class="_avatary_number">+<%= total_members - 2 %></span>
+														        <% end %>
+														    	<% else %>
+														    		<small><mutted>Sin miembros</mutted></small>
+														    	<% end %>
+																</div>
+															</div>
+															<div class="_2">
+																<div class="dropdown">
+																  <button class="dropdown-toggle _options" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+																		<i class="bi bi-three-dots-vertical"></i>
+																  </button>
+																  <ul class="dropdown-menu">
+																    <li><a class="dropdown-item" href="#">Action</a></li>
+																    <li><a class="dropdown-item" href="#">Another action</a></li>
+																    <li><a class="dropdown-item" href="#">Something else here</a></li>
+																  </ul>
+																</div>
+															</div>
+														</div>
+														<div class="_fila _2">
+															<div class="_1">
+																<h2 class="_name"><%= club.club_name %></h2>
+															</div>
+														</div>
+														<div class="_fila _3">
+															<div class="_1">
+																<% if club.user.id == current_user.id %>
+																	<p class="_type">Director </p>
+																  <% unless progress > 99 %>
+																    <p><%= progress %>%</p>
+																  <% end %>
+																<% else %>
+																	<p class="_type">Miembro</p>
+																<% end %>
+
+															</div>
+														</div>
+														<% unless progress > 99 %>
+															<div class="_fila _4">
+													      <div class="progress" role="progressbar" aria-label="Example 20px high" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100" style="height: 5px">
+													        <div class="progress-bar" style="width: <%= progress %>%"></div>
+													      </div>
+															</div>
+														<% end %>
+														<%= link_to dashboard_club_path(club), class: "_link_hide" do %><% end %>
+													</div>
+													<figure class="_logo">
+														<%= image_tag club.avatar.url(:medium), class: "_shield _1" %>
+													</figure>
+												</div>
+											<% end %>
+										</fieldset>
+									<% end %>
+									<fieldset class="_activities">
+										<div class="_datas">
+											<div class="_data _1">
+												<div class="_media">
+													<figure>
+														<i class="fad fa-trophy"></i>	
+													</figure>
+													<p class="_text">Copas</p>
+												</div>
+												<div class="_info">
+													<div class="_numb">
+														<div class="_moving">
+															<div class="_up">
+																<i class="fad fa-sort-up"></i>
+															</div>
+														</div>
+														<h2>18</h2>
+													</div>
+												</div>
+											</div>
+											<div class="_data _2">
+												<div class="_media">
+													<figure>
+														<i class="fad fa-futbol"></i>
+													</figure>
+													<p class="_text">Duelos</p>
+												</div>
+												<div class="_info">
+													<div class="_numb">
+														<div class="_moving">
+															<div class="_down">
+																<i class="fad fa-sort-down"></i>
+															</div>
+														</div>
+														<h2>94</h2>
+													</div>
+												</div>
+											</div>
+											<div class="_data _3">
+												<div class="_media">
+													<figure>
+														<i class="fad fa-futbol"></i>
+													</figure>
+													<p class="_text">Fans</p>
+												</div>
+												<div class="_info">
+													<div class="_numb">
+														<div class="_moving">
+															<div class="_up">
+																<i class="fad fa-sort-up"></i>
+															</div>
+														</div>
+														<h2><%= current_user.followers.count %></h2>
+													</div>
+												</div>
+											</div>
+											<div class="_data _4">
+												<div class="_media">
+													<figure>
+														<i class="fad fa-hands-heart"></i>
+													</figure>
+													<p class="_text">Elogios</p>
+												</div>
+												<div class="_info">
+													<div class="_numb">
+														<div class="_moving">
+															<div class="_up">
+																<i class="fad fa-sort-up"></i>
+															</div>
+														</div>
+														<h2>123.4k</h2>
+													</div>
+												</div>
+											</div>
+										</div>
+									</fieldset>
+										
+
+								</div>
+							</div>
+						</aside>
+					</div>
+					<div class="col-lg-3 _2">
+						<aside>
+							<header class="_header_console _1">
+								<div class="_in">
+									<div class="_info">
+										<h3 class="_title">Última actividad</h3>
+									</div>
+									<div class="_action">
+										<%= link_to notifications_path, class: "_minilink" do %>
+											Ver todos
+										<% end %>
+									</div>
+								</div>
+							</header>
+							<div class="_body_console _1 _notifications">
+								<% if @tasks.present? %>
+									<div class="_tasks">
+										<h4 class="_title">Para hoy</h4>
+										<% @tasks.each do |task| %>
+											<article class="_task">
+												<div class="_content">
+													<div class="_1">
+														<div class="_text">
+															<p><%= task.description %></p>
+														</div>
+														<div class="_cta">
+															<a class="_link" href="<%= task.url %>">
+																<i class="bi bi-check2-circle"></i>
+															</a>
+														</div>
+													</div>
+													<div class="_2">
+														<a class="_link" href="<%= task.url %>"><span>Solucionar</span> <i class="bi bi-chevron-compact-right"></i></a>
+													</div>
+												</div>
+											</article>
+										<% end %>
+									</div>
+								<% else %>
+									<% if current_user.clubs.present? %>
+										<div class="_notasks">
+											<p>No hay tareas disponibles.</p>
+										</div>
+									<% end %>
+								<% end %>
+							</div>
+						</aside>
+					</div>
+				<% else %>
+					<div class="col-12">
+						<aside>
+							<div class="_body_console _1 _nothing">
+								<%= render 'shared/tutos/clubs/welcome' %>
+							</div>
+						</aside>
+					</div>
+				<% end %>
+			</div>	
+		</aside>
+	</section> 
+<%= render 'shared/layout/two' %>
+
+<!--- <div class="_media <% if @fullclubs.present? %>cluber<% end %>">
+			  <%= link_to user_path(current_user), class: '_shield', target: '_blank' do %>
+			  	<figure class="_media">
+    				<%= image_tag current_user.avatar.url(:medium), class: "_avatar _6" %>
+					</figure>
+				<% end %>
+			</div>
+			<div class="_info">
+				<h4 class="_name"><%= current_user.firstname %> <%= current_user.lastname %></h4>
+				<p class="_slug"><%= current_user.slug %></p>
+			</div>
+-->

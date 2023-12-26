@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  team: one
+  duel: one
+  status: MyString
+  approve: false
+  rival: MyString
+
+two:
+  team: two
+  duel: two
+  status: MyString
+  approve: false
+  rival: MyString

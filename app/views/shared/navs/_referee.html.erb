@@ -1,0 +1,73 @@
+<% if user_signed_in? %>
+  <nav class="_navuser  ">
+    <div class="_cont _1">
+        <%= link_to user_path(current_user), class: "_usery" do %>
+            <%= image_tag current_user.avatar.url(:medium), class: "_avatar _4" %>
+            <p class="_name"><%= current_user.firstname %> <%= current_user.lastname %></p>
+            <p class="_username"><%= current_user.slug %></p>
+            <div class="text-center mt-1">
+              <span class="badge _1 pill-outline-secondary"><%= current_user.position_name %></span>
+            </div>
+        <% end %>
+        <% if user_signed_in? %>
+          <%= link_to console_path, class: "_item #{'active' if current_page?(console_path)}" do %>
+            <i class="fad fa-tachometer-alt"></i>
+            <span class="_1">Consola</span>
+          <% end %>
+        <% end %>
+        <% if user_signed_in? && current_user.referee_confirmation %>
+          <%= link_to referee_user_path(current_user), class: "_item #{'active' if current_page?(referee_user_path(current_user))}" do %>
+            <i class="fad fa-gavel"></i>
+            <span class="_1">Soy referí</span>
+          <% end %>
+        <% end %>
+        <%= link_to calledup_user_path(current_user), class: "_item #{'active' if current_page?(calledup_user_path(current_user))}" do %>
+          <i class="fad fa-futbol"></i>
+          <span>Encuentros</span>
+        <% end %>
+        <%= link_to clubs_user_path(current_user), class: "_item #{'active' if current_page?(clubs_user_path(current_user))}" do %>
+          <i class="fad fa-users-crown"></i>
+          <span>Mis equipos</span> 
+        <% end %>
+        <%= link_to user_path(current_user), class: "_item #{'active' if current_page?(user_path(current_user))}" do %>
+          <i class="fad fa-id-card-alt"></i>
+          <span>Mi cuenta</span>
+        <% end %>
+    </div>
+    <div class="_cont _2 _action">
+        <div class="_create_action">
+          <div class="_options">
+          </div>
+          <div class="collapse" id="collapseCreate">
+            <div class="card-body">
+              <div class="_buttons">
+                <%= link_to battle_path, class: "button--sacnite _3 _invert _btn _medium m-0-auto", 'data-bs-toggle': "tooltip", 'data-bs-title': "¡Crea un nuevo Torneo!", 'data-bs-placement': "left" do %>
+                  <i class="fad fa-trophy-alt button__icon"></i>
+                <% end %>
+                <%= link_to battle_path, class: "button--sacnite _3 _invert _btn _medium m-0-auto", 'data-bs-toggle': "tooltip", 'data-bs-title': "¡Crea un nuevo Equipo!", 'data-bs-placement': "left" do %>
+                  <i class="fad fa-users button__icon"></i>
+                <% end %>
+                <%= link_to battle_path, class: "button--sacnite _3 _invert _btn _medium m-0-auto", 'data-bs-toggle': "tooltip", 'data-bs-title': "¡Crea un nuevo Duelo!", 'data-bs-placement': "left" do %>
+                  <i class="fad fa-futbol button__icon"></i>
+                <% end %>
+              </div>
+            </div>
+          </div>  
+          <a class="_morebtn button--sacnite _2 _btn m-0-auto close _big _btn_more_create" id="_btn_more_create" data-bs-toggle="collapse" href="#collapseCreate" role="button" aria-expanded="false" aria-controls="collapseCreate">
+            <i class="fas fa-plus button__icon"></i>
+          </a>
+        </div>
+    </div>
+  </nav> 
+<% end %> 
+<script>
+  $(document).ready(function() {
+    $('._btn_more_create').click(function() {
+      $(this).toggleClass('on');
+    });
+  });
+
+  $(document).ready(function() {
+    $('[data-bs-toggle="tooltip"]').tooltip();
+  });
+</script> 

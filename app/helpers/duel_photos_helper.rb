@@ -1,0 +1,2 @@
+module DuelPhotosHelper
+end

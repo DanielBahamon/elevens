@@ -1,0 +1,21 @@
+<main class="_fully _container _1">
+  <main class="_layout _1 _duel">
+    <aside class="_1">
+      <div class="_cont">
+        <div class="_in">
+          <% if user_signed_in? %>
+            <% if current_user == @club.user && !current_page?(new_club_duel_path) && !current_page?(club_duel_path(@club, @duel)) %>
+              <%= render 'duels/shared/navs/side' %>
+            <% elsif current_user.referee && current_user.referee_confirmation %>
+              <%= render 'shared/navs/side_referee' %>
+            <% else %>
+              <%= render 'shared/navs/side' %>
+            <% end %>
+          <% else %>
+            <%= render 'shared/navs/side' %>
+          <% end %>
+        </div>
+      </div>
+    </aside>
+    <aside class="_2">
+      <%= yield %>

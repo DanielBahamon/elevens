@@ -1,0 +1,22 @@
+<% unless @duel.referee_id.present? %>
+  <%= form_for([@club, @duel, @duel.reservations.new]) do |f| %>
+    <div class="_referees_lists">
+      <div class="row m-0">
+        <%= f.hidden_field :start_date, value: @duel.start_date.try(:strftime, '%Y-%m-%dT%H:%M:%S') %>
+        <%= f.hidden_field :end_date, value: @duel.end_date.try(:strftime, '%Y-%m-%dT%H:%M:%S') %>
+        <%= f.hidden_field :club_id, value: @club.id %>
+        <%= f.hidden_field :duel_id, value: @duel.id %>
+      </div>
+    </div>
+    <button type="submit" class="button--naira _1 _fullwidth">
+      <span>Solicitar</span>
+      <i class="button__icon fal fa-save"></i>
+    </button>
+  <% end %>
+<% else %>
+  <div class="_waiting">
+    <h1>Esperando confirmación...</h1>
+  </div>
+<% end %>
+
+

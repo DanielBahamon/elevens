@@ -1,0 +1,213 @@
+<% content_for :page_name, "Condiciones del encuentro" %>
+
+
+<%= render 'duels/layout/one' %>
+
+	<section class="_console _1 _newduel">
+		<aside class="_1">
+				<div class="row">
+					<div class="col-lg-12 _1">
+						<aside>
+							<div class="_body_console _1">
+								<div>
+									<% if @reservation.approved == true && @reservation.rejected == false  %>
+										<div class="jumbotron _jumbo_1 _center">
+											<div class="_in">
+												<div class="row">
+													<div class="col-xl-5 _1">
+														<figure class="_figure">
+															<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/illustrations/Crossed+flags_Flatline.svg">
+														</figure>
+													</div>
+													<div class="col-xl-7 _2">
+														<div class="_info">
+															<h3 class="_title"><span>¡Felicidades! Eres el juez de este encuentro</span></h3>
+															<p>Ahora haz aceptado ser el árbitro de este próximo encuentro. Estamos emocionados de contar contigo y confiamos en tu experiencia para llevar a cabo un arbitraje imparcial y profesional. ¡Prepárate para vivir una gran experiencia futbolística!</p>
+															<h3 class="_title">
+																<span class="badge bg-success">$<%= @reservation.total %></span>
+															</h3>
+															<br>
+															<div class="_flex _flex_wrap">
+																<a class="button--naira _2 _btn _medium fit" data-bs-toggle="modal" data-bs-target="#detailsDuel">
+																  <span>Ver detalles</span>
+								                	<i class="fad fa-info-circle button__icon text-center"></i>
+																</a>
+																<%= link_to club_duel_path(@club, @duel), class: "button--naira _1 _btn _medium fit ", target: "_blank" do %>
+																	<span>Ir al duelo</span>
+								                	<i class="fad fa-external-link button__icon"></i>
+																<% end %>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									<% elsif @reservation.approved == true && @reservation.rejected == true %>
+										<div class="jumbotron _jumbo_1 _center">
+											<div class="_in">
+												<div class="row">
+													<div class="col-12 _2">
+														<div class="_info">
+															<h3 class="_title"><span>Tu cita como arbitro se ha cancelado</span></h3>
+															<p>Agradecemos tu consideración y esperamos poder colaborar contigo en futuras ocasiones.</p>
+															<br>
+															<div class="_flex _flex_wrap">
+																<%= link_to referee_user_path(current_user), class: "button--naira _2 _btn _medium fit" do %>
+																	<span>Volver a la consola</span>
+								                	<i class="far fa-arrow-left button__icon"></i>
+																<% end %>
+																<%= link_to club_duel_path(@club, @duel), class: "button--naira _1 _btn _medium fit", target: "_blank" do %>
+																	<span>Ir al duelo</span>
+								                	<i class="fad fa-external-link button__icon"></i>
+																<% end %>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									<% elsif @reservation.approved == false && @reservation.rejected == true %>
+										<div class="jumbotron _jumbo_1 _center">
+											<div class="_in">
+												<div class="row">
+													<div class="col-12 _2">
+														<div class="_info">
+															<h3 class="_title"><span>Tu cita como arbitro se ha cancelado</span></h3>
+															<p>Agradecemos tu consideración y esperamos poder colaborar contigo en futuras ocasiones.</p>
+															<br>
+															<div class="_flex _flex_wrap">
+																<%= link_to referee_user_path(current_user), class: "button--naira _2 _btn _medium fit" do %>
+																	<span>Volver a la consola</span>
+								                	<i class="far fa-arrow-left button__icon"></i>
+																<% end %>
+																<%= link_to club_duel_path(@club, @duel), class: "button--naira _1 _btn _medium fit", target: "_blank" do %>
+																	<span>Ir al duelo</span>
+								                	<i class="fad fa-external-link button__icon"></i>
+																<% end %>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									<% else %>
+										<div class="jumbotron _jumbo_1 _center">
+											<div class="_in">
+												<div class="row">
+													<div class="col-xl-5 _1">
+														<figure class="_figure">
+															<img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/illustrations/Crossed+flags_Flatline.svg">
+														</figure>
+													</div>
+													<div class="col-xl-7 _2">
+														<div class="_info">
+															<div class="row nom">
+																<div class="col-7 col-md-8">
+																	<h3 class="_title">
+																		<span>¡Únete como árbitro! </span>
+																	</h3>
+																</div>
+																<div class="col-5 col-md-4 text-end">
+																	<h3 class="_title">
+																		<span class="badge bg-success">$<%= @reservation.total %></span>
+																	</h3>
+																</div>
+															</div>
+															<div class="row nom">
+																<div class="col-12">
+																	<p><b><%= @club.club_name %></b> te ha enviado una invitación para ser el árbitro de su próximo encuentro. <br>Estamos emocionados de tenerte como parte de nuestro equipo arbitral y confiamos en tus habilidades y experiencia.</p>
+																	<br>
+																</div>
+															</div>
+															<div class="row nom">
+																<div class="col-12">
+																	<a class="button--aylen _1 _btn _fullwidth" data-bs-toggle="modal" data-bs-target="#detailsDuel">
+									                	<i class="fad fa-info-circle button__icon text-center"></i>
+																	  <span>Ver detalles</span>
+																	</a>
+																	<br>
+																</div>
+																<div class="col-sm-6 col-md-6">
+																	<%= render 'reservations/shared/approved' %>
+																</div>
+																<div class="col-sm-6">
+																	<%= render 'reservations/shared/rejected' %>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									<% end %>
+								</div>
+									
+							</div>
+						</aside>
+			    </div>
+
+			  </div>
+		</aside>
+	</section>
+
+<%= render 'duels/layout/two' %>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="detailsDuel" tabindex="-1" aria-labelledby="detailsDuelLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+				<h3 class="_title modal-title"><span>Detalles del encuentro</span></h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      	<div class="_jumbotron _jumbo_2">
+					<div class="_in">
+						<table class="table _table_details table-striped table-hover">
+						  <tbody>
+						    <tr>
+						      <th scope="row">Equipo</th>
+						      <td><%= @club.club_name %></td>
+						    </tr>
+						    <tr>
+						      <th scope="row">Fecha</th>
+						      <td><%= @duel.start_date.strftime("%A - %B %d, %Y") %></td>
+						    </tr>
+						    <tr>
+						      <th scope="row">Hora</th>
+						      <td colspan="2"><%= @duel.start_date.strftime("%I:%M %p") %></td>
+						    </tr>
+						    <tr>
+						      <th scope="row">Duración</th>
+						      <td colspan="2"><%= @formatted_duration %></td>
+						    </tr>
+						    <tr>
+						      <th scope="row">País</th>
+						      <td colspan="2"><%= @duel.country %></td>
+						    </tr>
+						    <tr>
+						      <th scope="row">Ciudad</th>
+						      <td colspan="2"><%= @duel.city %></td>
+						    </tr>
+						    <tr>
+						      <th scope="row">Dirección</th>
+						      <% if @duel.address.present? %>
+						      	<td colspan="2"><%= @duel.address %></td>
+						      <% else %>
+						      	<td colspan="2">Sin confirmar</td>
+						      <% end %>
+						    </tr>
+						  </tbody>
+						</table>
+					</div>
+				</div>
+      </div>
+    </div>
+  </div>
+</div>
+

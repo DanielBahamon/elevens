@@ -1,0 +1,48 @@
+<nav class="_navside">
+  <div class="_cont _1">
+    <%= link_to root_path, class: "_logo _1" do %>
+      <%= image_tag '//d4s5cnqwbwfuf.cloudfront.net/assets/brands/v1/11_dark.svg', class: "_light", alt: 'Entornes'%>
+    <% end %>
+    <%= link_to members_club_path, class: "_item #{'ready' if @club.memberships.where(active: true).count > 0 } #{'active' if current_page?(members_club_path)}" do %>
+      <i class="fad fa-users"></i>
+      <span>Miembros</span> 
+      <% if @club.memberships.where(active: true).count > 0 %><i class="bi bi-check2-circle"></i><% end %>
+    <% end %>
+    <%= link_to duels_club_path, class: "_item #{'active' if current_page?(duels_club_path)}" do %>
+      <i class="fad fa-futbol"></i>
+      <span>Mis duelos</span> 
+      <% if @club.duels.count > 0 %><i class="bi bi-check2-circle"></i><% end %>
+    <% end %>
+    <%= link_to welfare_club_path, class: "_item #{'active' if current_page?(welfare_club_path)}" do %>
+      <i class="fad fa-lightbulb-on"></i>
+      <span>Beneficios</span> 
+      <% if !@club.amenities.blank? %><i class="bi bi-check2-circle"></i><% end %>
+    <% end %>
+    <%= link_to location_club_path, class: "_item #{'ready' if !@club.address.blank? && !@club.city.blank? && !@club.country.blank? } #{'active' if current_page?(location_club_path)} #{'active' if current_page?(location_club_path)}"  do %>
+      <i class="fad fa-map-marked"></i>
+      <span>Ubicación</span> 
+      <% if !@club.address.blank? && !@club.city.blank? && !@club.country.blank? %><i class="bi bi-check2-circle"></i><% end %>
+    <% end %>
+    <%= link_to front_club_path, class: "_item #{'active' if current_page?(front_club_path)}" do %>
+      <i class="fad fa-presentation"></i>
+      <span>Presentación</span>
+      <% if !@club.avatar.blank? %><i class="bi bi-check2-circle"></i><% end %>
+    <% end %>
+    <br>
+
+    <% is_ready = !@club.price.blank? && !@club.captain.blank? && !@club.avatar.blank? && !@club.sport_type.blank? && !@club.amenities.blank? && !@club.address.blank? && !@club.city.blank? && !@club.country.blank? && @club.memberships.where(active: true).count > 0  %>
+    <% if is_ready %>
+      <%= simple_form_for @club do |f| %>
+        <%= f.hidden_field :active, value: true %>
+        <% unless @club.active == true %>
+          <button type="submit" class="_item _icon_action button--aylen _2 d-none d-xxl-block <%= 'disabled' unless is_ready %>" data-text="Publicando...">
+            <span>Publicar</span>
+          </button>
+          <button type="submit" class="_item _icon_action button--aylen _2 _item d-xxl-none <%= 'disabled' unless is_ready %>" data-text="Publicando...">
+            <span>Publicar</span>
+          </button>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</nav>

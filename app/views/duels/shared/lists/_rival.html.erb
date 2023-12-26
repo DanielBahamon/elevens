@@ -1,0 +1,26 @@
+<% local = Club.find_by(id: duel.club_id) %>
+<div class="_note"><small>Próximo Oponente</small></div>
+<tr id="duel_<%= duel.id %>">
+	<td>
+    <figure class="_shield">
+      <%= image_tag rival.avatar.url(:medium), class: "_shield _1" %>
+    </figure>
+	</td>
+	<td>
+		<p><%= rival.club_name %></p>
+	</td>
+	<td>
+		<p class="_date"><%= duel.start_date.strftime("%B %d, %Y") %></p>
+	</td>
+	<td>
+		<p class="_time"><%= duel.start_date.strftime("%I:%M %p") %></p>
+	</td>
+	<td>
+		<%= link_to club_duel_path(local.id, duel), class: "_link_hide" do %><% end %>
+	</td>
+	<td>
+		<%= link_to club_path(rival), class: "_icon", target: "_blank" do %>
+			<i class="fad fa-external-link"></i>
+		<% end %>
+	</td>
+</tr>

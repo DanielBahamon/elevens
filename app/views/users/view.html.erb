@@ -1,0 +1,38 @@
+<% content_for :page_name, "Convocatorias de @#{current_user.slug}" %>
+
+<%= render 'users/layout/one' %>
+	<section class="_console _1 _members">
+		<aside class="_1">
+			<div class="row">
+				<div class="col-12 _1">
+					<aside>
+						<header class="_header_console _1">
+							<div class="_in">
+								<div class="_info">
+									<div>
+										<div class="_infoclub">
+											<h3 class="_title"> 
+												<span>¡Hola <%= current_user.firstname %>!</span>
+											</h3>
+											<p class="_mutted">Sigue tu progreso de cuenta aquí:</p>
+										</div>
+									</div>
+								</div>
+								<div class="_action">
+				         <%= link_to user_path(current_user), class: "_minilink" do %>
+				           Ver perfil
+				         <% end %>
+								</div>
+							</div>
+						</header>
+						<div class="_body_console _1">
+							<div class="_cont _1">	
+
+							</div>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</aside>
+	</section>
+<%= render 'users/layout/two' %>

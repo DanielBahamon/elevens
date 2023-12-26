@@ -1,0 +1,57 @@
+<nav class="_navside _duel">
+  <div class="_cont _1">
+    <%= link_to dashboard_club_path(@club), data: { no_turbolink: true }, class: "_item " do %>
+      <i class="far fa-arrow-left"></i>
+      <span>volver</span>
+    <% end %>
+    <%= link_to panel_club_duel_path(@club, @duel), class: "_item #{'ready' if !@duel.referee_type.blank?  } #{'active' if current_page?(panel_club_duel_path(@club, @duel))}"  do %>
+      <i class="fad fa-columns"></i>
+      <span>Panel</span>
+        <% if @duel.duel_type == "Bet" && @duel.price.present? && @duel.responsibility == true && @duel.latitude.present? %>
+          <i class="bi bi-check2-circle"></i>
+        <% elsif @duel.duel_type != "Bet" && @duel.responsibility == true && @duel.latitude.present? %>
+          <i class="bi bi-check2-circle"></i>
+        <% end %>
+    <% end %>
+    <% if @duel.responsibility == true || @duel.referee == true %>
+      <%= link_to location_club_duel_path(@club, @duel), class: "_item _sub #{'ready' if !@duel.latitude.blank? } #{'active' if current_page?(location_club_duel_path(@club, @duel))} #{'d-none' unless current_page?(budget_club_duel_path(@club, @duel)) || current_page?(panel_club_duel_path(@club, @duel)) || current_page?(location_club_duel_path(@club, @duel)) || current_page?(referee_club_duel_path(@club, @duel))} "  do %>
+        <i class="fad fa-location-circle"></i>
+        <span>Ubicación</span> 
+        <% if @duel.latitude.present? %>
+          <i class="bi bi-check2-circle"></i>
+        <% end %>
+      <% end %>
+      <% if @duel.referee == true %>
+        <%= link_to referee_club_duel_path(@club, @duel), class: "_item _sub #{'ready' if !@duel.referee_type.blank? } #{'active' if current_page?(referee_club_duel_path(@club, @duel))} #{'d-none' unless current_page?(budget_club_duel_path(@club, @duel)) || current_page?(panel_club_duel_path(@club, @duel)) || current_page?(location_club_duel_path(@club, @duel)) || current_page?(referee_club_duel_path(@club, @duel))}"  do %>
+          <i class="fad fa-gavel"></i>
+          <span>Arbitraje</span>
+          <% if !@duel.responsibility == false %><i class="bi bi-check2-circle"></i><% end %>
+        <% end %>
+      <% end %>
+      <% if @duel.members.present? %>
+        <%= link_to members_club_duel_path(@club, @duel), class: "_item #{'ready' if !@duel.members.blank? } #{'active' if current_page?(members_club_duel_path(@club, @duel))}"  do %>
+          <i class="fad fa-users"></i>
+          <span>Asistencia</span>
+          <% if @duel.formation.present? &&  @duel.formation.present? %><i class="bi bi-check2-circle"></i><% end %>
+        <% end %>
+      <% end %>
+      <%= link_to formation_club_duel_path(@club, @duel), class: "_item _sub #{'ready' if !@duel.formation.blank? } #{'active' if current_page?(formation_club_duel_path(@club, @duel))} #{'d-none' unless current_page?(members_club_duel_path(@club, @duel)) || current_page?(formation_club_duel_path(@club, @duel)) || current_page?(assignment_club_duel_path(@club, @duel)) } "  do %>
+        <i class="fad fa-chess"></i>
+        <span>Formación</span> 
+        <% if @duel.formation.present? %>
+          <i class="bi bi-check2-circle"></i>
+        <% end %>
+      <% end %>
+      <%= link_to assignment_club_duel_path(@club, @duel), class: "_item _sub #{'ready' if !@duel.formation.blank? } #{'active' if current_page?(assignment_club_duel_path(@club, @duel))} #{'d-none' unless current_page?(members_club_duel_path(@club, @duel)) || current_page?(assignment_club_duel_path(@club, @duel)) || current_page?(formation_club_duel_path(@club, @duel)) } "  do %>
+        <i class="fad fa-users-class"></i>
+        <span>Roles</span> 
+        <% if @duel.formation.present? %>
+          <i class="bi bi-check2-circle"></i>
+        <% end %>
+      <% end %>
+
+
+    <% end %>
+  </div>
+</nav>
+<%= render "shared/navs/foot" %>

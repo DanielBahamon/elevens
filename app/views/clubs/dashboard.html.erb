@@ -1,0 +1,126 @@
+<% content_for :page_name, "Control de #{@club.club_name} - Entornes" %>
+
+<%= render 'clubs/layout/one' %>
+	<% if @undo.present? %>
+			<%= render 'shared/cards/duels/undo', duel: @undo %>
+  <% end %>
+	<section class="_console _1">
+		<% if @club.duels.present? && @club.memberships.present? %>
+			<aside class="_1">
+				<div class="row">
+					<div class="col-lg-8 _1">
+						<aside>
+							<div class="_body_console _1">
+								<div class="_cont _1">
+									<table class="table align-middle table_rivals">
+									  <tbody>
+									  	<% if @next.present?  %>
+									    		<%= render 'clubs/shared/cards/rival', duel: @next %>
+											<% end %>
+											<% if @duels.present? %>
+												<% @duels.each do |duel| %>
+												  <%= render 'clubs/shared/lists/duels/rivals', duel: duel %>
+												<% end %>
+											<% end %>
+										</tbody>
+									</table>
+							</div>
+						</aside>
+					</div>
+					<div class="col-lg-4 _2">
+						<aside>
+							<div class="_body_console _1">
+								<% if @pasts.present? %>
+									<% @pasts.each do |duel| %>
+									  <%= render 'clubs/shared/lists/duels/pasts', duel: duel %>
+									<% end %>
+								<% end %>
+								<% if @members.count > 0 %>
+									<div class="_cont">
+										<aside class="_members" id="members">
+											<table class="table table_users align-middle">
+											  <tbody>
+											  	<div class="_note"><small>Ultimas ganancias</small></div>
+													<% @members.each do |member| %>
+														<%= render 'shared/cards/users/list', member: member %>
+													<% end %>
+											  </tbody>
+											</table>
+										</aside>
+									</div>
+								<% else %>
+									<div class="_cont _1">
+										<div class="_in _noitems">
+											<div class="_inter">
+												<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+												<lottie-player src="https://assets3.lottiefiles.com/packages/lf20_IwKi9V.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;" loop  autoplay></lottie-player>
+												<h6 class="_mininotice">No tienes miembros aun</h6>
+											</div>
+										</div>
+									</div>
+								<% end %>
+							</div>
+						</aside>
+					</div>
+
+				</div>	
+			</aside>
+		<% elsif !@club.duels.present? && @club.memberships.present? %>
+			<aside class="_1">
+				<div class="row">
+					<div class="col-lg-12 _1">
+						<aside>
+							<div class="_body_console _1">
+								<div class="_cont _1">
+									<%= render 'shared/tutos/duels/firstduel', club: @club %>
+								</div>
+							</div>
+						</aside>
+					</div>
+				</div>	
+			</aside>
+		<% elsif @club.duels.present? && !@club.memberships.present? %>
+			<aside class="_1">
+				<div class="row">
+					<div class="col-lg-8 _1">
+						<aside>
+							<div class="_body_console _1">
+								<div class="_cont _1"></div>
+							</div>
+						</aside>
+					</div>
+					<div class="col-lg-4 _2">
+						<aside>
+							<div class="_body_console _1">
+								<div class="_cont"></div>
+							</div>
+						</aside>
+					</div>
+				</div>	
+			</aside>
+		<% else %>
+			<aside class="_1">
+				<div class="row">
+					<div class="col-12 _1">
+						<aside>
+							<div class="_body_console _1">
+								<div class="_cont">
+									<div class="jumbotron _jumbo_ _jumboresponsibility1">
+										<div class="_in text-center">
+											<h1 class="display-4 _title">Recluta a tus primeros talentos</h1>
+											<p class="lead">¡Comienza a formar tu club de fútbol y atrae a los futuros campeones ahora mismo!</p>
+											<hr>
+											<%= link_to scouting_club_path(@club), class: "_1 _bigbtn _midbtn button--naira m-0-auto" do %>
+									    	<span>Cazatalentos</span>
+											  <i class="button__icon fad fa-paw-claws"></i>
+											<% end %>
+										</div>
+									</div>
+								</div>
+							</div>
+						</aside>
+					</div>
+			</aside>
+		<% end %>
+	</section>
+ <%= render 'clubs/layout/two' %>

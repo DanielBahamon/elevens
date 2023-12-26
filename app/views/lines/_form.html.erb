@@ -1,0 +1,53 @@
+<% @local = Club.where("clubs.id = '#{@duel.club_id}'")[0] %>
+<% @guess = Club.where("clubs.id = '#{@duel.rival_id}'")[0] %>
+<% local_members = @local.memberships.where(active: true) %>
+<% guess_members = @guess.memberships.where(active: true) %>
+
+<% if current_user == @local.user && current_user != @guess.user  %>
+	<p class="_club_name"><%= @local.club_name %></p>
+	<%= simple_form_for([@local, @duel, @line]) do |f| %>
+		<div class="input-group mb-3">
+			<label class="input-group-text" for="inputGroupSelect01">Equipo</label>
+			<%= f.hidden_field :approve, value: true %>
+			<%= f.hidden_field :club_id, value: @local.id %>
+			<%= f.select :user_id, local_members.map {|key, value| [key.slug, key.user_id]}, {}, class: "form-select form-select-lg" %>
+			<%= f.submit "Crear", class: "btn btn-outline-secondary" %>
+		</div>
+	<% end %>
+	
+<% elsif current_user == @guess.user && current_user == @local.user %>
+	<p class="_club_name"><%= @local.club_name %></p>
+	<%= simple_form_for([@local, @duel, @line]) do |f| %>
+		<div class="input-group mb-3">
+			<label class="input-group-text" for="inputGroupSelect01">Equipo</label>
+			<%= f.hidden_field :approve, value: true %>
+			<%= f.hidden_field :club_id, value: @local.id %>
+			<%= f.select :user_id, local_members.map {|key, value| [key.slug, key.user_id]}, {}, class: "form-select form-select-lg" %>
+			<%= f.submit "Crear", class: "btn btn-outline-secondary" %>
+		</div>
+	<% end %>
+	<hr>
+	<p class="_club_name"><%= @guess.club_name %></p>
+	<%= simple_form_for([@guess, @duel, @line]) do |f| %>
+		<div class="input-group mb-3">
+			<label class="input-group-text" for="inputGroupSelect01">Equipo</label>
+			<%= f.hidden_field :approve, value: true %>
+			<%= f.hidden_field :club_id, value: @guess.id %>
+			<%= f.select :user_id, guess_members.map {|key, value| [key.slug, key.user_id]}, {}, class: "form-select form-select-lg" %>
+			<%= f.submit "Crear", class: "btn btn-outline-secondary" %>
+		</div>
+	<% end %>
+<% elsif current_user == @guess.user %>
+	<p class="_club_name"><%= @guess.club_name %></p>
+	<%= simple_form_for([@guess, @duel, @line]) do |f| %>
+		<div class="input-group mb-3">
+			<label class="input-group-text" for="inputGroupSelect01">Concovar a </label>
+			<%= f.hidden_field :approve, value: true %>
+			<%= f.hidden_field :club_id, value: @guess.id %>
+			<%= f.select :user_id, guess_members.map {|key, value| [key.slug, key.user_id]}, {}, class: "form-select form-select-lg" %>
+			<%= f.submit "Crear", class: "btn btn-outline-secondary" %>
+		</div>
+	<% end %>
+<% else %>
+	<h1>NO haces parte del duelo</h1>
+<% end %>

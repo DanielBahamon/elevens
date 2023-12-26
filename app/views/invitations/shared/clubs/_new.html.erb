@@ -1,0 +1,52 @@
+<div class="_new_ivitation">
+  <div class="_in">
+    <h1 class="l">¡Desafia!</h1>
+    <p class="lead"> ¿Listo para empezar? <br class="d-none d-lg-block" />¡Envía tu primer desafío ahora mismo!</p>
+  </div>
+  <div class="_formys">
+    <div class="accordion accordion-flush" id="accordionChallenge">
+      <div class="accordion-item">
+        <h2 class="accordion-header d-none">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+            ¡Compartir desafio!
+          </button>
+        </h2>
+        <div id="flush-collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionChallenge">
+          <div class="accordion-body">
+            <%= simple_form_for([@club, @invitation]) do |f| %>
+            <div id="carouselChallenge" class="carousel slide carousel-fade">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="_inputcont">
+                    <label>Enviar SMS</label>
+                    <%= f.text_field :cel, class: "_input_2", placeholder: "+00-123-456-7890", required: true %>
+                  </div>
+                  <button type="button" class="_button_label" data-bs-target="#carouselChallenge" data-bs-slide="next">
+                    <span>Enviar e-mail</span>
+                  </button>
+                </div>
+                <div class="carousel-item ">
+                  <div class="_inputcont">
+                    <label>Enviar E-mail</label>
+                    <%= f.text_field :email, class: "_input_2", placeholder: "john@example.com", required: true %>
+                  </div>
+                  <button type="button" class="_button_label" data-bs-target="#carouselChallenge" data-bs-slide="next">
+                    <span>Enviar SMS</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="button--naira _1 _fullwidth _without">
+              <span>Guardar</span>
+              <i class="button__icon fad fa-check-circle"></i>
+            </button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+        
+</div>
+
+  

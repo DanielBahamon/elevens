@@ -1,0 +1,14 @@
+<% content_for :page_name, "Entornes" %>
+<%= render 'shared/layout/one' %>
+	<header class="_head d-sm-none">
+	</header>
+	<aside class="_home">
+		<section class="_cont _1">
+			<% @duels.each do |duel|  %>
+				<% local = Club.where("clubs.id = '#{duel.club_id}'").first %>
+				<% guess = Club.where("clubs.id = '#{duel.rival_id}'").first %>
+				<%= render 'shared/cards/duels/duel', local: local, guess: guess, duel: duel %>
+			<% end %>
+		</section>
+	</aside> 
+<%= render 'shared/layout/two' %>

@@ -1,0 +1,457 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+/* SHOW */ 
+main._layout > aside._2 > section._user._1 ._avatar_cont{
+	position: relative;
+    border-radius: 3999px;
+    height: 110px;
+    width: 110px;
+    overflow: hidden;
+    max-width: 75vw;
+    max-height: 75vw;
+}
+main._layout > aside._2 > section._user._1 ._avatar_cont > img{
+	position: relative;
+    border-radius: 3999px;
+    height: 100%;
+    width: 100%;
+    object-fit:cover;
+    z-index:0;
+}
+main._layout > aside._2 > section._user._1 ._avatar_cont > input{
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+}
+main._layout > aside._2 > section._user._1 ._avatar_cont > figure{
+    position: absolute;
+    z-index: 1;
+    inset: 0 0 0 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #00000073;
+    border-radius: 3999px;
+    color: #ffffff;
+    font-size: 35px;
+}
+main._layout > aside._2 > section._user._1 ._usercover{
+	position: relative;
+    height: 15rem;
+    width: 100%;
+}
+main._layout > aside._2 > section._user._1 ._avatar_cont > div{
+	position: relative;
+    border-radius: 3999px;
+    height: 100%;
+    width: 100%;
+    object-fit:cover;
+    z-index:0;
+}
+main._layout > aside._2 > section._user._1 ._usercover > input{
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+}
+main._layout > aside._2 > section._user._1 ._usercover > figure{
+    position: absolute;
+    z-index: 1;
+    inset: 0 0 0 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #00000073;
+    color: #ffffff;
+    font-size: 35px;
+}
+
+main._layout > aside._2 > section._user aside._info ._2>aside._in>._actions {
+    justify-content: end;
+    display: flex;
+    grid-gap: 10px;
+}
+section._user._1 h3 {
+    font-family: 'Causten', 'Sofia', sans-serif;
+    font-weight: 800;
+    margin-bottom: 5px;
+    line-height: 1;
+    display: block;
+}
+
+
+section._user img._coverpic{
+    width:100%;
+    height: 100%;
+    object-fit:cover;
+}
+section._user ._members>ul>li.list-group-item {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+section._user ._members > ul > li.list-group-item ._in {
+    display: block;
+}
+section._user ._members > ul > li.list-group-item ._in>a {
+    display: block;
+}
+section._user aside._info img._avatar {
+    border-radius: 3999px;
+    height: 110px;
+    width: 110px;
+    -o-object-fit: cover;
+    object-fit: cover;
+    max-width: 100%;
+    min-width: 110px;
+}
+section._user > aside._info figure._rank {
+    text-align: center;
+}
+
+section._user._1 {
+    margin-bottom: 30px;
+}
+section._user._1 h3 {
+    font-family: 'Causten', 'Sofia', sans-serif;
+    font-weight: 800;
+    margin-bottom: 5px;
+    line-height: 1;
+    display: block;
+}
+section._user._1 small{
+    font-family: 'Causten', 'Sofia', sans-serif;
+    font-weight: 700;
+    line-height: 1;
+    display: block;
+}
+section._user._1 > ._info > .row._1 > ._1 {
+    text-align: center;
+    margin-top: -3.3rem;
+}
+section._user._1 > ._info > .row._1 > ._2 {
+    align-self: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-right: 0;
+}
+section._user._1 > ._info > .row._1 > ._3 {
+    text-align: right;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+section._user._1 > ._info > .row._1 > ._2 ._actions{
+    text-align: right;
+}
+section._user._1 > aside._info {
+    position: relative;
+    z-index: 2;
+}
+section._user._1 aside._info > .row._3 > div {
+    align-self: center;
+    justify-content: center;
+}
+section._user._1 aside._info > .row._2 {
+    margin-bottom: 25px;
+}
+section._user._1 ._data aside > p {
+    font-family: 'Rubik', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: block;
+}
+section._user._1 ._data > div {
+    height: 5rem;
+    align-items: center;
+    display: flex;
+}
+section._user._1 ._data aside > h4 {
+    margin-bottom: 0;
+}
+section._user._1 aside._info ._details > ._2 {
+    margin-top:15px;
+}
+section._user._1 aside._info ._details > ._2 > ._in {
+    display: flex;
+    grid-gap: 20px;
+    flex-wrap: wrap;
+}
+
+
+
+section._user._2 > ._tabs > ul {
+    justify-content: space-evenly;
+}
+
+
+._editprofile > .edit_user > aside._info > ._details > ._1 > ._in {
+    position: relative;
+}
+._editprofile > .edit_user > aside._info > ._details > ._1 > ._in > ._modal_edit {
+    position: absolute;
+    top: 5px;
+    right:0;
+}
+
+
+section._editprofile._1 > form > ._info > .row._1 > ._1 {
+    text-align: center;
+    margin-top: -3.3rem;
+}
+section._editprofile._1 > form > ._info > .row._1 > ._2 {
+    align-self: center;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-right: 0;
+}
+section._editprofile._1 > form > ._info > .row._1 > ._2 ._actions{
+    text-align: right;
+}
+section._editprofile._1 > form > aside._info {
+    position: relative;
+    z-index: 2;
+}
+section._user._1 aside._info > .row._2 {
+    margin-bottom: 25px;
+}
+section._user._1 aside._info > .row._details > div,
+section._user._1 aside._info > .row._data > div,
+section._user._1 aside._info > .row._sports > div,
+section._user._1 aside._info > .row._services > div {
+    padding: 0;
+}
+
+
+
+
+/* CONSOLE */
+  fieldset._jumbo_user {
+  }
+  fieldset._jumbo_user ._media figure img {
+  margin: 0 auto;
+  }
+  fieldset._jumbo_user ._info{
+    text-align: center;
+  }
+  fieldset._jumbo_user ._name {
+    white-space: nowrap;
+    font-family: 'Barlow Condensed','Rubik', sans-serif;
+    letter-spacing: 1px;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    font-style: italic;
+    margin-bottom: 0;
+    line-height: 1;
+    margin-top: 20px;
+  }
+  fieldset._jumbo_user ._slug {
+    font-family: 'Abel', sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    font-size:13px;
+  }
+  fieldset._jumbo_user ._datas {
+    display: flex;
+    justify-content: space-around;
+    grid-gap: 10px;
+    text-align: center;
+    margin-top: 30px;
+  }
+  fieldset._jumbo_user ._datas h1 {
+    margin-bottom: 0;
+    line-height: 1;
+    font-family: 'Bebas Neue','Rubik', sans-serif;
+    letter-spacing: 1px;
+    font-weight: 100 !important;
+  }
+  fieldset._jumbo_user ._datas p {
+    margin-bottom: 0;
+  }
+
+  fieldset._jumbo_user ._datas p {
+    font-family: 'Abel', sans-serif;
+    font-size: 15px;
+    margin-top: 10px;
+  }
+  fieldset._jumbo_user ._datas ._move {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: all .3s ease;
+    text-decoration: none;
+    text-transform: capitalize;
+    border-radius: 6px;
+    border:1px solid;
+    border-color: transparent;
+    width:200px;
+    max-width:calc(33% - 5px);
+  }
+  body._light fieldset._jumbo_user ._datas ._move:hover {
+    box-shadow: 0 30px 40px -15px #818d8d54;
+    transform: translateY(-5px);
+    border-color: #b9d0c6;
+  }
+  fieldset._jumbo_user ._media.cluber {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #splide_clubs ._shield {
+    width: 75px;
+    height: 75px;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+  }
+  fieldset._jumbo_user ._media.cluber .splide {
+    position: absolute;
+    width: 55%;
+    z-index: 0;
+  }
+  fieldset._jumbo_user ._media.cluber>._shield {
+    position: relative;
+    z-index: 2;
+  }
+  ._shield._mini {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+  }
+  ._itemclub ._i,
+  ._itemuser ._i {
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+  }
+  ._itemuser p,
+  ._itemclub p {
+    margin-bottom: 0;
+    line-height: 1;
+    font-family: 'Outfit', sans-serif;
+  }
+  ._itemuser ._slug,
+  ._itemclub ._slug {
+    font-family: 'Abel', sans-serif;
+    text-transform: uppercase;
+  }
+  ._itemuser > div {
+    justify-content: left;
+  }
+  body._light ._itemuser p a,
+  body._light ._itemclub p a,
+  body._light ._itemuser h6 a,
+  body._light ._itemclub h6 a{
+    color: #060909;
+  }
+  ._itemuser ._name,
+  ._itemclub ._name {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 0;
+  }
+  ._itemuser p strong,
+  ._itemclub p strong {
+    font-weight: 700;
+  }
+  ._itemuser ._data a,
+  ._itemclub ._data a {
+    text-decoration: none;
+    color:#2b4040;
+  }
+  ._itemclub>div,
+  ._itemuser>div {
+    display: flex;
+    align-items: center;
+  }
+  ._itemuser>div:not(:first-of-type) {
+    width: 20%;
+  }
+  ._itemuser>div:first-of-type{
+    justify-content:start;
+  }
+  ._itemuser>div{
+    justify-content:end;
+  }
+  ._itemuser>div:last-of-type{
+    justify-content:end;
+  }
+  ._itemuser>._i {
+    width: 40%;
+  }
+  ._itemuser > ._i figure {
+    position: relative;
+  }
+  ._itemuser > ._i figure span._pointstatus {
+    position: absolute;
+    bottom: 3%;
+    right: 3%;
+  }
+  ._iconlist{
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 0;
+    position: relative;
+    border-radius: 99999px;
+    -webkit-transition: color 0.3s;
+    transition: color 0.3s;
+  }
+  body ._itemclub,
+  body ._itemuser {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  span.badge {
+    font-family: 'Abel', sans-serif;
+    text-transform: uppercase;
+    font-weight: 100;
+    letter-spacing: 1px;
+  }
+  body._light ._pointstatus {
+    width: 13px;
+    height: 13px;
+    display: block;
+    border-radius: 999px;
+  }
+  body._light ._pointstatus.bg-success {
+    box-shadow: 0 0 14px -1px #39dd91;
+    border: 2px solid white;
+    background-color: #39dd91 !important;
+  }
+  body._light ._pointstatus.bg-secondary {
+    box-shadow: 0 0 14px -1px #39dd91;
+    border: 2px solid white;
+    background-color: #daf3f3 !important;
+  }
+  ._itemuser ._position {
+    display: flex;
+    grid-gap: 5px;
+    flex-wrap: wrap;
+  }
+  body._light .badge.outline {
+    border: 1px solid #060909;
+    color: #060909;
+    border-radius: 0;
+  }
+  body._light .badge.withoutline {
+    color: #060909;
+  }

@@ -1,0 +1,56 @@
+		<li class="list-group-item d-flex justify-content-between _itemuser">
+			<div class="_i">
+				<figure>
+					<%= link_to user_path(member) do %><%= image_tag member.avatar.url(:medium), class: "_avatar _1" %><% end %>
+					<div class="_status">
+						<% if member.status == true %>
+						  <span class="_pointstatus bg-success"></span>
+						<% else %>
+						  <span class="_pointstatus bg-secondary"></span>
+					  <% end %>
+					</div>
+				</figure>
+				<div class="_data">
+					<h6 class="_name"><%= link_to user_path(member) do %><%= member.firstname %> <%= member.lastname %><% end %></h6>
+					<p class="_slug"><%= member.slug %></p>
+				</div>
+			</div>
+			<div class="_iii">
+				<div class="_clubes">
+						
+				</div>
+			</div>
+				<div class="_ii">
+				  <div class="_position">
+				    <% if member.position.present? %>
+				      <% positions = member.position.split(',') %>
+				      <% positions.first(2).each do |position| %>
+				        <span class="badge outline"><%= position.strip %></span>
+				      <% end %>
+				      <% if positions.count > 2 %>
+				        <span class="badge outline">+<%= positions.count - 2 %></span>
+				      <% end %>
+				    <% else %>
+				      <span class="badge withoutline">No position</span>
+				    <% end %>
+				  </div>
+				</div>
+			<div class="_iv">
+				<div class="_move">
+			    <% if @local_users_convoked.include?(member) %>
+			      <% line = Line.find_by(user_id: member.id, duel_id: @duel.id, club_id: @local.id) %>
+			      <% if line.approve %>
+			        <div class="_action text-center">
+			          <span class="badge text-bg-success">Confirmado</span>
+			        </div>
+			      <% else %>
+			        <div class="_action text-end">
+			          <span class="badge text-bg-secondary">Pendiente</span>
+			        </div>
+			      <% end %>
+			    <% else %>
+			      <%= render 'lines/shared/convoke', club: @local, duel: @duel, member: member %>
+			    <% end %>
+				</div>
+			</div>
+		</li>

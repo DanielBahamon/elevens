@@ -1,0 +1,35 @@
+<header class="_navbar p-3">
+  <div class="_container _1">
+    <div class="d-flex flex-wrap align-items-center justify-content-between ">
+      <%= link_to root_path, class: "d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none" do %>
+        <figure class="_brand">
+          <img class="_light " src="//d4s5cnqwbwfuf.cloudfront.net/assets/brands/v1/11_dark.svg">
+        </figure>
+      <% end %>
+      <div class="_navform">
+        bueno
+      </div>
+      <div class="text-end">
+        <% if user_signed_in? %>
+          <div class="dropdown text-end">
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= image_tag avatar_url(current_user), class: "rounded-circle", width: "32", height: "32" %>
+            </a>
+            <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+              <li>
+                <%= link_to dashboard_path(current_user), class: "dropdown-item" do %>Mis equipos<% end %>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
+            </ul>
+          </div>
+        <% else %>
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light me-2" %>
+            <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-warning" %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</header>

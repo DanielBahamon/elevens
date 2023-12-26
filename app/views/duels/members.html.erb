@@ -1,0 +1,94 @@
+<% content_for :page_name, "Condiciones del encuentro" %>
+
+<%= render 'duels/layout/one' %>
+	<%= render 'duels/shared/navs/header' %>
+
+	<section class="_console _1">
+		<aside class="_1">
+				<div class="row">
+		      <% if @duel.members.present? %>
+
+	      	
+				    <div class="col-12 _3">
+							<aside>
+								<div class="_body_console _1">
+									<div class="_cont">
+										<div class="_table_members">
+											<ul class="list-group list-group-flush">
+
+												<% @local_users.each do |member| %>
+													<%= render 'duels/shared/lists/users/private', member: member %>
+												<% end %>
+											</ul>
+										</div>
+									</div>
+									<div class="_action">
+										<br>
+										<br>
+										<%= link_to formation_club_duel_path(@club, @duel), class: 'button--naira _1 _bigbtn' do %>
+								    	<span>Ir a Formación</span>
+										  <i class="button__icon fal fa-arrow-right"></i>
+										<% end %>
+									</div>
+								</div>
+							</aside>
+				    </div>
+		      	
+				  <% else %>
+					  <div class="col-12">
+					  	<div class="jumbotron _jumbot _1">
+					  		<div class="_in">
+					  			<h2>Falta un paso</h2>
+					  			<p class="_mutted _slug">Debes condicionar la cantidad de jugadores por equipo antes agregar la titularidad.</p>
+					  			<hr>
+					  			<%= link_to conditions_club_duel_path(@club, @duel), class:"button--naira _1 fit _btnnext" do %>
+							    	<span>Condiciones</span>
+										<i class="button__icon fad fa-check-circle"></i>
+					  			<% end %>
+					  		</div>
+					  	</div>
+					  </div>
+				  <% end %>
+			  </div>
+		</aside>
+	</section>
+
+<%= render 'duels/layout/two' %>
+
+<script type="text/javascript">
+	// Selecciona el elemento canvas
+	var canvas = new fabric.Canvas('fabricCanvas');
+
+	// Agrega objetos al lienzo
+	var rect = new fabric.Rect({
+	  left: 100,
+	  top: 100,
+	  fill: 'red',
+	  width: 100,
+	  height: 100
+	});
+
+	canvas.add(rect);
+
+	// Puedes interactuar con los objetos, dibujar, mover, etc.
+</script>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function () {
+	  var main = new Splide( '#_main_formation', {
+	    type      : 'slide',
+	  });
+		main.mount();
+  });
+</script>
+<script type="text/javascript">
+	document.querySelectorAll('._option input[type="radio"]').forEach(function(radio) {
+	  radio.addEventListener('click', function() {
+	    document.querySelectorAll('._option').forEach(function(sport) {
+	      sport.classList.remove('selected');
+	    });
+	    this.closest('._option').classList.add('selected');
+	  });
+	});
+
+
+</script>

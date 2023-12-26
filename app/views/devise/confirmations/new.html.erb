@@ -1,0 +1,29 @@
+<% content_for :page_name, "Reenviar instrucciones de confirmación - Entornes" %>
+
+<section class="_session">
+  <aside class="_login">
+    <b>Reenviar instrucciones de confirmación</b>
+    <%= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+      <%= f.error_notification %>
+      <%= f.full_error :confirmation_token %>
+
+      <div class="form-inputs">
+        <%= f.input :email,
+                    required: true,
+                    autofocus: true,
+                    placeholder: 'Correo electrónico',
+                    value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email),
+                    input_html: { autocomplete: "email" } %>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="_btn _btn_1 _fullwidth">
+          <span>Reenviar</span>
+        </button> 
+      </div>
+    <% end %>
+    <small class="text-muted _line">O</small>
+    <div class="_actions">
+      <%= render "devise/shared/links" %>
+    </div>
+  </aside>
+</section>

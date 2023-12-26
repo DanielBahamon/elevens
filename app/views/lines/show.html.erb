@@ -1,0 +1,81 @@
+<% content_for :page_name, "Arbitraje del duelo" %>
+
+<%= render 'duels/layout/one' %>
+	<section class="_console _1 _newduel">
+		<aside class="_1">
+			<div class="row">
+				<div class="col-lg-12 _1">
+						<aside>
+							<header class="_header_console _1">
+							</header>
+							<div class="_body_console _1">
+								<div class="_cont">
+										<div class="jumbotron _jumbo_1">
+											<div class="row nom">
+												<div class="col-lg-12 text-center">
+													<div class="_in ">
+														<% if !@line.reject == true && @line.approve == false %>
+													    <h3 class="display-6">¡Te han convocado!</h3>
+													    <p class="lead">¡Felicidades! Has sido convocado por <%= @club.user.firstname %> para participar como jugador en un emocionante duelo. Tienes la opción de aceptar o rechazar la invitación:</p>
+													    <br>
+													    <div class="row nom">
+													    	<div class="col-lg-6 _1">
+														    	<%= simple_form_for([@club, @duel, @line]) do |f| %>
+																		<%= f.hidden_field :approve, value: true %>
+														    		<button type="submit" class="button--naira _1 fit">
+																    	<span>Aceptar el desafio</span>
+																    	<i class="button__icon fad fa-check-circle"></i>
+														    		</button>
+																	<% end %>
+													    	</div>
+													    	<div class="col-lg-6 _1">
+																	<%= simple_form_for([@club, @duel, @line]) do |f| %>
+																		<%= f.hidden_field :reject, value: true %>
+														    		<button type="submit" class="button--naira _2 fit" >
+																    	<span>Dejar pasar el desafio</span>
+																    	<i class="button__icon fad fa-times-circle"></i>
+														    		</button>
+																	<% end %>
+													    	</div>
+													    </div>
+														<% elsif !@line.reject == true && @line.approve == true %>
+													    <h3 class="display-6">¡Prepárate para jugar!</h3>
+													    <p>Has aceptado el desafío y estás listo para darlo todo en el duelo. ¡Es hora de demostrar tus habilidades y disfrutar del juego!</p>
+													    <br>
+													    <div class="row nom">
+													    	<div class="col-lg-6 _1">
+														    	<%= link_to club_duel_path(@club, @duel), class: "button--naira _1 fit" do %>
+															    	<span>Ir al duelo</span>
+																		<i class="button__icon bi bi-check2-all"></i>
+																	<% end %>
+													    	</div>
+													    </div>
+														<% elsif @line.reject == true && @line.approve == false %>
+													    <h3 class="display-6">¡Oportunidad perdida!</h3>
+													    <p>Lamentablemente, has decidido no aceptar el desafío para participar en el duelo. Es importante recordar que no aceptar convocatorias puede afectar tu puntuación en el ranking y hacerte perder experiencias inolvidables.</p>
+													    <p>Recuerda que cada oportunidad es valiosa para demostrar tus habilidades y enfrentarte a nuevos retos. Aceptar desafíos te permite crecer como jugador y tener encuentros emocionantes en el campo.</p>
+													    <br>
+													    <div class="row nom">
+													    	<div class="col-lg-6 _1">
+														    	<%= link_to console_path, class: "button--naira _1 fit" do %>
+															    	<span>Ir a la consola</span>
+															    	<i class="button__icon fas fa-arrow-left"></i>
+																	<% end %>
+													    	</div>
+													    </div>
+														<% end %>
+															
+												  </div>
+												</div>
+											</div>
+										</div>
+
+								</div>
+							</div>
+						</aside>
+				</div>
+			</div>
+		</aside>
+	</section>
+
+<%= render 'duels/layout/two' %>

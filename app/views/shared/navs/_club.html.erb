@@ -1,0 +1,42 @@
+<% if user_signed_in? %>
+    <nav class="_navuser  ">
+      <div class="_cont _1">
+        <%= link_to club_path(@club), data: { no_turbolink: true }, class: "_item" do %>
+          <figure class="_media">
+            <%= image_tag @club.avatar.url(:thumb) %>
+          </figure>
+          <span>Ir a <%= @club.club_name %></span>
+        <% end %>
+        <%= link_to dashboard_club_path(@club), class: "_item #{'ready' if @club.memberships.where(active: true).count > 0 } #{'active' if current_page?(dashboard_club_path(@club))}" do %>
+          <i class="fad fa-chalkboard-teacher"></i>
+          <span>Pizarra</span> 
+        <% end %>
+        <%= link_to scouting_club_path(@club), class: "_item #{'active' if current_page?(scouting_club_path(@club))}" do %>
+          <i class="fad fa-paw-claws"></i>
+          <span>Reclutamiento</span> 
+        <% end %>
+        <%= link_to members_club_path(@club), class: "_item #{'active' if current_page?(members_club_path(@club))}" do %>
+          <i class="fad fa-users"></i>
+          <span>Miembros</span> 
+        <% end %>
+        <%= link_to duels_club_path(@club), class: "_item #{'active' if current_page?(duels_club_path(@club))}" do %>
+          <i class="fad fa-futbol"></i>
+          <span>Oponentes</span> 
+        <% end %>
+      </div>
+    </nav>
+<% end %>
+
+
+
+<script>
+  $(document).ready(function() {
+    $('._btn_more_create').click(function() {
+      $(this).toggleClass('on');
+    });
+  });
+
+  $(document).ready(function() {
+    $('[data-bs-toggle="tooltip"]').tooltip();
+  });
+</script> 

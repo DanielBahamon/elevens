@@ -1,0 +1,9 @@
+<%= simple_form_for([@club, @duel, @reservation], class: "_steps "  )  do |f| %>
+  <div class="field">
+    <%= f.hidden_field :rejected, value: true %>
+  </div>
+  <button type="submit" class="button--naira _2 _btn _fullwidth">
+    <span>Dejar pasar</span>
+    <i class="fad fa-times-circle button__icon text-center"></i>
+  </button>
+<% end %>

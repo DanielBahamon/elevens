@@ -1,0 +1,31 @@
+<section class="_head  _1">
+	<div class="_inner _1">
+		<div class="_info">
+			<nav aria-label="breadcrumb">
+			  <ol class="breadcrumb mb-0">
+			    <% breadcrumbs.each do |breadcrumb| %>
+			      <% if breadcrumb.path %>
+			        <li class="breadcrumb-item"><h3 class="mb-0"><%= link_to breadcrumb.name, breadcrumb.path %></h3></li>
+			      <% else %>
+			        <li class="breadcrumb-item active stroke" aria-current="page"><h3 class="mb-0"><%= breadcrumb.name %></h3></li>
+			      <% end %>
+			    <% end %>
+			  </ol>
+			</nav>
+		</div>
+	</div>
+	<div class="_action">
+		<% if @duel.status == 'Pending' %>
+			<span class="badge rounded-pill _pending _status"><span class="_shine pulse"></span> Incomplento</span>
+		<% elsif  @duel.status == 'Open' %>
+			<span class="badge rounded-pill _open _status"><span class="_shine pulse"></span> Abierto</span>
+		<% elsif  @duel.status == 'Approved' %>
+			<span class="badge rounded-pill _approved _status"><span class="_shine pulse"></span> Confirmado</span>
+		<% elsif  @duel.status == 'Cancelled' %>
+			<span class="badge rounded-pill _cancelled _status"><span class="_shine pulse"></span> Cancelado</span>
+		<% else %>
+			<span class="badge rounded-pill _done _status"><span class="_shine pulse"></span> Concretado</span>
+		<% end %>
+	</div>
+		
+</section>
