@@ -55,6 +55,7 @@ class PagesController < ApplicationController
       first_of_month = (start_date - 1.months).beginning_of_month
       end_of_month = (start_date + 1.months).beginning_of_month
 
+      # @tasks = @tasks.as_json(include: { duel: { include: :rival } })
       @tasks = @tasks.joins(:club).joins(:duel)
                       .select('tasks.*, clubs.*, duels.*' )
                       .where('tasks.start_date BETWEEN ? AND ?', first_of_month, end_of_month)
