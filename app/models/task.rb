@@ -1,5 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :user, class_name: 'User', foreign_key: 'user_id'
+  belongs_to :club
+  belongs_to :duel
 
   validates :description, presence: true
   validate :unique_task_for_user, on: :create

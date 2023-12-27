@@ -13,6 +13,7 @@ class Club < ApplicationRecord
   has_many :referees
   has_many :relationships, dependent: :destroy, as: :followable
   has_many :followers, through: :relationships, source: :user
+  has_many :tasks, dependent: :destroy
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed? 

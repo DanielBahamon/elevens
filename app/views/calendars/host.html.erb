@@ -1,0 +1,23 @@
+<div id="calendar"></div>
+
+
+<script type="text/javascript">
+  window.tasks = <%= raw @tasks.to_json %>
+  console.log(tasks)
+
+  $('#calendar').fullCalendar({
+    header: {
+      left: 'title',
+      center: '',
+      right: 'prev,next'
+    },
+    defaultDate: tasks.length > 0 ? new Date(tasks[0].start_date) : new Date(),
+    events: tasks.map(function(task) {
+      return {
+        title: task.description,
+        start: new Date(task.start_date).toISOString(),
+        end: new Date(task.end_date).toISOString()
+      };
+    })
+  });
+</script>

@@ -117,83 +117,50 @@
 											<% end %>
 										</fieldset>
 									<% end %>
-									<fieldset class="_activities">
-										<div class="_datas">
-											<div class="_data _1">
-												<div class="_media">
-													<figure>
-														<i class="fad fa-trophy"></i>	
-													</figure>
-													<p class="_text">Copas</p>
-												</div>
-												<div class="_info">
-													<div class="_numb">
-														<div class="_moving">
-															<div class="_up">
-																<i class="fad fa-sort-up"></i>
+									<fieldset class="_calendar">
+										<div id="calendar"></div>
+										<script type="text/javascript">
+											window.tasks = <%= raw @tasks.to_json %>
+											console.log(tasks)
+
+											function showReservations(data) {
+												return data.map(function (e) {
+													return {
+														title: e.description,
+														start: e['start_date'],
+														end: e['end_date'],
+														avatar: e.image,
+														status: e.status
+													};
+												});
+											}
+
+											$('#calendar').fullCalendar({
+												header: {
+													left: 'title',
+													center: '',
+													right: 'prev,next'
+												},
+												defaultDate: tasks.length > 0 ? new Date(tasks[0].start_date) : new Date(),
+												events: showReservations(tasks),
+												eventRender: function(event, element, view) {
+													return $(`
+														<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end">
+															<div class="fc-content ${event.status}">
+																<span class="fc-title">${event.title}</span>
 															</div>
-														</div>
-														<h2>18</h2>
-													</div>
-												</div>
-											</div>
-											<div class="_data _2">
-												<div class="_media">
-													<figure>
-														<i class="fad fa-futbol"></i>
-													</figure>
-													<p class="_text">Duelos</p>
-												</div>
-												<div class="_info">
-													<div class="_numb">
-														<div class="_moving">
-															<div class="_down">
-																<i class="fad fa-sort-down"></i>
+															<div class="fc-content ${event.status}">
+																<span class="fc-startdate">${event.start}</span>
 															</div>
-														</div>
-														<h2>94</h2>
-													</div>
-												</div>
-											</div>
-											<div class="_data _3">
-												<div class="_media">
-													<figure>
-														<i class="fad fa-futbol"></i>
-													</figure>
-													<p class="_text">Fans</p>
-												</div>
-												<div class="_info">
-													<div class="_numb">
-														<div class="_moving">
-															<div class="_up">
-																<i class="fad fa-sort-up"></i>
+															<div class="fc-content ${event.status}">
+																<span class="fc-enddate">${event.end}</span>
 															</div>
-														</div>
-														<h2><%= current_user.followers.count %></h2>
-													</div>
-												</div>
-											</div>
-											<div class="_data _4">
-												<div class="_media">
-													<figure>
-														<i class="fad fa-hands-heart"></i>
-													</figure>
-													<p class="_text">Elogios</p>
-												</div>
-												<div class="_info">
-													<div class="_numb">
-														<div class="_moving">
-															<div class="_up">
-																<i class="fad fa-sort-up"></i>
-															</div>
-														</div>
-														<h2>123.4k</h2>
-													</div>
-												</div>
-											</div>
-										</div>
+														</a>
+													`);
+												}
+											});
+										</script>
 									</fieldset>
-										
 
 								</div>
 							</div>

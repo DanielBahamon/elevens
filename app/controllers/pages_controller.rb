@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   before_action :authenticate_user!, except: [:home, :search, :radar, :live, :explore, :notifications]
   before_action :set_clubes, except: [:home, :search, :radar, :live, :explore, :notifications]
   helper_method :calculate_progress
+  # include ApplicationHelper
  
   def home
     @clubs = Club.all
@@ -41,6 +42,28 @@ class PagesController < ApplicationController
     load_duels_and_events
     calculate_event_times
     load_tasks_user
+
+    params[:start_date] ||= Date.today.to_s
+    params[:end_date] ||= Date.today.to_s
+    params[:task_id] ||= @tasks[0] ? @tasks[0].id : nil
+
+    if params[:task_id]
+      @task = Task.find(params[:task_id])
+      start_date = Date.parse(params[:start_date])
+      end_date = Date.parse(params[:end_date])
+
+      first_of_month = (start_date - 1.months).beginning_of_month
+      end_of_month = (start_date + 1.months).beginning_of_month
+
+      @tasks = @tasks.joins(:club).joins(:duel)
+                      .select('tasks.*, clubs.*, duels.*' )
+                      .where('tasks.start_date BETWEEN ? AND ?', first_of_month, end_of_month)
+      # @tasks.each{|e| e.image = avatar_url(e.club.avatar))}
+      
+    else
+      @task = nil
+      @tasks = []
+    end
   end
 
   def search

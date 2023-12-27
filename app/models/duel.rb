@@ -12,6 +12,7 @@ class Duel < ApplicationRecord
   has_many :invitations, dependent: :destroy
   has_many :duels_referees
   has_many :referees, through: :duels_referees
+  has_many :tasks, dependent: :destroy
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed? 

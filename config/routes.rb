@@ -127,7 +127,7 @@ Rails.application.routes.draw do
   get 'clubname_validator/:slug', to: 'clubs#clubname_validator'
   get 'username_validator/:slug', to: 'users#username_validator'
   get 'mentions', to: 'users#mentions'
-  get 'calendar', to: 'calendars#user'  # Esta ruta apuntará al método 'user' del controlador 'CalendarsController'
+  get 'calendar', to: 'calendars#host'  # Esta ruta apuntará al método 'user' del controlador 'CalendarsController'
 
   post '/create_auto_tasks', to: 'tasks#create_auto_tasks', as: :create_auto_tasks
 

@@ -2,29 +2,29 @@ class CalendarsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
 
-  def user
-    # Obtener los clubs en los que el current_user es propietario o miembro aprobado
-    @clubs = @user.clubs.includes(:memberships).where('memberships.status = 1 OR clubs.user_id = ?', @user.id)
+  def host
+    @tasks = current_user.tasks
 
-    # Obtener los duelos relacionados con esos clubs para el mes actual
-    @duels = Duel.where('(club_id IN (?) OR rival_id IN (?)) AND start_date >= ? AND start_date <= ?',
-                        @clubs.pluck(:id), @clubs.pluck(:id),
-                        Time.zone.now.beginning_of_month, Time.zone.now.end_of_month)
-                 .where.not(rival_id: nil)
-                 .order(:start_date)
+    params[:start_date] ||= Date.today.to_s
+    params[:end_date] ||= Date.today.to_s
+    params[:task_id] ||= @tasks[0] ? @tasks[0].id : nil
 
-    if params[:duel_id]
-      @duel = Duel.find(params[:duel_id])
+    if params[:task_id]
+      @task = Task.find(params[:task_id])
       start_date = Date.parse(params[:start_date])
+      end_date = Date.parse(params[:end_date])
 
       first_of_month = (start_date - 1.months).beginning_of_month
-      end_of_month = (start_date + 1.months).end_of_month
+      end_of_month = (start_date + 1.months).beginning_of_month
 
-      @events = @duel.club.events.where('(start_date BETWEEN ? AND ?)', first_of_month, end_of_month)
+      @tasks = @tasks.joins(:club).joins(:duel)
+                      .select('tasks.*, clubs.*, duels.*' )
+                      .where('tasks.start_date BETWEEN ? AND ?', first_of_month, end_of_month)
     else
-      @duel = nil
-      @events = []
+      @task = nil
+      @tasks = []
     end
+    
   end
 
   private
