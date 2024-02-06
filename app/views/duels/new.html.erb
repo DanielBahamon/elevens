@@ -3,37 +3,12 @@
   <%= link_to console_path, class: '_close_newduel _btn button--sacnite _1 _invert' do %>
     <i class="button__icon bi bi-x-lg"></i>
   <% end %>
-    <aside class="_step _1" id="step1">
-      <div class="jumbotron _jumbo_ _jumboresponsibility1">
-        <div class="_in text-center">
-          <div class="_info">
-          <h1 class="_title">Crea un duelo</h1>
-            <button class="button--shikoba _2 next-step" id="pills-instant-tab" type="button" role="tab" aria-controls="pills-instant" aria-selected="true">
-              <span>Instantaneo</span>
-              <i class="button__icon fal fa-clock"></i>
-            </button>
-            <button class="button--shikoba _1 next-step fullwidth" id="pills-schedule-tab" type="button" role="tab" aria-controls="pills-schedule" aria-selected="false">
-              <span>Programado</span>
-              <i class="button__icon fal fa-calendar-alt"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </aside>
-    <aside class="_step _2" id="step2" style="display: none;">
-        <div class="tab-content " id="pills-tabContent">
-            <div class="tab-pane fade tab_instant" id="pills-instant" role="tabpanel" aria-labelledby="pills-instant-tab" tabindex="0">
-              <%= render 'duels/shared/forms/instant' %>
-            </div>
-            <div class="tab-pane fade tab_schedule" id="pills-schedule" role="tabpanel" aria-labelledby="pills-schedule-tab" tabindex="0">
-              <%= render 'duels/shared/forms/schedule' %>
-            </div>
-        </div>
+    <aside class="_step _2">
+      <%= render 'duels/shared/forms/schedule', selected_date: @selected_date %>
     </aside>
 </section>
 <script>
-
-  $(document).ready(function() {
+  /*$(document).ready(function() {
     // Inicialmente ocultar todos los pasos, luego mostrar el primero
     $('#step1').show();
     $('#step2').hide();
@@ -63,7 +38,7 @@
       // Desactivar todos los tabs
       $('.tab-pane').removeClass('show active');
     });
-  });
+  });*/
 
 	/* ==================== INPUT RADIO =================== */
 

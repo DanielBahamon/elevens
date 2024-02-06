@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_12_26_055612) do
+ActiveRecord::Schema.define(version: 2024_02_04_233919) do
+
+  create_table "calendars", force: :cascade do |t|
+    t.datetime "day"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.decimal "price", precision: 8, scale: 2
+    t.integer "status"
+    t.string "user_id"
+    t.string "club_id"
+    t.string "duel_id"
+    t.string "referee_id"
+    t.integer "type_reservation"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "club_photos", force: :cascade do |t|
     t.string "club_id", null: false
@@ -161,6 +176,9 @@ ActiveRecord::Schema.define(version: 2023_12_26_055612) do
     t.boolean "showformation", default: false
     t.integer "time_type"
     t.integer "ready_time"
+    t.boolean "ready", default: false
+    t.string "color_local"
+    t.string "color_rival"
     t.index ["club_id"], name: "index_duels_on_club_id"
     t.index ["clubs_id"], name: "index_duels_on_clubs_id"
     t.index ["user_id"], name: "index_duels_on_user_id"

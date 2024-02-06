@@ -92,6 +92,40 @@ class Duel < ApplicationRecord
     referees.exists?(user_id: user.id) || self.user_id == user.id
   end
 
+  after_save :check_for_opponent
+
+  attr_accessor :progress_percentage
+
+  def minimum_members_confirmed?
+    required_members = {
+      Futbol11: 11,
+      Futbol10: 10,
+      Futbol9: 9,
+      Futbol8: 8,
+      Futbol7: 7,
+      Futbol6: 6,
+      Futbol5: 5,
+      Microfutbol: 4,
+      Bancas: 3,
+      Kings: 2,
+      Legends: 1, 
+      Futvoley: 2, 
+      Futenis: 2,  
+      Futsal: 5
+    }
+
+    lines.where(approve: true).count >= required_members[sport.to_sym]
+  end
+
+  
+  private 
+
+    def check_for_opponent
+      # Asegúrate de que el estado es Pending (o el que corresponda en tu lógica) y que ready es false o nil
+      if rival_id.present? && status == 'Pending' && !ready?
+        update_column(:ready, true) # Cambia el campo ready a true sin disparar más callbacks
+      end
+    end
 
 end
   

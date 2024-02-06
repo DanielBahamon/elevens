@@ -8,6 +8,7 @@ class DuelsController < ApplicationController
   before_action :set_formations
   before_action :is_authorised, only: [:new, :create, :referee, :panel, :budget, :description, :visuals, :location]
   before_action :authorize_creator, only: [:panel, :budget, :description, :visuals, :location, :location, :destroy]
+  before_action :set_time_zone, only: [:create]
   helper_method :duel_progress
 
   def index
@@ -16,6 +17,12 @@ class DuelsController < ApplicationController
 
   def new
     @duel = @club.duels.new
+    # @selected_date = params[:selected_date]
+    if params[:selected_date]
+      @selected_date = Time.zone.parse(params[:selected_date])
+    else
+      @selected_date = nil
+    end
   end
 
   def create
@@ -24,6 +31,9 @@ class DuelsController < ApplicationController
 
     start_date = Time.zone.parse(duel_params[:start_date]).utc
     end_date = Time.zone.parse(duel_params[:end_date]).utc
+
+    # start_date = Time.zone.parse(duel_params[:start_date])
+    # end_date = Time.zone.parse(duel_params[:end_date])
     # start_date = DateTime.zone.parse(duel_params[:start_date]).utc
     # # start_time = DateTime.parse(params[:start_date]).utc
     # end_date = Time.zone.parse(duel_params[:end_date])
@@ -88,6 +98,98 @@ class DuelsController < ApplicationController
     redirect_back(fallback_location: request.referer)
   end
   
+
+  def minimum_members_confirmed?
+    required_members = {
+      Futbol11: 11,
+      Futbol10: 10,
+      Futbol9: 9,
+      Futbol8: 8,
+      Futbol7: 7,
+      Futbol6: 6,
+      Futbol5: 5,
+      Microfutbol: 4,
+      Bancas: 3,
+      Kings: 2,
+      Legends: 1, 
+      Futvoley: 2, 
+      Futenis: 2,  
+      Futsal: 5
+    }
+
+    lines.where(approve: true).count >= required_members[sport.to_sym]
+  end
+
+
+  def panel
+    add_breadcrumb 'New duel', nil
+    @referees = Referee.all
+    @reservation = Reservation.new
+    @invitation = Invitation.new
+
+    @available_clubs = Club.where(id: available_club_ids).paginate(page: params[:page], per_page: 1)
+
+    @no_approve_clubs = Club.where(id: @duel.rivals.where(approve: false).pluck(:rival_id))
+    @approve_clubs = Club.where(id: @duel.rivals.where(approve: true).pluck(:rival_id))
+
+    @local_lines = Line.where(club_id: @local.id, status: 1, duel_id: @duel.id)
+    @no_local_lines = Line.where(club_id: @local.id, duel_id: @duel.id)
+    @local_lines_approve = Line.where(club_id: @local.id, status: 1, approve: true, duel_id: @duel.id)
+
+    @local_members = @local.memberships
+    @locals = User.where(id: @local_members.pluck(:user_id)).where(id: @local_lines.pluck(:user_id))
+    @local_users = User.where(id: @local_members.pluck(:user_id))
+    @local_users_approved = User.where(id: @local_lines_approve.pluck(:user_id)).where(id: @local_members.pluck(:user_id))
+    @local_users_convoked = User.where(id: Line.where(duel_id: @duel.id).pluck(:user_id))
+
+    @local_us = @local_users 
+
+    if @guess.present?
+      @guess_lines = Line.where(club_id: @guess.id, status: 1, duel_id: @duel.id)
+      @no_guess_lines = Line.where(club_id: @guess.id, duel_id: @duel.id)
+
+      @guess_members = @guess.memberships
+      @guesses = User.where(id: @guess_members.pluck(:user_id)).where(id: @guess_lines.pluck(:user_id))
+      @guess_users = User.where(id: @guess_members.pluck(:user_id))
+      @guess_users_approved = User.where(id: @guess_lines.where(approve: true).pluck(:user_id))
+    end
+
+    @position_choices = User.distinct.pluck(:position)
+    @selected_positions = params[:selected_positions] || {}
+
+    if @local_users_approved.present?
+      # desired_positions = @local_users_approved.pluck(:position).map { |positions| positions.split(',').map(&:strip) }.flatten.uniq
+      desired_positions = @local_users_approved.pluck(:position).map { |positions| positions.to_s.split(',').map(&:strip) }.flatten.compact.uniq
+      @local_available_position = @local_users.select do |user|
+        positions = if user.position.present?
+              user.position.split(',').map(&:strip)
+            else
+              []  # O cualquier valor predeterminado que desees en caso de que position sea nulo
+            end
+        (positions & desired_positions).any? 
+      end
+    end
+
+    if @duel.formation.present?
+      @formacion_actual = @duel.formation
+    end
+    
+    @duel.progress_percentage = calculate_duel_progress(@duel)
+  end
+
+
+  def calculate_duel_progress(duel)
+    total_progress = 0
+    total_tasks = 100
+    
+    total_progress += 25 if duel.minimum_members_confirmed?
+    total_progress += 25 if duel.price?
+    total_progress += 25 if duel.latitude? 
+    total_progress += 25 if duel.ready? 
+    
+    [total_progress, total_tasks].min
+  end
+
   def show
     # @duels = current_user.duels
     @duels = Duel.all
@@ -327,61 +429,6 @@ class DuelsController < ApplicationController
     end
   end
 
-  def panel
-    add_breadcrumb 'New duel', nil
-
-    @referees = Referee.all
-    @reservation = Reservation.new
-    @invitation = Invitation.new
-
-    @available_clubs = Club.where(id: available_club_ids).paginate(page: params[:page], per_page: 1)
-
-    @no_approve_clubs = Club.where(id: @duel.rivals.where(approve: false).pluck(:rival_id))
-    @approve_clubs = Club.where(id: @duel.rivals.where(approve: true).pluck(:rival_id))
-
-    @local_lines = Line.where(club_id: @local.id, status: 1, duel_id: @duel.id)
-    @no_local_lines = Line.where(club_id: @local.id, duel_id: @duel.id)
-    @local_lines_approve = Line.where(club_id: @local.id, status: 1, approve: true, duel_id: @duel.id)
-
-    @local_members = @local.memberships
-    @locals = User.where(id: @local_members.pluck(:user_id)).where(id: @local_lines.pluck(:user_id))
-    @local_users = User.where(id: @local_members.pluck(:user_id))
-    @local_users_approved = User.where(id: @local_lines_approve.pluck(:user_id)).where(id: @local_members.pluck(:user_id))
-    @local_users_convoked = User.where(id: Line.where(duel_id: @duel.id).pluck(:user_id))
-
-    @local_us = @local_users 
-
-    if @guess.present?
-      @guess_lines = Line.where(club_id: @guess.id, status: 1, duel_id: @duel.id)
-      @no_guess_lines = Line.where(club_id: @guess.id, duel_id: @duel.id)
-
-      @guess_members = @guess.memberships
-      @guesses = User.where(id: @guess_members.pluck(:user_id)).where(id: @guess_lines.pluck(:user_id))
-      @guess_users = User.where(id: @guess_members.pluck(:user_id))
-      @guess_users_approved = User.where(id: @guess_lines.where(approve: true).pluck(:user_id))
-    end
-
-    @position_choices = User.distinct.pluck(:position)
-    @selected_positions = params[:selected_positions] || {}
-
-    if @local_users_approved.present?
-      # desired_positions = @local_users_approved.pluck(:position).map { |positions| positions.split(',').map(&:strip) }.flatten.uniq
-      desired_positions = @local_users_approved.pluck(:position).map { |positions| positions.to_s.split(',').map(&:strip) }.flatten.compact.uniq
-      @local_available_position = @local_users.select do |user|
-        positions = if user.position.present?
-              user.position.split(',').map(&:strip)
-            else
-              []  # O cualquier valor predeterminado que desees en caso de que position sea nulo
-            end
-        (positions & desired_positions).any? 
-      end
-    end
-
-    if @duel.formation.present?
-      @formacion_actual = @duel.formation
-    end
-  end
-
   def rival
   end
 
@@ -447,27 +494,28 @@ class DuelsController < ApplicationController
   end
 
 
-  def duel_progress(duel)
-    total_progress = 0
-    total_tasks = 100
-    total_progress += 20 if duel.avatar.present?
-    total_progress += 20 if club.services_ready?
-    total_progress += 10 if club.latitude?
-    total_progress += 10 if club.longitude?
-    total_progress += 10 if club.status == 'Published'
-    total_progress += 10 if Duel.exists?(club_id: club.id)
+  # def duel_progress(duel)
+  #   total_progress = 0
+  #   total_tasks = 100
+  #   total_progress += 20 if duel.avatar.present?
+  #   total_progress += 20 if club.services_ready?
+  #   total_progress += 10 if club.latitude?
+  #   total_progress += 10 if club.longitude?
+  #   total_progress += 10 if club.status == 'Published'
+  #   total_progress += 10 if Duel.exists?(club_id: club.id)
 
-    active_club_ids = current_user.clubs.where(id: @clubs.ids).pluck(:id)
-    clubs_with_members_count = Club.joins(:memberships)
-                                    .where(id: active_club_ids, memberships: { status: 1 })
-                                    .group(:id)
-                                    .count
+  #   active_club_ids = current_user.clubs.where(id: @clubs.ids).pluck(:id)
+  #   clubs_with_members_count = Club.joins(:memberships)
+  #                                   .where(id: active_club_ids, memberships: { status: 1 })
+  #                                   .group(:id)
+  #                                   .count
 
-    total_progress += clubs_with_members_count.keys.count * 20 if clubs_with_members_count[club.id].to_i >= 2
+  #   total_progress += clubs_with_members_count.keys.count * 20 if clubs_with_members_count[club.id].to_i >= 2
 
-    normalized_progress = [total_progress, total_tasks].min
-  end
+  #   normalized_progress = [total_progress, total_tasks].min
+  # end
 
+  
 
   private
 
@@ -515,6 +563,10 @@ class DuelsController < ApplicationController
 
     def authorize_creator
       redirect_to root_path, alert: "No tienes suficiente autorización" unless current_user.id == @duel.user_id
+    end
+
+    def set_time_zone
+      Time.zone = 'UTC'
     end
 
     def set_formations
@@ -1347,6 +1399,6 @@ class DuelsController < ApplicationController
                                     :sport_bib, :digital_counter,:streaming, :snacks, :referee_price, :referee_freelance, 
                                     :club_id, :user_id, :rival_id, :duel_total,:local_score, :rival_score, :referee_id, 
                                     :latitude, :longitude, :responsibility, :substitutes, :formation, :serviceconfirmation, 
-                                    :showformation, :time_type, :ready_time)
+                                    :showformation, :time_type, :ready_time, :color_local, :color_rival)
     end
 end

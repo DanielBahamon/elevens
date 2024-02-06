@@ -1,11 +1,10 @@
 <nav class="_navside _club">
   <div class="_cont _1">
-    <%= link_to console_path, class: "_item #{'active' if current_page?(console_path(@club))}" do %>
-      <i class="far fa-arrow-left"></i>
-      <span class="_1">Consola</span>
+    <%= link_to club_path(@club), data: { no_turbolink: true }, class: "_logo _1 _item" do %>
+      <%= image_tag @club.avatar.url(:medium), class: "_light" %>
+      <span><%= @club.club_name %></span> 
     <% end %>
     <% if user_signed_in? %>
-      <hr>
       <%= link_to dashboard_club_path(@club), class: "_item #{'ready' if @club.memberships.where(active: true).count > 0 } #{'active' if current_page?(dashboard_club_path(@club))}" do %>
         <i class="fad fa-chalkboard-teacher"></i>
         <span>Pizarra</span> 
@@ -18,14 +17,21 @@
         <i class="fad fa-history"></i>
         <span>Historial</span> 
       <% end %>
-      <%= link_to scouting_club_path(@club), class: "_item #{'active' if current_page?(scouting_club_path(@club))}" do %>
-        <i class="fad fa-paw-claws"></i>
-        <span>Reclutar</span> 
+      <% if current_user.id == @club.user_id %>
+        <%= link_to scouting_club_path(@club), class: "_item #{'active' if current_page?(scouting_club_path(@club))}" do %>
+          <i class="fad fa-paw-claws"></i>
+          <span>Reclutar</span> 
+        <% end %>
+        <%= link_to edit_club_path(@club), class: "_item #{'active' if current_page?(edit_club_path(@club))}" do %>
+          <i class="fad fa-pencil-alt"></i>
+          <span>Editar</span> 
+        <% end %>
       <% end %>
-      <%= link_to edit_club_path(@club), class: "_item #{'active' if current_page?(edit_club_path(@club))}" do %>
-        <i class="fad fa-pencil-alt"></i>
-        <span>Editar</span> 
-      <% end %>
+    <% end %>
+    <hr>
+    <%= link_to console_path, class: "_item #{'active' if current_page?(console_path(@club))}" do %>
+      <i class="far fa-arrow-left"></i>
+      <span class="_1">Consola</span>
     <% end %>
 
     <% is_ready = !@club.price.blank? && !@club.captain.blank? && !@club.avatar.blank? && !@club.sport_type.blank? && !@club.amenities.blank? && !@club.address.blank? && !@club.city.blank? && !@club.country.blank? && @club.memberships.where(active: true).count > 0  %>

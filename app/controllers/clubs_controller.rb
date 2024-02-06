@@ -3,7 +3,8 @@ class ClubsController < ApplicationController
   before_action :set_club, except: [:index, :new, :create, :clubname_validator, :sendjoin]
   before_action :set_user, except: [:index, :new, :create, :show, :sendjoin]
   before_action :set_breadcrumbs, except: [:index, :new, :create]
-  before_action :is_authorised, only: [:leader, :description, :members, :visuals, :budget, :amenities, :location, :notifications]
+  before_action :check_ownership, only: [:edit, :destroy]
+  before_action :is_authorised, only: [:leader, :description, :visuals, :budget, :amenities, :location, :notifications]
 
   def index
     @clubs = Club.all
@@ -65,15 +66,11 @@ class ClubsController < ApplicationController
     load_notifications
     load_duels_and_related_info
     load_opponent_info
-
-    # @clubs = current_user.clubs
-    # @notifications = current_user.notifications.order(created_at: :desc)
-
-    # @duels_for_user = Duel.where("club_id = :club_id OR rival_id = :club_id", club_id: @club.id)
-
-    # @opponent_duels = @duels_for_user.where.not(club_id: @club.id).or(@duels_for_user.where.not(rival_id: @club.id))
-
-    # @opponent = Club.find_by(id: @opponent_duels.pluck(:club_id, :rival_id).flatten.uniq.compact.first)
+    load_upcoming_duels_count
+    load_membership_data
+    load_approved_memberships
+    @upcoming_duels = @club.duels.where('start_date > ? AND ready = ?', Time.zone.now, true)
+    @past_duels = @club.duels.where('start_date < ? AND ready = ?', Time.zone.now, true)
   end
 
   def description
@@ -250,6 +247,18 @@ class ClubsController < ApplicationController
     def set_breadcrumbs
     end
 
+    def check_ownership
+      unless current_user.id == @club.user_id
+        # Redirige al usuario a donde consideres adecuado
+        if user_signed_in?
+          redirect_to authenticated_root_path, alert: "No tienes permiso para realizar esta acción."
+        else
+          redirect_to unauthenticated_root_path, alert: "No tienes permiso para realizar esta acción."
+        end 
+        
+      end
+    end
+
     def load_duels_and_related_info
       @next = load_next_duel
       @open = load_open_duel
@@ -273,6 +282,12 @@ class ClubsController < ApplicationController
       @requested_rivals = @club.rivals.where(club_id: @club.id)
       @approved_requested_rivals = @requested_rivals.where(approve: true)
       @rejected_requested_rivals = @requested_rivals.where(approve: false)
+    end
+    
+    def load_upcoming_duels_count
+      @upcoming_duels_count = Duel
+                                .where("(club_id = :club_id OR rival_id = :club_id) AND start_date > :current_time", club_id: @club.id, current_time: Time.current)
+                                .count
     end
 
 

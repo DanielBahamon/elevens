@@ -1,23 +1,51 @@
 <div id="calendar"></div>
-
-
 <script type="text/javascript">
-  window.tasks = <%= raw @tasks.to_json %>
-  console.log(tasks)
+  window.tasks = <%= raw @tasks_with_clubs.to_json %>
+
+  function showReservations(data) {
+      return data.map(function(e) {
+          return {
+              title: e.description,
+              start: new Date(e.start_date).toISOString(),
+              end: new Date(e.end_date).toISOString(),
+              status: e.status,
+              avatar: e['avatar'] // URL del avatar
+              // Asegúrate de incluir cualquier otra propiedad que necesites aquí
+          };
+      });
+  }
+
 
   $('#calendar').fullCalendar({
     header: {
-      left: 'title',
-      center: '',
-      right: 'prev,next'
+      left: 'prev, next',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay'
     },
+    /*defaultView: 'agendaWeek',*/
     defaultDate: tasks.length > 0 ? new Date(tasks[0].start_date) : new Date(),
-    events: tasks.map(function(task) {
-      return {
-        title: task.description,
-        start: new Date(task.start_date).toISOString(),
-        end: new Date(task.end_date).toISOString()
-      };
-    })
+    events: showReservations(tasks),
+    selectable: true,
+    select: function(start, end) {
+      // Aquí abres el modal de Bootstrap cuando se selecciona un día
+      $('#tuModal').modal('show');
+      // Puedes usar start y end para obtener información sobre la selección
+    },
+    eventRender: function(event, element, view) {
+      return $(`
+        <a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end">
+          <div class="fc-content ${event.status}">
+            <span class="fc-title"><img src="${event.avatar}"> vs <img src="${event.rival_avatar}"></span>
+          </div>
+          <div class="fc-content ${event.status}">
+            <span class="fc-startdate">${event.start}</span>
+          </div>
+          <div class="fc-content ${event.status}">
+            <span class="fc-enddate">${event.end}</span>
+          </div>
+        </a>
+      `);
+      
+    }
   });
 </script>

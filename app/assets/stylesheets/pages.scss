@@ -464,3 +464,453 @@
 	    padding: 20px;
 		}
 	}
+
+
+
+	/* CALENDAR */
+	.calendar_simple .fc-ltr .fc-basic-view .fc-day-top {
+    position: relative;
+	}
+
+	.fc-content-skeleton tbody {
+    transform: translateY(-17px);
+    position: relative;
+    z-index: 3;
+	}
+	.calendar_simple ._point ._i {
+		width: 5px;
+		height: 5px;
+		border-radius: 100px;
+		background: #000;
+		text-align: center;
+	}
+	.calendar_simple td.fc-day-top.fc-fri.fc-today.fc-state-highlight ._point ._i{
+		background: #fff;
+	}
+	.calendar_simple .fc-unthemed th, 
+	.calendar_simple .fc-unthemed td, 
+	.calendar_simple .fc-unthemed thead, 
+	.calendar_simple .fc-unthemed tbody, 
+	.calendar_simple .fc-unthemed .fc-divider,
+	.calendar_simple .fc-unthemed .fc-row, 
+	.calendar_simple .fc-unthemed .fc-content, 
+	.calendar_simple .fc-unthemed .fc-popover, 
+	.calendar_simple .fc-unthemed .fc-list-view, 
+	.calendar_simple .fc-unthemed .fc-list-heading td {
+    border-color: transparent;
+    border: 0 !important;
+	}
+	.calendar_simple .fc-row .fc-content-skeleton, 
+	.calendar_simple .fc-row .fc-content-skeleton table, 
+	.calendar_simple .fc-row .fc-content-skeleton table thead, 
+	.calendar_simple .fc-row .fc-content-skeleton table thead tr, 
+	.calendar_simple .fc-row .fc-content-skeleton table thead tr td {
+    height: 100%;
+	}
+	.calendar_simple .fc-ltr .fc-basic-view .fc-day-top .fc-day-number {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 900;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 65px;
+    float: inherit;
+		padding: 0;
+	}
+	.calendar_simple .fc-scroller.fc-day-grid-container {
+    height: 100% !important;
+		overflow: hidden !important;
+	}
+	.calendar_simple .fc-toolbar.fc-header-toolbar h2 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 25px;
+	}
+	.calendar_simple .fc-toolbar.fc-header-toolbar {
+		padding: 20px;
+	}
+	.calendar_simple .fc-unthemed td.fc-past{
+		opacity:0.3;
+	}
+	.calendar_simple .fc-day-top.fc-other-month{
+		opacity: 0.8;
+	}
+	body._light .calendar_simple td.fc-today > span{
+    color: #fff;
+    position: relative;
+		z-index: 2;
+	}
+	body._light .calendar_simple td.fc-today > ._points{
+    position: relative;
+		z-index: 2;
+    color: #fff;
+	}
+	.calendar_simple tr:first-child > td > .fc-day-grid-event {
+		margin-top: 0;
+	}
+	.calendar_simple td.fc-today:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height:70px;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    border-radius: 6px;
+    top: 0;
+	}
+	.calendar_simple .fc-day-top {
+		transition: all .18s ease;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+	.calendar_simple .fc-day-top:hover{
+		z-index: 3;
+		transform: scale(0.8);
+	}
+	body._light .calendar_simple .fc-day-top:hover{
+		background:#80808030;
+	}
+	body._light .calendar_simple .fc-content-skeleton td.fc-state-highlight:before {
+		background: #000000;
+	}
+	.calendar_simple .fc-content-skeleton td.fc-state-highlight:hover:before{
+		transform: scale(0.9);
+	}
+	.calendar_simple td.fc-state-highlight {
+		position: relative;
+	}
+	.calendar_simple td.fc-state-highlight span.fc-day-number {
+    position: relative;
+    z-index: 2;
+		padding: 0;
+	}
+	.calendar_simple .fc-unthemed td.fc-today{
+		background:transparent;
+	}
+	.calendar_simple .fc-day-top .fc-day-number{
+    position: relative;
+    z-index: 2;
+	}
+	body._light .calendar_simple td.fc-state-highlight ._point ._i {
+    background: #fff;
+	}
+	section._console._1._dashboard > aside._1 > .row > ._2 ._header_console._1, 
+	section._console._1._dashboard > aside._1 > .row > ._2 ._body_console._1 {
+    background: transparent !important;
+    padding: 20px 40px;
+	}
+	.calendar_simple .fc-toolbar.fc-header-toolbar h2 {
+    font-size: 25px;
+    line-height: 1;
+    text-transform: uppercase;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+	}
+	.calendar_simple th.fc-day-header {
+    text-transform: uppercase;
+    font-family: 'Barlow Condensed', sans-serif;
+	}
+	.calendar_simple .fc-day-grid-event {
+    background: transparent;
+    border: 0;
+	
+	}
+	.calendar_simple .fc-content span.fc-time, .calendar_simple .fc-content span.fc-title {
+    display: none;
+	}
+	.calendar_simple td.fc-today > ._point {
+		position: relative;
+		z-index: 2;
+		top: -22px;
+	}
+
+	.calendar_simple td.fc-today > span.fc-day-number {
+		position: relative;
+		z-index: 0;
+		bottom: 0;
+	}
+	.calendar_simple ._points {
+    display: flex;
+    grid-gap: 2px;
+    position: absolute !important;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 30%;
+    flex-wrap: wrap;
+    justify-content: center;
+	}
+	.calendar_simple td.fc-today > ._point {
+    position: relative;
+    z-index: 2;
+    top: -22px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+	}
+	body._light .calendar_simple td.fc-state-highlight > ._point ._i{
+		background:#fff;
+	}
+	.newEventModal input._time {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    position: relative;
+    text-align: center;
+    font-size: 30px;
+		cursor: pointer;
+	}
+	body._light .newEventModal input._time {
+    border: 1px solid black;
+    background: #deede861;
+	}
+
+	li.ui-timepicker-am.ui-timepicker-disabled.ui-timepicker-selected {
+		opacity: 0.2 !important;
+	}	
+	.calendar_simple ._points ._more {
+    background: black;
+    border-radius: 9999px;
+    color: #fff;
+    padding: 5px;
+    font-size: 9px;
+    width: 11px;
+    height: 11px;
+    line-height: 1.3;
+    text-align: center;
+    display: flex;
+    align-items: center;
+	}
+
+
+	.newEventModal h1.modal-title {
+    font-size: 30px !important;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-style: italic;
+    letter-spacing: 0px;
+    font-weight: 900;
+    padding-top: 80px;
+    padding-bottom: 20px;
+	}
+	.newEventModal .modal-header{
+    justify-content: center;
+	}
+	.newEventModal ._list>ul {
+    padding: 0;
+    list-style: none;
+	}
+	body .ui-timepicker-wrapper {
+    width: 400px;
+    margin: 0 auto;
+    right: 0;
+    left: 0 !important;
+    max-width: 50vw !important;
+	}
+	body .ui-timepicker-wrapper li {
+    text-align: center;
+    font-size: 30px;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+	}
+
+	._layout._1._club ._console ._card > ._in._1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+	}
+	._layout._1._club ._console ._card > ._in{
+    padding: 0 10px;
+	}
+	._layout._1._club ._console ._card > ._in:first-of-type {
+    padding: 10px 10px 0 10px;
+	}
+	._layout._1._club ._console ._card > ._in:last-of-type {
+    padding: 0 10px 10px 10px;
+	}
+
+	._navside ._duely a {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 10px;
+		transition: all .1s ease-in-out;
+	}
+	._navside ._duely a:hover{
+		transform: scale(1.1);
+	}
+	body._light ._navside ._duely a {
+    color: #12191f;
+    background: #e7effb;
+	}
+	._navside ._duely {
+    text-align: center;
+    padding: 30px 15px;
+		display: flex;
+		grid-gap: 10px;
+		align-items: center;
+		justify-content: space-between;
+	}
+	._navside ._duely h5 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-style: italic;
+    letter-spacing: 1px;
+	}
+
+	._layout._club ._console._1 aside._1 > .row > .col-lg-3 {
+    padding: 15px !important;
+	}
+
+	._layout._club ._console._1 ._card {
+		border: 1px solid #46514ea3;
+    border-radius: 9px;
+		transition: all	.1s ease-in-out;
+		box-shadow: 0 0 30px -50px #46514ea3;
+	}
+	._layout._club ._console._1 ._card:hover{
+		transform: translateY(-2px) scale(1.008);
+		box-shadow: 0 5px 30px -20px #46514ea3;
+	}
+	._layout._1._club ._console ._card > ._in p {
+    margin-bottom: 0;
+	}
+	._layout._1._club ._console ._card > ._in h1 {
+    margin-bottom: 0;
+    line-height: 1;
+    padding: 10px 0;
+	}
+
+
+
+
+	._progress{
+		position: relative;
+	}
+	._progress ._step{
+		position: absolute;
+		z-index:2;
+		width:50px;
+		height:50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		font-size: 20px;
+	}
+	._progress ._step._1 {
+			left: 0;
+	}
+	._progress ._step._2 {
+    left: 25%;
+	}
+	._progress ._step._3 {
+    left: 50%;
+	}
+	._progress ._step._4 {
+    left: 75%;
+	}
+	._progress ._step._5 {
+    left: 100%;
+	}
+	
+  ._progress {
+    height: 15px;
+    background-color: transparent;
+    border-radius: 0;
+    width:100%;
+    max-width:100%;
+  }
+  ._progress-bar {
+    height: 100%;
+    background: transparent;
+    position: relative;
+  }
+  ._progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #060908 0%, #507765 35%, #b9d0c6 100%) !important;
+    animation: progress 1s ease-out forwards;
+  }
+
+
+	._jump section._bannermain{
+    border-radius: 9px;
+    padding: 15px;
+    display: block;
+	}
+	body._light ._jump section._bannermain{
+    background: #FFF;
+	}
+	body._light span._step {
+		box-shadow: 0 3px 20px -16px #000000e3;
+    top: -50%;
+    transform: translate(-50%, -25%);
+    background: #fff;
+	}
+
+	._jump .contentend button {
+    margin-left: auto;
+	}
+
+	._bannermain figure._media{
+    width: 90px;
+	}
+	section._bannermain ._inside {
+    display: flex;
+    grid-gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+	}
+	
+	section._bannermain ._inside ._inner {
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+	}
+	section._bannermain ._inside ._inner p {
+    margin-bottom: 0;
+	}
+
+	section._bannermain ._inside ._inner a {
+		text-decoration: none;
+	}
+	section._bannermain ._inside ._inner ._iconadd {
+    text-align: center;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    border-radius: 999px;
+		transition: all .25s ease-in-out;
+	}
+	body._light section._bannermain ._inside ._inner ._iconadd{
+    background: #f2f5fa;
+		color: #b7c8d9;
+    box-shadow: 0 10px 30px -20px #2b313be0;
+	}
+	section._bannermain ._inside ._inner ._iconadd:hover{
+		transform: translateY(-5px) scale(1.06);
+	}
+
+	._jump ._progress {
+    margin: 30px auto 50px;
+    max-width: 90%;
+		width:600px;
+	}

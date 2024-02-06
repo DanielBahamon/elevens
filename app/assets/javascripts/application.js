@@ -9,8 +9,12 @@
 //= require fullcalendar/locale-all
 //= require toastr
 //= require fabric
-//= require moment
-//= require fullcalendar
+//= require jquery.timepicker.js
 //= require_tree .
 
 /* BAHAMON */
+$(document).ready(function() {
+  $('._time').on('keydown', function(event) {
+    event.preventDefault();
+  });
+});

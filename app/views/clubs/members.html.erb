@@ -57,21 +57,21 @@
 															
 													</div>
 												</div>
-													<div class="_ii">
-													  <div class="_position">
-													    <% if player.position.present? %>
-													      <% positions = player.position.split(',') %>
-													      <% positions.first(2).each do |position| %>
-													        <span class="badge outline"><%= position.strip %></span>
-													      <% end %>
-													      <% if positions.count > 2 %>
-													        <span class="badge outline">+<%= positions.count - 2 %></span>
-													      <% end %>
-													    <% else %>
-													      <span class="badge withoutline">No position</span>
-													    <% end %>
-													  </div>
+												<div class="_ii">
+													<div class="_position">
+														<% if player.position.present? %>
+															<% positions = player.position.split(',') %>
+															<% positions.first(2).each do |position| %>
+																<span class="badge outline"><%= position.strip %></span>
+															<% end %>
+															<% if positions.count > 2 %>
+																<span class="badge outline">+<%= positions.count - 2 %></span>
+															<% end %>
+														<% else %>
+															<span class="badge withoutline">No position</span>
+														<% end %>
 													</div>
+												</div>
 												<div class="_iv">
 													<div class="_move">
 														<% if @pendings.pluck(:user_id).include?(player.id) %>

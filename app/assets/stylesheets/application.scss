@@ -12,7 +12,7 @@
 *
 *= require jquery-ui
 *= require_tree .
-*= require fullcalendar
+*= require jquery.timepicker.css
 *= require_self
  */
  
@@ -290,7 +290,7 @@
   main._layout._1 > aside ._head p{ 
     text-decoration: none;
     text-transform: uppercase;
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Abel', sans-serif;
     font-weight: 400;
     letter-spacing: 1px;
     font-size: 13px;
@@ -2585,29 +2585,6 @@
 /* END JUMBOTRON */
 
 /* PROGRESS */
-  ._progress {
-    height: 15px !important;
-    overflow: hidden !important;
-    background-color: transparent !important;
-    border-radius: 0 !important;
-    width:100% !important;
-    max-width:100% !important;
-  }
-  ._progress-bar {
-    height: 100%;
-    background: transparent;
-    position: relative;
-  }
-  ._progress-bar::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background: linear-gradient(90deg, #060908 0%, #507765 35%, #b9d0c6 100%) !important;
-    animation: progress 1s ease-out forwards;
-  }
   ._inputactions {
     display: flex;
     align-items: center;
@@ -3981,10 +3958,6 @@
   body._light ._cardy > div h2, 
   body._light ._cardy > div p._paragraph {
     color: #0f1419;
-  }
-  section._console._1._panel_duel ._cardy.noready {
-  }
-  section._console._1._panel_duel ._cardy.noready:hover {
   }
   ._cardy.noready:hover {
     filter: grayscale(0);

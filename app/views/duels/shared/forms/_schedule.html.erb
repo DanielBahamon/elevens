@@ -101,8 +101,12 @@
 		  </div>
 		  <div class="_body">
 	      <div class="input-group mb-3">
-	        <%= f.datetime_field :start_date, placeholder: "DD/MM/AAAA", class: "form-control _process", id: "start-date" %>
-	      </div>
+				<% if @selected_date.present? %>
+  				<%= f.datetime_field :start_date, value: @selected_date.strftime('%Y-%m-%dT%H:%M'), placeholder: "DD/MM/AAAA HH:MM", class: "form-control _process", id: "start-date_2" %>
+	      <% else %>
+  				<%= f.datetime_field :start_date, placeholder: "DD/MM/AAAA HH:MM", class: "form-control _process", id: "start-date_2" %>
+				<% end %>
+				</div>
 		  </div>
 		  <div class="_foot"></div>
 			<div class="_action">
@@ -145,7 +149,7 @@
 		      		<i class="bi bi-plus-lg"></i>
 						</a>
 	      	</div>
-	    		<%= f.datetime_field :end_date, id: "end-date", class: "_process d-none" %>
+	    		<%= f.datetime_field :end_date, id: "end-date_2", class: "_process d-none" %>
 	      </div>
 	    </div>
 			<div class="_foot">
@@ -289,37 +293,32 @@
 	(function() {
 		/* ================== DATETIME I ======================= */
 			$(function() {
-				const startDate = $('#start-date');
+				const startDate = $('#start-date_2');
 				const durationHours = $('#duration-time');
-				const endDate = $('#end-date');
+				const endDate = $('#end-date_2');
 
 				function updateEndDate() {
-					if (!startDate.val()) {
-						console.error('La fecha de inicio no está establecida');
-						return;
-					}
-				
-					const start = new Date(startDate.val() + 'Z');
-					const duration = parseInt(durationHours.val());
-				
-					if (isNaN(start.getTime())) {
-						console.error('La fecha de inicio no es válida');
-						return;
-					}
-				
-					if (isNaN(duration)) {
-						console.error('La duración no es válida');
-						return;
-					}
-				
-					const end = new Date(start.getTime() + duration * 60 * 1000);
-					// Ajusta la fecha y hora a la zona horaria del navegador
-					const offset = start.getTimezoneOffset();
-					start.setMinutes(start.getMinutes() - offset);
-					startDate.val(start.toISOString().slice(0, 16))
+						if (!startDate.val()) {
+								console.error('La fecha de inicio no está establecida');
+								return;
+						}
 
-					end.setMinutes(end.getMinutes() - offset);
-					endDate.val(end.toISOString().slice(0, 16));
+						// Interpretar la fecha y hora como local y convertirla a UTC
+						const start = new Date(startDate.val());
+						start.setMinutes(start.getMinutes() - start.getTimezoneOffset());
+						const duration = parseInt(durationHours.val());
+
+						if (isNaN(duration)) {
+								console.error('La duración no es válida');
+								return;
+						}
+
+						// Calcular la fecha y hora de finalización en UTC
+						const end = new Date(start.getTime() + duration * 60 * 1000);
+
+						// Formatear y establecer las fechas de inicio y finalización
+						startDate.val(start.toISOString().slice(0, 16));
+						endDate.val(end.toISOString().slice(0, 16));
 				}
 
 				startDate.on('input', updateEndDate);
@@ -331,10 +330,9 @@
 					durationHours.val(val);
 					updateEndDate();
 				});
-
 				$('._btn-plus-time_2').on('click', function() {
-					var val = parseInt(durationHours.val()) || 360;
-					val = Math.min(360, val + 10); // Establecer un máximo de 360 minutos
+					var val = parseInt(durationHours.val()) || 30;
+					val = Math.min(150, val + 10); // Establecer un máximo de 360 minutos
 					durationHours.val(val);
 					updateEndDate();
 				});
@@ -344,7 +342,7 @@
 		/* ==================== BARRA DE PROGRESO ===================== */
 			$(document).ready(function() {
 				var currentStep = 0;
-				var $form = $('.tab_schedule .new_duel');
+				var $form = $('.new_duel');
 				var $steps = $form.find('.step');
 				var numSteps = $steps.length;
 
@@ -389,7 +387,7 @@
 									$steps.eq(currentStep).fadeIn(500);
 							});
 					}
-			});
+				});
 
 				$form.find('.prev').click(function() {
 						$steps.eq(currentStep).fadeOut(500).promise().done(function() {

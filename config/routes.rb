@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show] do
     resources :goals, only: [:new, :create]
+    resources :calendars
     member do
       post '/verify_phone_number' => 'users#verify_phone_number'
       patch 'update_phone_number' => 'users#update_phone_number'
@@ -31,6 +32,7 @@ Rails.application.routes.draw do
   resource :relationships, only: [:create, :destroy]
   resources :clubs, except: [:edit] do
     resources :invitations, only: [:new, :create]
+    resources :calendars
     member do
       get 'edit'
       get 'duels'
@@ -124,12 +126,14 @@ Rails.application.routes.draw do
   get 'console' => 'pages#console'
   get 'players' => 'pages#players'
   get 'notifications' => 'pages#notifications'
+  get 'preload_tasks', to: 'pages#preload_tasks'
   get 'clubname_validator/:slug', to: 'clubs#clubname_validator'
   get 'username_validator/:slug', to: 'users#username_validator'
   get 'mentions', to: 'users#mentions'
   get 'calendar', to: 'calendars#host'  # Esta ruta apuntará al método 'user' del controlador 'CalendarsController'
 
   post '/create_auto_tasks', to: 'tasks#create_auto_tasks', as: :create_auto_tasks
+  
 
   resources :tasks, only: [:index, :create, :edit, :update, :destroy]
 

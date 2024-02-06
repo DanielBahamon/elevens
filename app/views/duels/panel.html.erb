@@ -5,6 +5,9 @@
   <% is_ready = !@duel.members.blank? && !@duel.price.blank? && !@duel.responsibility == false && !@duel.address.blank? && !@duel.referee_id.blank? && !@duel.address.blank? %>
 <% end %>
 
+<% local = Club.find_by(id: @duel.club_id) %>
+<% guess = Club.find_by(id: @duel.rival_id) if @duel.rival_id.present? %>
+
 <%= render 'duels/layout/one' %>
 	<%= render 'duels/shared/navs/header' %>
 	<section class="_console _1 _panel_duel">
@@ -13,34 +16,85 @@
 			  	<div class="row">
 						<div class="col-lg-12">
 							<aside>
-								<% if !@duel.referee == true && !@duel.responsibility == true %>
-									<div class="_body_console _1">
-										<div class="_cont">
-											<div class="jumbotron _jumbo_ _jumboresponsibility1">
-												<div class="_in text-center">
-													<h1 class="mb-4 display-2 _title">Firma de responsabilidad</h1>
-													<p class="lead mb-0">Al elegir no contar con un árbitro en tu duelo, asumes una gran responsabilidad como Capitán. </p>
-													<p class="lead">Por favor, confirma que comprendes estas responsabilidades adicionales y estás dispuesto a aceptar las consecuencias que se aplicarán en caso de cualquier incumplimiento.</p>
-													<br>
-													<div class="_action _flex ">
-														<%= simple_form_for([@club, @duel]) do |f| %>
-															<%= f.hidden_field :responsibility, value: true %>
-															<button type="submit" class="button--naira _1 fit m-0-auto" name="commit">
-													    	<span>Acepto la responsabilidad</span>
-																<i class="button__icon fas fa-signature	"></i>
-															</button>
+								<div class="_jump">
+									<% if @duel.referee && @duel.responsibility %>
+										<section class="_banner">
+											<h2 class="_title _avant _f700 _uppercase">Condiciones del encuentro</h2>
+											<p class="lead mb-0">Al elegir no contar con un árbitro en tu duelo, asumes una gran responsabilidad como Capitán. </p>
+											<p class="lead">Por favor, confirma que comprendes estas responsabilidades adicionales y estás dispuesto a aceptar las consecuencias que se aplicarán en caso de cualquier incumplimiento.</p>
+											<br>
+											<div class="_action _flex contentend">
+												<%= simple_form_for([@club, @duel]) do |f| %>
+													<%= f.hidden_field :responsibility, value: true %>
+													<button type="submit" class="button--naira _1 fit" name="commit">
+														<span>Acepto la responsabilidad</span>
+														<i class="button__icon fas fa-signature	"></i>
+													</button>
+												<% end %>
+											</div>
+										</section>
+									<% elsif !(@duel.referee && @duel.responsibility) && (@duel.referee || @duel.responsibility) %>
+										<section class="_bannermain d-none">
+											<div class="_inside">
+												<div class="_inner _1">
+													<figure class="_media _local">
+														<img src="<%= local.avatar %>">
+													</figure>
+													<%= link_to club_duel_path(local.id, @duel) do %>
+														<h1 class="_uppercase _avant m-0 _line1"><%= local.club_name %></h1>
+														<p class="_uppercase _abel"><%= local.country %></p>
+													<% end %>
+												</div>
+												<div class="_inner _2">
+													<% if @duel.rival_id.present? %>
+														<%= link_to club_duel_path(guess, @duel) do %>
+															<h1 class="_uppercase _avant m-0 _line1"><%= guess.club_name %></h1>
+															<p class="_uppercase _abel"><%= guess.country %></p>
 														<% end %>
-													</div>
+														<figure class="_media _guess">
+															<img src="<%= guess.avatar %>">
+														</figure>
+													<% else %>
+														<%= link_to club_duel_rivals_path(@club, @duel), class: "_iconadd _fit" do %>
+															<i class="fas fa-plus"></i>
+														<% end %>
+													<% end %>
 												</div>
 											</div>
-										</div>
-									</div>
-								<% end %>
+										</section>
+										<section class="_progress">
+											<div class="progress">
+												<div class="progress-bar" role="progressbar" style="width: <%= @duel.progress_percentage %>%;" aria-valuenow="<%= @duel.progress_percentage %>" aria-valuemin="0" aria-valuemax="100"></div>
+											</div>
+											<div class="_steps">
+												<span class="_step _1">
+													<span>1</span>
+												</span>
+												<span class="_step _2">
+													<span>2</span>
+												</span>
+												<span class="_step _3">
+													<span>3</span>
+												</span>
+												<span class="_step _4">
+													<span>4</span>
+												</span>
+												<span class="_step _5">
+													<span>5</span>
+												</span>
+											</div>
+										</section>
+										<section class="_building">
+											<div class="_inside">
+											</div>
+										</section>
+									<% end %>
+								</div>
 								<% if @duel.responsibility == true || @duel.referee == true %>
 									<div class="_body_console _2">
 										<div class="_cont">
 											<div class="_flexy">
-											  	<div class="_cardy _fullduel _one _action <% if !@duel.rival_id.present? %>noready<% end %>">
+											  	<div class="d-none _cardy _fullduel _one _action <% if !@duel.rival_id.present? %>noready<% end %>">
 														<div class="_cont">
 															<aside>
 																<% local = Club.find_by(id: @duel.club_id) %>
@@ -82,9 +136,7 @@
 																	</div>
 																</div>
 															</aside>
-																
 														</div>
-
 														<figure class="_media _local">
 															<img src="<%= local.avatar %>">
 														</figure>
@@ -119,11 +171,16 @@
 																  "Mundial" => "america-94.png",
 																  "League" => "premio-94"
 																} %>
-
-																<% duel_type = @duel.duel_type %>
-																<% icon_class = duel_type_icons[duel_type] || "" %>
-																<% bet_duel_type = duel_type.gsub('Bet', 'Apuesta').titleize %>
-
+																<% if @duel.duel_type.present? %>
+																	<% duel_type = @duel.duel_type %>
+																	<% icon_class = duel_type_icons[duel_type] || "" %>
+																	<% bet_duel_type = duel_type.gsub('Bet', 'Apuesta').titleize %>
+																<% else %>
+																	<% # Maneja el caso en que duel_type es nil, por ejemplo, asignando valores por defecto %>
+																	<% duel_type = "DefaultDuelType" %>
+																	<% icon_class = "default-icon-class" %>
+																	<% bet_duel_type = "Tipo de Duelo por Defecto" %>
+																<% end %>
 																<div class="_data">
 																	<div class="_image">
 																		<img src="https://d4s5cnqwbwfuf.cloudfront.net/assets/icons/3d/i/<%= icon_class %>">
@@ -253,7 +310,7 @@
         <br>
         <div class="_cont text-center">
           <% if @duel.rival_id.blank? %>
-          <h1 class="_title _avant _f700 _uppercase">Apuesta</h1>
+          	<h1 class="_title _avant _f700 _uppercase">Apuesta</h1>
             <h3>¿Cuánto vas a apostar?</h3>
           <% else %>
             <h3>Apuesta establecida:</h3>

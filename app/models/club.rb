@@ -14,6 +14,7 @@ class Club < ApplicationRecord
   has_many :relationships, dependent: :destroy, as: :followable
   has_many :followers, through: :relationships, source: :user
   has_many :tasks, dependent: :destroy
+  has_many :calendars, dependent: :destroy
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed? 
@@ -60,5 +61,6 @@ class Club < ApplicationRecord
   def user_is_referee?(user)
     referees.exists?(user_id: user.id) # Verifica si el usuario es árbitro en este club
   end
+
 end
   

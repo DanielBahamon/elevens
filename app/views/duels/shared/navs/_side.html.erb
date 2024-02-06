@@ -1,5 +1,27 @@
 <nav class="_navside _duel">
   <div class="_cont _1">
+    <div class="_duely">
+      <%= link_to club_path(@local) do %>
+        <figure class="_media _local">
+          <img src="<%= @local.avatar %>">
+        </figure>
+      <% end %>
+      <h5>VS</h5>
+      <% if @duel.rival_id.present? %>
+        <%= link_to club_path(@guess) do %>
+          <figure class="_media _guess">
+            <img src="<%= @guess.avatar %>">
+          </figure>
+        <% end %>
+      <% else %>
+        <%= link_to club_duel_rivals_path(@club, @duel) do %>
+          <figure class="_media _guess">
+            <i class="fas fa-plus"></i>
+          </figure>
+        <% end %>
+      <% end %>
+    </div>
+      
     <%= link_to dashboard_club_path(@club), data: { no_turbolink: true }, class: "_item " do %>
       <i class="far fa-arrow-left"></i>
       <span>volver</span>
