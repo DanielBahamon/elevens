@@ -67,25 +67,181 @@
 												<div class="progress-bar" role="progressbar" style="width: <%= @duel.progress_percentage %>%;" aria-valuenow="<%= @duel.progress_percentage %>" aria-valuemin="0" aria-valuemax="100"></div>
 											</div>
 											<div class="_steps">
-												<span class="_step _1">
-													<span>1</span>
-												</span>
-												<span class="_step _2">
-													<span>2</span>
-												</span>
-												<span class="_step _3">
-													<span>3</span>
-												</span>
-												<span class="_step _4">
-													<span>4</span>
-												</span>
-												<span class="_step _5">
-													<span>5</span>
-												</span>
+												<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+													<li class="nav-item" role="presentation">
+														<button class="nav-link active _step _1" id="pills-step1-tab" data-bs-toggle="pill" data-bs-target="#pills-step1" type="button" role="tab" aria-controls="pills-step1" aria-selected="true">
+															<span>1</span>
+														</button>
+													</li>
+													
+													<li class="nav-item" role="presentation">
+														<button class="nav-link _step _2" id="pills-step2-tab" data-bs-toggle="pill" data-bs-target="#pills-step2" type="button" role="tab" aria-controls="pills-step2" aria-selected="false" <%= "disabled" unless @duel.minimum_members_confirmed? %>>
+															<span>2</span>
+														</button>
+													</li>
+													<li class="nav-item" role="presentation">
+														<button class="nav-link _step _3" id="pills-step3-tab" data-bs-toggle="pill" data-bs-target="#pills-step3" type="button" role="tab" aria-controls="pills-step3" aria-selected="false" <%= "disabled" unless @duel.latitude? %>>
+															<span>3</span>
+														</button>
+													</li>
+													<li class="nav-item" role="presentation">
+														<button class="nav-link _step _4" id="pills-step4-tab" data-bs-toggle="pill" data-bs-target="#pills-step4" type="button" role="tab" aria-controls="pills-step4" aria-selected="false" <%= "disabled" unless @duel.latitude? %>>
+															<span>4</span>
+														</button>
+													</li>
+													<li class="nav-item" role="presentation">
+														<button class="nav-link _step _5" id="pills-step5-tab" data-bs-toggle="pill" data-bs-target="#pills-step5" type="button" role="tab" aria-controls="pills-step5" aria-selected="false" <%= "disabled" unless @duel.minimum_members_confirmed? %>>
+															<span>5</span>
+														</button>
+													</li>
+												</ul>
 											</div>
 										</section>
 										<section class="_building">
 											<div class="_inside">
+												<div class="tab-content" id="pills-tabContent">
+													<div class="tab-pane fade show active" id="pills-step1" role="tabpanel" aria-labelledby="pills-step1-tab" tabindex="0">
+														<section class="_banner">
+															<div class="_inner">
+																<h3 class="_avant _f700 _uppercase"><i>Convocatoria</i></h3>
+																<br>
+																<div class="_table_members">
+																	<ul class="list-group list-group-flush">
+																		<% @local_users.each do |member| %>
+																			<%= render 'duels/shared/lists/users/private', member: member %>
+																		<% end %>
+																	</ul>
+																	<br>
+																</div>
+															</div>
+														</section>
+													</div>
+													<div class="tab-pane fade" id="pills-step2" role="tabpanel" aria-labelledby="pills-step2-tab" tabindex="0">
+														<section class="_banner">
+															<div class="_inner">
+																<%= simple_form_for([@club, @duel]) do |f| %>
+																	<div class="_aspects">
+																		<div class="_aspectselect">    
+																			<div class="_selectactions">
+																				<% if @duel.rival_id.blank? %>
+																					<span class="_symbol">$</span>
+																					<%= f.text_field :price, class: "form-control price-duel", required: true, placeholder: "0.00", maxlength: 11, data: { max_value: 99999999 } %>
+																				<% else %>
+																					<span>$<%= number_with_delimiter(@duel.price.to_i, delimiter: ',', separator: '.') %></span>
+																				<% end %>
+																			</div>
+																		</div>
+																	</div>
+																	<br>
+																	<script type="text/javascript">
+																		document.addEventListener('DOMContentLoaded', function() {
+																			const amountInput = document.querySelector('.price-duel');
+
+																			amountInput.addEventListener('input', function(e) {
+																				let value = e.target.value.replace(/[^\d]/g, ''); // Elimina todos los caracteres que no sean dígitos
+
+																				// Si no hay valor, coloca 0 para evitar que se muestre vacío
+																				if (value === '') {
+																					value = '0';
+																				}
+
+																				e.target.value = parseInt(value, 10).toLocaleString('en-US', { maximumFractionDigits: 0 }); // Formatea el número sin decimales con separadores de miles
+
+																				// Elimina los separadores de miles para asegurarse de que se almacene como número entero en la base de datos
+																				value = value.replace(/\,/g, '');
+
+																				e.target.setAttribute('data-stored-value', value); // Guarda el valor sin formato como atributo adicional
+																			});
+
+																			amountInput.addEventListener('change', function(e) {
+																				const storedValue = e.target.getAttribute('data-stored-value');
+																				e.target.value = storedValue; // Restaura el valor sin formato al perder el foco del campo
+																			});
+																		});
+
+																	</script>
+																	<% if @duel.rival_id.blank? %>
+																		<button class="button--naira _1 _bigbtn" type="submit">
+																			<span>Guardar</span>
+																			<i class="button__icon fad fa-save"></i>
+																		</button>
+																	<% else %>
+																		<button class="button--naira _1 _bigbtn" type="button" data-bs-dismiss="modal">
+																			<span>Entendido</span>
+																			<i class="button__icon fad fa-check-circle"></i>
+																		</button>
+																	<% end %>
+																<% end %>
+																<script type="text/javascript">
+																	// Este código se ejecutará cuando la página esté completamente cargada.
+																	document.addEventListener('DOMContentLoaded', function() {
+																		var priceInput = document.querySelector('.price-duel');
+																		
+																		priceInput.addEventListener('input', function() {
+																			var inputValue = this.value;
+
+																			// Elimina todos los caracteres no numéricos, excepto la coma decimal.
+																			inputValue = inputValue.replace(/[^0-9,]/g, '');
+
+																			// Reemplaza los puntos con comas para separar los miles y asegura una coma decimal.
+																			inputValue = inputValue.replace(/\./g, ',');
+
+																			this.value = inputValue;
+																		});
+																	});
+																</script>
+															</div>
+														</section>
+													</div>
+													<div class="tab-pane fade" id="pills-step3" role="tabpanel" aria-labelledby="pills-step3-tab" tabindex="0">
+														<section class="_banner">
+															<div class="_inner">
+																<div class="_cont">
+																	<div class="text-center">
+																		<h1 class="_title _avant _f700 _uppercase">Ubicación</h1>
+																	</div>
+																	<% if @duel.city.blank? || @duel.country.blank? || @duel.address.blank? %>
+																		<p>Por favor, confirma la ubicación y asegúrate de tener un espacio adecuado reservado para llevar a cabo el duelo de manera exitosa.</p>
+																		<%= link_to location_club_duel_path(@club, @duel), class: "button--naira _1 _bigbtn" do %>
+																			<span>Ir a Ubicación</span>
+																			<i class="button__icon fad fa-save"></i>
+																		<% end %>
+																	<% else %>
+																		<br>
+																		<h3 class="text-center"><%= @duel.city %>, <%= @duel.country %></h3>
+																		<p class="text-center"><%= @duel.address %></p>
+																		<br>
+																		<%= link_to location_club_duel_path(@club, @duel), class: "button--naira _1 " do %>
+																			<span>Ir a Ubicación</span>
+																			<i class="button__icon fas fa-map-marked-alt"></i>
+																		<% end %>
+																	<% end %>
+																</div>
+															</div>
+														</section>
+													</div>
+													<div class="tab-pane fade" id="pills-step4" role="tabpanel" aria-labelledby="pills-step4-tab" tabindex="0">
+														<section class="_banner">
+															<div class="_inner">
+																<%= simple_form_for([@club, @duel]) do |f| %>
+																	<div class="row">
+																		<div class="col-lg-6">
+																			<div class="_aspects">
+																				<div class="_aspect">
+																					<%= f.select :color_local, [["Rojo", "RED"], ["Azul", "BLUE"], ["Verde", "GREEN"], ["Amarillo", "YELLOW"], ["Naranja", "ORANGE"], ["Morado", "PURPLE"], ["Negro", "BLACK"], ["Blanco", "WHITE"]] %>
+																				</div>
+																				<div class="_aspect">
+																					<%= f.select :color_rival, [["Rojo", "RED"], ["Azul", "BLUE"], ["Verde", "GREEN"], ["Amarillo", "YELLOW"], ["Naranja", "ORANGE"], ["Morado", "PURPLE"], ["Negro", "BLACK"], ["Blanco", "WHITE"]] %>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																<% end %>
+															</div>
+														</section>
+													</div>
+													<div class="tab-pane fade" id="pills-step5" role="tabpanel" aria-labelledby="pills-step5-tab" tabindex="0"></div>
+												</div>
 											</div>
 										</section>
 									<% end %>

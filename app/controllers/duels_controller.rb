@@ -6,8 +6,8 @@ class DuelsController < ApplicationController
   before_action :set_referee, except: [:index, :new, :create]
   before_action :set_local_and_guess, except: [:index, :new, :create]
   before_action :set_formations
-  before_action :is_authorised, only: [:new, :create, :referee, :panel, :budget, :description, :visuals, :location]
-  before_action :authorize_creator, only: [:panel, :budget, :description, :visuals, :location, :location, :destroy]
+  before_action :is_authorised, only: [:new, :create, :referee,  :budget, :description, :visuals, :location]
+  before_action :authorize_creator, only: [ :budget, :description, :visuals, :location, :location, :destroy]
   before_action :set_time_zone, only: [:create]
   helper_method :duel_progress
 
@@ -123,6 +123,7 @@ class DuelsController < ApplicationController
 
   def panel
     add_breadcrumb 'New duel', nil
+    
     @referees = Referee.all
     @reservation = Reservation.new
     @invitation = Invitation.new
@@ -177,6 +178,47 @@ class DuelsController < ApplicationController
     @duel.progress_percentage = calculate_duel_progress(@duel)
   end
 
+  def members
+    add_breadcrumb 'Asistencia', nil
+    @local = @duel.club
+    @guess = Club.find_by(id: @duel.rival_id) if @duel.rival_id.present?
+
+    unless current_user.id == @local.user_id || (@guess&.user_id == current_user.id)
+      redirect_back(fallback_location: root_path, alert: "No tienes suficiente autorización")
+      return
+    end
+
+    @no_approve_clubs = Club.where(id: @duel.rivals.where(approve: false).pluck(:rival_id))
+    @approve_clubs = Club.where(id: @duel.rivals.where(approve: true).pluck(:rival_id))
+
+    @local_lines = Line.where(club_id: @local.id, status: 1, duel_id: @duel.id)
+    @no_local_lines = Line.where(club_id: @local.id, duel_id: @duel.id)
+    @local_lines_approve = Line.where(club_id: @local.id, status: 1, approve: true, duel_id: @duel.id)
+
+    @local_members = @local.memberships
+    @locals = User.where(id: @local_members.pluck(:user_id)).where(id: @local_lines.pluck(:user_id))
+    @local_users = User.where(id: @local_members.pluck(:user_id))
+    @local_users_approved = User.where(id: @local_lines_approve.pluck(:user_id)).where(id: @local_members.pluck(:user_id))
+    @local_users_convoked = User.where(id: Line.where(duel_id: @duel.id).pluck(:user_id))
+
+    local_member_ids = @local_members.ids
+
+    @local_us = @local_users 
+
+
+    if @guess.present?
+      @guess_lines = Line.where(club_id: @guess.id, status: 1, duel_id: @duel.id)
+      @no_guess_lines = Line.where(club_id: @guess.id, duel_id: @duel.id)
+
+      @guess_members = @guess.memberships
+      @guesses = User.where(id: @guess_members.pluck(:user_id)).where(id: @guess_lines.pluck(:user_id))
+      @guess_users = User.where(id: @guess_members.pluck(:user_id))
+      @guess_users_approved = User.where(id: @guess_lines.where(approve: true).pluck(:user_id))
+    end
+
+    @position_choices = User.distinct.pluck(:position)
+    @selected_positions = params[:selected_positions] || {}
+  end
 
   def calculate_duel_progress(duel)
     total_progress = 0
@@ -239,47 +281,6 @@ class DuelsController < ApplicationController
     add_breadcrumb 'Presupuesto', nil
   end
 
-  def members
-    add_breadcrumb 'Asistencia', nil
-    @local = @duel.club
-    @guess = Club.find_by(id: @duel.rival_id) if @duel.rival_id.present?
-
-    unless current_user.id == @local.user_id || (@guess&.user_id == current_user.id)
-      redirect_back(fallback_location: root_path, alert: "No tienes suficiente autorización")
-      return
-    end
-
-    @no_approve_clubs = Club.where(id: @duel.rivals.where(approve: false).pluck(:rival_id))
-    @approve_clubs = Club.where(id: @duel.rivals.where(approve: true).pluck(:rival_id))
-
-    @local_lines = Line.where(club_id: @local.id, status: 1, duel_id: @duel.id)
-    @no_local_lines = Line.where(club_id: @local.id, duel_id: @duel.id)
-    @local_lines_approve = Line.where(club_id: @local.id, status: 1, approve: true, duel_id: @duel.id)
-
-    @local_members = @local.memberships
-    @locals = User.where(id: @local_members.pluck(:user_id)).where(id: @local_lines.pluck(:user_id))
-    @local_users = User.where(id: @local_members.pluck(:user_id))
-    @local_users_approved = User.where(id: @local_lines_approve.pluck(:user_id)).where(id: @local_members.pluck(:user_id))
-    @local_users_convoked = User.where(id: Line.where(duel_id: @duel.id).pluck(:user_id))
-
-    local_member_ids = @local_members.ids
-
-    @local_us = @local_users 
-
-
-    if @guess.present?
-      @guess_lines = Line.where(club_id: @guess.id, status: 1, duel_id: @duel.id)
-      @no_guess_lines = Line.where(club_id: @guess.id, duel_id: @duel.id)
-
-      @guess_members = @guess.memberships
-      @guesses = User.where(id: @guess_members.pluck(:user_id)).where(id: @guess_lines.pluck(:user_id))
-      @guess_users = User.where(id: @guess_members.pluck(:user_id))
-      @guess_users_approved = User.where(id: @guess_lines.where(approve: true).pluck(:user_id))
-    end
-
-    @position_choices = User.distinct.pluck(:position)
-    @selected_positions = params[:selected_positions] || {}
-  end
 
   def formation
     add_breadcrumb 'Asistencia', members_club_duel_path(@club, @duel)

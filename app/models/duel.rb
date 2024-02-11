@@ -3,6 +3,7 @@ class Duel < ApplicationRecord
 
   belongs_to :user
   belongs_to :club
+  belongs_to :field
   has_many :rivals
   has_many :duel_photos
   # has_many :referees
@@ -121,7 +122,6 @@ class Duel < ApplicationRecord
   private 
 
     def check_for_opponent
-      # Asegúrate de que el estado es Pending (o el que corresponda en tu lógica) y que ready es false o nil
       if rival_id.present? && status == 'Pending' && !ready?
         update_column(:ready, true) # Cambia el campo ready a true sin disparar más callbacks
       end

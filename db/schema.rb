@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_02_04_233919) do
+ActiveRecord::Schema.define(version: 2024_02_10_055333) do
 
   create_table "calendars", force: :cascade do |t|
     t.datetime "day"
@@ -182,6 +182,42 @@ ActiveRecord::Schema.define(version: 2024_02_04_233919) do
     t.index ["club_id"], name: "index_duels_on_club_id"
     t.index ["clubs_id"], name: "index_duels_on_clubs_id"
     t.index ["user_id"], name: "index_duels_on_user_id"
+  end
+
+  create_table "fields", id: { type: :string, limit: 36 }, force: :cascade do |t|
+    t.string "user_id"
+    t.boolean "approve", default: false
+    t.integer "status", default: 0
+    t.string "position"
+    t.string "name"
+    t.string "location"
+    t.string "country"
+    t.string "city"
+    t.string "neighborhood"
+    t.string "address"
+    t.decimal "latitude", precision: 10, scale: 6
+    t.decimal "longitude", precision: 10, scale: 6
+    t.boolean "bathrooms", default: false
+    t.boolean "parking", default: false
+    t.boolean "wifi", default: false
+    t.boolean "roof", default: false
+    t.boolean "showers", default: false
+    t.boolean "store", default: false
+    t.boolean "waterfree", default: false
+    t.boolean "videogames", default: false
+    t.boolean "gym", default: false
+    t.boolean "lockers", default: false
+    t.boolean "snacks", default: false
+    t.boolean "uniform", default: false
+    t.boolean "private", default: false
+    t.boolean "active", default: false
+    t.integer "duels", default: 0
+    t.integer "capacity"
+    t.integer "price", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_fields_on_slug", unique: true
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

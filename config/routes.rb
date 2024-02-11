@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  get 'fields/index'
+  get 'fields/show'
+  get 'fields/new'
+  get 'fields/edit'
   authenticated :user do
     root to: 'pages#console', as: :authenticated_root
   end
@@ -12,6 +16,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show] do
     resources :goals, only: [:new, :create]
     resources :calendars
+    resources :fields
     member do
       post '/verify_phone_number' => 'users#verify_phone_number'
       patch 'update_phone_number' => 'users#update_phone_number'

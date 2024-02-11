@@ -856,7 +856,7 @@
 	body._light ._jump section._bannermain{
     background: #FFF;
 	}
-	body._light span._step {
+	body._light ._step {
 		box-shadow: 0 3px 20px -16px #000000e3;
     top: -50%;
     transform: translate(-50%, -25%);
@@ -913,4 +913,27 @@
     margin: 30px auto 50px;
     max-width: 90%;
 		width:600px;
+	}
+
+	body._light ._jump section._banner {
+    background: #fff;
+	}
+	._jump section._banner {
+    padding: 15px;
+    border-radius: 12px;
+	}
+	._table_members ._move ._action button {
+    border: 0;
+    padding: 15px;
+    width: 50px;
+    height: 50px;
+    border-radius: 999px;
+    background: #f2f5fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+	}
+	._progress ._step:disabled{
+    background-color: #fff !important;
 	}
