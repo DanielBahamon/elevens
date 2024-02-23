@@ -15,15 +15,15 @@
 												<div class="col-lg-12 text-center">
 													<div class="_in ">
 														<% if !@line.reject == true && @line.approve == false %>
-													    <h3 class="display-6">¡Te han convocado!</h3>
-													    <p class="lead">¡Felicidades! Has sido convocado por <%= @club.user.firstname %> para participar como jugador en un emocionante duelo. Tienes la opción de aceptar o rechazar la invitación:</p>
+													    <h3 class="display-6">You have been called up!</h3>
+													    <p class="lead">Congratulations! You have been called up by <%= @club.user.firstname %> to participate as a player in an exciting match. You have the option to accept or decline the invitation:</p>
 													    <br>
 													    <div class="row nom">
 													    	<div class="col-lg-6 _1">
 														    	<%= simple_form_for([@club, @duel, @line]) do |f| %>
 																		<%= f.hidden_field :approve, value: true %>
 														    		<button type="submit" class="button--naira _1 fit">
-																    	<span>Aceptar el desafio</span>
+																    	<span>Accept the challenge</span>
 																    	<i class="button__icon fad fa-check-circle"></i>
 														    		</button>
 																	<% end %>
@@ -32,15 +32,15 @@
 																	<%= simple_form_for([@club, @duel, @line]) do |f| %>
 																		<%= f.hidden_field :reject, value: true %>
 														    		<button type="submit" class="button--naira _2 fit" >
-																    	<span>Dejar pasar el desafio</span>
+																    	<span>Pass on the challenge</span>
 																    	<i class="button__icon fad fa-times-circle"></i>
 														    		</button>
 																	<% end %>
 													    	</div>
 													    </div>
 														<% elsif !@line.reject == true && @line.approve == true %>
-													    <h3 class="display-6">¡Prepárate para jugar!</h3>
-													    <p>Has aceptado el desafío y estás listo para darlo todo en el duelo. ¡Es hora de demostrar tus habilidades y disfrutar del juego!</p>
+													    <h3 class="display-6">Get ready to play!</h3>
+													    <p>You have accepted the challenge and are ready to give your all in the duel. It's time to showcase your skills and enjoy the game!</p>
 													    <br>
 													    <div class="row nom">
 													    	<div class="col-lg-6 _1">
@@ -51,14 +51,14 @@
 													    	</div>
 													    </div>
 														<% elsif @line.reject == true && @line.approve == false %>
-													    <h3 class="display-6">¡Oportunidad perdida!</h3>
-													    <p>Lamentablemente, has decidido no aceptar el desafío para participar en el duelo. Es importante recordar que no aceptar convocatorias puede afectar tu puntuación en el ranking y hacerte perder experiencias inolvidables.</p>
-													    <p>Recuerda que cada oportunidad es valiosa para demostrar tus habilidades y enfrentarte a nuevos retos. Aceptar desafíos te permite crecer como jugador y tener encuentros emocionantes en el campo.</p>
+													    <h3 class="display-6">"Missed opportunity!</h3>
+													    <p>Unfortunately, you have chosen not to accept the challenge to participate in the duel. It's important to remember that declining invitations can affect your ranking score and make you miss out on unforgettable experiences.</p>
+													    <p>Remember that every opportunity is valuable for showcasing your skills and facing new challenges. Accepting challenges allows you to grow as a player and have exciting encounters on the field.</p>
 													    <br>
 													    <div class="row nom">
 													    	<div class="col-lg-6 _1">
 														    	<%= link_to console_path, class: "button--naira _1 fit" do %>
-															    	<span>Ir a la consola</span>
+															    	<span>Go to Console</span>
 															    	<i class="button__icon fas fa-arrow-left"></i>
 																	<% end %>
 													    	</div>

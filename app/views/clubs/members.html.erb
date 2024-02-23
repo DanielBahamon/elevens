@@ -1,4 +1,4 @@
-<% content_for :page_name, "Edit #{@club.club_name} - Entornes" %>
+<% content_for :page_name, "Miembros de #{@club.club_name} - Entornes" %>
 
 
 <%= render 'clubs/layout/one' %>
@@ -10,26 +10,11 @@
 			<div class="row">
 				<div class="col-12 _1">
 					<aside>
-						<header class="_header_console _1">
-							<div class="_in">
-								<div class="_info">
-									<div>
-										<div class="_infoclub">
-											<h3 class="_title"> 
-												<span>Miembros</span>
-											</h3>
-											<p class="_mutted">Protagonistas de <%= @club.club_name %>:</p>
-										</div>
-									</div>
-								</div>
-								<div class="_action">
-									<button type="button" class="button--naira _1	_fullwidth" data-bs-toggle="modal" data-bs-target="#solicitudesModal">
-			              <span>Solicitudes</span>
-	                	<i class="button__icon far fa-users"></i>
-									</button>
-								</div>
-							</div>
-						</header>
+						<%= render 'clubs/shared/navs/header' %>
+					</aside>
+				</div>
+				<div class="col-12 _1">
+					<aside>
 						<div class="_body_console _1">
 							<% if @members.count > 0 %>
 								<div class="_cont _1">
@@ -48,8 +33,13 @@
 														</div>
 													</figure>
 													<div class="_data">
-														<h6 class="_name"><%= link_to user_path(player) do %><%= player.firstname %> <%= player.lastname %><% end %></h6>
+														<h6 class="_name">
+															<%= link_to user_path(player) do %><%= player.firstname %> <%= player.lastname %><% end %>
+														</h6>
 														<p class="_slug"><%= player.slug %></p>
+														<% if player.id == @club.user_id %>
+															<span class="badge withoutline p-0">Director</span>
+														<% end %>
 													</div>
 												</div>
 												<div class="_iii">
@@ -106,40 +96,39 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="solicitudesModal" tabindex="-1" aria-labelledby="solicitudesModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl	">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="_title" id="solicitudesModalLabel">Solicitudes</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-				<% if @no_members.count > 0 %>
-					<div class="_cont _1">
-						<aside class="_members row" id="members">
-							<table class="table align-middle _list_members table-hover table-borderless">
-							  <tbody>
-									<%= render 'memberships/shared/no_members' %>
-							  </tbody>
-							</table>
-						</aside>
+<div class="modal fade" id="modalInvitation" tabindex="-1" aria-labelledby="modalInvitationLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<span></span>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="_new_ivitation">
+					<div class="_in">
+						<h1 class="l">¡Desafia!</h1>
+						<p class="lead"> ¿Listo para empezar? <br class="d-none d-lg-block" />¡Envía tu primer desafío ahora mismo!</p>
 					</div>
-					<% else %>
-						<div class="_cont _1">
-							<div class="_in _noitems">
-								<div class="_inter">
-									<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-									<lottie-player src="https://assets3.lottiefiles.com/packages/lf20_IwKi9V.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;" loop autoplay></lottie-player>
-									<h6 class="_mininotice">Sin solicitudes</h6>
+					<div class="_formys">
+						<div class="accordion accordion-flush" id="accordionChallenge">
+							<div class="accordion-item">
+								<h2 class="accordion-header d-none">
+									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+										¡Compartir desafio!
+									</button>
+								</h2>
+								<div id="flush-collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionChallenge">
+									<div class="accordion-body">
+									</div>
 								</div>
 							</div>
 						</div>
-					<% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
+					</div>
+								
+				</div>
+
+					
+			</div>
+		</div>
+	</div>
 </div>

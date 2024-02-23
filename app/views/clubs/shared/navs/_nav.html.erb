@@ -1,0 +1,38 @@
+<div class="_nav_club">
+  <nav class="navbar navbar-expand-lg ">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav nav  nav-underline">
+          <li class="nav-item">
+            <%= link_to dashboard_club_path(@club), class: "nav-link #{'active' if current_page?(dashboard_club_path(@club))}" do %>
+              <span>Dashboard</span> 
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to members_club_path(@club), class: "nav-link #{'active' if current_page?(members_club_path(@club))}" do %>
+              <span>Team</span> 
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to scouting_club_path(@club), class: "nav-link #{'active' if current_page?(scouting_club_path(@club))}" do %>
+              <span>Scouting</span> 
+            <% end %>
+          </li>
+          <li class="nav-item"></li>
+            <%= link_to requests_club_path(@club), class: "nav-link #{'active' if current_page?(requests_club_path(@club))}" do %>
+              <span>Requests</span>
+            <% end %>
+          </li>
+          <li class="nav-item"></li>
+            <%= link_to edit_club_path(@club), class: "nav-link #{'active' if current_page?(edit_club_path(@club))}" do %>
+              <span>Edit</span>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>

@@ -59,171 +59,170 @@
 	</div>
 	<div class="_cont _4">
 		<% if club.uniform == true || club.payroll == true || club.staff == true || club.transport == true || club.perdiem == true %>
-			<h6 class="_subtitle">Dotación</h6>
+			<h6 class="_subtitle">Endowment</h6>
 			<div class="_amenities _1">
-				<% if club.uniform == true %>
+					<% if club.uniform == true %>
 					<div class="chip _1">
-					  <i class="fal fa-tshirt"></i>
-					  <span>Uniforme</span>
+							<i class="fal fa-tshirt"></i>
+							<span>Uniform</span>
 					</div>
-		    <% end %>
-		  	<% if club.payroll == true %>
+					<% end %>
+					<% if club.payroll == true %>
 					<div class="chip _1">
-					  <i class="fal fa-money-check-edit-alt"></i>
-					  <span>Nomina</span>
+							<i class="fal fa-money-check-edit-alt"></i>
+							<span>Payroll</span>
 					</div>
-		    <% end %>
-		  	<% if club.staff == true %>
+					<% end %>
+					<% if club.staff == true %>
 					<div class="chip _1">
-					  <i class="fal fa-users-class"></i>
-					  <span>Cuerpo tecnico</span>
+							<i class="fal fa-users-class"></i>
+							<span>Technical Staff</span>
 					</div>
-		    <% end %>
-		  	<% if club.transport == true %>
+					<% end %>
+					<% if club.transport == true %>
 					<div class="chip _1">
-					  <i class="fal fa-shuttle-van"></i>
-					  <span>Transporte</span>
+							<i class="fal fa-shuttle-van"></i>
+							<span>Transport</span>
 					</div>
-		    <% end %>
-		  	<% if club.perdiem == true %>
+					<% end %>
+					<% if club.perdiem == true %>
 					<div class="chip _1">
-					  <i class="fal fa-hand-holding-usd"></i>
-					  <span>Viaticos</span>
+							<i class="fal fa-hand-holding-usd"></i>
+							<span>Per diem</span>
 					</div>
-		    <% end %>
-
+					<% end %>
 			</div>
 			<br/>
     <% end %>
 		<% if club.training == true || club.private == true || club.roof == true || club.parking == true || club.owner == true %>
-			<h6 class="_subtitle">Entrenamientos</h6>
+			<h6 class="_subtitle">Trainings</h6>
 			<div class="_amenities _3">
-		  	<% if club.training == true %>
+					<% if club.training == true %>
 					<div class="chip _1">
-					  <i class="bi bi-clock"></i>
-					  <span>Frecuentes</span>
+							<i class="bi bi-clock"></i>
+							<span>Frequent</span>
 					</div>
-		    <% end %>
-		  	<% if club.private == true %>
+					<% end %>
+					<% if club.private == true %>
 					<div class="chip _1">
-					  <i class="bi bi-lock"></i>
-					  <span>Privados</span>
+							<i class="bi bi-lock"></i>
+							<span>Private</span>
 					</div>
-		    <% end %>
-		  	<% if club.parking == true %>
+					<% end %>
+					<% if club.parking == true %>
 					<div class="chip _1">
-					  <i class="fal fa-parking"></i>
-					  <span>Parqueaderos</span>
+							<i class="fal fa-parking"></i>
+							<span>Parking</span>
 					</div>
-		    <% end %>
-		  	<% if club.roof == true %>
+					<% end %>
+					<% if club.roof == true %>
 					<div class="chip _1">
-					  <i class="fal fa-warehouse-alt"></i>
-					  <span>Canchas cubiertas</span>
+							<i class="fal fa-warehouse-alt"></i>
+							<span>Indoor courts</span>
 					</div>
-		    <% end %>
-		  	<% if club.owner == true %>
+					<% end %>
+					<% if club.owner == true %>
 					<div class="chip _1">
-					  <i class="bi bi-flag"></i>
-					  <span>Canchas privadas</span>
+							<i class="bi bi-flag"></i>
+							<span>Private fields</span>
 					</div>
-		    <% end %>
+					<% end %>
 			</div>
 			<br/>
     <% end %>
 		<% if club.hydration == true || club.lockers == true || club.snacks == true || club.lunch == true || club.bathrooms == true || club.showers == true || club.assistance == true || club.gym == true || club.wifi == true || club.washers == true || club.heating == true || club.air == true || club.videogames == true || club.pools == true || club.courses == true %>
-			<h6 class="_subtitle">Servicios</h6>
+			<h6 class="_subtitle">Services</h6>
 			<div class="_amenities _2">
-		  	<% if club.hydration == true %>
+					<% if club.hydration == true %>
 					<div class="chip _1">
-					  <i class="bi bi-cup-straw"></i>
-					  <span>Hidratación</span>
+							<i class="bi bi-cup-straw"></i>
+							<span>Hydration</span>
 					</div>
-		    <% end %>
-		  	<% if club.lockers == true %>
+					<% end %>
+					<% if club.lockers == true %>
 					<div class="chip _1">
-					  <i class="bi bi-archive"></i>
-					  <span>Casilleros</span>
+							<i class="bi bi-archive"></i>
+							<span>Lockers</span>
 					</div>
-		    <% end %>
-		  	<% if club.snacks == true %>
+					<% end %>
+					<% if club.snacks == true %>
 					<div class="chip _1">
-					  <i class="fal fa-apple-alt"></i>
-					  <span>Snacks</span>
+							<i class="fal fa-apple-alt"></i>
+							<span>Snacks</span>
 					</div>
-		    <% end %>
-		  	<% if club.lunch == true %>
+					<% end %>
+					<% if club.lunch == true %>
 					<div class="chip _1">
-					  <i class="fal fa-soup"></i>
-					  <span>Alimentación</span>
+							<i class="fal fa-soup"></i>
+							<span>Food</span>
 					</div>
-		    <% end %>
-		  	<% if club.bathrooms == true %>
+					<% end %>
+					<% if club.bathrooms == true %>
 					<div class="chip _1">
-					  <i class="fal fa-toilet"></i>
-					  <span>Baños</span>
+							<i class="fal fa-toilet"></i>
+							<span>Bathrooms</span>
 					</div>
-		    <% end %>
-		  	<% if club.showers == true %>
+					<% end %>
+					<% if club.showers == true %>
 					<div class="chip _1">
-					  <i class="fal fa-shower"></i>
-					  <span>Duchas</span>
+							<i class="fal fa-shower"></i>
+							<span>Showers</span>
 					</div>
-		    <% end %>
-		  	<% if club.assistance == true %>
+					<% end %>
+					<% if club.assistance == true %>
 					<div class="chip _1">
-					  <i class="fal fa-medkit"></i>
-					  <span>Kit Medico</span>
+							<i class="fal fa-medkit"></i>
+							<span>Medical Kit</span>
 					</div>
-		    <% end %>
-		  	<% if club.gym == true %>
+					<% end %>
+					<% if club.gym == true %>
 					<div class="chip _1">
-					  <i class="fal fa-dumbbell"></i>
-					  <span>Gimnasio</span>
+							<i class="fal fa-dumbbell"></i>
+							<span>Gym</span>
 					</div>
-		    <% end %>
-		  	<% if club.wifi == true %>
+					<% end %>
+					<% if club.wifi == true %>
 					<div class="chip _1">
-					  <i class="fal fa-wifi"></i>
-					  <span>WIFI</span>
+							<i class="fal fa-wifi"></i>
+							<span>WIFI</span>
 					</div>
-		    <% end %>
-		  	<% if club.washers == true %>
+					<% end %>
+					<% if club.washers == true %>
 					<div class="chip _1">
-					  <i class="fal fa-washer"></i>
-					  <span>Lavanderia</span>
+							<i class="fal fa-washer"></i>
+							<span>Laundry</span>
 					</div>
-		    <% end %>
-		  	<% if club.heating == true %>
+					<% end %>
+					<% if club.heating == true %>
 					<div class="chip _1">
-					  <i class="fal fa-fireplace"></i>
-					  <span>Calefaccion</span>
+							<i class="fal fa-fireplace"></i>
+							<span>Heating</span>
 					</div>
-		    <% end %>
-		  	<% if club.air == true %>
+					<% end %>
+					<% if club.air == true %>
 					<div class="chip _1">
-					  <i class="fal fa-wind"></i>
-					  <span>Aire condicionado</span>
+							<i class="fal fa-wind"></i>
+							<span>Air conditioning</span>
 					</div>
-		    <% end %>
-		  	<% if club.videogames == true %>
+					<% end %>
+					<% if club.videogames == true %>
 					<div class="chip _1">
-					  <i class="fal fa-gamepad"></i>
-					  <span>Videojuegos</span>
+							<i class="fal fa-gamepad"></i>
+							<span>Video games</span>
 					</div>
-		    <% end %>
-		  	<% if club.pools == true %>
+					<% end %>
+					<% if club.pools == true %>
 					<div class="chip _1">
-					  <i class="fal fa-swimmer"></i>
-					  <span>Piscinas</span>
+							<i class="fal fa-swimmer"></i>
+							<span>Pools</span>
 					</div>
-		    <% end %>
-		  	<% if club.courses == true %>
+					<% end %>
+					<% if club.courses == true %>
 					<div class="chip _1">
-					  <i class="fal fa-graduation-cap"></i>
-					  <span>Aprendizaje</span>
+							<i class="fal fa-graduation-cap"></i>
+							<span>Learning</span>
 					</div>
-		    <% end %>
+					<% end %>
 			</div>
     <% end %>
 	</div>

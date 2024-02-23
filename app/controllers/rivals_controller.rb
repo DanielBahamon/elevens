@@ -61,26 +61,26 @@ class RivalsController < ApplicationController
     @rival.save
     
     if @rival.save
-      render :show, notice: "Fantastico!"
+      render :show, notice: "Done!"
     else
-      render :new, notice: "Ups, algo esta mal."
+      render :new, notice: "Oops! Something went wrong."
     end
   end
 
   def update
     if @rival.update(rival_params)
-      flash[:notice] = "¡Guardado!"
+      flash[:notice] = "Saved!"
     else
-      flash[:notice] = "Algo no esta bien..."
+      flash[:notice] = "Oops! Something went wrong."
     end
     redirect_back(fallback_location: request.referer)
   end
 
   def edit
     if @rival.update(rival_params)
-      flash[:notice] = "¡Guardado!"
+      flash[:notice] = "Saved!"
     else
-      flash[:notice] = "Algo no esta bien..."
+      flash[:notice] = "Oops! Something went wrong."
     end
     redirect_back(fallback_location: request.referer)
   end
@@ -98,10 +98,10 @@ class RivalsController < ApplicationController
     respond_to do |format|
       if @r.save
         # Notification.create(recipient: @club.user, notification_type: 'solicitude', sender: current_user, content: "Tienes una nueva solicitud para #{@club.club_name} de #{current_user.slug.capitalize}.", url: members_club_path(@club.id), club_id: @club.id, category: 2, action: 5)
-        format.html { redirect_to(@club, :notice => '¡Leyenda! Pronto recibirás una respuesta del capitan') }
+        format.html { redirect_to(@club, :notice => "Awesome! You'll soon receive a response from the captain.") }
         format.xml  { head :ok }
       else
-        format.html { redirect_to(@club, :alert => 'Ops! Intenta mas tarde') }
+        format.html { redirect_to(@club, :alert => 'Oops! Something went wrong.') }
         format.xml  { render :xml => @club.errors, :status => :unprocessable_entity }
       end
     end
@@ -114,10 +114,10 @@ class RivalsController < ApplicationController
     @rival = duel.rivals.build(user_id: current_user.id, club_id: @club.id, duel_id: duel.id, rival_id: rival.id, start_date: duel.start_date, end_date: duel.end_date)
 
     if @rival.save
-      flash[:notice] = "Has desafiado a #{rival.club_name} exitosamente."
-      Notification.create(recipient: rival.user, notification_type: 'challenge', sender: current_user, content: "¡#{@club.club_name} te ha desafiado!", url: club_duel_rival_path(@club, duel, @rival), club_id: @club.id, category: 1, action: 1)
+      flash[:notice] = "You have challenged #{rival.club_name}."
+      Notification.create(recipient: rival.user, notification_type: 'challenge', sender: current_user, content: "#{@club.club_name} has challenged you!", url: club_duel_rival_path(@club, duel, @rival), club_id: @club.id, category: 1, action: 1)
     else
-      flash[:alert] = "Hubo un error al desafiar a #{rival.club_name}."
+      flash[:alert] = "There was an error challenging #{rival.club_name}."
     end
     redirect_back(fallback_location: request.referer)
   end
@@ -160,7 +160,7 @@ class RivalsController < ApplicationController
     end
 
     def is_authorised
-      redirect_to root_path, alert: "No tienes suficiente autorización"
+      redirect_to root_path, alert: "You do not have sufficient authorization for this."
     end
 
     def rival_params

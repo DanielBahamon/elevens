@@ -787,12 +787,12 @@
     }
   }
   ._duel aside._2 ._time {
-    font-family: 'Abel', sans-serif;
+    font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 1px;
     margin-bottom: 0;
-    margin-top: 5px;
+    margin-top: 2px;
     line-height: 1;
   }
   ._duel > ._cont aside._2 > .row._1 > div._2 > ._inside > .row {
@@ -1938,11 +1938,11 @@
   }
   main._layout._1 > aside._2 > ._head .stroke,
   main._layout._1 > aside._2 > ._head .stroke h3{
-    font-family: 'Oswald', sans-serif;
-    font-weight: 900 !important;
-    text-transform: uppercase;
     text-decoration: none;
-    font-style: italic;
+    line-height: 1;
+    text-transform: uppercase;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600;
     letter-spacing: 1px;
   }
   body._light main._layout._1 > aside._2 > ._head .stroke{

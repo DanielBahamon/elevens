@@ -7,7 +7,7 @@ class Membership < ApplicationRecord
   belongs_to :user
 
   # validates_uniqueness_of :user_id, :message => "You can only join one group!"
-  validates_uniqueness_of :user_id, :scope => [:club_id], :message => "Ya solicitaste entrar al equipo"
+  validates_uniqueness_of :user_id, :scope => [:club_id], :message => "You have already requested to join the team."
 
   validate :slug
   validate :firstname

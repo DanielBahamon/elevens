@@ -72,7 +72,7 @@ class UsersController < ApplicationController
       elsif time_remaining2 <= 1.month
         if time_remaining2 >= 1.week
           weeks = (time_remaining2.to_i / 1.week.to_i).to_i
-          @event_time2 = weeks > 1 ? "#{weeks} semanas" : "#{weeks} semana"
+          @event_time2 = weeks > 1 ? "#{weeks} weeks" : "#{weeks} week"
         elsif time_remaining2 >= 1.day
           days = (time_remaining2.to_i / 1.day.to_i).to_i
           @event_time2 = days > 1 ? "#{days}d" : "#{days}d"
@@ -133,7 +133,7 @@ class UsersController < ApplicationController
       @duel = Duel.where(referee_id: current_user.id).where('start_date >= ?', Date.today).order(:start_date).first
       @pasts = Duel.where("(referee_id IN (?)) AND active = ? AND start_date < ?", current_user.id, true, DateTime.now).order(start_date: :desc)
     else
-      redirect_to root_path, alert: "No tienes acceso a esta página."
+      redirect_to root_path, alert: "You do not have sufficient authorization for this."
     end
   end
 

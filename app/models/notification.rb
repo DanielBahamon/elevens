@@ -9,25 +9,25 @@ class Notification < ApplicationRecord
   def category_name
     case category.to_sym
     when :Friendship
-      "Alianzas"
+      "Friendships"
     when :Duel
-      "Duelos"
+      "Duels"
     when :Club
-      "Equipos"
+      "Clubs"
     when :Rival
-      "Rival"
+      "Rivals"
     when :Account
-      "Tu cuenta"
+      "Your account"
     when :App
-      "Entornes"
+      "Elevens"
     when :Message
-      "Mensaje"
+      "Message"
     when :Callups
-      "Convocatoria"
+      "Call up"
     when :Referee
-      "Arbitraje"
+      "Referee"
     when :Challenge
-      "Desafio"
+      "Challenge"
     else
       ""
     end
@@ -36,29 +36,29 @@ class Notification < ApplicationRecord
   def action_name
     case action.to_sym
     when :Friend
-      "Amistad"
+      "Friend"
     when :Callup
-      "Convocatoria"
+      "Calledup"
     when :Accepted
-      "Aceptado"
+      "Accepted"
     when :Denied
-      "Denegado"
+      "Denied"
     when :Suspended
-      "Suspendido"
+      "Suspended"
     when :Solicitude
-      "Solicitud"
+      "Solicitude"
     when :Sanction
-      "Sancion"
+      "Sanction"
     when :Blocked
-      "Bloqueo"
+      "Blocked"
     when :Lesion
-      "Lesion"
+      "Injury"
     when :Follower
-      "Fan"
+      "Follower"
     when :Invitation
-      "Invitacion"
+      "Invitation"
     when :Challenges
-      "Desafios"
+      "Challenges"
     else
       ""
     end

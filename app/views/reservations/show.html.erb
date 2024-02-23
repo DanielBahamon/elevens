@@ -21,19 +21,19 @@
 													</div>
 													<div class="col-xl-7 _2">
 														<div class="_info">
-															<h3 class="_title"><span>¡Felicidades! Eres el juez de este encuentro</span></h3>
-															<p>Ahora haz aceptado ser el árbitro de este próximo encuentro. Estamos emocionados de contar contigo y confiamos en tu experiencia para llevar a cabo un arbitraje imparcial y profesional. ¡Prepárate para vivir una gran experiencia futbolística!</p>
+															<h3 class="_title"><span>Congratulations! You are the referee of this match</span></h3>
+															<p>Now that you've accepted to be the referee for this upcoming match, we're excited to have you on board and trust in your experience to conduct fair and professional refereeing. Get ready for a great soccer experience!</p>
 															<h3 class="_title">
 																<span class="badge bg-success">$<%= @reservation.total %></span>
 															</h3>
 															<br>
 															<div class="_flex _flex_wrap">
 																<a class="button--naira _2 _btn _medium fit" data-bs-toggle="modal" data-bs-target="#detailsDuel">
-																  <span>Ver detalles</span>
+																  <span>View Details</span>
 								                	<i class="fad fa-info-circle button__icon text-center"></i>
 																</a>
 																<%= link_to club_duel_path(@club, @duel), class: "button--naira _1 _btn _medium fit ", target: "_blank" do %>
-																	<span>Ir al duelo</span>
+																	<span>Go to duel</span>
 								                	<i class="fad fa-external-link button__icon"></i>
 																<% end %>
 															</div>
@@ -49,16 +49,16 @@
 												<div class="row">
 													<div class="col-12 _2">
 														<div class="_info">
-															<h3 class="_title"><span>Tu cita como arbitro se ha cancelado</span></h3>
-															<p>Agradecemos tu consideración y esperamos poder colaborar contigo en futuras ocasiones.</p>
+															<h3 class="_title"><span>Your referee appointment has been canceled.</span></h3>
+															<p>We appreciate your consideration and look forward to collaborating with you on future occasions.</p>
 															<br>
 															<div class="_flex _flex_wrap">
 																<%= link_to referee_user_path(current_user), class: "button--naira _2 _btn _medium fit" do %>
-																	<span>Volver a la consola</span>
+																	<span>Come back</span>
 								                	<i class="far fa-arrow-left button__icon"></i>
 																<% end %>
 																<%= link_to club_duel_path(@club, @duel), class: "button--naira _1 _btn _medium fit", target: "_blank" do %>
-																	<span>Ir al duelo</span>
+																	<span>Let's see the duel</span>
 								                	<i class="fad fa-external-link button__icon"></i>
 																<% end %>
 															</div>
@@ -74,16 +74,16 @@
 												<div class="row">
 													<div class="col-12 _2">
 														<div class="_info">
-															<h3 class="_title"><span>Tu cita como arbitro se ha cancelado</span></h3>
-															<p>Agradecemos tu consideración y esperamos poder colaborar contigo en futuras ocasiones.</p>
+															<h3 class="_title"><span>Your appointment as referee has been canceled</span></h3>
+															<p>We appreciate your consideration and hope to collaborate with you on future occasions.</p>
 															<br>
 															<div class="_flex _flex_wrap">
 																<%= link_to referee_user_path(current_user), class: "button--naira _2 _btn _medium fit" do %>
-																	<span>Volver a la consola</span>
+																	<span>Go to Console</span>
 								                	<i class="far fa-arrow-left button__icon"></i>
 																<% end %>
 																<%= link_to club_duel_path(@club, @duel), class: "button--naira _1 _btn _medium fit", target: "_blank" do %>
-																	<span>Ir al duelo</span>
+																	<span>Go to duel</span>
 								                	<i class="fad fa-external-link button__icon"></i>
 																<% end %>
 															</div>

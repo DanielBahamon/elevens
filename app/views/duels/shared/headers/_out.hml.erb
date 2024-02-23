@@ -7,13 +7,13 @@
 
     <%= link_to location_club_duel_path, class: "_item #{'ready' if !@duel.address.blank? && !@duel.city.blank? && !@duel.country.blank? } #{'active' if current_page?(location_club_duel_path)} #{'active' if current_page?(location_club_duel_path)}"  do %>
       <i class="fal fa-map-marked"></i>
-      <span>Ubicación</span> 
+      <span>Location</span> 
       <% if !@duel.address.blank? && !@duel.city.blank? && !@duel.country.blank? %><i class="bi bi-check2-circle"></i><% end %>
     <% end %>
 
     <%= link_to referee_club_duel_path, class: "_item #{'ready' if !@duel.referee_type.blank? } #{'active' if current_page?(referee_club_duel_path)} #{'active' if current_page?(referee_club_duel_path)}"  do %>
       <i class="fal fa-whistle"></i>
-      <span>Arbitraje</span>
+      <span>Referee</span>
       <% if !@duel.referee == true %>
         <% if !@duel.responsibility == false %><i class="bi bi-check2-circle"></i><% end %>
       <% else %>
@@ -23,19 +23,19 @@
 
     <%= link_to conditions_club_duel_path, class: "_item #{'ready' if !@duel.referee_type.blank?  } #{'active' if current_page?(conditions_club_duel_path)} #{'active' if current_page?(conditions_club_duel_path)}"  do %>
       <i class="fal fa-eclipse"></i>
-      <span>Condiciones</span> 
+      <span>Conditions</span> 
       <% if !@duel.referee_type.blank? %><i class="bi bi-check2-circle"></i><% end %>
     <% end %>
 
     <%= link_to budget_club_duel_path, class: "_item #{'ready' if !@duel.referee_type.blank? } #{'active' if current_page?(budget_club_duel_path)} #{'active' if current_page?(budget_club_duel_path)}"  do %>
       <i class="fal fa-money-bill-wave"></i>
-      <span>Presupuesto</span> 
+      <span>Budget</span> 
       <% if !@duel.referee_type.blank? %><i class="bi bi-check2-circle"></i><% end %>
     <% end %>
 
     <%= link_to front_club_duel_path, class: "_item #{'ready' if !@duel.address.blank? && !@duel.city.blank? && !@duel.country.blank? } #{'active' if current_page?(front_club_duel_path)} #{'active' if current_page?(front_club_duel_path)}"  do %>
       <i class="fal fa-presentation"></i>
-      <span>Presentación</span> 
+      <span>Presentation</span> 
       <% if !@duel.name.blank? %><i class="bi bi-check2-circle"></i><% end %>
     <% end %>
 
@@ -48,7 +48,7 @@
     <% end %>
     <%= simple_form_for([@club, @duel]) do |f| %>
       <%= f.hidden_field :active, value: true %>
-      <%= f.submit "Publicar", class: "btn btn-outline-secondary #{'disabled' unless is_ready}" %>
+      <%= f.submit "Publish", class: "btn btn-outline-secondary #{'disabled' unless is_ready}" %>
     <% end %>
 
   </div>

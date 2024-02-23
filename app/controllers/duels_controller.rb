@@ -31,26 +31,20 @@ class DuelsController < ApplicationController
 
     start_date = Time.zone.parse(duel_params[:start_date]).utc
     end_date = Time.zone.parse(duel_params[:end_date]).utc
-
-    # start_date = Time.zone.parse(duel_params[:start_date])
-    # end_date = Time.zone.parse(duel_params[:end_date])
-    # start_date = DateTime.zone.parse(duel_params[:start_date]).utc
-    # # start_time = DateTime.parse(params[:start_date]).utc
-    # end_date = Time.zone.parse(duel_params[:end_date])
     hours = (end_date - start_date).to_i
 
     if @duel.save
       Task.create(
-        description: "Tarea para el duelo #{@duel.id}",
+        description: "Sports Duel",
         start_date: start_date,
         end_date: end_date,
-        user: current_user, # Asegúrate de que el duelo tenga un usuario asociado
-        club_id: @club.id, # Asegúrate de que el duelo tenga un club_id
+        user: current_user,
+        club_id: @club.id,
         duel_id: @duel.id
       )
-      redirect_to panel_club_duel_path(@club, @duel), notice: "¡Hecho!"
+      redirect_to panel_club_duel_path(@club, @duel), notice: "Done!"
     else
-      render :new, notice: "Ups, algo esta mal."
+      render :new, notice: "Oops! Something went wrong."
     end
   end
 
@@ -71,17 +65,17 @@ class DuelsController < ApplicationController
     when "Futbol7"
       return 7
     when "Futbol6"
-      return 6 # Ajusta la cantidad según tus necesidades
+      return 6
     when "Microfutbol", "Futsal"
       return 5
     when "Bancas"
       return 4
     when "Futvoley", "Futenis", "Kings"
-      return 2 # Ajusta la cantidad según tus necesidades
+      return 2
     when "Legends"
       return 1
     else
-      return nil # Deporte no reconocido
+      return nil
     end
   end
 
@@ -91,14 +85,13 @@ class DuelsController < ApplicationController
 
   def update
     if @duel.update(duel_params)
-      flash[:notice] = "¡Guardado!"
+      flash[:notice] = "Done!"
     else
-      flash[:notice] = "Algo no esta bien..."
+      flash[:notice] = "Oops! Something went wrong"
     end
     redirect_back(fallback_location: request.referer)
   end
   
-
   def minimum_members_confirmed?
     required_members = {
       Futbol11: 11,
@@ -120,9 +113,8 @@ class DuelsController < ApplicationController
     lines.where(approve: true).count >= required_members[sport.to_sym]
   end
 
-
   def panel
-    add_breadcrumb 'New duel', nil
+    add_breadcrumb 'Dashboard', nil
     
     @referees = Referee.all
     @reservation = Reservation.new
@@ -179,12 +171,12 @@ class DuelsController < ApplicationController
   end
 
   def members
-    add_breadcrumb 'Asistencia', nil
+    add_breadcrumb 'Members', nil
     @local = @duel.club
     @guess = Club.find_by(id: @duel.rival_id) if @duel.rival_id.present?
 
     unless current_user.id == @local.user_id || (@guess&.user_id == current_user.id)
-      redirect_back(fallback_location: root_path, alert: "No tienes suficiente autorización")
+      redirect_back(fallback_location: root_path, alert: "You do not have sufficient authorization for this.")
       return
     end
 
@@ -278,18 +270,17 @@ class DuelsController < ApplicationController
   end
 
   def budget
-    add_breadcrumb 'Presupuesto', nil
+    add_breadcrumb 'Budget', nil
   end
 
-
   def formation
-    add_breadcrumb 'Asistencia', members_club_duel_path(@club, @duel)
-    add_breadcrumb 'Formación', nil
+    add_breadcrumb 'Members', members_club_duel_path(@club, @duel)
+    add_breadcrumb 'Alignment', nil
     @local = @duel.club
     @guess = Club.find_by(id: @duel.rival_id) if @duel.rival_id.present?
 
     unless current_user.id == @local.user_id || (@guess&.user_id == current_user.id)
-      redirect_back(fallback_location: root_path, alert: "No tienes suficiente autorización")
+      redirect_back(fallback_location: root_path, alert: "You do not have sufficient authorization for this.")
       return
     end
 
@@ -329,7 +320,7 @@ class DuelsController < ApplicationController
     @guess = Club.find_by(id: @duel.rival_id) if @duel.rival_id.present?
 
     unless current_user.id == @local.user_id || (@guess&.user_id == current_user.id)
-      redirect_back(fallback_location: root_path, alert: "No tienes suficiente autorización")
+      redirect_back(fallback_location: root_path, alert: "You do not have sufficient authorization for this.")
       return
     end
 
@@ -395,12 +386,12 @@ class DuelsController < ApplicationController
     @referees = Referee.all
     @reservation = Reservation.new
 
-    add_breadcrumb 'Arbitraje', nil
+    add_breadcrumb 'Referee', nil
     
   end
 
   def location
-    add_breadcrumb 'Ubicación', nil
+    add_breadcrumb 'Location', nil
   end
 
   def join
@@ -410,10 +401,9 @@ class DuelsController < ApplicationController
     @rival = duel.rivals.build(user_id: current_user.id, club_id: @club.id, duel_id: duel.id, rival_id: rival.id, start_date: duel.start_date, end_date: duel.end_date)
 
     if @rival.save
-      flash[:notice] = "Has desafiado a #{rival.club_name} exitosamente."
-      # Aquí puedes agregar el código para enviar la notificación al equipo rival.
+      flash[:notice] = "You have successfully challenged #{rival.club_name}."
     else
-      flash[:alert] = "Hubo un error al desafiar a #{rival.club_name}."
+      flash[:alert] = "There was an error challenging #{rival.club_name}."
     end
     redirect_back(fallback_location: request.referer)
   end
@@ -443,10 +433,10 @@ class DuelsController < ApplicationController
     @m = @duel.lines.build(duel_id: params[:id], club_id: params[:club_id], membership: params[:membership_id], user: params[:user_id])
     
     if @m.save
-      redirect_back(fallback_location: request.referer, notice: "Convocado!")
+      redirect_back(fallback_location: request.referer, notice: "Called up!")
     else
       flash[:error] = @m.errors.full_messages
-      redirect_back(fallback_location: request.referer, alert: "Error")
+      redirect_back(fallback_location: request.referer, alert: "Oops! Something went wrong.")
     end
   end
 
@@ -455,16 +445,16 @@ class DuelsController < ApplicationController
     @reservations = Reservation.where("duel_id = '#{@duel.id}'")
 
     if @duel.lines.exists?
-      redirect_back(fallback_location: request.referer, notice: "¡No puedes eliminar este duelo debido a las alineaciones asociadas!")
+      redirect_back(fallback_location: request.referer, notice: "You can't delete this duel due to associated lineups!")
     elsif @rivals.exists? 
-      redirect_back(fallback_location: request.referer, notice: "¡No puedes eliminar este duelo debido a que hay un rival existente!")
+      redirect_back(fallback_location: request.referer, notice: "You can't delete this duel because there is an existing rival!")
     elsif @reservations.exists?
       Reservation.where(duel_id: @duel.id).destroy_all
       @duel.destroy
-      redirect_to club_path(@duel.club), notice: "Duelo eliminado correctamente."
+      redirect_to club_path(@duel.club), notice: "Duel successfully deleted."
     else
       @duel.destroy
-      redirect_to club_path(@duel.club), notice: "Duelo eliminado correctamente."
+      redirect_to club_path(@duel.club), notice: "Duel successfully deleted."
     end
   end
 
@@ -490,7 +480,7 @@ class DuelsController < ApplicationController
       # Acciones permitidas para el referee en este duelo (por ejemplo, mostrar información del duelo)
       render 'referee_access' # Esto renderizará una vista específica para el referee
     else
-      redirect_to root_path, alert: 'No tienes acceso a este duelo como árbitro.'
+      redirect_to root_path, alert: 'You do not have access to this duel as a referee.'
     end
   end
 
@@ -537,11 +527,11 @@ class DuelsController < ApplicationController
 
     def create_task
       Task.create(
-        description: "Tarea para el duelo #{self.id}",
+        description: "Sport Duel",
         start_date: self.start_date,
         end_date: self.end_date,
-        user: self.user, # Asegúrate de que el duelo tenga un usuario asociado
-        club_id: self.club_id, # Asegúrate de que el duelo tenga un club_id
+        user: self.user, 
+        club_id: self.club_id, 
         duel_id: self.id
       )
     end
@@ -556,14 +546,14 @@ class DuelsController < ApplicationController
     end
 
     def is_authorised
-      redirect_to root_path, alert: "No tienes suficiente autorización" unless current_user.id == @club.user_id
+      redirect_to root_path, alert: "You do not have sufficient authorization for this." unless current_user.id == @club.user_id
     end
 
     def set_breadcrumbs
     end
 
     def authorize_creator
-      redirect_to root_path, alert: "No tienes suficiente autorización" unless current_user.id == @duel.user_id
+      redirect_to root_path, alert: "You do not have sufficient authorization for this." unless current_user.id == @duel.user_id
     end
 
     def set_time_zone

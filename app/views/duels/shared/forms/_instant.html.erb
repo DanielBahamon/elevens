@@ -6,21 +6,24 @@
     <aside class="_content">
       <div class="_head">
         <div class="_in">
-          <h1 class="display-6">Selecciona la disciplina para tu duelo</h1>
+          <h1 class="display-6">Select the discipline for your duel</h1>
         </div>
       </div>
       <div class="_sports _options">
         <% sports = [
-				  ["Futbol 11", "Futbol11", 11],
-				  ["Futbol 10", "Futbol10", 10],
-				  ["Futbol 9", "Futbol9", 9],
-				  ["Futbol 8", "Futbol8", 8],
-				  ["Futbol 7", "Futsal7", 7],
-				  ["Futsal", "Futsal", 6],
-				  ["Microfutbol", "Microfutbol", 5],
-				  ["Bancas", "Bancas", 4],
-				  ["Kings", "Kings", 2],
-				  ["Legends", "Legends", 1]
+				  ["11-a-side", "Futbol11", 11],
+				  ["10-a-side", "Futbol10", 10],
+				  ["9-a-side", "Futbol9", 9],
+				  ["8-a-side", "Futbol8", 8],
+				  ["7-a-side", "Futbol7", 7],
+				  ["6-a-side", "Futbol6", 6],
+				  ["5-a-side", "Futbol5", 5],
+				  ["4-a-side", "Microfutbol", 4],
+				  ["3-a-side", "Bancas", 3],
+				  ["2-a-side", "Kings", 2],
+				  ["1-a-side", "Legends", 1],
+				  ["Futvoley", "Futvoley", 3],
+				  ["Futenis", "Futenis", 2]
 				].reverse %>
 				<% approved_members_count = @club.memberships.where(status: 1).count %>
 				<div class="_sports _options">
@@ -42,15 +45,13 @@
 								          1 x 1
 								        <% when "Kings" %>
 								          2 x 2
-								        <% when "Futenis" %>
-								          2 x 2
-								        <% when "Futvoley" %>
-								          2 x 2
 								        <% when "Bancas" %>
-								          4 x 4
+								          3 x 3
 								        <% when "Microfutbol" %>
+								          4 x 4
+								        <% when "Futbol5" %>
 								          5 x 5
-								        <% when "Futsal" %>
+								        <% when "Futbol6" %>
 								          6 x 6
 								        <% when "Futbol7" %>
 								          7 x 7
@@ -71,9 +72,9 @@
 				      <%= f.radio_button :sport, sport_id, {class: 'form-check-input next', required: true, id: "duel_sport_#{sport_id}", disabled: disable_sport } %>
 								<div class="_note">
 							  <% if disable_sport %>
-							    <p>No tienes jugadores suficientes</p>
+							    <p>You don't have enough players</p>
 							  <% else %>
-							    <p>Seleccionar</p>
+							    <p>Select</p>
 							  <% end %>
 							</div>
 
@@ -83,7 +84,7 @@
       </div>
 			<div class="_action text-center">
 				<button class="_back_step button--shikoba _2">
-					<span>Volver</span>
+					<span>Back</span>
 					<i class="button__icon fal fa-arrow-left"></i>
 				</button>
 			</div>
@@ -94,20 +95,20 @@
 		<aside class="_content _type_time_start">
 			<div class="_head">
 				<div class="_in">
-					<h1 class="display-6">¿En cuánto tiempo estás listo?</h1>
+					<h1 class="display-6">How much time do you need?</h1>
 				</div>
 			</div>
 			<div class="_body">
 				<div class="_sports _options">
 					<% ready_times = [
-						["En 15 minutos", 15],
-						["En media hora", 30],
-						["En 1 hora", 60],
-						["En 2 horas", 120],
-						["En 3 horas", 180],
-						["En 4 horas", 240],
-						["En 5 horas", 300],
-						["En 6 horas", 360]
+						["15 min", 15],
+						["30 min", 30],
+						["1 hour", 60],
+						["2 hour", 120],
+						["3 hour", 180],
+						["4 hour", 240],
+						["5 hour", 300],
+						["6 hour", 360]
 					] %>
 					<% ready_times.each do |ready_time| %>
 						<% ready_time_name, ready_time_minutes = ready_time %>
@@ -129,11 +130,11 @@
 			</div>
 			<div class="_action">
 			<button type="button" class="prev button--shikoba _2">
-				<span>Anterior</span>
+				<span>Back</span>
 				<i class="button__icon fal fa-arrow-left"></i>
 			</button>
 			<button type="button" class="next button--shikoba _2">
-				<span>Siguiente</span>
+				<span>Next</span>
 				<i class="button__icon fal fa-arrow-right"></i>
 			</button>
 			</div>
@@ -144,8 +145,8 @@
 		<aside class="_content">
 			<div class="_head">
 				<div class="_in">
-				  <h1 class="display-6">Determina la duración del duelo</h1>
-				  <p class="lead">¡Estupendo! Ahora, necesitamos determinar cuánto tiempo tomará el duelo. Selecciona la duración del duelo en minutos para asegurarte de que ambos equipos tengan tiempo suficiente para competir y demostrar su habilidad:</p>
+				  <h1 class="display-6">Determine the duration of the duel</h1>
+				  <p class="lead">¡Great! Now, we need to determine how long the duel will last. Select the duration of the duel in minutes to ensure that both teams have enough time to compete and showcase their skills:</p>
 				</div>
 		  </div>
 	    <div class="_body">
@@ -167,16 +168,16 @@
 	    </div>
 			<div class="_foot">
 			  <div class="alert alert-info" role="alert">
-				  ¡Cada minuto cuenta! Ingresa la duración aproximada de tu duelo en minutos. Recuerda que deben ser al menos 30 minutos, pero no más de 6 horas (360 minutos) para que tu duelo sea válido.
+				  Every minute counts! Enter the approximate duration of your duel in minutes. Remember it must be at least 30 minutes, but no more than 6 hours (360 minutes) for your duel to be valid.
 				</div>
 			</div>
 			<div class="_action">
 				<button type="button" class="prev button--shikoba _2">
-					<span>Anterior</span>
+					<span>Back</span>
 					<i class="button__icon fal fa-arrow-left"></i>
 				</button>
 				<button type="button" class="next button--shikoba _2" id="follow-button">
-					<span>Siguiente</span>
+					<span>Next</span>
 					<i class="button__icon fal fa-arrow-right"></i>
 				</button>
 			</div>
@@ -187,13 +188,13 @@
 		<aside class="_content">
 			<div class="_head">
 				<div class="_in">
-				  <h1 class="display-6">¿Deseas un árbitro para tu duelo?</h1>
-				  <p class="lead">En este paso, debes decidir si deseas un árbitro para tu duelo. Un árbitro puede ayudar a garantizar que el juego sea justo y seguro para todos los participantes. </p>
+				  <h1 class="display-6">Do you want a referee for your duel?</h1>
+				  <p class="lead">In this step, you must decide if you want a referee for your duel. A referee can help ensure that the game is fair and safe for all participants.</p>
 				</div>
 		  </div>
 		  <div class="_body">
 				<div class="_referees _options">
-		    	<% referees = [["Solicitar un arbitro", true ], ["Sin arbitro", false]] %>
+		    	<% referees = [["Request a referee", true ], ["No referee", false]] %>
 			    <% referees.each do |referee| %>
 			      <div class="_referee _option">
 		      		<div class="_info">
@@ -217,12 +218,12 @@
 		  </div>
 			<div class="_foot">
 				  <div class="alert alert-info" role="alert">
-					  Si decides no tener un árbitro, asegúrate de leer y entender las responsabilidades adicionales que tendrás como capitán. 
+					  If you decide not to have a referee, make sure to read and understand the additional responsibilities you will have as a captain.
 					</div>
 			</div>
 			<div class="_action">
 				<button type="button" class="prev button--shikoba _2">
-					<span>Anterior</span>
+					<span>Back</span>
 					<i class="button__icon fal fa-arrow-left"></i>
 				</button>
 			</div>
@@ -233,13 +234,13 @@
 		<aside class="_content">
 			<div class="_head">
 				<div class="_in">
-				  <h1 class="display-6">¿Deseas que tu duelo sea amistoso o de apuesta?</h1>
-				  <p class="lead">En este paso, debes decidir si deseas que tu duelo sea amistoso o de apuesta. Selecciona una opción a continuación: </p>
+				  <h1 class="display-6">Do you want your duel to be friendly or for a bet?</h1>
+				  <p class="lead">In this step, you must decide if you want your duel to be friendly or for a bet. Select an option below:</p>
 				</div>
 		  </div>
 		  <div class="_body">
 				<div class="_types _options">
-		    	<% types = [["Duelo amistoso", "Friendly"], ["Duelo de apuesta", "Bet"]] %>
+		    	<% types = [["Friendly Duel", "Friendly"], ["Bet Duel", "Bet"]] %>
 			    <% types.each do |type| %>
 			      <div class="_type _option">
 		      		<div class="_info">
@@ -263,12 +264,12 @@
 		  </div>
 			<div class="_foot">
 			  <div class="alert alert-info" role="alert">
-				  Si eliges un duelo de apuesta por favor, ten en cuenta que los duelos de apuesta no están disponibles en todas las ubicaciones y están sujetos a las leyes y regulaciones locales.
+				  If you choose a bet duel, please note that bet duels may not be available in all locations and are subject to local laws and regulations.
 				</div>
 			</div>
 			<div class="_action">
 				<button type="button" class="prev button--shikoba _2">
-					<span>Anterior</span>
+					<span>Back</span>
 					<i class="button__icon fal fa-arrow-left"></i>
 				</button>
 			</div>
@@ -279,19 +280,19 @@
 		<aside class="_content">
 			<div class="_head">
 				<div class="_in">
-				  <h1 class="display-6">Responsabilidades adicionales como capitán</h1>
-				  <p class="lead">Si decides no tener un árbitro para tu duelo, es importante que entiendas que tú y el otro capitán serán responsables de garantizar que el juego sea justo y que se respeten las reglas. En caso de cualquier conflicto, se aplicarán sanciones al equipo y a ambos capitanes. Por favor, confirma que entiendes estas responsabilidades adicionales antes de continuar:</p>
+				  <h1 class="display-6">Additional Responsibilities as Captain</h1>
+				  <p class="lead">If you choose not to have a referee for your duel, it's important that you understand that you and the other captain will be responsible for ensuring that the game is fair and that the rules are respected. In case of any conflict, sanctions will be applied to the team and both captains. Please confirm that you understand these additional responsibilities before proceeding:</p>
 				</div>
 		  </div>
 		  <div class="_body"></div>
 		  <div class="_foot"></div>
 			<div class="_action">
 				<button type="button" class="prev button--shikoba _2">
-					<span>Anterior</span>
+					<span>Back</span>
 					<i class="button__icon fal fa-arrow-left"></i>
 				</button>
 				<button type="submit" class="button--shikoba _2">
-					<span>Crear duelo instantaneo</span>
+					<span>Create Instant Duel</span>
 					<i class="button__icon fal fa-arrow-right"></i>
 				</button>
 			</div>

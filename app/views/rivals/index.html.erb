@@ -13,12 +13,12 @@
 										<div class="_in">
 											<div class="_titles">
 												<h1 class="_title _stroke">
-													<span><i>Clubes</i></span>
+													<span><i>Clubs</i></span>
 												</h1>
 											</div>
 											<div class="_action">
 						            <button class="button--naira _1 _bigbtn" type="submit" data-bs-toggle="modal" data-bs-target="#modalInvitation">
-						              <span>Invitar</span>
+						              <span>Sent</span>
 						              <i class="button__icon fad fa-paper-plane"></i>
 						            </button>
 											</div>
@@ -55,7 +55,7 @@
 											<% end %>
 
 											<% if @unchallengers.count > 0 %>
-											  <p class="_mutted _slug">Desafiados:</p>
+											  <p class="_mutted _slug">Challenged:</p>
 											  <div class="_clubs">
 											    <% @unchallengers.each do |rival| %>
 											      <div class="_club">
@@ -110,17 +110,17 @@
 														<br>
 														<div class="_infoclub">
 															<h1 class="_title"> 
-																<span>¡<%= @club.club_name %> <br class="d-none d-lg-block"> te ha desafiado!</span>
+																<span><%= @club.club_name %> has challenged you!</span>
 															</h1>
 														</div>
-														<p class="_mutted _slug">Prepara a tu equipo si crees que es capaz:</p>
+														<p class="_mutted _slug">Prepare your team if you think they're up for it</p>
 														<%= simple_form_for([@club, @duel]) do |f| %>
 															<% clubs = current_user.clubs.where("clubs.id != '#{@club.id}'") %>
 															<hr>
 															<%= f.select :rival_id, clubs.map {|key, value| [key.club_name, key.id]}, {}, class: "form-select form-select-lg" %>
 															<br>
 											    		<button type="submit" class="button--naira _1 fit _btnnext m-0-auto">
-													    	<span>Aceptar</span>
+													    	<span>Accept</span>
 																<i class="button__icon fad fa-check-circle"></i>
 											    		</button>
 															<br>
@@ -147,10 +147,10 @@
 													<br>
 													<div class="_infoclub">
 														<h1 class="_title"> 
-															<span>¡Duelo casado!</span>
+															<span>Match made!</span>
 														</h1>
 													</div>
-													<p class="_mutted _slug">¡Asegurate de estar listo!</p>
+													<p class="_mutted _slug">Make sure you're ready!</p>
 													<hr>
 													<div class="_flex _shields">
 														<%= link_to club_path(@local) do %>
@@ -163,7 +163,7 @@
 													</div>
 													<br>
 													<%= link_to club_duel_path(@club, @duel), class: "button--naira _1 fit _btnnext m-0-auto" do %>
-											    	<span>Ver</span>
+											    	<span>View</span>
 														<i class="button__icon fad fa-check-circle"></i>
 													<% end %>
 												</div>

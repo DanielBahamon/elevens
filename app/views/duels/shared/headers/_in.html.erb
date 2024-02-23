@@ -11,7 +11,7 @@
         <% if @guess %>
             <h3 class="_title"><%= @local.club_name %> V.S <%= @guess.club_name %></h3>
         <% else %>
-            <h3 class="_title">Previa de <%= @duel.club.club_name %></h3>
+            <h3 class="_title">Preview of <%= @duel.club.club_name %></h3>
         <% end %>
     </div>
     <div class="_3 dropstart">
@@ -21,7 +21,7 @@
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <% if user_signed_in? && current_user == @duel.club.user %>
         <%= link_to conditions_club_duel_path, class: "dropdown-item" do %>
-            Editar Duelo
+           Edit Duel
         <% end %>
       <% else %>
         <a class="_link">Reportar</a>

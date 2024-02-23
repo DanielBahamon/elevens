@@ -22,11 +22,11 @@ class LinesController < ApplicationController
     @club = Club.find(params[:club_id])
     @line = @duel.lines.build(user_id: @user.id, club_id: params[:club_id], duel_id: @duel.id, approve: false, status: 1, membership: @membership.id)
     if @line.save
-      Notification.create(recipient: @user, notification_type: 'callup', sender: current_user, content: "#{@club.club_name} te ha convocado a su proximo duelo como #{params[:position]}.", url: club_duel_line_path(@club, @duel, @line), club_id: @club.id, category: 1, action: 1)
-      redirect_back(fallback_location: request.referer, notice: "Convocado!")
+      Notification.create(recipient: @user, notification_type: 'callup', sender: current_user, content: "#{@club.club_name} has called you up for their next duel as #{params[:position]}.", url: club_duel_line_path(@club, @duel, @line), club_id: @club.id, category: 1, action: 1)
+      redirect_back(fallback_location: request.referer, notice: "Called up!")
     else
       flash[:error] = @line.errors.full_messages
-      redirect_back(fallback_location: request.referer, alert: "Error")
+      redirect_back(fallback_location: request.referer, alert: "Oops! Something went wrong.")
     end
   end
 
@@ -37,19 +37,19 @@ class LinesController < ApplicationController
     @line = Line.new(line_params)
     if @line.save
       Notification.create(recipient: @liner, notification_type: 'callup', sender: current_user, content: "#{@club.club_name} te ha convocado a su proximo duelo como #{params[:line][:position]}.", url: club_duel_line_path(@club, @duel, @line), club_id: @club.id, category: 1, action: 1)
-      redirect_back(fallback_location: request.referer, notice: "Convocado!")
+      redirect_back(fallback_location: request.referer, notice: "Called up!")
     else
-      flash[:error] = "No es posible"
-      redirect_back(fallback_location: request.referer, alert: "Error")
+      flash[:error] = "Sorry. It is not possible."
+      redirect_back(fallback_location: request.referer, alert: "Oops! Something went wrong.")
     end
   end
 
   def update
     @memberships = @club.memberships
     if @line.update(line_params)
-      flash[:notice] = "¡Guardado!"
+      flash[:notice] = "Saved!"
     else
-      flash[:notice] = "Algo no está bien..."
+      flash[:notice] = "Oops! Something went wrong."
     end
     redirect_back(fallback_location: request.referer)
   end
@@ -57,17 +57,17 @@ class LinesController < ApplicationController
   def edit
     @memberships = @club.memberships
     if @line.update(line_params)
-      flash[:notice] = "¡Guardado!"
+      flash[:notice] = "Saved!"
     else
-      flash[:notice] = "Algo no esta bien..."
+      flash[:notice] = "Oops! Something went wrong."
     end
     redirect_back(fallback_location: request.referer)
   end
   
   def show
-    add_breadcrumb 'Convocatoria', nil
+    add_breadcrumb 'Convocation', nil
     unless current_user.id == @line.user_id
-      redirect_back(fallback_location: root_path, alert: "No tienes suficiente autorización")
+      redirect_back(fallback_location: root_path, alert: "You do not have sufficient authorization for this.")
       return
     end
   end
@@ -80,10 +80,10 @@ class LinesController < ApplicationController
     
     respond_to do |format|
       if @m.save
-        format.html { redirect_to(@club, :notice => '¡Bien! Pronto recibirás una respuesta del capitan.') }
+        format.html { redirect_to(@club, :notice => "Great! You'll receive a response from the captain soon.") }
         format.xml  { head :ok }
       else
-        format.html { redirect_to(@club, :notice => 'Join error.') }
+        format.html { redirect_to(@club, :notice => "Oops! Something went wrong.") }
         format.xml  { render :xml => @club.errors, :status => :unprocessable_entity }
       end
     end
@@ -92,13 +92,13 @@ class LinesController < ApplicationController
   def invoke
     @line.Invoke!
     # charge(@membership.club, @membership)
-    flash[:notice] = "Convocado!!"
+    flash[:notice] = "Called up!"
     redirect_back(fallback_location: request.referer)
   end
 
   def ejected
     @line.Ejected!
-    flash[:alert] = "Denegado!"
+    flash[:alert] = "Denied!"
     redirect_back(fallback_location: request.referer)
   end
 
@@ -124,9 +124,9 @@ class LinesController < ApplicationController
     end
 
     def set_breadcrumbs
-      add_breadcrumb 'Consola', console_path
+      add_breadcrumb 'Console', console_path
       add_breadcrumb @club.club_name, club_path(@club)
-      add_breadcrumb 'Duelo', panel_club_duel_path
+      add_breadcrumb 'Duel', panel_club_duel_path
     end
 
     def set_membership
@@ -138,7 +138,7 @@ class LinesController < ApplicationController
     end
     
     def is_authorised
-      redirect_to root_path, alert: "No tienes suficiente autorización"
+      redirect_to root_path, alert: "You do not have sufficient authorization for this."
     end
 
     def line_params

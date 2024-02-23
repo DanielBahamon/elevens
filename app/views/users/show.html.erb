@@ -14,15 +14,15 @@
 										<div>
 											<div class="_infoclub">
 												<h3 class="_title"> 
-													<span>¡Hola <%= current_user.firstname %>!</span>
+													<span>Hello <%= current_user.firstname %>!</span>
 												</h3>
-												<p class="_mutted">Sigue tu progreso de cuenta aquí:</p>
+												<p class="_mutted">Follow your account progress here:</p>
 											</div>
 										</div>
 									</div>
 									<div class="_action">
 					         <%= link_to preview_user_path(current_user), class: "_minilink" do %>
-					           Ver perfil
+					           View profile
 					         <% end %>
 									</div>
 								</div>
@@ -35,13 +35,13 @@
 												<i class="fad fa-trophy"></i>	
 											</figure>
 											<div class="_info">
-												<b>Copas</b>
+												<b>Cups</b>
 												<div class="_numb">
 													<h2>18</h2>
 													<div class="_moving">
 														<div class="_up">
 															<i class="fad fa-sort-up"></i>
-															Ultimo ganado
+															Last won
 														</div>
 													</div>
 												</div>
@@ -52,13 +52,13 @@
 												<i class="fad fa-futbol"></i>
 											</figure>
 											<div class="_info">
-												<b>Encuentros</b>
+												<b>Matches</b>
 												<div class="_numb">
 													<h2>94</h2>
 													<div class="_moving">
 														<div class="_down">
 															<i class="fad fa-sort-down"></i>
-															Ultimo perdido
+															Last lost
 														</div>
 													</div>
 												</div>
@@ -69,13 +69,13 @@
 												<i class="fad fa-futbol"></i>
 											</figure>
 											<div class="_info">
-												<b>Seguidores</b>
+												<b>Followers</b>
 												<div class="_numb">
 													<h2><%= current_user.followers.count %></h2>
 													<div class="_moving">
 														<div class="_up">
 															<i class="fad fa-sort-up"></i>
-															+ 10 este mes
+															+10 this month
 														</div>
 													</div>
 												</div>
@@ -86,13 +86,13 @@
 												<i class="fad fa-hands-heart"></i>
 											</figure>
 											<div class="_info">
-												<b>Elogios</b>
+												<b>Compliments</b>
 												<div class="_numb">
 													<h2>123.4k</h2>
 													<div class="_moving">
 														<div class="_up">
 															<i class="fad fa-sort-up"></i>
-															+ 100 este mes
+															+100 this month
 														</div>
 													</div>
 												</div>
@@ -112,7 +112,7 @@
 										</aside>
 										<aside class="_2">
 											<div class="_cont _1">
-												<h6>Parte de</h6>
+												<h6>Part of</h6>
 												<table class="table table-hover align-middle">
 												  <tbody>
 
@@ -121,14 +121,14 @@
 													      <td scope="row"><%= image_tag club.avatar.url(:medium), class: "_shield" %></th>
 													      <td><%= club.club_name %></td>
 													      <td><%= club.champions %></td>
-													      <td>Seguir</td>
+													      <td>Follow</td>
 													      <td><%= link_to club_path(club), class: "_link_hide" do%><% end %></td>
 													    </tr>
 													  <% end %>
 												  </tbody>
 												</table>
 											</div>
-											<h2>Equipos creados por <%= @user.firstname %> :</h2>
+											<h2>Teams created by <%= @user.firstname %>:</h2>
 											<ul>
 											  <% @myclubs.each do |club| %>
 											    <li><%= link_to club_path(club)  do%><%= club.club_name %><% end %></li>
@@ -173,13 +173,13 @@
 													<i class="fad fa-trophy"></i>	
 												</figure>
 												<div class="_info">
-													<b>Copas</b>
+													<b>Cups</b>
 													<div class="_numb">
 														<h2>18</h2>
 														<div class="_moving">
 															<div class="_up">
 																<i class="fad fa-sort-up"></i>
-																Ultimo ganado
+																Last won
 															</div>
 														</div>
 													</div>
@@ -190,13 +190,13 @@
 													<i class="fad fa-futbol"></i>
 												</figure>
 												<div class="_info">
-													<b>Encuentros</b>
+													<b>Matches</b>
 													<div class="_numb">
 														<h2>94</h2>
 														<div class="_moving">
 															<div class="_down">
 																<i class="fad fa-sort-down"></i>
-																Ultimo perdido
+																Last lost
 															</div>
 														</div>
 													</div>
@@ -207,13 +207,13 @@
 													<i class="fad fa-futbol"></i>
 												</figure>
 												<div class="_info">
-													<b>Seguidores</b>
+													<b>Followers</b>
 													<div class="_numb">
 														<h2><%= current_user.followers.count %></h2>
 														<div class="_moving">
 															<div class="_up">
 																<i class="fad fa-sort-up"></i>
-																+ 10 este mes
+																+10 this month
 															</div>
 														</div>
 													</div>
@@ -224,13 +224,13 @@
 													<i class="fad fa-hands-heart"></i>
 												</figure>
 												<div class="_info">
-													<b>Elogios</b>
+													<b>Compliments</b>
 													<div class="_numb">
 														<h2>123.4k</h2>
 														<div class="_moving">
 															<div class="_up">
 																<i class="fad fa-sort-up"></i>
-																+ 100 este mes
+																+100 this month
 															</div>
 														</div>
 													</div>
@@ -249,15 +249,15 @@
 										<div>
 											<div class="_infoclub">
 												<h3 class="_title"> 
-													<span>¡Hola <%= current_user.firstname %>!</span>
+													<span>Hello <%= current_user.firstname %>!</span>
 												</h3>
-												<p class="_mutted">Sigue tu progreso de cuenta aquí:</p>
+												<p class="_mutted">Track your account progress here:</p>
 											</div>
 										</div>
 									</div>
 									<div class="_action">
 					         <%= link_to user_path(current_user), class: "_minilink" do %>
-					           Ver perfil
+					           View profile
 					         <% end %>
 									</div>
 								</div>
@@ -316,7 +316,7 @@
 												<div class="col-xl-8 _1">
 													<div class="_in">
 														<h3><%= @user.firstname %> <%= @user.lastname %></h3>
-														<small class="text-muted">@<%= @user.slug %></small>
+														<small class="text-muted"><%= @user.slug %></small>
 													</div>
 												</div>
 												<div class="col-xl-4 _2">
@@ -334,13 +334,13 @@
 												<div class="col-4">
 													<aside>
 														<h4>120.4k</h4>
-														<p>Duelos Ganados</p>
+														<p>Victories</p>
 													</aside>
 												</div>
 												<div class="col-4">
 													<aside>
 														<h4>158</h4>
-														<p>Torneos Ganados</p>
+														<p>Tournaments</p>
 													</aside>
 												</div>
 											</div>
@@ -352,7 +352,7 @@
 										</aside>
 										<aside class="_2">
 											<div class="_cont _1">
-												<h6>Parte de</h6>
+												<h6>Part of</h6>
 												<table class="table table-hover align-middle">
 												  <tbody>
 
@@ -361,14 +361,14 @@
 													      <td scope="row"><%= image_tag club.avatar.url(:medium), class: "_shield" %></th>
 													      <td><%= club.club_name %></td>
 													      <td><%= club.champions %></td>
-													      <td>Seguir</td>
+													      <td>Follow</td>
 													      <td><%= link_to club_path(club), class: "_link_hide" do%><% end %></td>
 													    </tr>
 													  <% end %>
 												  </tbody>
 												</table>
 											</div>
-											<h2>Equipos creados por <%= @user.firstname %> :</h2>
+											<h2>Teams created by <%= @user.firstname %>:</h2>
 											<ul>
 											  <% @myclubs.each do |club| %>
 											    <li><%= link_to club_path(club)  do%><%= club.club_name %><% end %></li>

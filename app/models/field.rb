@@ -1,7 +1,7 @@
 class Field < ApplicationRecord
   before_validation :set_uuid, on: :create
 
-  belongs_to :users
+  belongs_to :users, optional: true
   has_many :duels, dependent: :destroy
   
   geocoded_by :address

@@ -619,3 +619,20 @@
 	.jumbotron._jumbo_{
     position: relative;
 	}
+
+
+
+
+	/* V1  */
+	.nav .nav-item button {
+    border: 0;
+    background: transparent;
+	}
+	.calendar_simple._1 {
+    padding: 15px;
+    border: 1px solid;
+    border-radius: 5px;
+	}
+	body._light .calendar_simple._1{
+    border-color: #111518;
+	}

@@ -20,10 +20,10 @@ class PagesController < ApplicationController
     total_tasks = 100
     total_progress += 20 if club.avatar.present?
     total_progress += 20 if club.services_ready?
-    total_progress += 10 if club.latitude?
-    total_progress += 10 if club.longitude?
+    total_progress += 20 if club.latitude?
+    total_progress += 10 if ClubPhoto.exists?(club_id: club.id)
     total_progress += 10 if club.status == 'Published'
-    total_progress += 10 if Duel.exists?(club_id: club.id)
+    # total_progress += 10 if Duel.exists?(club_id: club.id)
 
     created_clubs = Club.where(user_id: current_user.id)
     member_clubs = Club.joins(:memberships).where(memberships: { user_id: current_user.id }).distinct
@@ -60,45 +60,49 @@ class PagesController < ApplicationController
     params[:end_date] ||= Date.today.to_s
     params[:task_id] ||= @tasks[0] ? @tasks[0].id : nil
   
+    unless @tasks.blank?
+      params[:task_id] ||= @tasks.first.id
+      @task = Task.find_by(id: params[:task_id])
+    end
 
-      @task = Task.find(params[:task_id])
-      start_date = Date.parse(params[:start_date])
-      end_date = Date.parse(params[:end_date])
-  
-      first_of_month = (start_date - 1.months).beginning_of_month
-      end_of_month = (start_date + 1.months).beginning_of_month
-  
-      # Obtener los duelos relacionados con los clubes del usuario
-      @duels = Duel.where('(club_id IN (?) OR rival_id IN (?)) ', user_club_ids, user_club_ids)
-      @duels_with_clubs = []
-  
-      # Obtener datos específicos de los clubes local y visitante para cada duelo
-      @duels.each do |duel|
-        local_club = Club.find_by(id: duel.club_id)
-        rival_club = Club.find_by(id: duel.rival_id)
-  
-        @duels_with_clubs << {
-          duel: duel,
-          local_club: local_club,
-          rival_club: rival_club
-        }
-      end
-      @tasks = Task.joins(:club).where(club_id: @active_club_ids)
+    # @task = Task.find(params[:task_id])
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
 
-      # Renderizar estos datos en la vista según sea necesario
-      # @tasks = @tasks.joins(:club).joins(:duel)
-      #               .select('tasks.*, clubs.*, duels.*' )
-      #               .where('tasks.start_date BETWEEN ? AND ?', first_of_month, end_of_month)
+    first_of_month = (start_date - 1.months).beginning_of_month
+    end_of_month = (start_date + 1.months).beginning_of_month
 
-      @tasks_with_clubs = @tasks.map do |task|
-        duel = Duel.find_by(id: task.duel_id) # Usa find_by para evitar excepciones si no existe
-        club = Club.find_by(id: task.club_id) # Igualmente, usa find_by para seguridad
-        rival = duel ? Club.find_by(id: duel.rival_id) : nil
-        task.as_json.merge(
-          avatar: club&.avatar&.url, # Usa el avatar del club o la imagen por defecto
-          rival_avatar: rival&.avatar&.url  # Usa el avatar del rival o la imagen por defecto
-        )
-      end
+    # Obtener los duelos relacionados con los clubes del usuario
+    @duels = Duel.where('(club_id IN (?) OR rival_id IN (?)) ', user_club_ids, user_club_ids)
+    @duels_with_clubs = []
+
+    # Obtener datos específicos de los clubes local y visitante para cada duelo
+    @duels.each do |duel|
+      local_club = Club.find_by(id: duel.club_id)
+      rival_club = Club.find_by(id: duel.rival_id)
+
+      @duels_with_clubs << {
+        duel: duel,
+        local_club: local_club,
+        rival_club: rival_club
+      }
+    end
+    @tasks = Task.joins(:club).where(club_id: @active_club_ids)
+
+    # Renderizar estos datos en la vista según sea necesario
+    # @tasks = @tasks.joins(:club).joins(:duel)
+    #               .select('tasks.*, clubs.*, duels.*' )
+    #               .where('tasks.start_date BETWEEN ? AND ?', first_of_month, end_of_month)
+
+    @tasks_with_clubs = @tasks.map do |task|
+      duel = Duel.find_by(id: task.duel_id) # Usa find_by para evitar excepciones si no existe
+      club = Club.find_by(id: task.club_id) # Igualmente, usa find_by para seguridad
+      rival = duel ? Club.find_by(id: duel.rival_id) : nil
+      task.as_json.merge(
+        avatar: club&.avatar&.url, # Usa el avatar del club o la imagen por defecto
+        rival_avatar: rival&.avatar&.url  # Usa el avatar del rival o la imagen por defecto
+      )
+    end
 
   end
 
@@ -141,7 +145,7 @@ class PagesController < ApplicationController
   def load_tasks_user
     @clubs.each do |club|
       if calculate_progress(club) < 100
-        current_user.tasks.create(description: "Concluye el club #{club.club_name}", club_id: club.id, url: dashboard_club_path(club))
+        current_user.tasks.create(description: "Conclude #{club.club_name}", club_id: club.id, url: dashboard_club_path(club))
       end
     end
     if current_user.clubs.present?
@@ -149,7 +153,7 @@ class PagesController < ApplicationController
         current_user.tasks.create(description: "Estas perdiendo condición", url: battle_path)
       end
       if Duel.where("user_id = ? OR club_id IN (?)", current_user.id, @active_club_ids).empty?
-        current_user.tasks.create(description: "Debes probarte en la cancha", url: battle_path)
+        current_user.tasks.create(description: "You should try yourself on the field.", url: battle_path)
       end
     end
       

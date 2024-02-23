@@ -3,7 +3,7 @@
 		<label class="input-group-text" for="inputGroupSelect01">Equipo</label>
 		<% clubs = current_user.clubs.where("clubs.id != '#{@club.id}'") %>
 		<%= f.select :rival_id, clubs.map {|key, value| [key.club_name, key.id]}, {}, class: "form-select form-select-lg" %>
-		<%= f.submit "Crear", class: "btn btn-outline-secondary" %>
+		<%= f.submit "Create", class: "btn btn-outline-secondary" %>
 	</div>
 	<br>
 <% end %>

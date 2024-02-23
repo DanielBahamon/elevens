@@ -8,27 +8,9 @@
 		<aside class="_1">
 			<%= simple_form_for @club do |f| %>
 				<div class="row">
-					<div class="col-12">
+					<div class="col-12 _1">
 						<aside>
-							<header class="_header_console _1">
-								<div class="_in">
-									<div class="_info">
-										<div>
-											<div class="_infoclub">
-												<h2 class="_title"> 
-													<span>Edición de <%= @club.club_name %></span>
-												</h2>
-											</div>
-										</div>
-									</div>
-									<div class="_action">
-                    <button class="button--naira _1" type="submit">
-								    	<span>Guardar</span>
-										  <i class="button__icon far fa-save"></i>
-                    </button>
-									</div>
-								</div>
-							</header>
+							<%= render 'clubs/shared/navs/header' %>
 						</aside>
 					</div>
 					<div class="col-lg-7 _1">
@@ -41,7 +23,7 @@
 													<div>
 														<div class="_infoclub">
 															<h3 class="_title"> 
-																<span>Beneficios</span>
+																<span>Benefits</span>
 															</h3>
 														</div>
 													</div>
@@ -53,31 +35,31 @@
 												<div class="form-check form-switch">
 													<i class="fad fa-tshirt"></i>
 												  <%= f.check_box :uniform, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_uniform" for="club_uniform">Uniformes</label>
+												  <label class="form-check-label" id="club_uniform" for="club_uniform">Uniforms</label>
 												  <label class="_hidelabel" for="club_uniform"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-users-class"></i>
 												  <%= f.check_box :staff, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_staff" for="club_staff">Equipo tecnico</label>
+												  <label class="form-check-label" id="club_staff" for="club_staff">Technical Staff</label>
 												  <label class="_hidelabel" for="club_staff"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-money-check-edit-alt"></i>
 												  <%= f.check_box :payroll, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_payroll" for="club_payroll">Nomina</label>
+												  <label class="form-check-label" id="club_payroll" for="club_payroll">Payroll</label>
 												  <label class="_hidelabel" for="club_payroll"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-bus"></i>
 												  <%= f.check_box :transport, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_transport" for="club_transport">Transporte</label>
+												  <label class="form-check-label" id="club_transport" for="club_transport">Transport</label>
 												  <label class="_hidelabel" for="club_transport"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-plane-alt"></i>
 												  <%= f.check_box :perdiem, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_perdiem" for="club_perdiem">Viaticos</label>
+												  <label class="form-check-label" id="club_perdiem" for="club_perdiem">Per Diem</label>
 												  <label class="_hidelabel" for="club_perdiem"></label>
 												</div>
 											</div>
@@ -92,7 +74,7 @@
 													<div>
 														<div class="_infoclub">
 															<h3 class="_title"> 
-																<span>Entrenamientos</span>
+																<span>Trainings</span>
 															</h3>
 														</div>
 													</div>
@@ -104,31 +86,31 @@
 												<div class="form-check form-switch">
 													<i class="fad fa-user-clock"></i>
 												  <%= f.check_box :training, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_training" for="club_training">Frecuentes</label>
+												  <label class="form-check-label" id="club_training" for="club_training">Frequent</label>
 												  <label class="_hidelabel" for="club_training"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-parking"></i>
 												  <%= f.check_box :parking, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_parking" for="club_parking">Parqueaderos</label>
+												  <label class="form-check-label" id="club_parking" for="club_parking">Parking</label>
 												  <label class="_hidelabel" for="club_parking"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-shield-check"></i>
 												  <%= f.check_box :private, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_private" for="club_private">Privados</label>
+												  <label class="form-check-label" id="club_private" for="club_private">Private</label>
 												  <label class="_hidelabel" for="club_private"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-user-shield"></i>
 												  <%= f.check_box :owner, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_owner" for="club_owner">Canchas privadas</label>
+												  <label class="form-check-label" id="club_owner" for="club_owner">Private fields</label>
 												  <label class="_hidelabel" for="club_owner"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-chimney"></i>
 												  <%= f.check_box :roof, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_roof" for="club_roof">Canchas cubiertas</label>
+												  <label class="form-check-label" id="club_roof" for="club_roof">Indoor courts</label>
 												  <label class="_hidelabel" for="club_roof"></label>
 												</div>
 											</div>
@@ -143,7 +125,7 @@
 													<div>
 														<div class="_infoclub">
 															<h3 class="_title"> 
-																<span>Servicios</span>
+																<span>Services</span>
 															</h3>
 														</div>
 													</div>
@@ -155,25 +137,25 @@
 												<div class="form-check form-switch">
 													<i class="fad fa-toilet-paper"></i>
 												  <%= f.check_box :bathrooms, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_bathrooms" for="club_bathrooms">Baños</label>
+												  <label class="form-check-label" id="club_bathrooms" for="club_bathrooms">Bathrooms</label>
 												  <label class="_hidelabel" for="club_bathrooms"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-shower"></i>
 												  <%= f.check_box :showers, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_showers" for="club_showers">Duchas</label>
+												  <label class="form-check-label" id="club_showers" for="club_showers">Showers</label>
 												  <label class="_hidelabel" for="club_showers"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-glass-citrus"></i>
 												  <%= f.check_box :hydration, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_hydration" for="club_hydration">Hidratación</label>
+												  <label class="form-check-label" id="club_hydration" for="club_hydration">Hydration</label>
 												  <label class="_hidelabel" for="club_hydration"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-backpack"></i>
 												  <%= f.check_box :lockers, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_lockers" for="club_lockers">Casilleros</label>
+												  <label class="form-check-label" id="club_lockers" for="club_lockers">Lockers</label>
 												  <label class="_hidelabel" for="club_lockers"></label>
 												</div>
 												<div class="form-check form-switch">
@@ -191,13 +173,13 @@
 												<div class="form-check form-switch">
 													<i class="fad fa-medkit"></i>
 												  <%= f.check_box :assistance, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_assistance" for="club_assistance">Primeros Auxilios</label>
+												  <label class="form-check-label" id="club_assistance" for="club_assistance">First Aid</label>
 												  <label class="_hidelabel" for="club_assistance"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-dumbbell"></i>
 												  <%= f.check_box :gym, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_gym" for="club_gym">Gimnasio</label>
+												  <label class="form-check-label" id="club_gym" for="club_gym">Gym</label>
 												  <label class="_hidelabel" for="club_gym"></label>
 												</div>
 
@@ -224,43 +206,43 @@
 												<div class="form-check form-switch">
 													<i class="fad fa-burger-soda"></i>
 												  <%= f.check_box :lunch, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_lunch" for="club_lunch">Alimentos</label>
+												  <label class="form-check-label" id="club_lunch" for="club_lunch">Food</label>
 													  <label class="_hidelabel" for="club_lunch"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-washer"></i>
 												  <%= f.check_box :washers, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_washers" for="club_washers">Lavanderia</label>
+												  <label class="form-check-label" id="club_washers" for="club_washers">Laundry</label>
 													  <label class="_hidelabel" for="club_washers"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-temperature-hot"></i>
 												  <%= f.check_box :heating, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_heating" for="club_heating">Calefacción</label>
+												  <label class="form-check-label" id="club_heating" for="club_heating">Heating</label>
 												  <label class="_hidelabel" for="club_heating"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-temperature-frigid"></i>
 												  <%= f.check_box :air, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_air" for="club_air">Aire condicionado</label>
+												  <label class="form-check-label" id="club_air" for="club_air">Air conditioning</label>
 												  <label class="_hidelabel" for="club_air"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-gamepad"></i>
 												  <%= f.check_box :videogames, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_videogames" for="club_videogames">Videojuegos</label>
+												  <label class="form-check-label" id="club_videogames" for="club_videogames">Videogames</label>
 												  <label class="_hidelabel" for="club_videogames"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-swimmer"></i>
 												  <%= f.check_box :pools, class: "form-check-input", role: "switch" %>
-												  <label class="form-check-label" id="club_pools" for="club_pools">Piscinas</label>
+												  <label class="form-check-label" id="club_pools" for="club_pools">Pools</label>
 												  <label class="_hidelabel" for="club_pools"></label>
 												</div>
 												<div class="form-check form-switch">
 													<i class="fad fa-graduation-cap"></i>
 													<%= f.check_box :courses, class: "form-check-input #{'on' if @club.courses == true}", role: "switch" %>
-												  <label class="form-check-label" id="club_courses" for="club_courses">Aprendizaje</label>
+												  <label class="form-check-label" id="club_courses" for="club_courses">Learning</label>
 												  <label class="_hidelabel" for="club_courses"></label>
 												</div>
 											</div>
@@ -330,7 +312,7 @@
 				  										</a>
 							    						<%= f.text_field :club_name, class: "form-control _input_title_edit", placeholder: "#{@club.club_name}" %>
 				  										<button class="_btn button--aylen _2 fit" type="submit">
-				  											<span>Guardar</span>
+				  											<span>Ready</span>
 				  										</button>
 														</div>
 							    				</h3>
@@ -339,7 +321,7 @@
 				  										<a class="btn _slug_edit_link_cancel">
 							    							<i class="bi bi-chevron-left"></i>
 				  										</a>
-															<p class="_clubsubtitle _1 mb-0">@<%= @club.slug %></p>
+															<p class="_clubsubtitle _1 mb-0"><%= @club.slug %></p>
 				  										<a class="btn _slug_edit_link">
 				  											<i class="bi bi-pencil-square "></i>
 				  										</a>
@@ -352,7 +334,7 @@
 					                    <%= f.text_field :slug, class: "_input _2 form-control _input_slug_edit", required: true,
 					                          id: "club_clubname", placeholder: "#{@club.slug} " %>
 				  										<button class="_btn button--aylen _2 fit" type="submit">
-				  											<span>Guardar</span>
+				  											<span>Ready</span>
 				  										</button>
 														</div>
 							    				</h6>
@@ -375,13 +357,13 @@
 						  				<div class="col-4 p-0 text-center">
 						  					<aside>
 						  						<h4>120.4k</h4>
-						  						<p>Duelos Ganados</p>
+						  						<p>Victories</p>
 						  					</aside>
 						  				</div>
 						  				<div class="col-4 p-0 text-center">
 						  					<aside>
 						  						<h4>158</h4>
-						  						<p>Torneos Ganados</p>
+						  						<p>Tournaments Won</p>
 						  					</aside>
 						  				</div>
 						  			</div>
@@ -391,13 +373,13 @@
 									    			<div class="col-12 p-0">
 														<div class="input-group mb-3">
 														  	<%= f.select( :sport_type, [
-												  						 ["Tipo de deporte", ""],
-												  						 ["Fútbol", "Football"],
-												  						 ["Fútsal", "Showbol"],
-												  						 ["Microfutbol", "Micro"],
-												  						 ["Futvóley", "Footvoley"], 
-												  						 ["Fútbol-Tenis", "Tenis"],
-												  						 ["Banquitas", "Benches"]],
+												  						 ["Sport", ""],
+												  						 ["Football", "Football"],
+												  						 ["Showbol", "Showbol"],
+												  						 ["Futsal", "Micro"],
+												  						 ["Footvoley", "Footvoley"], 
+												  						 ["Tenis", "Tenis"],
+												  						 ["Small-sided", "Benches"]],
 												  						 {required: true}, 
 												  						 {class: 'form-select'}) %>
 
@@ -430,7 +412,7 @@
 	  <div class="modal-dialog modal-dialog-centered">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	      	<h5 style="margin-bottom: 0;">Portada</h5>
+	      	<h5 style="margin-bottom: 0;">Cover</h5>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
@@ -441,7 +423,7 @@
 			    			<div class="col-md-12">
 									<div class="input-group mb-3">
 									  <%= file_field_tag "images[]", type: :file, multiple: true, class: "form-control" %>
-									  <%= f.submit "Guardar", class: "btn btn-outline-secondary" %>
+									  <%= f.submit "Ready", class: "btn btn-outline-secondary" %>
 									</div>
 			    			</div>
 			    		</div>
@@ -470,7 +452,7 @@
 									<div class="input-group mb-3">
               			<%= f.file_field :avatar, class: "form-control", id: "upload_picture_1" %>
 										<%= f.hidden_field :front, value: true %>
-									  <%= f.submit "Guardar", class: "btn btn-outline-secondary" %>
+									  <%= f.submit "Ready", class: "btn btn-outline-secondary" %>
 									</div>
 			    			</div>
 			    		</div>
@@ -493,25 +475,25 @@
 			    		<div class="row">
 			    			<div class="col-md-6">
 									<div class="input-group mb-3">
-										<label>País</label>
+										<label>Country</label>
 						  			<%= f.text_field :country, class: "form-control", placeholder: "País" %>
 									</div>
 			    			</div>
 			    			<div class="col-md-6">
 			    				<div class="input-group mb-3">
-										<label>Ciudad</label>
+										<label>City</label>
 						  			<%= f.text_field :city, class: "form-control", placeholder: "Ciudad" %>
 			    				</div>
 			    			</div>
 			    			<div class="col-md-6">
 			    				<div class="input-group mb-3">
-										<label>Distrito/Barrio/Zona</label>
+										<label>District/Neighborhood/Area</label>
 						  			<%= f.text_field :neighborhood, class: "form-control", placeholder: "Barrio / Distrito" %>
 			    				</div>
 			    			</div>
 			    			<div class="col-md-6">
 			    				<div class="input-group mb-3">
-										<label>Dirección</label>
+										<label>Address</label>
 						  			<%= f.text_field :address, class: "form-control", placeholder: "Dirección" %>
 			    				</div>
 								  <%= f.hidden_field :latitude, value: current_user.clubs[0].latitude || 37.7749 %>
@@ -625,7 +607,7 @@
 			    			<div class="col-12">
 			    				<br>
                   <button class="button--naira _1 _bigbtn" type="submit">
-							    	<span>Guardar</span>
+							    	<span>Ready</span>
 									  <i class="button__icon fad fa-save"></i>
                   </button>
 			    			</div>

@@ -12,15 +12,15 @@
 									<div>
 										<div class="_infoclub">
 											<h3 class="_title"> 
-												<span>¡Hola <%= current_user.firstname %>!</span>
+												<span>Hello <%= current_user.firstname %>!</span>
 											</h3>
-											<p class="_mutted">Sigue tu progreso de cuenta aquí:</p>
+											<p class="_mutted">Track your account progress here:</p>
 										</div>
 									</div>
 								</div>
 								<div class="_action">
 				         <%= link_to user_path(current_user), class: "_minilink" do %>
-				           Ver perfil
+				           View profile
 				         <% end %>
 								</div>
 							</div>

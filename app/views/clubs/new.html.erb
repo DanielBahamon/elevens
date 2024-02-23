@@ -21,8 +21,8 @@
 			<aside class="_content">
 				<div class="_head">
 				  <div class="_in">
-				    <h1 class="display-6">Bautiza a tu Club</h1>
-				    <p class="lead">En este primer paso, debes elegir un buen nombre para tu club:</p>
+				    <h1 class="display-6">Name your Club</h1>
+				    <p class="lead">In this first step, you must choose a good name for your club:</p>
 				  </div>
 				</div>
 				<div class="_body_console">
@@ -32,7 +32,7 @@
 					<div class="_btns">
 				    <p></p>
 				    <a href="#" class="button--naira _1 fit next" id="follow-button">
-				    	<span>Siguiente</span>
+				    	<span>Next</span>
 							<i class="button__icon bi bi-check2"></i>
 				  	</a>
 					</div>
@@ -43,22 +43,22 @@
 			<aside class="_content">
 				<div class="_head">
 				  <div class="_in">
-				    <h1 class="display-6">¿Cúal es tu país origen?</h1>
+				    <h1 class="display-6">Which is your country of origin?</h1>
 				  </div>
 				</div>
 				<div class="_body_console">
 					<div class="input-group mb-3">
-					  <%= f.text_field :country, class: "_input_text _1 form-control inputhide", placeholder: "Pais", required: true %>
+					  <%= f.text_field :country, class: "_input_text _1 form-control inputhide", placeholder: "Country", required: true %>
 				  	<div id="club_country-dropdown"></div>
 					</div>
 				</div>
 				<div class="_action">
 			    <a href="#" class="button--naira _1 fit prev" id="follow-button">
-			    	<span>Anterior</span>
+			    	<span>Back</span>
 						<i class="button__icon bi bi-check2"></i>
 			  	</a>
 			    <a href="#" class="button--naira _1 fit next" id="follow-button">
-			    	<span>Siguiente</span>
+			    	<span>Next</span>
 						<i class="button__icon bi bi-check2"></i>
 			  	</a>
 				</div>
@@ -68,22 +68,22 @@
 			<aside class="_content">
 				<div class="_head">
 				  <div class="_in">
-				    <h1 class="display-6">¿Qué ciudad que representara tu club?</h1>
+				    <h1 class="display-6">"What city will your club represent?</h1>
 				  </div>
 				</div>
 				<div class="_body_console">
 					<div class="input-group mb-3">
-					  <%= f.text_field :city, class: "_input_text _1 form-control", placeholder: "Tu ciudad", required: true %>
+					  <%= f.text_field :city, class: "_input_text _1 form-control", placeholder: "City", required: true %>
 				  	<div id="club_city-dropdown"></div>
 					</div>
 				</div>
 				<div class="_action">
 			    <a href="#" class="button--naira _1 fit prev" id="follow-button">
-			    	<span>Anterior</span>
+			    	<span>Back</span>
 						<i class="button__icon bi bi-check2"></i>
 			  	</a>
 			    <a href="#" class="button--naira _1 fit next" id="follow-button">
-			    	<span>Siguiente</span>
+			    	<span>Next</span>
 						<i class="button__icon bi bi-check2"></i>
 			  	</a>
 				</div>
@@ -93,22 +93,22 @@
 			<aside class="_content">
 				<div class="_head">
 				  <div class="_in">
-				    <h1 class="display-6">Especifica la ubicación de tu club</h1>
+				    <h1 class="display-6">Specify the location of your club</h1>
 				  </div>
 				</div>
 				<div class="_body_console">
 					<div class="input-group mb-3">
-					  <%= f.text_field :address, class: "_input_text _1 form-control", placeholder: "Dirección", required: true %>
+					  <%= f.text_field :address, class: "_input_text _1 form-control", placeholder: "Address", required: true %>
 				  	<div id="club_address-dropdown"></div>
 					</div>
 				</div>
 				<div class="_action">
 			    <a href="#" class="button--naira _1 fit prev" id="follow-button">
-			    	<span>Anterior</span>
+			    	<span>Back</span>
 						<i class="button__icon bi bi-check2"></i>
 			  	</a>
 			    <a href="#" class="button--naira _1 fit next" id="follow-button">
-			    	<span>Siguiente</span>
+			    	<span>Next</span>
 						<i class="button__icon bi bi-check2"></i>
 			  	</a>
 				</div>
@@ -118,12 +118,12 @@
 			<aside class="_content">
 				<div class="_head">
 				  <div class="_in">
-				    <h1 class="display-6">Confirma</h1>
+				    <h1 class="display-6">Confirm</h1>
 				  </div>
 				</div>
 				<div class="_body_console">
 					<div class="_in">
-						<p class="lead">Confirma la ubicación exacta del duelo, puedes mover el icono dentro del mapa:</p>
+						<p class="lead">Confirm the exact location of the duel, you can move the icon within the map:</p>
 		        <div class="_map" id="map_club"></div>
 						<div class="_action_btns">
 						</div>
@@ -131,11 +131,11 @@
 				</div>
 				<div class="_action">
 					<button class="button--naira _2 fit prev " type="button" id="button-addon3">
-			    	<span>Atras</span>
+			    	<span>Back</span>
 						<i class="button__icon fas fa-arrow-left"></i>
 					</button>
 				  <button class="button--naira _1 fit" type="submit">
-			    	<span>Confirmar y guardar</span>
+			    	<span>Confirm and Save</span>
 						<i class="button__icon fas fa-arrow-right"></i>
 				  </button>
 				</div>
@@ -221,7 +221,7 @@
 	          document.getElementById('club_latitude').value = location.lat();
 	          document.getElementById('club_longitude').value = location.lng();
 	        } else {
-	          alert('La geocodificación no tuvo éxito por la siguiente razón: ' + status);
+	          alert('Geocode was not successful for the following reason: ' + status);
 	        }
 	      });
 	    }

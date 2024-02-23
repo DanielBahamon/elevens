@@ -15,7 +15,7 @@ class RefereesController < ApplicationController
   def create
     @referee = Referee.new(id:current_user.id, user_id: current_user.id, firstname: current_user.firstname, lastname: current_user.lastname, slug: current_user.slug, position: 0)
     if @referee.save
-      redirect_to @referee, notice: "¡Te has unido como árbitro!"
+      redirect_to @referee, notice: "You have joined as a referee!"
     else
       render :new
     end

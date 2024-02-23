@@ -9,7 +9,7 @@
 								<div class="_titles">
 									<h1 class="_title _stroke">
 										<%= link_to user_path(current_user) do %>
-											<i class="fas fa-chevron-left"></i> <i>Volver</i>
+											<i class="fas fa-chevron-left"></i> <i>Back</i>
 										<% end %>
 									</h1>
 								</div>
@@ -59,8 +59,8 @@
                       <div class="_in">
                         <div class="_actions">
 													<a class="_btn btn btn-outline-primary"><i class="bi bi-info-circle"></i></a>
-                          <a class="_btn btn btn-primary disabled" disabled>Seguir</a>
-                          <a class="_btn btn btn-outline-primary disabled" disabled>Invitar</a>
+                          <a class="_btn btn btn-primary disabled" disabled>Follow</a>
+                          <a class="_btn btn btn-outline-primary disabled" disabled>Scout</a>
                           <a class="btn btn btn-outline-secondary disabled" disabled><i class="bi bi-info-circle"></i></a>
                         </div>
                       </div>
@@ -76,13 +76,13 @@
                     <div class="col-4 p-0 text-center">
                       <aside>
                         <h4>120.4k</h4>
-                        <p>Duelos Ganados</p>
+                        <p>Victories</p>
                       </aside>
                     </div>
                     <div class="col-4 p-0 text-center">
                       <aside>
                         <h4>158</h4>
-                        <p>Torneos Ganados</p>
+                        <p>Tournament</p>
                       </aside>
                     </div>
                   </div>
@@ -95,14 +95,14 @@
 											      <td scope="row"><%= image_tag club.avatar.url(:medium), class: "_shield" %></th>
 											      <td><%= club.club_name %></td>
 											      <td><%= club.champions %></td>
-											      <td>Seguir</td>
+											      <td>Follow</td>
 											      <td><%= link_to club_path(club), class: "_link_hide" do%><% end %></td>
 											    </tr>
 											  <% end %>
 										  </tbody>
 										</table>
 
-										<h2>Equipos creados por <%= @user.firstname %> :</h2>
+										<h2>Teams created by <%= @user.firstname %>:</h2>
 										<ul>
 										  <% @myclubs.each do |club| %>
 										    <li><%= link_to club_path(club)  do%><%= club.club_name %><% end %></li>

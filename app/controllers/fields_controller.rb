@@ -1,25 +1,25 @@
 class FieldsController < ApplicationController
-  before_action :set_user
   before_action :set_field, except: [:index, :new, :create]
-  before_action :authorize_creator, only: [ :budget, :description, :visuals, :location, :location, :destroy]
+  # before_action :authorize_creator, only: [ :budget, :description, :visuals, :location, :location, :destroy]
 
   def index
+    @field = Field.all
   end
 
   def show
   end
 
   def new
-    @field = @user.fields.new
+    @field = Field.new
   end
 
   def create
-    @field = @user.fields.build(field_params)
-    
-    # @field = Field.new(field_params)
+
+    @field = current_user.fields.build(field_params)
+  
     if @field.save
       respond_to do |format|
-        format.html { redirect_to fields_path }
+        format.html { redirect_to @field }
         format.js
       end
     else
@@ -37,9 +37,9 @@ class FieldsController < ApplicationController
   
   def update
     if @field.update(field_params)
-      flash[:notice] = "¡Guardado!"
+      flash[:notice] = "Saved!"
     else
-      flash[:notice] = "Algo no esta bien..."
+      flash[:notice] = "Oops! Something went wrong."
     end
     redirect_back(fallback_location: request.referer)
   end
@@ -51,11 +51,11 @@ class FieldsController < ApplicationController
     end
 
     def set_user
-      @user = User.friendly.find(params[:user_id])
+      @user = User.friendly.find(params[:user_id]) if params[:user_id]
     end
 
     def authorize_creator
-      redirect_to root_path, alert: "No tienes suficiente autorización" unless current_user.id == @field.user_id
+      redirect_to root_path, alert: "You do not have sufficient authorization for this." unless current_user.id == @field.user_id
     end
   
     def field_params

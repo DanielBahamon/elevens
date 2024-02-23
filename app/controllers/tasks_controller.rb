@@ -9,9 +9,9 @@ class TasksController < ApplicationController
     @task = current_user.tasks.build(task_params)
 
     if @task.save
-      redirect_to tasks_path, notice: 'Tarea creada exitosamente.'
+      redirect_to tasks_path, notice: 'Task created successfully.'
     else
-      flash.now[:error] = 'Hubo un error al crear la tarea.'
+      flash.now[:error] = 'There was an error creating the task.'
       render :new
     end
   end
@@ -23,9 +23,9 @@ class TasksController < ApplicationController
     @task.duel_id = params[:duel_id]
   
     if @task.save
-      redirect_to club_path(@task.club_id), notice: 'Tarea creada exitosamente.'
+      redirect_to club_path(@task.club_id), notice: 'Task created successfully.'
     else
-      flash.now[:error] = 'Hubo un error al crear la tarea.'
+      flash.now[:error] = 'There was an error creating the task.'
       render :new
     end
   end

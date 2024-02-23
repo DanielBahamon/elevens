@@ -2167,9 +2167,7 @@
     position: sticky;
     z-index: 3;
   }
-  main._layout._1 > aside._1 > ._cont, 
-  main._layout._1 > aside._1 > ._cont > ._in {
-  }
+
   main._layout._1 > aside._1 ._navsidefoot{
     display: grid;
     align-items: end;
@@ -2183,6 +2181,7 @@
   main._layout > aside._1 nav._navside > ._cont._1 > ._logo {
     padding: 20px;
     margin: 0;
+    width: 100%;
     transition:all 0.2s cubic-bezier(.01,.32,.29,1.2);
   }
   main._layout._1 > aside ._head ._actions {

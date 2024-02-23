@@ -3,7 +3,7 @@
 	<section class="_cont _1">
     <div class="_1">
       <div class="_i">
-				<p class="_mutted">Caduca en <%= calculate_event_time(@undo) || @undo.start_date.strftime("%H:%M %p - %B %d, %Y") %></p>
+				<p class="_mutted">Expires in <%= calculate_event_time(@undo) || @undo.start_date.strftime("%H:%M %p - %B %d, %Y") %></p>
       </div>
       <div class="_ii">
 				<p class="_mutted"><%= duel.sport %></p>
@@ -13,14 +13,14 @@
       <div class="_i">
       	<div class="_in">
 					<%= link_to panel_club_duel_path(local, duel), class: "_typematch", target: "_blank" do %>
-						<h3 class="_title">Concretar nuevo evento</h3>
+						<h3 class="_title">To schedule a new event</h3>
 					<% end %>
       	</div>
       </div>
       <div class="_ii">
 				<%= link_to panel_club_duel_path(local, duel), class: "button--shikoba _1" do %>
 					<i class="button__icon fad fa-external-link"></i>
-      		<span>Completar</span>
+      		<span>Complete</span>
 				<% end %>
       </div>
 		</div>
@@ -32,22 +32,22 @@
 		          <figure>
 								<i class="fad fa-handshake-alt"></i>
 		          </figure>
-		          <p class="_annun">Evento amistoso</p>
+		          <p class="_annun">Friendly event</p>
 						<% elsif duel.duel_type == "Bet" %>
 		          <figure>
 								<i class="fad fa-sack-dollar"></i>
 		          </figure>
-		          <p class="_annun">Evento de apuesta</p>
+		          <p class="_annun">Bet event</p>
 						<% elsif duel.duel_type == "Tournament" %>
 		          <figure>
 								<i class="fad fa-trophy-alt"></i>
 		          </figure>
-		          <p class="_annun">Evento de torneo</p>
+		          <p class="_annun">Tournament event</p>
 						<% elsif duel.duel_type == "League" %>
 		          <figure>
 								<i class="fad fa-award"></i>
 		          </figure>
-		          <p class="_annun">Evento de liga</p>
+		          <p class="_annun">League event</p>
 						<% end %>
 					<% end %>
 	      </div>

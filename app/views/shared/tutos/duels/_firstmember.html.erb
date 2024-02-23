@@ -1,0 +1,21 @@
+<div class="jumbotron _jumbo">
+	<div class="_in text-center">
+		<h1 class="_title">Recruit your first talents</h1>
+    <p class="_text">Start forming your football club and attract future champions right now!</p>
+    <hr>
+    <div class="row nom">
+      <div class="col-lg-6 _1">
+        <%= link_to scouting_club_path(@club), class: "button--shikoba _1" do %>
+          <span>Scout talents</span>
+          <i class="button__icon fad fa-paw-claws"></i>
+        <% end %>
+      </div>
+      <div class="col-lg-6 _2">    
+        <%= link_to club_selfjoin_path(club_id: @club, user_id: current_user.id), method: :post,  class: "button--shikoba _2", id: "_invitation_#{current_user.id}" do %>
+          <span>Participate as a player</span>
+          <i class="button__icon fad fa-user-plus"></i>
+        <% end %>
+      </div>
+    </div>  
+	</div>
+</div>

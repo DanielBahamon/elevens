@@ -1,11 +1,16 @@
-<% content_for :page_name, "Control de #{@club.club_name} - Entornes" %>
+<% content_for :page_name, "Dashboard #{@club.club_name}" %>
 
 <%= render 'clubs/layout/one' %>
 	<section class="_console _1">
-		<% if @club.duels.present? && @club.memberships.present? %>
+		<% if @club.memberships.present? %>
 			<aside class="_1">
 				<div class="row">
-					<div class="col-lg-3">
+					<div class="col-12 _1">
+						<aside>
+							<%= render 'clubs/shared/navs/header' %>
+						</aside>
+					</div>
+					<div class="col-6 col-lg-3">
 						<div class="_card">
 							<div class="_in _1">
 								<span class="_1">
@@ -23,7 +28,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-6 col-lg-3">
 						<div class="_card">
 							<div class="_in _1">
 								<span class="_1">
@@ -41,7 +46,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-6 col-lg-3">
 						<div class="_card">
 							<div class="_in _1">
 								<span class="_1">
@@ -59,7 +64,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3">
+					<div class="col-6 col-lg-3">
 						<div class="_card">
 							<div class="_in _1">
 								<span class="_1">
@@ -77,145 +82,390 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6 _1">
+					<div class="col-12 _1">
 						<aside>
 							<div class="_body_console _1">
 								<div class="_cont _1">
-								
 									<% if @undo.present? %>
 											<%= render 'shared/cards/duels/undo', duel: @undo %>
 									<% end %>
-									<table class="table align-middle table_rivals">
-									  <tbody>
-									  	<% if @next.present?  %>
-									    	<%= render 'clubs/shared/cards/rival', duel: @next %>
-											<% end %>
-											<% if @upcoming_duels.present? %>
-												<% @upcoming_duels.each do |duel| %>
-												<%= render 'clubs/shared/lists/duels/rivals', duel: duel %>
+							</div>
+						</aside>
+					</div>
+					<div class="col-lg-6 col-xl-6 _1">
+						<aside>
+							<div class="_body_console _1">
+								<div class="_cont _1">
+									<ul class="nav" id="taskClubSubnav" role="tablist">
+										<li class="nav-item" role="presentation">
+											<button class="nav-link active" id="list-tab" data-bs-toggle="tab" data-bs-target="#list-tab-tasks" type="button" role="tab" aria-controls="list-tab-tasks" aria-selected="true">Task list</button>
+										</li>
+										<li class="nav-item" role="presentation">
+											<button class="nav-link" id="calendar-tab" data-bs-toggle="tab" data-bs-target="#calendar-tab-pane" type="button" role="tab" aria-controls="calendar-tab-pane" aria-selected="false">Calendar</button>
+										</li>
+										<li class="nav-item" role="presentation">
+											<button class="nav-link" id="past-tab" data-bs-toggle="tab" data-bs-target="#past-tab-pane" type="button" role="tab" aria-controls="past-tab-pane" aria-selected="false">History</button>
+										</li>
+									</ul>
+									<div class="tab-content" id="taskClubSubnavContent">
+										<div class="tab-pane fade show active" id="list-tab-tasks" role="tabpanel" aria-labelledby="list-tab" tabindex="0">
+											<div class="_cont _1">
+												<% if @next.present?  %>
+													<table class="table align-middle table_rivals">
+														<tbody>
+															<%= render 'clubs/shared/cards/rival', duel: @next %>
+															<% if @upcoming_duels.present? %>
+																<% @upcoming_duels.each do |duel| %>
+																<%= render 'clubs/shared/lists/duels/rivals', duel: duel %>
+																<% end %>
+															<% end %>
+														</tbody>
+													</table>
+												<% else %>
+													<div class="_notice">
+														<h2>No next opponents</h2>
+													</div>
 												<% end %>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="calendar-tab-pane" role="tabpanel" aria-labelledby="calendar-tab" tabindex="0">
+											<div class="_cont _1">
+												<div class="calendar_simple _1">
+													<div id="calendar"></div>
+
+													<div class="modal fade newEventModal" id="newEventModal" tabindex="-1" aria-labelledby="newEventModalLabel" aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h1 class="modal-title fs-5" id="newEventModalLabel">New event</h1>
+																	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																</div>
+																<div class="modal-body">
+															
+																	<div class="_list"></div>
+																	<input class="timepicker _time" id="timeSelector">
+																</div>
+																<div class="modal-footer">
+																	<% if current_user.clubs.present? %>
+																		<%= link_to new_club_duel_path(current_user.clubs.first), class: "btn btn-primary", id: "createDuelLink" do %>
+																			<span>New duel</span>
+																		<% end %>
+																	<% end %>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="modal fade newEventTodayModal" id="newEventTodayModal" tabindex="-1" aria-labelledby="newEventTodayModalLabel" aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h1 class="modal-title fs-5" id="newEventModalLabel">Nuevo event</h1>
+																	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																</div>
+																<div class="modal-body">
+																	<div class="_list"></div>
+																</div>
+																<div class="modal-footer">
+																	<% if @clubs.present? %>
+																		<%= link_to new_club_duel_path(@clubs.first), class: "btn btn-primary", id: "createDuelLink" do %>
+																			<span>New duel</span>
+																		<% end %>
+																	<% end %>
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<% if @clubs.present? %>
+														<script type="text/javascript">
+																var clubId = '<%= @clubs.first.id %>';
+																// Asignación inicial de tareas y horas no disponibles
+																window.tasks = <%= raw @tasks_with_clubs.to_json %>
+																var unavailableHours = {};
+
+																// Función para mostrar las reservas en el FullCalendar
+																function showReservations(data) {
+																	return data.map(function(e) {
+																		return {
+																			title: e.description,
+																			start: new Date(e.start_date).toISOString(),
+																			end: new Date(e.end_date).toISOString(),
+																			status: e.status,
+																			avatar: e['avatar'] // URL del avatar
+																			// Asegúrate de incluir cualquier otra propiedad que necesites aquí
+																		};
+																	});
+																}
+
+																// Función para actualizar las horas no disponibles basadas en los datos de las tareas
+																function updateUnavailableHours(tasksData) {
+																	unavailableHours = {}; // Reset de las horas no disponibles
+																	tasksData.forEach(function(task) {
+																		var startDate = moment.utc(task.start_date);
+																		var endDate = moment.utc(task.end_date);
+
+																		var dateKey = startDate.format('YYYY-MM-DD');
+
+																		if (!unavailableHours[dateKey]) {
+																			unavailableHours[dateKey] = [];
+																		}
+
+																		var timeRange = [startDate.format('HH:mm'), endDate.format('HH:mm')];
+																		unavailableHours[dateKey].push(timeRange);
+																	});
+																}
+
+																// Función para actualizar el enlace del duelo con la fecha y hora seleccionadas
+																function updateDuelLinkWithDateTime(date, time) {
+																	var dateTimeString = date.format('YYYY-MM-DD') + 'T' + time + ':00';
+																	var baseUrl = '<%= new_club_duel_path(@clubs.first) %>';
+																	var fullUrl = baseUrl + "?selected_date=" + encodeURIComponent(dateTimeString);
+																	$('#createDuelLink').attr('href', fullUrl);
+																}
+
+																// Inicialización de FullCalendar
+																$('#calendar').fullCalendar({
+																	header: {
+																		left: 'title',
+																		center: '',
+																		right: 'prev, next'
+																	},
+																	events: showReservations(window.tasks),
+																	selectable: true,
+																	dayClick: function(date, jsEvent, view) {
+																		//var today = moment().startOf('day');
+																		var today = moment(); 
+																		var now = moment.utc(); // Hora actual
+																		var clickedDate = date.clone().startOf('day');
+
+																		if (clickedDate.isBefore(today, 'day')) {
+																				// Si la fecha seleccionada es antes de hoy, no hacer nada
+																				return;
+																		}
+
+																		var formattedDate = date.format('YYYY-MM-DD');
+																		if (clickedDate.isSame(today, 'day')) {
+																				$('#newEventTodayModal .modal-title').text('Eventos para hoy - ' + date.format('MMMM D, YYYY - dddd'));
+																				$('#newEventTodayModal').modal('show');
+																				return; // Agregar esta línea para evitar que se abra el modal de selección de hora si es el día de hoy.
+																		} else {
+																				// Para cualquier otro día futuro, muestra el modal de nuevo evento
+																				$('#newEventModal .modal-title').text('Selecciona una hora para ' + date.format('MMMM D, YYYY - dddd'));
+																				var modal = new bootstrap.Modal(document.getElementById('newEventModal'));
+																				modal.show();
+																		}
+
+																		if (date.isBefore(today, 'day')) {
+																			return;
+																		}
+
+																		var formattedDate = date.format('YYYY-MM-DD');
+																		$('#newEventModal .modal-title').text('' + formattedDate);
+																		var modal = new bootstrap.Modal(document.getElementById('newEventModal'));
+																		modal.show();
+
+																		var timepickerElement = $('#timeSelector');
+																		timepickerElement.timepicker('remove'); // Eliminar cualquier instancia anterior
+
+																		// Configuración básica del timepicker
+																		var timepickerOptions = {
+																			timeFormat: 'H:i',
+																			disableTimeRanges: unavailableHours[formattedDate] || [],
+																			step: 30
+																		};
+																		// Si la fecha seleccionada es hoy, configurar minTime y maxTime
+																		if (clickedDate.isSame(today, 'day')) {
+																				var currentMinutes = now.minutes();
+																				var additionalMinutes = currentMinutes < 30 ? 30 - currentMinutes : 60 - currentMinutes;
+																				
+																				// Clonamos 'now' para no modificar la instancia original de 'moment'
+																				var roundedCurrentTime = now.clone().add(additionalMinutes, 'minutes');
+
+																				timepickerOptions.minTime = roundedCurrentTime.format('HH:mm');
+																				timepickerOptions.maxTime = '23:59'; // Ajuste para que el tiempo máximo sea hasta el final del día de hoy
+																		}
+
+																		timepickerElement.timepicker(timepickerOptions);
+
+																		timepickerElement.off('change').on('change', function() {
+																			var selectedTime = $(this).val();
+																			updateDuelLinkWithDateTime(date, selectedTime);
+																		});
+																		
+																		// Obtén los eventos del día seleccionado
+																		var events = $('#calendar').fullCalendar('clientEvents', function(event) {
+																			return event.start.isSame(date, 'day');
+																		});
+
+																		// Compila la lista de eventos para mostrar
+																		var eventList = events.map(function(event) {
+																			return '<li>' + event.title + ' - ' + event.start.format() + '</li>';
+																		}).join('');
+
+																		// Actualizamos el título del modal con la fecha seleccionada
+																		$('#newEventModal .modal-title').text(date.format('MMMM D, YYYY - dddd'));
+																		$('#newEventModal .modal-body ._list').html('<ul>' + eventList + '</ul>');
+
+																	},
+																	eventRender: function(event, element, view) {
+																			if (view.type === 'month') {
+																					// Usa el método 'data-date' para asegurarte de que siempre estás apuntando al día correcto, incluso después de cambiar de mes
+																					var dayEl = view.el.find('.fc-day-top[data-date="' + event.start.format('YYYY-MM-DD') + '"]');
+
+																					// Encuentra o crea el contenedor de puntos
+																					var pointsContainer = dayEl.find('._points');
+																					if (pointsContainer.length === 0) {
+																							pointsContainer = $('<div class="_points"></div>');
+																							dayEl.append(pointsContainer);
+																					}
+
+																					var pointCount = pointsContainer.find('._point').length + 1; // Agrega 1 por el evento actual
+																					if (pointCount < 4) { // Cambia a 4 porque ya has contado el evento actual
+																							var eventDot = $('<div class="_point"><div class="_i"></div></div>');
+																							pointsContainer.append(eventDot);
+																					} else if (pointCount === 4) { // Cambia a 4 para manejar el caso de exactamente 4 eventos
+																							// Eliminar los puntos existentes y añadir "+3"
+																							pointsContainer.empty();
+																							var moreEventsIndicator = $('<div class="_more">+3</div>');
+																							pointsContainer.append(moreEventsIndicator);
+																					} // No necesitas un 'else' aquí porque ya has manejado el caso de 4 o más
+																			}
+																	}
+																});
+
+																// Carga inicial de las tareas y actualización de las horas no disponibles
+																$(document).ready(function() {
+																	updateUnavailableHours(window.tasks);
+																});
+														</script>
+													<% end %>
+
+												</div>
+											</div>	
+										</div>
+										<div class="tab-pane fade" id="past-tab-pane" role="tabpanel" aria-labelledby="past-tab" tabindex="0">
+											<div class="_cont _1">
+												<% if @pasts.present? %>
+													<% @pasts.each do |duel| %>
+														<%= render 'clubs/shared/lists/duels/pasts', duel: duel %>
+													<% end %>
+												<% else %>
+													<div class="_notice">
+														<h2>No history yet</h2>
+													</div>
+												<% end %>
+											</div>	
+										</div>
+									</div>
+								</div>
+							</div>
+						</aside>
+					</div>
+					<div class="col-lg-6 col-xl-4 _3">
+						<aside>
+							<div class="_body_console _1">
+								<div class="_cont _1">
+									<% if @members.count > 0 %>
+										<ul class="list-group list-group-flush">
+											<% @members.each do |player| %>
+												<li class="list-group-item d-flex justify-content-between _itemuser">
+													<div class="_i">
+														<figure>
+															<%= link_to user_path(player) do %><%= image_tag player.avatar.url(:medium), class: "_avatar _1" %><% end %>
+															<div class="_status">
+																<% if player.status == true %>
+																	<span class="_pointstatus bg-success"></span>
+																<% else %>
+																	<span class="_pointstatus bg-secondary"></span>
+																<% end %>
+															</div>
+														</figure>
+														<div class="_data">
+															<h6 class="_name"><%= link_to user_path(player) do %><%= player.firstname %> <%= player.lastname %><% end %></h6>
+															<p class="_slug"><%= player.slug %></p>
+														</div>
+													</div>
+													<div class="_iii">
+														<div class="_clubes">
+																
+														</div>
+													</div>
+													<div class="_ii">
+														<div class="_position">
+															<% if player.position.present? %>
+																<% positions = player.position.split(',') %>
+																<% positions.first(2).each do |position| %>
+																	<span class="badge outline"><%= position.strip %></span>
+																<% end %>
+																<% if positions.count > 2 %>
+																	<span class="badge outline">+<%= positions.count - 2 %></span>
+																<% end %>
+															<% else %>
+																<span class="badge withoutline">No position</span>
+															<% end %>
+														</div>
+													</div>
+													<div class="_iv">
+														<div class="_move">
+															<% if @pendings.pluck(:user_id).include?(player.id) %>
+																<div class="_iconlist _1">
+																	<i class="fal fa-clock"></i>
+																</div>
+															<% elsif @approveds.pluck(:user_id).include?(player.id) %>
+																<div class="button--icon _1">
+																	<i class="fal fa-check-circle"></i>
+																</div>
+															<% else %>
+																<%= link_to club_sendjoin_path(club_id: @club.id, user_id: player.id), method: :post, remote: true, class: "button--icon _1", id: "_invitation_#{player.id}" do %>
+																	<i class="fal fa-user-plus"></i>
+																<% end %>
+															<% end %>
+														</div>
+													</div>
+												</li>
 											<% end %>
-										</tbody>
-									</table>
+										</ul>
+									<% else %>
+										<div class="_cont _1">
+											<div class="_in _noitems">
+												<div class="_inter">
+													<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+													<lottie-player src="https://assets3.lottiefiles.com/packages/lf20_IwKi9V.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;" loop  autoplay></lottie-player>
+													<h6 class="_mininotice">No tienes miembros aun</h6>
+												</div>
+											</div>
+										</div>
+									<% end %>
+								</div>
+							</div>
+						</aside>
+					</div>
+					<div class="col-xl-2 _2">
+						<aside>
+							<div class="_body_console _1">
+								<div class="_cont">
+									<div class="_color">
+										<h3>Main:</h3>
+										<figure class="_maincolor _shirt">
+											<i class="fad fa-tshirt"></i>
+										</figure>
+										<hr>
+										<h3>Secondary:</h3>
+										<figure class="_secondarycolor _shirt">
+											<i class="fad fa-tshirt"></i>
+										</figure>
+									</div>
+								</div>
 							</div>
 						</aside>
 					</div>
 					<div class="col-lg-6 _2">
 						<aside>
 							<div class="_body_console _1">
-								<% if @members.count > 0 %>
-									<ul class="list-group list-group-flush">
-										<% @members.each do |player| %>
-											<li class="list-group-item d-flex justify-content-between _itemuser">
-												<div class="_i">
-													<figure>
-														<%= link_to user_path(player) do %><%= image_tag player.avatar.url(:medium), class: "_avatar _1" %><% end %>
-														<div class="_status">
-															<% if player.status == true %>
-																<span class="_pointstatus bg-success"></span>
-															<% else %>
-																<span class="_pointstatus bg-secondary"></span>
-															<% end %>
-														</div>
-													</figure>
-													<div class="_data">
-														<h6 class="_name"><%= link_to user_path(player) do %><%= player.firstname %> <%= player.lastname %><% end %></h6>
-														<p class="_slug"><%= player.slug %></p>
-													</div>
-												</div>
-												<div class="_iii">
-													<div class="_clubes">
-															
-													</div>
-												</div>
-												<div class="_ii">
-													<div class="_position">
-														<% if player.position.present? %>
-															<% positions = player.position.split(',') %>
-															<% positions.first(2).each do |position| %>
-																<span class="badge outline"><%= position.strip %></span>
-															<% end %>
-															<% if positions.count > 2 %>
-																<span class="badge outline">+<%= positions.count - 2 %></span>
-															<% end %>
-														<% else %>
-															<span class="badge withoutline">No position</span>
-														<% end %>
-													</div>
-												</div>
-												<div class="_iv">
-													<div class="_move">
-														<% if @pendings.pluck(:user_id).include?(player.id) %>
-															<div class="_iconlist _1">
-																<i class="fal fa-clock"></i>
-															</div>
-														<% elsif @approveds.pluck(:user_id).include?(player.id) %>
-															<div class="button--icon _1">
-																<i class="fal fa-check-circle"></i>
-															</div>
-														<% else %>
-															<%= link_to club_sendjoin_path(club_id: @club.id, user_id: player.id), method: :post, remote: true, class: "button--icon _1", id: "_invitation_#{player.id}" do %>
-																<i class="fal fa-user-plus"></i>
-															<% end %>
-														<% end %>
-													</div>
-												</div>
-											</li>
-										<% end %>
-									</ul>
-								<% else %>
-									<div class="_cont _1">
-										<div class="_in _noitems">
-											<div class="_inter">
-												<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-												<lottie-player src="https://assets3.lottiefiles.com/packages/lf20_IwKi9V.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;" loop  autoplay></lottie-player>
-												<h6 class="_mininotice">No tienes miembros aun</h6>
-											</div>
-										</div>
-									</div>
-								<% end %>
-								<% if @pasts.present? %>
-									<% @pasts.each do |duel| %>
-									  <%= render 'clubs/shared/lists/duels/pasts', duel: duel %>
-									<% end %>
-								<% end %>
 							</div>
 						</aside>
 					</div>
 
-				</div>	
-			</aside>
-		<% elsif !@club.duels.present? && @club.memberships.present? %>
-			<aside class="_1">
-				<div class="row">
-					<div class="col-lg-12 _1">
-						<aside>
-							<div class="_body_console _1">
-								<div class="_cont _1">
-									<%= render 'shared/tutos/duels/firstduel', club: @club %>
-								</div>
-							</div>
-						</aside>
-					</div>
-				</div>	
-			</aside>
-		<% elsif @club.duels.present? && !@club.memberships.present? %>
-			<aside class="_1">
-				<div class="row">
-					<div class="col-lg-8 _1">
-						<aside>
-							<div class="_body_console _1">
-								<div class="_cont _1"></div>
-							</div>
-						</aside>
-					</div>
-					<div class="col-lg-4 _2">
-						<aside>
-							<div class="_body_console _1">
-								<div class="_cont"></div>
-							</div>
-						</aside>
-					</div>
 				</div>	
 			</aside>
 		<% else %>
@@ -224,22 +474,13 @@
 					<div class="col-12 _1">
 						<aside>
 							<div class="_body_console _1">
-								<div class="_cont">
-									<div class="jumbotron _jumbo_ _jumboresponsibility1">
-										<div class="_in text-center">
-											<h1 class="display-4 _title">Recluta a tus primeros talentos</h1>
-											<p class="lead">¡Comienza a formar tu club de fútbol y atrae a los futuros campeones ahora mismo!</p>
-											<hr>
-											<%= link_to scouting_club_path(@club), class: "_1 _bigbtn _midbtn button--naira m-0-auto" do %>
-									    	<span>Cazatalentos</span>
-											  <i class="button__icon fad fa-paw-claws"></i>
-											<% end %>
-										</div>
-									</div>
+								<div class="_cont _1">
+									<%= render 'shared/tutos/duels/firstmember', club: @club %>
 								</div>
 							</div>
 						</aside>
 					</div>
+				</div>
 			</aside>
 		<% end %>
 	</section>

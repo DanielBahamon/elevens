@@ -1,0 +1,120 @@
+<% content_for :page_name, "Solicitudes para #{@club.club_name} - Entornes" %>
+
+
+<%= render 'clubs/layout/one' %>
+	<% if @undo.present? %>
+			<%= render 'shared/cards/duels/undo', duel: @undo %>
+  <% end %>
+	<section class="_console _1 _members">
+		<aside class="_1">
+			<div class="row">
+				<div class="col-12 _1">
+					<aside>
+						<%= render 'clubs/shared/navs/header' %>
+					</aside>
+				</div>
+				<div class="col-12 _1">
+					<aside>
+						<div class="_body_console _1">
+              <% if @no_members.count > 0 %>
+                <div class="_cont _1">
+                  <aside class="_members row" id="members">
+                    <table class="table align-middle _list_members table-hover table-borderless">
+                      <tbody>
+                        <%= render 'memberships/shared/no_members' %>
+                      </tbody>
+                    </table>
+                  </aside>
+                </div>
+              <% else %>
+                <div class="_cont _1">
+                  <div class="_in _noitems">
+                    <div class="_inter">
+                      <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                      <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_IwKi9V.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;" loop autoplay></lottie-player>
+                      <h6 class="_mininotice">No requests</h6>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+						</div>
+					</aside>	
+				</div>
+			</div>	
+		</aside>
+	</section> 
+ <%= render 'clubs/layout/two' %>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalInvitation" tabindex="-1" aria-labelledby="modalInvitationLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<span></span>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="_new_ivitation">
+					<div class="_in">
+						<h1 class="l">Challenge!</h1>
+						<p class="lead"> Ready to start? <br class="d-none d-lg-block" /> Send your first challenge now!</p>
+					</div>
+					<div class="_formys">
+						<div class="accordion accordion-flush" id="accordionChallenge">
+							<div class="accordion-item">
+								<h2 class="accordion-header d-none">
+									<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+										Share challenge!
+									</button>
+								</h2>
+								<div id="flush-collapseTwo" class="accordion-collapse collapse show" data-bs-parent="#accordionChallenge">
+									<div class="accordion-body">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+								
+				</div>
+
+					
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="solicitudesModal" tabindex="-1" aria-labelledby="solicitudesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl	">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="_title" id="solicitudesModalLabel">Requests</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+				<% if @no_members.count > 0 %>
+					<div class="_cont _1">
+						<aside class="_members row" id="members">
+							<table class="table align-middle _list_members table-hover table-borderless">
+							  <tbody>
+									<%= render 'memberships/shared/no_members' %>
+							  </tbody>
+							</table>
+						</aside>
+					</div>
+					<% else %>
+						<div class="_cont _1">
+							<div class="_in _noitems">
+								<div class="_inter">
+									<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+									<lottie-player src="https://assets3.lottiefiles.com/packages/lf20_IwKi9V.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;" loop autoplay></lottie-player>
+									<h6 class="_mininotice">No requests</h6>
+								</div>
+							</div>
+						</div>
+					<% end %>
+      </div>
+    </div>
+  </div>
+</div>

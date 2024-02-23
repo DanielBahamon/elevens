@@ -23,7 +23,7 @@
 	    			<%= image_tag member.avatar.url(:medium), class: "_avatar _1" %>
 	    		<% end %>
 	    	<% else %>
-	    		<small><mutted>Sin miembros</mutted></small>
+	    		<small><mutted>Without members</mutted></small>
 	    	<% end %>
 			</div>
 		</div>
@@ -31,12 +31,12 @@
   <div class="_iv">
     <% if user_signed_in? %>
 			<%= link_to join_club_path(club), class: "button--shikoba _1 _fit" do %>
-				<span>Solicitar entrar</span>
+				<span>Join</span>
 		    <i class="button__icon fad fa-bullseye-arrow"></i>
 			<% end %>
 		<% else %>
 			<%= link_to club_path(club), class: "button--shikoba _1 _fit" do %>
-				<span>Visitar</span>
+				<span>Visit</span>
 		    <i class="button__icon fad fa-bullseye-arrow"></i>
 			<% end %>
 		<% end %>

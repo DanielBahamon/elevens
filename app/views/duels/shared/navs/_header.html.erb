@@ -23,15 +23,15 @@
 	<div class="_inner _3">
 		<div class="_status">
 			<% if @duel.status == 'Pending' %>
-				<span class="badge rounded-pill _pending _status"><span class="_shine pulse"></span> Incomplento</span>
+				<span class="badge rounded-pill _pending _status"><span class="_shine pulse"></span> Incomplete</span>
 			<% elsif  @duel.status == 'Open' %>
-				<span class="badge rounded-pill _open _status"><span class="_shine pulse"></span> Abierto</span>
+				<span class="badge rounded-pill _open _status"><span class="_shine pulse"></span> Open</span>
 			<% elsif  @duel.status == 'Approved' %>
-				<span class="badge rounded-pill _approved _status"><span class="_shine pulse"></span> Confirmado</span>
+				<span class="badge rounded-pill _approved _status"><span class="_shine pulse"></span> Confirmed</span>
 			<% elsif  @duel.status == 'Cancelled' %>
-				<span class="badge rounded-pill _cancelled _status"><span class="_shine pulse"></span> Cancelado</span>
+				<span class="badge rounded-pill _cancelled _status"><span class="_shine pulse"></span> Cancelled</span>
 			<% else %>
-				<span class="badge rounded-pill _done _status"><span class="_shine pulse"></span> Concretado</span>
+				<span class="badge rounded-pill _done _status"><span class="_shine pulse"></span> Confirmed</span>
 			<% end %>
 		</div>
 	</div>

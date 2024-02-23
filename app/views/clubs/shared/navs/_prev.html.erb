@@ -5,27 +5,27 @@
     <% end %>
     <%= link_to members_club_path, class: "_item #{'ready' if @club.memberships.where(active: true).count > 0 } #{'active' if current_page?(members_club_path)}" do %>
       <i class="fad fa-users"></i>
-      <span>Miembros</span> 
+      <span>Team</span> 
       <% if @club.memberships.where(active: true).count > 0 %><i class="bi bi-check2-circle"></i><% end %>
     <% end %>
     <%= link_to duels_club_path, class: "_item #{'active' if current_page?(duels_club_path)}" do %>
       <i class="fad fa-futbol"></i>
-      <span>Mis duelos</span> 
+      <span>My duels</span> 
       <% if @club.duels.count > 0 %><i class="bi bi-check2-circle"></i><% end %>
     <% end %>
     <%= link_to welfare_club_path, class: "_item #{'active' if current_page?(welfare_club_path)}" do %>
       <i class="fad fa-lightbulb-on"></i>
-      <span>Beneficios</span> 
+      <span>Benefits</span> 
       <% if !@club.amenities.blank? %><i class="bi bi-check2-circle"></i><% end %>
     <% end %>
     <%= link_to location_club_path, class: "_item #{'ready' if !@club.address.blank? && !@club.city.blank? && !@club.country.blank? } #{'active' if current_page?(location_club_path)} #{'active' if current_page?(location_club_path)}"  do %>
       <i class="fad fa-map-marked"></i>
-      <span>Ubicación</span> 
+      <span>Location</span> 
       <% if !@club.address.blank? && !@club.city.blank? && !@club.country.blank? %><i class="bi bi-check2-circle"></i><% end %>
     <% end %>
     <%= link_to front_club_path, class: "_item #{'active' if current_page?(front_club_path)}" do %>
       <i class="fad fa-presentation"></i>
-      <span>Presentación</span>
+      <span>Presentation</span>
       <% if !@club.avatar.blank? %><i class="bi bi-check2-circle"></i><% end %>
     <% end %>
     <br>
@@ -35,11 +35,11 @@
       <%= simple_form_for @club do |f| %>
         <%= f.hidden_field :active, value: true %>
         <% unless @club.active == true %>
-          <button type="submit" class="_item _icon_action button--aylen _2 d-none d-xxl-block <%= 'disabled' unless is_ready %>" data-text="Publicando...">
-            <span>Publicar</span>
+          <button type="submit" class="_item _icon_action button--aylen _2 d-none d-xxl-block <%= 'disabled' unless is_ready %>" data-text="Publishing...">
+            <span>Publish</span>
           </button>
-          <button type="submit" class="_item _icon_action button--aylen _2 _item d-xxl-none <%= 'disabled' unless is_ready %>" data-text="Publicando...">
-            <span>Publicar</span>
+          <button type="submit" class="_item _icon_action button--aylen _2 _item d-xxl-none <%= 'disabled' unless is_ready %>" data-text="Publishing...">
+            <span>Publish</span>
           </button>
         <% end %>
       <% end %>

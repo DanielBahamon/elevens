@@ -1,25 +1,39 @@
-<section class="_head _1">
-	<div class="_inner _1">
-		<%= link_to console_path, class: "_linkback" do %>
-			<i class="bi bi-chevron-left"></i>
-		<% end %>
+<header class="_header_console _1">
+	<div class="_in">
 		<div class="_info">
-			<nav aria-label="breadcrumb">
-			  <ol class="breadcrumb mb-0">
-			    <% breadcrumbs.each do |breadcrumb| %>
-			      <% if breadcrumb.path %>
-			        <li class="breadcrumb-item"><h3 class="mb-0"><%= link_to breadcrumb.name, breadcrumb.path %></h3></li>
-			      <% else %>
-			        <li class="breadcrumb-item active" aria-current="page"><%= breadcrumb.name %></li>
-			      <% end %>
+			<div>
+				<div class="_infoclub">
+					<% breadcrumbs.each do |breadcrumb| %>
+						<h3 class="_title"> 
+							<span><%= breadcrumb.name %></span>
+						</h3>
 			    <% end %>
-			  </ol>
-			</nav>
+				</div>
+			</div>
+		</div>
+		<div class="d-none d-lg-block">
+			<%= render 'clubs/shared/navs/nav' %>
+		</div>
+		<div class="_action">
+			<% if current_page?(members_club_path(@club)) || current_page?(requests_club_path(@club)) || current_page?(scouting_club_path(@club)) %>
+				<button class="button--shikoba _2" type="submit" data-bs-toggle="modal" data-bs-target="#modalInvitation">
+					<span>Invite</span>
+					<i class="button__icon fad fa-paper-plane"></i>
+				</button>
+			<% elsif current_page?(edit_club_path(@club)) %>
+				<button class="button--shikoba _2" type="submit">
+					<span>Ready</span>
+					<i class="button__icon fal fa-check-circle"></i>
+				</button>
+			<% else %>
+				<%= link_to battle_path, class: "button--shikoba _2 " do %>
+					<span>New duel</span>
+					<i class="button__icon bi bi-plus-circle"></i>
+				<% end %>
+			<% end %>
+			<div class="d-lg-none">
+				<%= render 'clubs/shared/navs/nav' %>
+			</div>
 		</div>
 	</div>
-	<div class="_action">
-    <%= link_to battle_path, class: "button--sacnite _2 _btn _medium m-0-auto" do %>
-      <i class="fas fa-plus button__icon"></i>
-    <% end %>
-	</div>
-</section>
+</header>

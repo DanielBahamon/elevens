@@ -57,13 +57,13 @@
 	  				<div class="col-4">
 	  					<aside>
 	  						<h4>120.4k</h4>
-	  						<p>Duelos Ganados</p>
+	  						<p>Victories</p>
 	  					</aside>
 	  				</div>
 	  				<div class="col-4">
 	  					<aside>
 	  						<h4>158</h4>
-	  						<p>Torneos Ganados</p>
+	  						<p>Tournament Won</p>
 	  					</aside>
 	  				</div>
 	  			</div>
@@ -86,7 +86,7 @@
 									        <li class="splide__slide" >
 									        	<figure>
 									          	<i class="bi bi-pass"></i>
-									          	<p>Uniforme</p>
+									          	<p>Uniform</p>
 									        	</figure>
 									        </li>
 								        <% end %>
@@ -94,7 +94,7 @@
 									        <li class="splide__slide" >
 									        	<figure>
 									          	<i class="bi bi-cash-coin"></i>
-									          	<p>Membresia</p>
+									          	<p>Membership</p>
 									        	</figure>
 									        </li>
 								        <% end %>
@@ -102,7 +102,7 @@
 									        <li class="splide__slide" >
 									        	<figure>
 									          	<i class="bi bi-clock"></i>
-									          	<p>Entrenamientos Frecuentes</p>
+									          	<p>Frequent Training</p>
 									        	</figure>
 									        </li>
 								        <% end %>
@@ -110,7 +110,7 @@
 									        <li class="splide__slide" >
 									        	<figure>
 									          	<i class="bi bi-droplet"></i>
-									          	<p>Hidratación</p>
+									          	<p>Hydration</p>
 									        	</figure>
 									        </li>
 								        <% end %>
@@ -118,7 +118,7 @@
 									        <li class="splide__slide" >
 									        	<figure>
 									          	<i class="bi bi-shield-lock"></i>
-									          	<p>Entrenamientos privados</p>
+									          	<p>Private Training</p>
 									        	</figure>
 									        </li>
 								        <% end %>
@@ -179,7 +179,7 @@
 										</div>
 									<% end %>
 								<% else %>
-									<h1>Aun no hay duelos</h1>
+									<h1>No duels yet</h1>
 								<% end %>
 				  		</div>
 					  </div>
@@ -197,7 +197,7 @@
 		<aside class="_2">
 	    <div class="_cont _1">
 	      <div class="_maps">
-	      	<h6 class="_h6">Ubicación</h6>
+	      	<h6 class="_h6">Location</h6>
 					<div id="map_club" class="map" style="width:100%; height: 300px;"></div>
 					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz-J87QC1qvkimHdAE55GcV4Qpt8STDzc"></script>
 					<script>
@@ -224,7 +224,7 @@
 					</script>
 	      </div>
 	      <div class="_clubs_close">
-	      	<h6 class="_h6">Equipos cerca</h6>
+	      	<h6 class="_h6">Clubs nearby</h6>
 	      	<% if @club.nearbys.present? %>
 						<% for @cluby in @club.nearbys(10) %>
 							<div class="col-md-4">

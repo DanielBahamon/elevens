@@ -1,2 +1,28 @@
 <h1>Fields#new</h1>
 <p>Find me in app/views/fields/new.html.erb</p>
+<% if @field.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@field.errors.count, "error") %> prohibieron que este campo se guarde:</h2>
+    <ul>
+    <% @field.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+<%= simple_form_for([@field], class: "_steps "	)  do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+    <div>
+      <%= f.label :name, "Nombre del Campo" %>
+      <%= f.text_field :name %>
+    </div>
+    <div>
+      <%= f.label :location, "Ubicación" %>
+      <%= f.text_field :location %>
+    </div>
+    <div>
+      <%= f.label :capacity, "Capacidad" %>
+      <%= f.number_field :capacity %>
+    </div>
+    <%= f.submit "Crear Campo" %>
+  <% end %>

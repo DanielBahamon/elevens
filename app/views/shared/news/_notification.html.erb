@@ -5,7 +5,7 @@
         <p class="_mutted"><%= notification.category_name %></p>
       </div>
       <div class="_ii">
-        <p class="_mutted">hace <%= notification.time_remaining %></p>
+        <p class="_mutted"><%= notification.time_remaining %> ago</p>
       </div>
     </div>
     <div class="_2">
@@ -17,52 +17,52 @@
           <figure>
             <i class="fad fa-user-friends"></i>
           </figure>
-          <p class="_annun">Nueva amistad</p>
+          <p class="_annun">New friendship</p>
         <% elsif notification.action_name == 'Fan' %>
           <figure>
             <i class="fad fa-user-plus"></i>
           </figure>
-          <p class="_annun">Tienes un nuevo fan</p>
+          <p class="_annun">New follower</p>
         <% elsif notification.action_name == 'Convocatoria' %>
           <figure>
             <i class="fad fa-flag-checkered"></i>
           </figure>
-          <p class="_annun">Haz sido convocado</p>
+          <p class="_annun">You have been called up</p>
         <% elsif notification.action_name == 'Aceptado' %>
           <figure>
             <i class="fad fa-check-circle"></i>
           </figure>
-          <p class="_annun">Aprobado</p>
+          <p class="_annun">Approved</p>
         <% elsif notification.action_name == 'Denegado' %>
           <figure>
             <i class="fad fa-times-circle"></i>
           </figure>
-          <p class="_annun">Denegado</p>
+          <p class="_annun">Denied</p>
         <% elsif notification.action_name == 'Suspendido' %>
           <figure>
             <i class="fad fa-ghost"></i>
           </figure>
-          <p class="_annun">Nueva suspensión</p>
+          <p class="_annun">New suspension</p>
         <% elsif notification.action_name == 'Solicitud' %>
           <figure>
             <i class="fad fa-hand-peace"></i>
           </figure>
-          <p class="_annun">Nueva solicitud</p>
+          <p class="_annun">New request</p>
         <% elsif notification.action_name == 'Lesion' %>
           <figure>
             <i class="fad fa-user-injured"></i>
           </figure>
-          <p class="_annun">Alerta de lesión</p>
+          <p class="_annun">Injury alert</p>
         <% elsif notification.action_name == 'Sancion' %>
           <figure>
             <i class="fad fa-engine-warning"></i>
           </figure>
-          <p class="_annun">Alerta de sanción</p>
+          <p class="_annun">Sanction alert</p>
         <% elsif notification.action_name == 'Bloqueo' %>
           <figure>
             <i class="fad fa-ban"></i>
           </figure>
-          <p class="_annun">Alerta de bloqueo</p>
+          <p class="_annun">Block alert</p>
         <% elsif notification.action_name == 'Invitacion' %>
           <figure>
             <i class="fad fa-envelope-open-text"></i>
@@ -72,7 +72,7 @@
           <figure>
             <i class="fad fa-swords"></i>
           </figure>
-          <p class="_annun">Desafio</p>
+          <p class="_annun">Challenge</p>
         <% end %>
       </div>
     </div>

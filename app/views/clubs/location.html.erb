@@ -6,9 +6,9 @@
 		    <%= simple_form_for @club do |f| %>
 					<div class="_cont _1">
 						<div class="_minihead">
-							<h5><i class="fal fa-map-marked"></i> <span>Ubicación</span></h5>
+							<h5><i class="fal fa-map-marked"></i> <span>Location</span></h5>
 							<button type="submit" class="button--naira _1 fit">
-								<span>Guardar</span>
+								<span>Ready</span>
 								<i class="button__icon fal fa-save"></i>
 							</button>
 						</div>
@@ -17,16 +17,16 @@
 		    		<div class="row">
 		    			<div class="col-12">
 								<div class="input-group mb-3">
-					  			<%= f.text_field :country, class: "form-control", placeholder: "País" %>
+					  			<%= f.text_field :country, class: "form-control", placeholder: "Country" %>
 								</div>
 		    				<div class="input-group mb-3">
-					  			<%= f.text_field :city, class: "form-control", placeholder: "Ciudad" %>
+					  			<%= f.text_field :city, class: "form-control", placeholder: "City" %>
 		    				</div>
 		    				<div class="input-group mb-3">
-					  			<%= f.text_field :neighborhood, class: "form-control", placeholder: "Barrio / Distrito" %>
+					  			<%= f.text_field :neighborhood, class: "form-control", placeholder: "District/Neighborhood/Area" %>
 		    				</div>
 		    				<div class="input-group mb-3">
-					  			<%= f.text_field :address, class: "form-control", placeholder: "Dirección" %>
+					  			<%= f.text_field :address, class: "form-control", placeholder: "Address" %>
 		    				</div>
 							  <%= f.hidden_field :latitude, value: current_user.clubs[0].latitude || 37.7749 %>
 							  <%= f.hidden_field :longitude, value: current_user.clubs[0].longitude || -122.4194 %>

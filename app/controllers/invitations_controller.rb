@@ -23,10 +23,10 @@ class InvitationsController < ApplicationController
     @invitation.link_register = "/registration/?token=#{token}"
 
     if @invitation.save
-      redirect_back(fallback_location: request.referer, notice: "¡Invitación enviada!")
+      redirect_back(fallback_location: request.referer, notice: "Invitation sent!")
     else
       flash[:error] = @invitation.errors.full_messages
-      redirect_back(fallback_location: request.referer, alert: "Ya haz sido invitado(a)")
+      redirect_back(fallback_location: request.referer, alert: "You have already been invited.")
     end
   end
 
@@ -38,7 +38,7 @@ class InvitationsController < ApplicationController
 	def show
     add_breadcrumb 'Convocatoria', nil
     unless current_user.id == @line.user_id
-      redirect_back(fallback_location: root_path, alert: "No tienes suficiente autorización")
+      redirect_back(fallback_location: root_path, alert: "You do not have sufficient authorization for this.")
       return
     end		
 	end
@@ -46,9 +46,9 @@ class InvitationsController < ApplicationController
 
 	def update
     if @invitation.update(invitation_params)
-      flash[:notice] = "¡Guardado!"
+      flash[:notice] = "Saved!"
     else
-      flash[:notice] = "Algo no anda bien"
+      flash[:notice] = "Oops! Something went wrong."
     end
     redirect_back(fallback_location: request.referer)
 	end
@@ -60,9 +60,9 @@ class InvitationsController < ApplicationController
 
 	def edit
     if @invitation.update(invitation_params)
-      flash[:notice] = "¡Guardado!"
+      flash[:notice] = "Saved!"
     else
-      flash[:notice] = "Algo no anda bien"
+      flash[:notice] = "Oops! Something went wrong."
     end
     redirect_back(fallback_location: request.referer)
 	end
@@ -77,13 +77,13 @@ class InvitationsController < ApplicationController
 
     Invitation.create(token: token, email: email, duel_id: @duel.id, 
                       club_id: @club.id, user_id: current_user.id, 
-                      referee_id: @referee.id, text: "Tienes una nueva invitación pendiente a un duelo", 
-                      title: "Invitación", link: club_duel_path(@club.id, @duel.id))
+                      referee_id: @referee.id, text: "You have a new pending duel invitation.", 
+                      title: "Invitation", link: club_duel_path(@club.id, @duel.id))
 
     invitation_link = "#{new_registration_path}?token=#{token}"
 
     if @invitation.save
-      redirect_back(fallback_location: request.referer, notice: "Convocado!")
+      redirect_back(fallback_location: request.referer, notice: "Called up!")
     else
       flash[:error] = @invitation.errors.full_messages
       redirect_back(fallback_location: request.referer, alert: "Error")
@@ -95,15 +95,15 @@ class InvitationsController < ApplicationController
   private
 
     def set_invitation
-        @invitation = Invitation.find(params[:id])
+      @invitation = Invitation.find(params[:id])
     end
 
     def set_duel
-        @duel = Duel.find(params[:duel_id])
+      @duel = Duel.find(params[:duel_id])
     end
     
     def set_rival
-        @rival = User.find(params.require(:rival_id))
+      @rival = User.find(params.require(:rival_id))
     end
     
     def set_club
@@ -115,13 +115,13 @@ class InvitationsController < ApplicationController
     end
 
     def is_authorised
-      redirect_to root_path, alert: "No tienes suficiente autorización" unless current_user.id == @club.user_id || current_user.id == @rival.user_id
+      redirect_to root_path, alert: "You do not have sufficient authorization for this." unless current_user.id == @club.user_id || current_user.id == @rival.user_id
     end
 
     def set_breadcrumbs
-      add_breadcrumb 'Consola', console_path
+      add_breadcrumb 'Console', console_path
       add_breadcrumb @club.club_name, club_path(@club)
-      add_breadcrumb 'Duelo', conditions_club_duel_path
+      add_breadcrumb 'Duel', conditions_club_duel_path
     end
 
     def invitation_params

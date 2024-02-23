@@ -24,11 +24,11 @@
 													</div>
 													<div class="col-xl-7 col-lg-6 _2">
 														<div class="_cont">
-															<h2 class="_title"><span>Ubicación del Duelo</span></h2>
-															<p class="lead"> Antes de publicar el duelo, asegúrate de agregar la ubicación exacta del encuentro. Esto permitirá que los equipos y los árbitros sepan dónde se llevará a cabo el enfrentamiento.</p>
+															<h2 class="_title"><span>Location of the Duel</span></h2>
+															<p class="lead">Before publishing the duel, make sure to add the exact location of the match. This will allow teams and referees to know where the encounter will take place.</p>
 															<br>
 															<a class="button--naira _1 _bigbtn fit next" >
-															  <span>Agregar</span>
+															  <span>Add</span>
 															  <i class="fad fa-map-marker-alt button__icon text-cente"></i>
 															</a>
 														</div>
@@ -46,15 +46,15 @@
 															</div>
 															<div class="col-xl-7 col-lg-6 _2">
 																<div class="_cont">
-																	<h2 class="_title"><span>¿En dónde es el encuentro?</span></h2>
+																	<h2 class="_title"><span>Where is the match?</span></h2>
 																	<div class="input-group mb-3">
-																	  <%= f.text_field :country, class: "_input_text _1 form-control", placeholder: "País" %>
+																	  <%= f.text_field :country, class: "_input_text _1 form-control", placeholder: "Country" %>
 																  	<div id="duel_country-dropdown"></div>
 																	</div>
 																	<div class="_action_btns">
 																		<span></span>
 																	  <button class="button--naira _1 fit next" type="button" id="button-addon1">
-																    	<span>Continuar</span>
+																    	<span>Next</span>
 																			<i class="button__icon fas fa-arrow-right"></i>
 																	  </button>
 																	</div>
@@ -76,18 +76,18 @@
 															</div>
 															<div class="col-xl-7 col-lg-6 _2">
 																<div class="_cont">
-																	<h2 class="_title"><span>¿En qué ciudad es el encuentro?</span></h2>
+																	<h2 class="_title"><span>In which city is the match?</span></h2>
 																	<div class="input-group mb-3">
-															  		<%= f.text_field :city, class: "_input_text _1 form-control _process", placeholder: "Ciudad" %>
+															  		<%= f.text_field :city, class: "_input_text _1 form-control _process", placeholder: "City" %>
 													  				<div id="duel_city-dropdown"></div>
 																	</div>
 																	<div class="_action_btns">
 															  		<button class="button--naira _2 fit prev " type="button" id="button-addon1">
-																    	<span>Atras</span>
+																    	<span>Back</span>
 																			<i class="button__icon fas fa-arrow-left"></i>
 																		</button>
 																	  <button class="button--naira _1 fit next" type="button" id="button-addon2">
-																    	<span>Continuar</span>
+																    	<span>Next</span>
 																			<i class="button__icon fas fa-arrow-right"></i>
 																	  </button>
 																	</div>
@@ -108,17 +108,17 @@
 															</div>
 															<div class="col-xl-7 col-lg-6 _2">
 																<div class="_cont">
-																	<h2 class="_title"><span>¿Conoces la zona o el barrio?</span></h2>
+																	<h2 class="_title"><span>Do you know the area or neighborhood?</span></h2>
 																	<div class="input-group mb-3">
-													  				<%= f.text_field :neighborhood, class: "_input_text _1", placeholder: "Barrio / Zona / Comuna" %>
+													  				<%= f.text_field :neighborhood, class: "_input_text _1", placeholder: "District / Neighborhood / Area" %>
 																	</div>
 																	<div class="_action_btns">
 																		<button class="button--naira _2 fit prev " type="button" id="button-addon2">
-																    	<span>Atras</span>
+																    	<span>Back</span>
 																			<i class="button__icon fas fa-arrow-left"></i>
 																		</button>
 																	  <button class="button--naira _1 fit next" type="button" id="button-addon3">
-																    	<span>Continuar</span>
+																    	<span>Next</span>
 																			<i class="button__icon fas fa-arrow-right"></i>
 																	  </button>
 																	</div>
@@ -139,18 +139,18 @@
 															</div>
 															<div class="col-xl-7 col-lg-6 _2">
 																<div class="_cont">
-																	<h2 class="_title"><span>¿Cómo llegar?</span></h2>
+																	<h2 class="_title"><span>How to get there?</span></h2>
 																	<div class="input-group mb-3">
-														  			<%= f.text_field :address, class: "_input_text _1", placeholder: "Dirección" %>
+														  			<%= f.text_field :address, class: "_input_text _1", placeholder: "Address" %>
 													  				<div id="duel_address-dropdown"></div>
 																	</div>
 																	<div class="_action_btns">
 																		<button class="button--naira _2 fit prev " type="button" id="button-addon3">
-																    	<span>Atras</span>
+																    	<span>Back</span>
 																			<i class="button__icon fas fa-arrow-left"></i>
 																		</button>
 																	  <button class="button--naira _1 fit next" type="button" id="button-addon4">
-																    	<span>Continuar</span>
+																    	<span>Next</span>
 																			<i class="button__icon fas fa-arrow-right"></i>
 																	  </button>
 																	</div>
@@ -161,20 +161,20 @@
 										  	</aside>
 										  </fieldset>
 										  <fieldset class="step">
-										  	<asied class="_content _maps" >
+										  	<aside class="_content _maps" >
 										  		<div class="_body">
 														<div class="row nom">
 															<div class="col-12">
 																<div class="_in">
-																	<p class="lead">Confirma la ubicación exacta del duelo, puedes mover el icono dentro del mapa:</p>
+																	<p class="lead">Confirm the exact location of the match, you can move the icon within the map:</p>
 													        <div class="_map" id="map_duel"></div>
 																	<div class="_action_btns">
 																		<button class="button--naira _2 fit prev " type="button" id="button-addon3">
-																    	<span>Atras</span>
+																    	<span>Back</span>
 																			<i class="button__icon fas fa-arrow-left"></i>
 																		</button>
 																	  <button class="button--naira _1 fit" type="submit">
-																    	<span>Confirmar y guardar</span>
+																    	<span>Confirm and save</span>
 																			<i class="button__icon fas fa-arrow-right"></i>
 																	  </button>
 																	</div>
@@ -182,7 +182,7 @@
 															</div>
 														</div>
 										  		</div>
-										  	</asied>
+										  	</aside>
 										  </fieldset>
 										<% elsif @duel.latitude.present? && !@duel.rival_id.present? %>
 											<fieldset class="step active">
@@ -194,8 +194,8 @@
 													</div>
 													<div class="col-12 _2">
 														<div class="_cont text-center">
-															<h2 class="_title"><span>Todo listo por aqui!</span></h2>
-															<p>Ya has agregado la ubicación del duelo pero aun puedes <a class="next">confirmarla</a>.</p>
+															<h2 class="_title"><span>Everything is ready here!</span></h2>
+															<p>You have added the location of the match, but you can still <a class='next'>confirm it</a>.</p>
 															<br>
 														</div>
 													</div>
@@ -212,14 +212,14 @@
 															</div>
 															<div class="col-xl-7 col-lg-6 _2">
 																<div class="_cont">
-																	<h2 class="_title"><span>¿En dónde es el encuentro?</span></h2>
+																	<h2 class="_title"><span>Where is the match taking place?</span></h2>
 																	<div class="input-group mb-3">
-																	  <%= f.text_field :country, class: "_input_text _1 form-control", placeholder: "País" %>
+																	  <%= f.text_field :country, class: "_input_text _1 form-control", placeholder: "Country" %>
 																  	<div id="duel_country-dropdown"></div>
 																	</div>
 																	<div class="_action_btns">
 																		<button class="button--naira _1 _bigbtn _btn fit next" type="button" id="button-addon1">
-																		  <span>Continuar</span>
+																		  <span>Next</span>
 																		  <i class="button__icon fal fa-arrow-right"></i>
 																		</button>
 																	</div>
@@ -241,18 +241,18 @@
 															</div>
 															<div class="col-xl-7 col-lg-6 _2">
 																<div class="_cont">
-																	<h2 class="_title"><span>¿En qué ciudad es el encuentro?</span></h2>
+																	<h2 class="_title"><span>What city is the match in?</span></h2>
 																	<div class="input-group mb-3">
-															  		<%= f.text_field :city, class: "_input_text _1 form-control _process", placeholder: "Ciudad" %>
+															  		<%= f.text_field :city, class: "_input_text _1 form-control _process", placeholder: "City" %>
 													  				<div id="duel_city-dropdown"></div>
 																	</div>
 																	<div class="_action_btns">
 																		<button class="button--naira _1 _midbtn _btn fit prev" type="button" id="button-addon1">
-																		  <span>Atras</span>
+																		  <span>Back</span>
 																			<i class="button__icon fal fa-arrow-left"></i>
 																		</button>
 																		<button class="button--naira _1 _midbtn _btn fit next" type="button" id="button-addon2">
-																		  <span>Continuar</span>
+																		  <span>Next</span>
 																			<i class="button__icon fal fa-arrow-right"></i>
 																		</button>
 																	</div>
@@ -273,17 +273,17 @@
 															</div>
 															<div class="col-xl-7 col-lg-6 _2">
 																<div class="_cont">
-																	<h2 class="_title"><span>¿Conoces la zona o el barrio?</span></h2>
+																	<h2 class="_title"><span>Do you know the area or neighborhood?</span></h2>
 																	<div class="input-group mb-3">
-													  				<%= f.text_field :neighborhood, class: "_input_text _1", placeholder: "Barrio / Zona / Comuna" %>
+													  				<%= f.text_field :neighborhood, class: "_input_text _1", placeholder: "District / Neighborhood / Area" %>
 																	</div>
 																	<div class="_action_btns">
 																		<button class="button--naira _1 _midbtn _btn fit prev" type="button" id="button-addon2">
-																		  <span>Atras</span>
+																		  <span>Back</span>
 																			<i class="button__icon fal fa-arrow-left"></i>
 																		</button>
 																		<button class="button--naira _1 _midbtn _btn fit next" type="button" id="button-addon3">
-																		  <span>Continuar</span>
+																		  <span>Next</span>
 																			<i class="button__icon fal fa-arrow-right"></i>
 																		</button>
 																	</div>
@@ -304,18 +304,18 @@
 															</div>
 															<div class="col-xl-7 col-lg-6 _2">
 																<div class="_cont">
-																	<h2 class="_title"><span>¿Cómo llegar?</span></h2>
+																	<h2 class="_title"><span>How to get there?</span></h2>
 																	<div class="input-group mb-3">
-														  			<%= f.text_field :address, class: "_input_text _1", placeholder: "Dirección" %>
+														  			<%= f.text_field :address, class: "_input_text _1", placeholder: "Address" %>
 													  				<div id="duel_address-dropdown"></div>
 																	</div>
 																	<div class="_action_btns">
 																		<button class="button--naira _1 _midbtn _btn fit prev" type="button" id="button-addon3">
-																		  <span>Atras</span>
+																		  <span>Back</span>
 																			<i class="button__icon fal fa-arrow-left"></i>
 																		</button>
 																		<button class="button--naira _1 _midbtn _btn fit next" type="button" id="button-addon4">
-																		  <span>Continuar</span>
+																		  <span>Next</span>
 																			<i class="button__icon fal fa-arrow-right"></i>
 																		</button>
 																	</div>
@@ -326,21 +326,21 @@
 										  	</aside>
 										  </fieldset>
 										  <fieldset class="step">
-										  	<asied class="_content _maps" >
+										  	<aside class="_content _maps" >
 										  		<div class="_body">
 														<div class="row nom">
 															<div class="col-12">
 																<div class="_in">
-																	<h2 class="_title"><span>Confirma la ubicación</span></h2>
-																	<p class="lead">Por favor, confirma la ubicación exacta del encuentro moviendo el icono dentro del mapa de abajo:</p>
+																	<h2 class="_title"><span>Confirm the location</span></h2>
+																	<p class="lead">Please confirm the exact location of the match by moving the icon within the map below:</p>
 													        <div class="_map" id="map_duel"></div>
 																	<div class="_action_btns">
 																		<button class="button--naira _1 _midbtn _btn fit prev" type="button" id="button-addon3">
-																		  <span>Atras</span>
+																		  <span>Back</span>
 																			<i class="button__icon fal fa-arrow-left"></i>
 																		</button>
 																		<button class="button--naira _1 _midbtn _btn fit next" type="submit">
-																		  <span>Confirmar y guardar</span>
+																		  <span>Confirm and save</span>
 																			<i class="button__icon fad fa-thumbs-up"></i>
 																		</button>
 																	</div>
@@ -348,7 +348,7 @@
 															</div>
 														</div>
 										  		</div>
-										  	</asied>
+										  	</aside>
 										  </fieldset>
 										<% else %>
 											<div class="_info">
@@ -360,8 +360,8 @@
 													</div>
 													<div class="col-xl-7 col-lg-6 _2">
 														<div class="_cont">
-															<h3 class="_title"><span>¡Todo esta confirmado!</span></h3>
-															<p class="lead"> La ubicación del duelo ha sido agregada exitosamente. Ahora los equipos y los árbitros estarán informados sobre dónde se llevará a cabo el enfrentamiento. ¡Prepárate para vivir una emocionante competencia en este lugar especial.</p>
+															<h3 class="_title"><span>Everything is confirmed!</span></h3>
+															<p class="lead">The location of the match has been successfully added. Now the teams and referees will be informed about where the match will take place. Get ready to experience an exciting competition in this special location!</p>
 														</div>
 													</div>
 												</div>
@@ -397,11 +397,11 @@
 	          map.setCenter(location);
 	          marker.setPosition(location);
 	        }, function() {
-	          console.log('El servicio de geolocalización falló.');
+	          console.log('The geolocation service failed.');
 	        });
 	      } else {
 	        location = { lat: 0, lng: 0 }; // Otra ubicación predeterminada si no se admite la geolocalización
-	        console.log('Tu navegador no admite geolocalización.');
+	        console.log('Your browser does not support geolocation.');
 	      }
 	    <% else %>
 	      location = {lat: <%= @duel.latitude %>, lng: <%= @duel.longitude %>};
@@ -458,7 +458,7 @@
 	          document.getElementById('duel_latitude').value = location.lat();
 	          document.getElementById('duel_longitude').value = location.lng();
 	        } else {
-	          alert('La geocodificación no tuvo éxito por la siguiente razón: ' + status);
+	          alert('The geocoding was unsuccessful for the following reason: ' + status);
 	        }
 	      });
 	    }
@@ -576,46 +576,4 @@
 	    });
 	  });
 
-		// var nextButtons = document.querySelectorAll('.next');
-		// for (var i = 0; i < nextButtons.length; i++) {
-		//   nextButtons[i].addEventListener('click', function() {
-		//     updateProgressBar();
-		//   });
-		// }
-
-	  // function updateProgress() {
-	  //   var numCompletedFields = $fields.filter(function() {
-	  //     return $(this).val() !== '';
-	  //   }).length;
-
-	  //   var percent = parseFloat((100 / numFields) * numCompletedFields).toFixed(2);
-	  //   $progressBar.attr('aria-valuenow', percent).css('width', numCompletedFields + '%');
-	  // }
-
-	  // $fields.change(function() {
-	  //   updateProgress();
-	  // });
-
-	  //Call updateProgress initially to set the progress bar to 0%
-	  // updateProgress();
-	});
-
-	// function updateProgressBar() {
-	//   var steps = document.querySelectorAll('.step');
-	//   var progress = document.getElementById('_progress-bar');
-	//   var stepCount = steps.length;
-	//   var currentStep = 0;
-
-	  //   // Encontrar el paso actual
-	  // for (var i = 0; i < steps.length; i++) {
-	  //   if (steps[i].classList.contains('active')) {
-	  //     currentStep = i;
-	  //     break;
-	  //   }
-	  // }
-
-	//   // Actualizar la barra de progreso
-	  // var percent = ((currentStep + 1) / stepCount) * 100;
-	//   progress.style.width = percent + '%';
-	// }
 </script>

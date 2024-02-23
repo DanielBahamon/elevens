@@ -15,7 +15,7 @@ class RelationshipsController < ApplicationController
 
   def create
     current_user.follow(@user)
-    Notification.create(recipient: @user, notification_type: 'following', sender: current_user, content: "Haz empezado a seguir a #{@user.slug}", url: user_path(@user))
+    Notification.create(recipient: @user, notification_type: 'following', sender: current_user, content: "You have started following #{@user.slug}", url: user_path(@user))
     # redirect_back fallback_location: root_path
     redirect_back(fallback_location: request.referer)
   end

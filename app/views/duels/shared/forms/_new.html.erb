@@ -13,7 +13,7 @@
     <aside class="_content">
       <div class="_head">
         <div class="_in">
-          <h1 class="display-6">Selecciona la disciplina para tu duelo</h1>
+          <h1 class="display-6">Select the discipline for your duel</h1>
           <p class="lead">
             <!-- ... (texto previo) -->
           </p>
@@ -21,16 +21,19 @@
       </div>
       <div class="_sports _options">
         <% sports = [
-				  ["Futbol 11", "Futbol11", 11],
-				  ["Futbol 10", "Futbol10", 10],
-				  ["Futbol 9", "Futbol9", 9],
-				  ["Futbol 8", "Futbol8", 8],
-				  ["Futbol 7", "Futsal7", 7],
-				  ["Futsal", "Futsal", 6],
-				  ["Microfutbol", "Microfutbol", 5],
-				  ["Bancas", "Bancas", 4],
-				  ["Kings", "Kings", 2],
-				  ["Legends", "Legends", 1]
+				  ["11-a-side", "Futbol11", 11],
+				  ["10-a-side", "Futbol10", 10],
+				  ["9-a-side", "Futbol9", 9],
+				  ["8-a-side", "Futbol8", 8],
+				  ["7-a-side", "Futbol7", 7],
+				  ["6-a-side", "Futbol6", 6],
+				  ["5-a-side", "Futbol5", 5],
+				  ["4-a-side", "Microfutbol", 4],
+				  ["3-a-side", "Bancas", 3],
+				  ["2-a-side", "Kings", 2],
+				  ["1-a-side", "Legends", 1],
+				  ["Futvoley", "Futvoley", 3],
+				  ["Futenis", "Futenis", 2]
 				].reverse %>
 				<% approved_members_count = @club.memberships.where(status: 1).count %>
 				<div class="_sports _options">
@@ -52,15 +55,13 @@
 								          1 x 1
 								        <% when "Kings" %>
 								          2 x 2
-								        <% when "Futenis" %>
-								          2 x 2
-								        <% when "Futvoley" %>
-								          2 x 2
 								        <% when "Bancas" %>
-								          4 x 4
+								          3 x 3
 								        <% when "Microfutbol" %>
+								          4 x 4
+								        <% when "Futbol5" %>
 								          5 x 5
-								        <% when "Futsal" %>
+								        <% when "Futbol6" %>
 								          6 x 6
 								        <% when "Futbol7" %>
 								          7 x 7
@@ -81,9 +82,9 @@
 				      <%= f.radio_button :sport, sport_id, {class: 'form-check-input next', required: true, id: "duel_sport_#{sport_id}", disabled: disable_sport } %>
 								<div class="_note">
 							  <% if disable_sport %>
-							    <p>No tienes jugadores suficientes</p>
+							    <p>You don't have enough players</p>
 							  <% else %>
-							    <p>Seleccionar</p>
+							    <p>Select</p>
 							  <% end %>
 							</div>
 
@@ -99,20 +100,20 @@
     <aside class="_back">
       <a href="#" class="_btn button--sacnite prev">
         <i class="bi bi-chevron-left"></i>
-        <span>Volver</span>
+        <span>Back</span>
       </a>
     </aside>
     <aside class="_content">
       <div class="_head">
         <div class="_in">
-          <h1 class="display-6">Selecciona el tipo de duelo</h1>
+          <h1 class="display-6">Select the type of duel</h1>
         </div>
       </div>
       <div class="_body">
 				<div class="_sports _options">
 					<% type_times = [
-						["Instantaneo", "Instant", 0],
-						["Programar duelo", "Schedule", 1]
+						["Instant", "Instant", 0],
+						["Schedule", "Schedule", 1]
 					] %>
 						<% type_times.each do |time| %>
 							<% type_duel_name, type_duel_id = time %>
@@ -134,7 +135,7 @@
       <div class="_action">
         <div class="_btns">
           <a href="#" class="button--naira _1 fit next" id="follow-button">
-            <span>Siguiente</span>
+            <span>Next</span>
             <i class="button__icon bi bi-check2"></i>
           </a>
         </div>
@@ -147,14 +148,14 @@
 		<aside class="_back">
   		<a href="#" class="_btn button--sacnite prev">
 				<i class="bi bi-chevron-left"></i>
-				<span>Volver</span>
+				<span>Back</span>
 			</a>
 		</aside>
   	<aside class="_content _scheduled_time">
   		<div class="_head">
 		    <div class="_in">
-		      <h1 class="display-6">Selecciona la fecha y hora de tu duelo</h1>
-		      <p class="lead">¡Genial! Ya elegiste la disciplina para tu duelo. Ahora, necesitamos saber la fecha y hora de tu duelo. Por favor, selecciona una fecha y hora que funcione para ti y tu equipo. Asegúrate de elegir una fecha que permita suficiente tiempo para prepararte para el duelo.</p>
+		      <h1 class="display-6">Select the date and time of your duel</h1>
+		      <p class="lead">Great! You've already chosen the discipline for your duel. Now, we need to know the date and time of your duel. Please select a date and time that works for you and your team. Make sure to choose a date that allows enough time to prepare for the duel.</p>
 		    </div>
 		  </div>
 		  <div class="_body">
@@ -167,7 +168,7 @@
 				<div></div>
 				<div class="_btns">
 			    <a href="#" class="button--naira _1 fit next" id="follow-button">
-			    	<span>Siguiente</span>
+			    	<span>Next</span>
 						<i class="button__icon bi bi-check2"></i>
 			  	</a>
 				</div>
@@ -176,20 +177,20 @@
 		<aside class="_content _type_time_start">
 			<div class="_head">
 				<div class="_in">
-					<h1 class="display-6">¿En cuánto tiempo estás listo?</h1>
+					<h1 class="display-6">How much time do you need?</h1>
 				</div>
 			</div>
 			<div class="_body">
 				<div class="_sports _options">
 					<% ready_times = [
-						["En 15 minutos", 15],
-						["En media hora", 30],
-						["En 1 hora", 60],
-						["En 2 horas", 120],
-						["En 3 horas", 180],
-						["En 4 horas", 240],
-						["En 5 horas", 300],
-						["En 6 horas", 360]
+						["15 min", 15],
+						["30 min", 30],
+						["1 hour", 60],
+						["2 hours", 120],
+						["3 hours", 180],
+						["4 hours", 240],
+						["5 hours", 300],
+						["6 hours", 360]
 					] %>
 					<% ready_times.each do |ready_time| %>
 						<% ready_time_name, ready_time_minutes = ready_time %>
@@ -228,7 +229,7 @@
 			<div class="_action">
 				<div class="_btns">
 					<a href="#" class="button--naira _1 fit next" id="follow-button">
-						<span>Siguiente</span>
+						<span>Next</span>
 						<i class="button__icon bi bi-check2"></i>
 					</a>
 				</div>
@@ -245,8 +246,8 @@
 		<aside class="_content">
 			<div class="_head">
 				<div class="_in">
-				  <h1 class="display-6">Determina la duración del duelo</h1>
-				  <p class="lead">¡Estupendo! Ahora, necesitamos determinar cuánto tiempo tomará el duelo. Selecciona la duración del duelo en minutos para asegurarte de que ambos equipos tengan tiempo suficiente para competir y demostrar su habilidad:</p>
+				  <h1 class="display-6">Determine the duration of the duel</h1>
+				  <p class="lead">Great! Now, we need to determine how long the duel will last. Select the duration of the duel in minutes to ensure that both teams have enough time to compete and demonstrate their skills:</p>
 				</div>
 		  </div>
 	    <div class="_body">
@@ -268,14 +269,14 @@
 	    </div>
 			<div class="_foot">
 			  <div class="alert alert-info" role="alert">
-				  ¡Cada minuto cuenta! Ingresa la duración aproximada de tu duelo en minutos. Recuerda que deben ser al menos 30 minutos, pero no más de 6 horas (360 minutos) para que tu duelo sea válido.
+				  Every minute counts! Enter the approximate duration of your duel in minutes. Remember it must be at least 30 minutes, but no more than 6 hours (360 minutes) for your duel to be valid.
 				</div>
 			</div>
 			<div class="_action">
 				<div></div>
 				<div class="_btns">
 			    <a href="#" class="button--naira _1 fit _btnnext next">
-			    	<span>Siguiente</span>
+			    	<span>Next</span>
 						<i class="button__icon bi bi-check2"></i>
 			  	</a>
 				</div>
@@ -292,8 +293,8 @@
 		<aside class="_content">
 			<div class="_head">
 				<div class="_in">
-				  <h1 class="display-6">¿Deseas un árbitro para tu duelo?</h1>
-				  <p class="lead">En este paso, debes decidir si deseas un árbitro para tu duelo. Un árbitro puede ayudar a garantizar que el juego sea justo y seguro para todos los participantes. </p>
+				  <h1 class="display-6">Do you want a referee for your duel?</h1>
+				  <p class="lead">In this step, you must decide if you want a referee for your duel. A referee can help ensure that the game is fair and safe for all participants.</p>
 				</div>
 		  </div>
 		  <div class="_body">
@@ -322,7 +323,7 @@
 		  </div>
 			<div class="_foot">
 				  <div class="alert alert-info" role="alert">
-					  Si decides no tener un árbitro, asegúrate de leer y entender las responsabilidades adicionales que tendrás como capitán. 
+					  If you choose not to have a referee, make sure to read and understand the additional responsibilities you will have as a captain.
 					</div>
 			</div>
 		</aside>
@@ -337,8 +338,8 @@
 		<aside class="_content">
 			<div class="_head">
 				<div class="_in">
-				  <h1 class="display-6">¿Deseas que tu duelo sea amistoso o de apuesta?</h1>
-				  <p class="lead">En este paso, debes decidir si deseas que tu duelo sea amistoso o de apuesta. Selecciona una opción a continuación: </p>
+				  <h1 class="display-6">Do you want your duel to be friendly or for a bet?</h1>
+				  <p class="lead">In this step, you must decide if you want your duel to be friendly or for a bet. Select an option below:</p>
 				</div>
 		  </div>
 		  <div class="_body">
@@ -367,7 +368,7 @@
 		  </div>
 			<div class="_foot">
 			  <div class="alert alert-info" role="alert">
-				  Si eliges un duelo de apuesta por favor, ten en cuenta que los duelos de apuesta no están disponibles en todas las ubicaciones y están sujetos a las leyes y regulaciones locales.
+				  If you choose a bet duel, please note that bet duels are not available in all locations and are subject to local laws and regulations.
 				</div>
 			</div>
 		</aside>
@@ -382,8 +383,8 @@
 		<aside class="_content">
 			<div class="_head">
 				<div class="_in">
-				  <h1 class="display-6">Responsabilidades adicionales como capitán</h1>
-				  <p class="lead">Si decides no tener un árbitro para tu duelo, es importante que entiendas que tú y el otro capitán serán responsables de garantizar que el juego sea justo y que se respeten las reglas. En caso de cualquier conflicto, se aplicarán sanciones al equipo y a ambos capitanes. Por favor, confirma que entiendes estas responsabilidades adicionales antes de continuar:</p>
+				  <h1 class="display-6">Additional responsibilities as a captain</h1>
+				  <p class="lead">If you choose not to have a referee for your duel, it's important to understand that you and the other captain will be responsible for ensuring that the game is fair and that the rules are respected. In case of any conflict, penalties will be applied to the team and both captains. Please confirm that you understand these additional responsibilities before continuing:</p>
 				</div>
 		  </div>
 		  <div class="_body"></div>
@@ -392,7 +393,7 @@
 				<div></div>
 				<div class="_btns">
 	    		<button type="submit" class="button--naira _1 fit _btnnext">
-			    	<span>Crear duelo</span>
+			    	<span>Create duel</span>
 						<i class="button__icon bi bi-check2-all"></i>
 	    		</button>
 				</div>

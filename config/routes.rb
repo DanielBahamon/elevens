@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
-  
-  get 'fields/index'
-  get 'fields/show'
-  get 'fields/new'
-  get 'fields/edit'
+
   authenticated :user do
     root to: 'pages#console', as: :authenticated_root
   end
@@ -12,11 +8,11 @@ Rails.application.routes.draw do
     root to: 'pages#radar', as: :unauthenticated_root
   end
 
+  resources :fields
 
   resources :users, only: [:show] do
     resources :goals, only: [:new, :create]
     resources :calendars
-    resources :fields
     member do
       post '/verify_phone_number' => 'users#verify_phone_number'
       patch 'update_phone_number' => 'users#update_phone_number'
@@ -44,6 +40,7 @@ Rails.application.routes.draw do
       get 'members'
       get 'location'
       get 'scouting'
+      get 'requests'
       get 'dashboard'
     end
 
@@ -51,6 +48,7 @@ Rails.application.routes.draw do
     get 'jointrue', on: :member
     post 'mark_all_as_read'
     post 'sendjoin/:user_id', to: 'clubs#sendjoin', as: 'sendjoin'
+    post 'selfjoin/:user_id', to: 'clubs#selfjoin', as: 'selfjoin'
 
     resources :club_photos, only: [:create, :destroy]
     resources :memberships, only: [:create, :destroy, :edit, :update, :approve, :decline, :show] do 
@@ -138,9 +136,9 @@ Rails.application.routes.draw do
   get 'calendar', to: 'calendars#host'  # Esta ruta apuntará al método 'user' del controlador 'CalendarsController'
 
   post '/create_auto_tasks', to: 'tasks#create_auto_tasks', as: :create_auto_tasks
-  
 
   resources :tasks, only: [:index, :create, :edit, :update, :destroy]
+  # post 'clubs/:club_id/create_approved_membership/:user_id', to: 'clubs#create_approved_membership', as: :create_approved_membership
 
 
 end

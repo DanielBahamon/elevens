@@ -13,56 +13,56 @@
     </div>
     <div class="_3">
       <div class="_data">
-        <% if notification.action_name == 'Amistad' %>
+        <% if notification.action_name == 'Friend' %>
           <figure>
             <i class="fad fa-user-friends"></i>
           </figure>
-          <p class="_annun">Nueva amistad</p>
-        <% elsif notification.action_name == 'Fan' %>
+          <p class="_annun">New friendship</p>
+        <% elsif notification.action_name == 'Follower' %>
           <figure>
             <i class="fad fa-user-plus"></i>
           </figure>
-          <p class="_annun">Tienes un nuevo fan</p>
-        <% elsif notification.action_name == 'Convocatoria' %>
+          <p class="_annun">You have a new fan.</p>
+        <% elsif notification.action_name == 'Calledup' %>
           <figure>
             <i class="fad fa-flag-checkered"></i>
           </figure>
-          <p class="_annun">Haz sido convocado</p>
-        <% elsif notification.action_name == 'Aceptado' %>
+          <p class="_annun">You have been called up.</p>
+        <% elsif notification.action_name == 'Accepted' %>
           <figure>
             <i class="fad fa-check-circle"></i>
           </figure>
-          <p class="_annun">Aprobado</p>
-        <% elsif notification.action_name == 'Denegado' %>
+          <p class="_annun">Approved</p>
+        <% elsif notification.action_name == 'Denied' %>
           <figure>
             <i class="fad fa-times-circle"></i>
           </figure>
-          <p class="_annun">Denegado</p>
+          <p class="_annun">Denied</p>
         <% elsif notification.action_name == 'Suspendido' %>
           <figure>
             <i class="fad fa-ghost"></i>
           </figure>
-          <p class="_annun">Nueva suspención</p>
-        <% elsif notification.action_name == 'Solicitud' %>
+          <p class="_annun">New suspension</p>
+        <% elsif notification.action_name == 'Solicitude' %>
           <figure>
             <i class="fad fa-hand-peace"></i>
           </figure>
-          <p class="_annun">Nueva solicitud</p>
-        <% elsif notification.action_name == 'Lesion' %>
+          <p class="_annun">New request</p>
+        <% elsif notification.action_name == 'Injury' %>
           <figure>
             <i class="fad fa-user-injured"></i>
           </figure>
-          <p class="_annun">Alerta de lesión</p>
-        <% elsif notification.action_name == 'Sancion' %>
+          <p class="_annun">Injury alert</p>
+        <% elsif notification.action_name == 'Sanction' %>
           <figure>
             <i class="fad fa-engine-warning"></i>
           </figure>
-          <p class="_annun">Alerta de sanción</p>
-        <% elsif notification.action_name == 'Bloqueo' %>
+          <p class="_annun">Sanction alert</p>
+        <% elsif notification.action_name == 'Blocked' %>
           <figure>
             <i class="fad fa-ban"></i>
           </figure>
-          <p class="_annun">Alerta de bloqueo</p>
+          <p class="_annun">Block alert</p>
         <% else %>
 
         <% end %>

@@ -40,19 +40,19 @@ class ReservationsController < ApplicationController
       @reservation.total = total_amount.round(2)
 
       if @reservation.save
-        flash[:notice] = "Solicitud enviada"
+        flash[:notice] = "Sent!"
         Notification.create(
           recipient: referee.user,
           notification_type: 'solicitude',
           sender: current_user,
-          content: "#{current_user.slug.capitalize} te ha invitado a ser juez en un encuentro.",
+          content: "#{current_user.slug.capitalize} has invited you to be a referee in a match.",
           url: club_duel_reservation_path(@club, @duel, @reservation),
           club_id: @club.id,
           category: 8,
           action: 10
         )
       else
-        flash[:alert] = "Ha habido un error al crear la reserva"
+        flash[:alert] = "Oops! Something went wrong."
         redirect_back(fallback_location: request.referer)
         return
       end
@@ -104,7 +104,7 @@ class ReservationsController < ApplicationController
     	if @reservation.approved == true
       	@duel.update(referee_id: current_user.id, referee_name: current_user.slug, responsibility: true)
     	end
-      flash[:notice] = "¡Esta hecho!"
+      flash[:notice] = "Done!"
     else
       flash[:notice] = @reservation.errors.full_messages
     end
@@ -163,10 +163,10 @@ class ReservationsController < ApplicationController
 		    is_referee = referee_reservations.exists?(referee_id: current_user.id)
 
 		    unless current_user.id == @duel.referee_id || current_user.id == @duel.user_id || is_referee
-		      redirect_to authenticated_root_path, alert: "No tienes suficiente autorización"
+		      redirect_to authenticated_root_path, alert: "You do not have sufficient authorization for this."
 		    end
 		  else
-		    redirect_to unauthenticated_root_path, alert: "Debes ingresar primero."
+		    redirect_to unauthenticated_root_path, alert: "You must log in first."
 		  end
 		end
 

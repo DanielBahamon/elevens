@@ -3,7 +3,7 @@ class Duel < ApplicationRecord
 
   belongs_to :user
   belongs_to :club
-  belongs_to :field
+  belongs_to :field, optional: true
   has_many :rivals
   has_many :duel_photos
   # has_many :referees
@@ -42,15 +42,15 @@ class Duel < ApplicationRecord
   def height_name
     case height.to_sym
     when :Snowy
-      "Nevado"
+      "Snowy"
     when :Moor
-      "Paramo"
+      "Moor"
     when :Cold
-      "Frío"
+      "Cold"
     when :Temperate
-      "Templado"
+      "Temperate"
     when :Warm
-      "Cálido"
+      "Warm"
     end
   end
 

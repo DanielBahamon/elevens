@@ -1,16 +1,16 @@
 <div class="jumbotron _jumbo">
 	<div class="_in text-center">
-		<h1 class="_title">Hola <span class="_alt"><%= current_user.firstname %></span></h1>
-		<b class="_subtitle lead">Te damos la bienvenida, para empezar a mostrar tu talento ve por tu primer club, puedes crear uno desde cero y llevarlo a la gloria o enlistarte en el mejor:</b>
+		<h1 class="_title">Hey <span class="_alt"><%= current_user.firstname %></span></h1>
+		<b class="_subtitle lead">Welcome, to start showcasing your talent, head to your first club. You can create one from scratch and lead it to glory, or enlist in the best one:</b>
 		<hr>
 		<div class="row nom">
 			<div class="col-lg-12 _1">
 				<%= link_to new_club_path, class: 'button--shikoba _2' do %>
-					<span>Iniciar un nuevo club</span>
+					<span>Start a new club</span>
 					<i class="button__icon bi bi-plus-circle"></i>
 				<% end %>
 				<%= link_to clubs_path, class: 'button--shikoba _1' do %>
-					<span>Enlistarme</span>
+					<span>Free player</span>
 					<i class="button__icon bi bi-search"></i>
 				<% end %>
 			</div>

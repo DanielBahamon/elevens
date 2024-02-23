@@ -14,12 +14,12 @@
 										<div class="_titles">
 											<h1 class="_title">
 												<%= link_to members_club_duel_path(@club, @duel) do %>
-													Asistencia
+													Members
 												<% end %>
 											</h1>
 											<i class="far fa-chevron-right"></i>
 											<h1 class="_title _current">
-												<span><i>Formación</i></span>
+												<span><i>Line up</i></span>
 											</h1>
 										</div>
 									</div>
@@ -120,7 +120,7 @@
 													    ["3-1-1-1", "3-1-1-1"],
 													    ["2-1-1-2", "2-1-1-2"],
 													  ],
-													  'Futsal' => [
+													  'Futbol6' => [
 													    ["2-2-1", "2-2-1"],
 													    ["1-3-1", "1-3-1"],
 													    ["2-1-2", "2-1-2"],
@@ -134,16 +134,7 @@
 													    ["1-1-1-2", "1-1-1-2"],
 													    ["1-2-1-1", "1-2-1-1"],
 													  ],
-													  'Microfutbol' => [
-													    ["2-2", "2-2"],
-													    ["1-3", "1-3"],
-													    ["2-1-1", "2-1-1"],
-													    ["3-1", "3-1"],
-													    ["1-2-1", "1-2-1"],
-													    ["2-1-1", "2-1-1"],
-													    ["1-1-2", "1-1-2"],
-													  ],
-													  'Bancas' => [
+													  'Futbol5' => [
 													    ["2-2", "2-2"],
 													    ["1-3", "1-3"],
 													    ["2-1-1", "2-1-1"],
@@ -161,6 +152,11 @@
 													    ["2-1-1", "2-1-1"],
 													    ["1-1-2", "1-1-2"],
 													  ],
+													  'Microfutbol' => [
+													    ["2-1", "2-1"],
+													    ["1-2", "1-2"],
+													    ["3", "3"], 
+													  ],
 													  'Futenis' => [
 													    ["2-1", "2-1"],
 													    ["1-2", "1-2"],
@@ -170,6 +166,10 @@
 													    ["1-1-2", "1-1-2"],
 													    ["1-1", "1-1"],
 													    ["2", "2"], 
+													  ],
+													  'Bancas' => [
+													    ["1-1", "1-1"],
+													    ["2", "2"],
 													  ],
 													  'Kings' => [
 													    ["1-1", "1-1"],
@@ -276,23 +276,23 @@
 				    				<div class="row nom">
 				    					<div class="col-3">
 												<%= link_to members_club_duel_path(@club, @duel), class: 'button--naira _1 _bigbtn' do %>
-											    <span>Volver</span>
+											    <span>Back</span>
 											    <i class="button__icon fal fa-arrow-left"></i>
 												<% end %>
 				    					</div>
 				    					<div class="col-9">
 												<% if @duel.formation.present? %>
 												  <button class="button--naira _1 _bigbtn _save" type="submit">
-												    <span>Guardar</span>
+												    <span>Ready</span>
 												    <i class="button__icon fad fa-save"></i>
 												  </button>
 												  <%= link_to assignment_club_duel_path(@club, @duel), class: 'button--naira _1 _bigbtn _go' do %>
-												    <span>Asignar</span>
+												    <span>Assignment</span>
 												    <i class="button__icon fad fa-users-class"></i>
 												  <% end %>
 												<% else %>
 												  <button class="button--naira _1 _bigbtn" type="submit">
-												    <span>Guardar</span>
+												    <span>Ready</span>
 												    <i class="button__icon fad fa-save"></i>
 												  </button>
 												<% end %>
@@ -306,11 +306,11 @@
 					  <div class="col-12">
 					  	<div class="jumbotron _jumbot _1">
 					  		<div class="_in">
-					  			<h2>Falta un paso</h2>
-					  			<p class="_mutted _slug">Debes condicionar la cantidad de jugadores por equipo antes agregar la titularidad.</p>
+					  			<h2>One step more</h2>
+					  			<p class="_mutted _slug">You must set the number of players per team before adding the lineup.</p>
 					  			<hr>
 					  			<%= link_to conditions_club_duel_path(@club, @duel), class:"button--naira _1 fit _btnnext" do %>
-							    	<span>Condiciones</span>
+							    	<span>Conditions</span>
 										<i class="button__icon fad fa-check-circle"></i>
 					  			<% end %>
 					  		</div>

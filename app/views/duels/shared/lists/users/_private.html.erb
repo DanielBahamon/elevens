@@ -41,11 +41,11 @@
 			      <% line = Line.find_by(user_id: member.id, duel_id: @duel.id, club_id: @local.id) %>
 			      <% if line.approve %>
 			        <div class="_action text-center">
-			          <span class="badge text-bg-success">Confirmado</span>
+			          <span class="badge text-bg-success">Approved</span>
 			        </div>
 			      <% else %>
 			        <div class="_action text-end">
-			          <span class="badge text-bg-secondary">Pendiente</span>
+			          <span class="badge text-bg-secondary">Pending</span>
 			        </div>
 			      <% end %>
 			    <% else %>

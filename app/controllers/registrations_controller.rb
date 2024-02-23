@@ -20,7 +20,7 @@ class RegistrationsController < Devise::RegistrationsController
 
 
         email_invitations.each do |invitation|
-          Notification.create(recipient: @user, notification_type: 'challenge', sender: @user, content: "#{@club.slug.capitalize} te ha desafiado a un duelo.", url: club_duel_path(@club, @duel), club_id: @club.id, category: 3, action: 10)
+          Notification.create(recipient: @user, notification_type: 'challenge', sender: @user, content: "#{@club.slug.capitalize} has challenged you to a duel.", url: club_duel_path(@club, @duel), club_id: @club.id, category: 3, action: 10)
         end
       end
     end

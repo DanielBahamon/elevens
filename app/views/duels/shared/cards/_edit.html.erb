@@ -3,17 +3,17 @@
 	<section class="_cont _1">
     <div class="_1">
       <div class="_i">
-        	<p class="_mutted">Editando</p>
+        	<p class="_mutted">Editing</p>
       </div>
       <div class="_ii">
-				<p class="_mutted">Expira en <%= @event_time2 %></p>
+				<p class="_mutted">Expires in <%= @event_time2 %></p>
       </div>
     </div>
 		<div class="_2">
       <div class="_i">
       	<div class="_in">
 					<%= link_to conditions_club_duel_path(local, duel), class: "_typematch" do %>
-						<h4 class="_title">¡Concreta el duelo y publicalo!</h4>
+						<h4 class="_title">Finalize the duel and publish it!</h4>
 					<% end %>
       	</div>
       </div>
@@ -28,27 +28,27 @@
 		          <figure>
 								<i class="fad fa-handshake-alt"></i>
 		          </figure>
-		          <p class="_annun">Amistoso</p>
+		          <p class="_annun">Friendly</p>
 						<% elsif duel.duel_type == "Bet" %>
 		          <figure>
 								<i class="fad fa-sack-dollar"></i>
 		          </figure>
-		          <p class="_annun">Apuesta</p>
+		          <p class="_annun">Bet</p>
 						<% elsif duel.duel_type == "Tournament" %>
 		          <figure>
 								<i class="fad fa-trophy-alt"></i>
 		          </figure>
-		          <p class="_annun">Torneo</p>
+		          <p class="_annun">Tournament</p>
 						<% elsif duel.duel_type == "League" %>
 		          <figure>
 								<i class="fad fa-award"></i>
 		          </figure>
-		          <p class="_annun">Liga</p>
+		          <p class="_annun">League</p>
 						<% elsif duel.duel_type == "Mundial" %>
 		          <figure>
 								<i class="fal fa-globe-americas"></i>
 		          </figure>
-		          <p class="_annun">Campeonato Mundial</p>
+		          <p class="_annun">World Cup</p>
 						<% end %>
 					<% end %>
 	      </div>

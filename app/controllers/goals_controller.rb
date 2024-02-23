@@ -15,7 +15,7 @@ class GoalsController < ApplicationController
     @goal = @user.goals.build(goal_params)
 
     if @goal.save
-      redirect_to @duel, notice: 'Goles guardados correctamente.'
+      redirect_to @duel, notice: 'Saved!'
     else
       render :new
     end
@@ -23,7 +23,7 @@ class GoalsController < ApplicationController
 
   def edit
     unless @goal.allow_edit_goal?(current_user)
-      redirect_to root_path, alert: 'No tienes permiso para editar este gol.'
+      redirect_to root_path, alert: 'You do not have sufficient authorization for this.'
     end
   end
 

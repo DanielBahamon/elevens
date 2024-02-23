@@ -12,10 +12,10 @@ class MembershipsController < ApplicationController
 	  respond_to do |format|
 	    if @membership.save
 				@memberships =  @club.memberships
-				redirect_back(fallback_location: request.referer, notice: "¡Guardado!")
+				redirect_back(fallback_location: request.referer, notice: "Saved!")
 	      format.js
 	    else
-			  flash[:error] = "No es posible"
+			  flash[:error] = "Sorry. It is not possible."
 			  redirect_back(fallback_location: request.referer)
 	      format.js
 	    end
@@ -24,9 +24,9 @@ class MembershipsController < ApplicationController
 
 	def update
 		if @membership.update(membership_params)
-		  flash[:notice] = "¡Guardado!"
+		  flash[:notice] = "Saved!"
 		else
-		  flash[:notice] = "Algo no esta bien"
+		  flash[:notice] = "Oops! Something went wrong."
 		end
 		redirect_back(fallback_location: request.referer)
 	end
@@ -45,12 +45,12 @@ class MembershipsController < ApplicationController
 	  @membership = Membership.find(params[:id])
 	  @user = User.find(@membership.user_id)
 	  @club = @membership.club
-    Notification.create(recipient: @user, notification_type: 'rejected', sender: @club.user, content: "Tu solicitud para @#{@club.slug} ha sido rechazada.", url: club_path(@club.id), club_id: @club.id, category: 2, action: 3)
+    Notification.create(recipient: @user, notification_type: 'rejected', sender: @club.user, content: "Your request for #{@club.slug} has been rejected.", url: club_path(@club.id), club_id: @club.id, category: 2, action: 3)
 		@membership.destroy
 	  if @membership.destroy
-	    flash[:notice] = '¡Haz rechazado la invitación!'
+	    flash[:notice] = 'You have rejected the invitation!'
 	  else
-	    flash[:error] = 'No se pudo eliminar la invitación.'
+	    flash[:error] = 'The invitation could not be deleted.'
 	  end
 	  redirect_to console_path
 	end
@@ -58,15 +58,15 @@ class MembershipsController < ApplicationController
   def approve 
     @user = User.find(@membership.user_id)
     @membership.Approved!
-    Notification.create(recipient: @user, notification_type: 'joined', sender: @club.user, content: "Tu solicitud para @#{@club.slug} ha sido aprobada.", url: club_path(@club.id), club_id: @club.id, category: 2, action: 2)
+    Notification.create(recipient: @user, notification_type: 'joined', sender: @club.user, content: "Your request for #{@club.slug} has been approved.", url: club_path(@club.id), club_id: @club.id, category: 2, action: 2)
     # charge(@membership.club, @membership)
-		flash[:notice] = "¡Membresia aprobada!"
+		flash[:notice] = "Membership approved!"
 		redirect_back(fallback_location: request.referer)
   end
 
   def decline
     @membership.Declined!
-		flash[:alert] = "¡Membresia denegada!"
+		flash[:alert] = "Membership denied!"
 
 		redirect_back(fallback_location: request.referer)
   end

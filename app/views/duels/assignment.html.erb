@@ -13,18 +13,18 @@
 											<div class="_titles">
 												<h1 class="_title">
 													<%= link_to members_club_duel_path(@club, @duel) do %>
-														Asistencia
+														Members
 													<% end %>
 												</h1>
 												<i class="far fa-chevron-right"></i>
 												<h1 class="_title">
 													<%= link_to formation_club_duel_path(@club, @duel) do %>
-														Formación
+														Line up
 													<% end %>
 												</h1>
 												<i class="far fa-chevron-right"></i>
 												<h1 class="_title _current">
-													<span><i>Asignación</i></span>
+													<span><i>Assignment</i></span>
 												</h1>
 											</div>
 										</div>
@@ -75,7 +75,7 @@
 					              </div>
 				              <% else %>
 				              	<div class="_jumbo">
-				              		<h1>Sin confirmados aun</h1>
+				              		<h1>Still unconfirmed</h1>
 				              	</div>
 				              <% end %>
 										</div>
@@ -84,7 +84,7 @@
 						    				<div class="row nom">
 						    					<div class="col-3">
 														<%= link_to formation_club_duel_path(@club, @duel), class: 'button--naira _1 _bigbtn' do %>
-													    <span>Volver</span>
+													    <span>Back</span>
 													    <i class="button__icon fal fa-arrow-left"></i>
 														<% end %>
 						    					</div>
@@ -95,7 +95,7 @@
 															  <%= simple_form_for([@club, @duel]) do |f| %>
 															    <%= f.hidden_field :showformation, value: true %>
 															    <button type="submit" class="button--naira _1 _bigbtn">
-															      <span>Publicar</span>
+															      <span>Publish</span>
 															      <i class="button__icon fad fa-rocket"></i>
 															    </button>
 															  <% end %>
@@ -113,11 +113,11 @@
 						  <div class="col-12">
 						  	<div class="jumbotron _jumbot _1">
 						  		<div class="_in">
-						  			<h2>Falta un paso</h2>
-						  			<p class="_mutted _slug">Debes condicionar la cantidad de jugadores por equipo antes agregar la titularidad.</p>
+						  			<h2>One step left</h2>
+						  			<p class="_mutted _slug">You must set the team's player count before adding the lineup.</p>
 						  			<hr>
 						  			<%= link_to conditions_club_duel_path(@club, @duel), class:"button--naira _1 fit _btnnext" do %>
-								    	<span>Condiciones</span>
+								    	<span>Conditions</span>
 											<i class="button__icon fad fa-check-circle"></i>
 						  			<% end %>
 						  		</div>

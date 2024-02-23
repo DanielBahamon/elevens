@@ -7,7 +7,7 @@ class DuelPhotosController < ApplicationController
 				@duel.duel_photos.create(image: img)
 			end
 			@duel_photos =  @duel.duel_photos
-			redirect_back(fallback_location: request.referer, notice: "¡Guardado!")
+			redirect_back(fallback_location: request.referer, notice: "Saved!")
 		end
 	end
 

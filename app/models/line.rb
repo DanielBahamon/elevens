@@ -5,7 +5,7 @@ class Line < ApplicationRecord
   belongs_to :duel
  
   # validates_uniqueness_of :user_id, :message => "You can only join one group!"
-  validates_uniqueness_of :user_id, :scope => [:duel_id], :message => "¡El usuario ya esta convocado!"
+  validates_uniqueness_of :user_id, :scope => [:duel_id], :message => "The user is already called up!"
   
   # validate :check_approval, on: :create
 
