@@ -16,11 +16,19 @@ class FieldsController < ApplicationController
   def create
     @field = @user.fields.build(field_params)
     
+    # @field = Field.new(field_params)
     if @field.save
-      redirect_to user_field_path(@user, @field), notice: "¡Hecho!"
+      respond_to do |format|
+        format.html { redirect_to fields_path }
+        format.js
+      end
     else
-      render :new, notice: "Ups, algo esta mal."
+      respond_to do |format|
+        format.html { render :new }
+        format.js { render :new }
+      end
     end
+
   end
 
   def edit

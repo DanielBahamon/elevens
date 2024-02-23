@@ -1,0 +1,15 @@
+<%= form_for(Field.new, remote: true) do |f| %>
+  <div>
+    <%= f.label :name, "Nombre del Campo" %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :location, "Ubicación" %>
+    <%= f.text_field :location %>
+  </div>
+  <div>
+    <%= f.label :capacity, "Capacidad" %>
+    <%= f.number_field :capacity %>
+  </div>
+  <%= f.submit "Crear Campo" %>
+<% end %>
