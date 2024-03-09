@@ -1,5 +1,5 @@
 <%= link_to control_club_path(club), class: '_shield', target: '_blank' do %>
 	<figure>
-		<%= image_tag club.avatar.url(:medium), class: "_shield _2" %>
+		<%= image_tag club.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _2" %>
 	</figure>
 <% end %>

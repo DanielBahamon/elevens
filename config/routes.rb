@@ -41,7 +41,7 @@ Rails.application.routes.draw do
       get 'location'
       get 'scouting'
       get 'requests'
-      get 'dashboard'
+      get 'direction'
     end
 
     get 'join', on: :member

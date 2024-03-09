@@ -10,7 +10,7 @@
 						<div class="_in">
 							<div class="_1">
 		            <%= link_to club_duel_path(@localy.id, duel), class: "_shield" do %>
-									<img src="<%= @localy.avatar %>">
+									<%= image_tag @localy.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _1" %>
 		            <% end %>
 		            <%= link_to club_duel_path(@localy.id, duel), class: "_name" do %>
 									<small class="_clubname"><%= @localy.slug %></small>
@@ -52,7 +52,7 @@
 						<div class="_in">
 							<div class="_1">
 								<%= link_to club_duel_path(@localy.id, duel), class: "_shield" do %>
-									<img src="<%= @guessy.avatar %>">
+									<%= image_tag @guessy.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _1" %>
 			      		<% end %>
 		            <%= link_to club_duel_path(@localy.id, duel), class: "_name" do %>
 									<small class="_clubname"><%= @guessy.slug %></small>

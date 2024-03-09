@@ -79,7 +79,7 @@
 				          </div>
 				        </div>
 				      </div>
-				      <%= f.radio_button :sport, sport_id, {class: 'form-check-input next', required: true, id: "duel_sport_#{sport_id}", disabled: disable_sport } %>
+				      	<%= f.radio_button :sport, sport_id, {class: 'form-check-input next', required: true, id: "duel_sport_#{sport_id}", disabled: disable_sport } %>
 								<div class="_note">
 							  <% if disable_sport %>
 							    <p>You don't have enough players</p>

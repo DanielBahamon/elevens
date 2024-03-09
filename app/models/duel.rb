@@ -25,11 +25,33 @@ class Duel < ApplicationRecord
     self.id = SecureRandom.uuid
   end
 
+  # def cover_photo(size)
+  #   if self.duel_photos.length > 0
+  #     self.duel_photos[0].image.url(size)
+  #   else
+  #     "blank.jpg"
+  #   end
+  # end
+
+  
   def cover_photo(size)
-    if self.duel_photos.length > 0
-      self.duel_photos[0].image.url(size)
+    if self.duel_photos.attached? && self.duel_photos.any?
+      photo = self.duel_photos.first.image
+      case size
+      when :thumb
+        photo.variant(resize_to_limit: [100, 100])
+      when :medium
+        photo.variant(resize_to_limit: [600, 600])
+      when :large
+        photo.variant(resize_to_limit: [800, 800])
+      when :extralarge
+        photo.variant(resize_to_limit: [1000, 1000])
+      else
+        photo
+      end
     else
-      "blank.jpg"
+      # 'blank.jpg' debe ser una imagen en tu directorio de assets o accesible vía URL directa
+      'blank.jpg'
     end
   end
   

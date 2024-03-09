@@ -3,7 +3,7 @@
 <tr id="duel_<%= duel.id %>">
 	<td>
     <figure class="_shield">
-      <%= image_tag rival.avatar.url(:medium), class: "_shield _1" %>
+      <%= image_tag rival.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _1" %>
     </figure>
 	</td>
 	<td>

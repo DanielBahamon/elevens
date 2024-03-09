@@ -17,9 +17,13 @@ class DuelPhotosController < ApplicationController
 		duel = @duel_photo.duel
 
 		@duel_photo.destroy
-		@duel_photos = DuelPhoto.where(duel_id: duel.id)
+		# @duel_photos = DuelPhoto.where(duel_id: duel.id)
+		@duel_photos = duel.duel_photos 
 
-		respond_to :js
+		respond_to do |format|
+			format.js
+			format.html { redirect_back(fallback_location: request.referer, notice: "Deleted.") }
+		end
 	end
 end
  

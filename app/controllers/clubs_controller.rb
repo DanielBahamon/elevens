@@ -52,7 +52,7 @@ class ClubsController < ApplicationController
 
   def show
     @memberships = @club.memberships
-    @photos = @club.club_photos
+    @photos = @club.club_photos.with_attached_image
     @members = User.all.joins(:memberships).where("'#{@club.id}' == memberships.club_id AND users.id = memberships.user_id AND memberships.status = 1")
     # Calcula el progreso del club (este es solo un ejemplo, tendrás que adaptarlo a tus necesidades)
     @club.progress_percentage = calculate_progress(@club)
@@ -60,8 +60,8 @@ class ClubsController < ApplicationController
     @tasks = Task.where(club_id: @club.id)
   end
 
-  def dashboard
-    add_breadcrumb 'Dashboard', nil
+  def direction
+    add_breadcrumb 'Direction', nil
     
     load_user_clubs
     load_notifications
@@ -72,6 +72,24 @@ class ClubsController < ApplicationController
     load_approved_memberships
     @upcoming_duels = @club.duels.where('start_date > ? AND ready = ?', Time.zone.now, true)
     @past_duels = @club.duels.where('start_date < ? AND ready = ?', Time.zone.now, true)
+    
+    params[:start_date] ||= Date.today.to_s
+    params[:end_date] ||= Date.today.to_s
+  
+    start_date = Date.parse(params[:start_date])
+    end_date = Date.parse(params[:end_date])
+  
+    @tasks = @club.tasks.where('start_date BETWEEN ? AND ?', start_date, end_date)
+  
+    @tasks_with_clubs = @tasks.map do |task|
+      duel = Duel.find_by(id: task.duel_id) # Evita excepciones si no existe
+      club = @club # Ya tienes el club cargado
+      rival = duel ? Club.find_by(id: duel.rival_id) : nil
+      task.as_json.merge(
+        avatar: club&.avatar&.url, # Usa el avatar del club o la imagen por defecto
+        rival_avatar: rival&.avatar&.url  # Usa el avatar del rival o la imagen por defecto
+      )
+    end
   end
 
   def description
@@ -79,7 +97,7 @@ class ClubsController < ApplicationController
 
   def edit
     add_breadcrumb 'Edit', nil
-    @club_photos = @club.club_photos
+    @club_photos = @club.club_photos.with_attached_image
   end
 
   def members
@@ -511,7 +529,7 @@ class ClubsController < ApplicationController
                                     :hydration, :owner, :lockers, :snacks, :payroll, :bathrooms, :staff, :assistance,
                                     :roof, :parking, :wifi, :gym, :amenities, :lunch, :transport, :showers,
                                     :latitude, :longitude, :neighborhood, :videogames, :air, :pools, :perdiem, :heating, 
-                                    :washers, :courses, :payment, :services_ready)
+                                    :washers, :courses, :payment, :services_ready, :main_color, :second_color, :front )
     end
 
 end

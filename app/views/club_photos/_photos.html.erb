@@ -1,19 +1,21 @@
-<% if @club_photos.count > 0 %>
-	<div class="splide splide_photos_edit">
-		<div class="splide__track">
-			<div class="splide__list">
-				<% @club_photos.each do |photo| %>
-					<div class="splide__slide _imgeditclub">
-			  		<%= image_tag photo.image.url(), class: "card-img-top" %>
-				  	<%= link_to club_club_photo_path(photo.club_id, photo), remote: true, method: :delete, data: {confirm: "¿Ultima palabra?"} do %>
-				  		<i class="bi bi-trash"></i>
-				    <% end %>
-					</div>
-				<% end %>
-			</div>
-		</div>
-	</div>
+<% if @club_photos.attached? %>
+  <div class="splide splide_photos_edit">
+    <div class="splide__track">
+      <div class="splide__list">
+        <% @club_photos.each do |photo| %>
+          <div class="splide__slide _imgeditclub">
+            <!-- Usa `image_tag` directamente con el adjunto de Active Storage -->
+            <%= image_tag photo.image, class: "card-img-top" if photo.image.attached? %>
+            <%= link_to club_club_photo_path(photo.club_id, photo), remote: true, method: :delete, data: { confirm: "¿Ultima palabra?" } do %>
+              <i class="bi bi-trash"></i>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 <% end %>
+
 
 <script>
   document.addEventListener( 'DOMContentLoaded', function() {

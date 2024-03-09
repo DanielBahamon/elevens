@@ -23,7 +23,7 @@
 					<div class="row _1 _cover">
 						<div class="col-4 col-xl-3 _1">
 							<aside class="_in">
-								<%= image_tag @club.avatar.url(:medium), class: "_shield" %>
+								<%= image_tag @club.avatar.variant(resize_to_limit: [300, 300]), class: "_shield" %>
 							</aside>
 						</div>
 						<div class="col-8 col-xl-9 _2">
@@ -214,7 +214,7 @@
 							});
 
 							var infoWindow = new google.maps.InfoWindow({
-								content: '<div id="content"><%= image_tag @club.avatar(:thumb), style: "width:100px;height:auto;" %></div>'
+								content: '<div id="content"><%= image_tag @club.avatar.variant(resize_to_limit: [300, 300]), style: "width:100px;height:auto;" %></div>'
 							});
 
 							infoWindow.open(map, marker);

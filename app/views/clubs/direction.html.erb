@@ -1,4 +1,4 @@
-<% content_for :page_name, "Dashboard #{@club.club_name}" %>
+<% content_for :page_name, "Direction #{@club.club_name}" %>
 
 <%= render 'clubs/layout/one' %>
 	<section class="_console _1">
@@ -10,7 +10,7 @@
 							<%= render 'clubs/shared/navs/header' %>
 						</aside>
 					</div>
-					<div class="col-6 col-lg-3">
+					<div class="col-sm-6 col-lg-3">
 						<div class="_card">
 							<div class="_in _1">
 								<span class="_1">
@@ -28,7 +28,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-6 col-lg-3">
+					<div class="col-sm-6 col-lg-3">
 						<div class="_card">
 							<div class="_in _1">
 								<span class="_1">
@@ -46,7 +46,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-6 col-lg-3">
+					<div class="col-sm-6 col-lg-3">
 						<div class="_card">
 							<div class="_in _1">
 								<span class="_1">
@@ -64,7 +64,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-6 col-lg-3">
+					<div class="col-sm-6 col-lg-3">
 						<div class="_card">
 							<div class="_in _1">
 								<span class="_1">
@@ -82,6 +82,8 @@
 							</div>
 						</div>
 					</div>
+
+
 					<div class="col-12 _1">
 						<aside>
 							<div class="_body_console _1">
@@ -89,10 +91,11 @@
 									<% if @undo.present? %>
 											<%= render 'shared/cards/duels/undo', duel: @undo %>
 									<% end %>
+								</div>
 							</div>
 						</aside>
 					</div>
-					<div class="col-lg-6 col-xl-6 _1">
+					<div class="col-lg-6 col-xl-7 _1">
 						<aside>
 							<div class="_body_console _1">
 								<div class="_cont _1">
@@ -176,14 +179,12 @@
 														</div>
 													</div>
 
-													<% if @clubs.present? %>
-														<script type="text/javascript">
-																var clubId = '<%= @clubs.first.id %>';
-																// Asignación inicial de tareas y horas no disponibles
+													<script type="text/javascript">
+															$(document).ready(function() {
+																var clubId = '<%= @club.id %>';
 																window.tasks = <%= raw @tasks_with_clubs.to_json %>
 																var unavailableHours = {};
 
-																// Función para mostrar las reservas en el FullCalendar
 																function showReservations(data) {
 																	return data.map(function(e) {
 																		return {
@@ -191,15 +192,13 @@
 																			start: new Date(e.start_date).toISOString(),
 																			end: new Date(e.end_date).toISOString(),
 																			status: e.status,
-																			avatar: e['avatar'] // URL del avatar
-																			// Asegúrate de incluir cualquier otra propiedad que necesites aquí
+																			avatar: e['avatar']
 																		};
 																	});
 																}
 
-																// Función para actualizar las horas no disponibles basadas en los datos de las tareas
 																function updateUnavailableHours(tasksData) {
-																	unavailableHours = {}; // Reset de las horas no disponibles
+																	unavailableHours = {}; 
 																	tasksData.forEach(function(task) {
 																		var startDate = moment.utc(task.start_date);
 																		var endDate = moment.utc(task.end_date);
@@ -215,7 +214,6 @@
 																	});
 																}
 
-																// Función para actualizar el enlace del duelo con la fecha y hora seleccionadas
 																function updateDuelLinkWithDateTime(date, time) {
 																	var dateTimeString = date.format('YYYY-MM-DD') + 'T' + time + ':00';
 																	var baseUrl = '<%= new_club_duel_path(@clubs.first) %>';
@@ -223,23 +221,21 @@
 																	$('#createDuelLink').attr('href', fullUrl);
 																}
 
-																// Inicialización de FullCalendar
 																$('#calendar').fullCalendar({
 																	header: {
 																		left: 'title',
 																		center: '',
 																		right: 'prev, next'
 																	},
+																	defaultDate: moment().startOf('month'),
 																	events: showReservations(window.tasks),
 																	selectable: true,
 																	dayClick: function(date, jsEvent, view) {
-																		//var today = moment().startOf('day');
 																		var today = moment(); 
 																		var now = moment.utc(); // Hora actual
 																		var clickedDate = date.clone().startOf('day');
 
 																		if (clickedDate.isBefore(today, 'day')) {
-																				// Si la fecha seleccionada es antes de hoy, no hacer nada
 																				return;
 																		}
 
@@ -330,15 +326,12 @@
 																							pointsContainer.append(moreEventsIndicator);
 																					} // No necesitas un 'else' aquí porque ya has manejado el caso de 4 o más
 																			}
-																	}
+																	},
 																});
 
-																// Carga inicial de las tareas y actualización de las horas no disponibles
-																$(document).ready(function() {
-																	updateUnavailableHours(window.tasks);
-																});
-														</script>
-													<% end %>
+																updateUnavailableHours(window.tasks);
+															});
+													</script>
 
 												</div>
 											</div>	
@@ -361,7 +354,7 @@
 							</div>
 						</aside>
 					</div>
-					<div class="col-lg-6 col-xl-4 _3">
+					<div class="col-lg-6 col-xl-5 _3">
 						<aside>
 							<div class="_body_console _1">
 								<div class="_cont _1">
@@ -371,7 +364,7 @@
 												<li class="list-group-item d-flex justify-content-between _itemuser">
 													<div class="_i">
 														<figure>
-															<%= link_to user_path(player) do %><%= image_tag player.avatar.url(:medium), class: "_avatar _1" %><% end %>
+															<%= link_to user_path(player) do %><%= image_tag player.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar _1" %><% end %>
 															<div class="_status">
 																<% if player.status == true %>
 																	<span class="_pointstatus bg-success"></span>
@@ -437,31 +430,6 @@
 										</div>
 									<% end %>
 								</div>
-							</div>
-						</aside>
-					</div>
-					<div class="col-xl-2 _2">
-						<aside>
-							<div class="_body_console _1">
-								<div class="_cont">
-									<div class="_color">
-										<h3>Main:</h3>
-										<figure class="_maincolor _shirt">
-											<i class="fad fa-tshirt"></i>
-										</figure>
-										<hr>
-										<h3>Secondary:</h3>
-										<figure class="_secondarycolor _shirt">
-											<i class="fad fa-tshirt"></i>
-										</figure>
-									</div>
-								</div>
-							</div>
-						</aside>
-					</div>
-					<div class="col-lg-6 _2">
-						<aside>
-							<div class="_body_console _1">
 							</div>
 						</aside>
 					</div>

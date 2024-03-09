@@ -2,7 +2,7 @@
   <nav class="_navuser  ">
     <div class="_cont _1">
         <%= link_to user_path(current_user), class: "_usery" do %>
-            <%= image_tag current_user.avatar.url(:medium), class: "_avatar _4" %>
+            <%= image_tag current_user.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar _4" %>
             <p class="_name"><%= current_user.firstname %> <%= current_user.lastname %></p>
             <p class="_username"><%= current_user.slug %></p>
             <div class="text-center mt-1">

@@ -15,9 +15,13 @@ class ClubPhotosController < ApplicationController
 		club = @club_photo.club
 
 		@club_photo.destroy
-		@club_photos = ClubPhoto.where(club_id: club.id)
+		@club_photos = club.club_photos 
+		# @club_photos = ClubPhoto.where(club_id: club.id)
 
-		respond_to :js
+		respond_to do |format|
+			format.js
+			format.html { redirect_back(fallback_location: request.referer, notice: "Deleted.") }
+		end
 	end
 end
  

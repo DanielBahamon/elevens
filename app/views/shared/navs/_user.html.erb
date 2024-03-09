@@ -2,7 +2,7 @@
   <nav class="_navuser  ">
     <div class="_cont _1">
         <%= link_to user_path(current_user), class: "_usery" do %>
-            <%= image_tag current_user.avatar.url(:medium), class: "_avatar _4" %>
+          <%= image_tag current_user.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar _4" %>
         <% end %>
         <%= link_to new_club_path, class: "_item #{'active' if current_page?(new_club_path)}" do %>
           <i class="fad fa-users"></i>

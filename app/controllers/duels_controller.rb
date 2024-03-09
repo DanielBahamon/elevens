@@ -219,7 +219,7 @@ class DuelsController < ApplicationController
     total_progress += 25 if duel.minimum_members_confirmed?
     total_progress += 25 if duel.price?
     total_progress += 25 if duel.latitude? 
-    total_progress += 25 if duel.ready? 
+    total_progress += 25 if duel.color_local?
     
     [total_progress, total_tasks].min
   end
@@ -424,7 +424,7 @@ class DuelsController < ApplicationController
   end
 
   def visuals
-    @duel_photos = @duel.duel_photos
+    @duel_photos = @duel.duel_photos.with_attached_image
   end
 
   def joinlines

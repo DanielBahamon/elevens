@@ -1,7 +1,7 @@
 <tr>
   <th class="_row">
     <figure class="_avatar">
-      <%= image_tag member.avatar.url(:medium), class: "_avatar _1" %>
+      <%= image_tag member.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar _1" %>
     </figure>
     <%= link_to user_path(member), class:"_name" do %>
       <%= member.firstname %> <%= member.lastname %>

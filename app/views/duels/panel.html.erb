@@ -34,11 +34,35 @@
 											</div>
 										</section>
 									<% else %>
+								
+										<section class="_header">
+											<div class="_duely">
+												<%= link_to direction_club_path(@local) do %>
+													<figure class="_media _local">
+														<%= image_tag @local.avatar.variant(resize_to_limit: [300, 300]) %>
+													</figure>
+												<% end %>
+												<h5>VS</h5>
+												<% if @duel.rival_id.present? %>
+													<%= link_to club_path(@guess) do %>
+														<figure class="_media _guess">
+															<%= image_tag @guess.avatar.variant(resize_to_limit: [300, 300]) %>
+														</figure>
+													<% end %>
+												<% else %>
+													<%= link_to club_duel_rivals_path(@club, @duel) do %>
+														<figure class="_media _guess">
+															<i class="fas fa-plus"></i>
+														</figure>
+													<% end %>
+												<% end %>
+											</div>
+										</section>
 										<section class="_bannermain d-none">
 											<div class="_inside">
 												<div class="_inner _1">
 													<figure class="_media _local">
-														<img src="<%= local.avatar %>">
+          									<%= image_tag local.avatar.variant(resize_to_limit: [300, 300]) %>
 													</figure>
 													<%= link_to club_duel_path(local.id, @duel) do %>
 														<h1 class="_uppercase _avant m-0 _line1"><%= local.club_name %></h1>
@@ -52,7 +76,7 @@
 															<p class="_uppercase _abel"><%= guess.country %></p>
 														<% end %>
 														<figure class="_media _guess">
-															<img src="<%= guess.avatar %>">
+          										<%= image_tag guess.avatar.variant(resize_to_limit: [300, 300]) %>
 														</figure>
 													<% else %>
 														<%= link_to club_duel_rivals_path(@club, @duel), class: "_iconadd _fit" do %>
@@ -62,6 +86,7 @@
 												</div>
 											</div>
 										</section>
+
 										<section class="_progress">
 											<div class="progress">
 												<div class="progress-bar" role="progressbar" style="width: <%= @duel.progress_percentage %>%;" aria-valuenow="<%= @duel.progress_percentage %>" aria-valuemin="0" aria-valuemax="100"></div>
@@ -69,96 +94,131 @@
 											<div class="_steps">
 												<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 													<li class="nav-item" role="presentation">
-														<button class="nav-link active _step _1" id="pills-step1-tab" data-bs-toggle="pill" data-bs-target="#pills-step1" type="button" role="tab" aria-controls="pills-step1" aria-selected="true">
+														<button class="nav-link _step _1 <%= 'active' unless @duel.color_local.present? %>" id="pills-step1-tab" data-bs-toggle="pill" data-bs-target="#pills-step1" type="button" role="tab" aria-controls="pills-step1" aria-selected="true">
 															<span>1</span>
 														</button>
 													</li>
-													
 													<li class="nav-item" role="presentation">
-														<button class="nav-link _step _2" id="pills-step2-tab" data-bs-toggle="pill" data-bs-target="#pills-step2" type="button" role="tab" aria-controls="pills-step2" aria-selected="false" <%= "disabled" unless @duel.minimum_members_confirmed? %>>
+														<button class="nav-link _step _2 <%= 'active' if @duel.color_local.present? && !@duel.address.present? %>" <%= 'disabled' unless @duel.color_local.present? %> id="pills-step2-tab" data-bs-toggle="pill" data-bs-target="#pills-step2" type="button" role="tab" aria-controls="pills-step2"  aria-selected="false">
 															<span>2</span>
 														</button>
 													</li>
 													<li class="nav-item" role="presentation">
-														<button class="nav-link _step _3" id="pills-step3-tab" data-bs-toggle="pill" data-bs-target="#pills-step3" type="button" role="tab" aria-controls="pills-step3" aria-selected="false" <%= "disabled" unless @duel.latitude? %>>
+														<button class="nav-link _step _3 <%= 'active' if @duel.color_local.present? && @duel.address.present? && !@duel.price.present? %>" <%= 'disabled' unless @duel.color_local.present? && @duel.address.present? %> id="pills-step3-tab" data-bs-toggle="pill" data-bs-target="#pills-step3" type="button" role="tab" aria-controls="pills-step3" aria-selected="false">
 															<span>3</span>
 														</button>
 													</li>
 													<li class="nav-item" role="presentation">
-														<button class="nav-link _step _4" id="pills-step4-tab" data-bs-toggle="pill" data-bs-target="#pills-step4" type="button" role="tab" aria-controls="pills-step4" aria-selected="false" <%= "disabled" unless @duel.latitude? %>>
+														<button class="nav-link _step _4 <%= 'active' if @duel.color_local.present? && @duel.address.present? && @duel.price.present? && !@duel.minimum_members_confirmed? %>" <%= 'disabled' unless @duel.color_local.present? && @duel.address.present? && @duel.price.present? %> id="pills-step4-tab" data-bs-toggle="pill" data-bs-target="#pills-step4" type="button" role="tab" aria-controls="pills-step4" aria-selected="false">
 															<span>4</span>
 														</button>
 													</li>
 													<li class="nav-item" role="presentation">
-														<button class="nav-link _step _5" id="pills-step5-tab" data-bs-toggle="pill" data-bs-target="#pills-step5" type="button" role="tab" aria-controls="pills-step5" aria-selected="false" <%= "disabled" unless @duel.minimum_members_confirmed? %>>
+														<button class="nav-link _step _5 <%= 'active' if @duel.color_local.present? && @duel.address.present? && @duel.price.present? && @duel.minimum_members_confirmed? %>" <%= 'disabled' unless @duel.color_local.present? && @duel.address.present? && @duel.price.present? && @duel.minimum_members_confirmed? %> id="pills-step5-tab" data-bs-toggle="pill" data-bs-target="#pills-step5" type="button" role="tab" aria-controls="pills-step5" aria-selected="false" >
 															<span>5</span>
 														</button>
 													</li>
 												</ul>
 											</div>
 										</section>
+										
 										<section class="_building">
 											<div class="_inside">
 												<div class="tab-content" id="pills-tabContent">
-													<div class="tab-pane fade show active" id="pills-step1" role="tabpanel" aria-labelledby="pills-step1-tab" tabindex="0">
-														<section class="_banner">
-															<div class="_inner"></div>
+													<div class="tab-pane fade <%= 'show active' unless @duel.color_local.present? %>" id="pills-step1" role="tabpanel" aria-labelledby="pills-step1-tab" tabindex="0">
+														<section class="_banner _banner_color">
+															<div class="_inner">
 																<h3 class="_avant _f700 _uppercase"><i>Colors</i></h3>
 																<br>
 																
 																<%= simple_form_for([@club, @duel]) do |f| %>
-																	<div class="_aspects">
-																		<div class="_aspectselect">    
-																			<div class="_selectactions">
-																				<div class="_aspects">
-																					<div class="_aspect">
-																						<%= f.select :color_local, [["Rojo", "RED"], ["Azul", "BLUE"], ["Verde", "GREEN"], ["Amarillo", "YELLOW"], ["Naranja", "ORANGE"], ["Morado", "PURPLE"], ["Negro", "BLACK"], ["Blanco", "WHITE"]] %>
+																
+																	<div class="_colors _options">
+																		<div class="row">
+																			<div class="col-12">
+																				<div class="_color _option">
+																					<div class="_info">
+																						<div class="_data">
+																							<figure class="_icon _iconcolor" style="background: <%= @club.main_color %>">
+          																			<%= image_tag @club.avatar.variant(resize_to_limit: [300, 300]) %>
+																							</figure>
+																							<div class="_data">
+																								<h5 class="m-0">Main Color</h5>
+																								<p></p>
+																							</div>
+																						</div>
+																						<div class="_action">
+																						</div>
 																					</div>
-																					<div class="_aspect">
-																						<%= f.select :color_rival, [["Rojo", "RED"], ["Azul", "BLUE"], ["Verde", "GREEN"], ["Amarillo", "YELLOW"], ["Naranja", "ORANGE"], ["Morado", "PURPLE"], ["Negro", "BLACK"], ["Blanco", "WHITE"]] %>
+																					<%= f.radio_button :color_local, @club.main_color, {class: 'next', required: true, id: "duel_color_main" } %>
+																				</div>
+																			</div>
+																			<div class="col-12">
+																				<div class="_color _option">
+																					<div class="_info">
+																						<div class="_data">
+																							<figure class="_icon _iconcolor" style="background: <%= @club.second_color %>">
+          																			<%= image_tag @club.avatar.variant(resize_to_limit: [300, 300]) %>
+																							</figure>
+																							<div class="_data">
+																								<h5 class="m-0">Second Color</h5>
+																								<p></p>
+																							</div>
+																						</div>
+																						<div class="_action">
+																						</div>
 																					</div>
+																					<%= f.radio_button :color_local, @club.second_color, {class: 'next', required: true, id: "duel_color_second" } %>
 																				</div>
 																			</div>
 																		</div>
+																		
 																	</div>
 																	<br>
 																	<script type="text/javascript">
 																		document.addEventListener('DOMContentLoaded', function() {
-																			const amountInput = document.querySelector('.price-duel');
-
-																			amountInput.addEventListener('input', function(e) {
-																				let value = e.target.value.replace(/[^\d]/g, ''); // Elimina todos los caracteres que no sean dígitos
-
-																				// Si no hay valor, coloca 0 para evitar que se muestre vacío
-																				if (value === '') {
-																					value = '0';
-																				}
-
-																				e.target.value = parseInt(value, 10).toLocaleString('en-US', { maximumFractionDigits: 0 }); // Formatea el número sin decimales con separadores de miles
-
-																				// Elimina los separadores de miles para asegurarse de que se almacene como número entero en la base de datos
-																				value = value.replace(/\,/g, '');
-
-																				e.target.setAttribute('data-stored-value', value); // Guarda el valor sin formato como atributo adicional
-																			});
-
-																			amountInput.addEventListener('change', function(e) {
-																				const storedValue = e.target.getAttribute('data-stored-value');
-																				e.target.value = storedValue; // Restaura el valor sin formato al perder el foco del campo
+																			const radioButtons = document.querySelectorAll('[name="duel[color_local]"]');
+																			radioButtons.forEach(function(radioButton) {
+																				radioButton.addEventListener('change', function() {
+																					document.querySelector('form').submit();
+																				});
 																			});
 																		});
-
 																	</script>
-																	<button class="button--naira _1 _bigbtn" type="submit">
-																		<span>next</span>
-																		<i class="button__icon fad fa-save"></i>
-																	</button>
+																	<script type="text/javascript">
+																		document.addEventListener('DOMContentLoaded', function() {
+																			var radioInputs = document.querySelectorAll('._option input[type="radio"]');
+																			function removeAllActiveClasses() {
+																				document.querySelectorAll('._option').forEach(function(option) {
+																					option.classList.remove('active');
+																				});
+																			}
+																			function addActiveClassToChecked() {
+																				radioInputs.forEach(function(radio) {
+																					if (radio.checked) {
+																						var optionElement = radio.closest('._option');
+																						optionElement.classList.add('active');
+																					}
+																				});
+																			}
+																			removeAllActiveClasses();
+																			addActiveClassToChecked();
+
+																			radioInputs.forEach(function(radio) {
+																				radio.addEventListener('change', function() {
+																					removeAllActiveClasses();
+																					addActiveClassToChecked();
+																				});
+																			});
+																		});
+																	</script>
 																<% end %>
+
 															</div>
 														</section>
 													</div>
-													<div class="tab-pane fade" id="pills-step2" role="tabpanel" aria-labelledby="pills-step2-tab" tabindex="0">
-														<section class="_banner">
+													<div class="tab-pane fade <%= 'show active' if @duel.color_local.present? && !@duel.address.present? %>" id="pills-step2" role="tabpanel" aria-labelledby="pills-step2-tab" tabindex="0">
+														<section class="_banner _banner_location">
 															<div class="_inner">
 																<div class="_cont">
 																	<div class="text-center">
@@ -184,8 +244,8 @@
 															</div>
 														</section>
 													</div>
-													<div class="tab-pane fade" id="pills-step3" role="tabpanel" aria-labelledby="pills-step3-tab" tabindex="0">
-														<section class="_banner">
+													<div class="tab-pane fade <%= 'show active' if @duel.color_local.present? && @duel.address.present? && !@duel.price.present? %>" id="pills-step3" role="tabpanel" aria-labelledby="pills-step3-tab" tabindex="0">
+														<section class="_banner _banner_bet">
 															<div class="_inner">
 																<%= simple_form_for([@club, @duel]) do |f| %>
 																	<div class="_aspects">
@@ -261,28 +321,24 @@
 															</div>
 														</section>
 													</div>
-													<div class="tab-pane fade" id="pills-step4" role="tabpanel" aria-labelledby="pills-step4-tab" tabindex="0">
-														<section class="_banner">
+													<div class="tab-pane fade <%= 'show active' if @duel.color_local.present? && @duel.address.present? && @duel.price.present? && !@duel.minimum_members_confirmed? %>" id="pills-step4" role="tabpanel" aria-labelledby="pills-step4-tab" tabindex="0">
+														<section class="_banner _banner_callup">
 															<div class="_inner">
-																<%= simple_form_for([@club, @duel]) do |f| %>
-																	<div class="row">
-																		<div class="col-lg-6">
-																			<div class="_aspects">
-																				<div class="_aspect">
-																					<%= f.select :color_local, [["Rojo", "RED"], ["Azul", "BLUE"], ["Verde", "GREEN"], ["Amarillo", "YELLOW"], ["Naranja", "ORANGE"], ["Morado", "PURPLE"], ["Negro", "BLACK"], ["Blanco", "WHITE"]] %>
-																				</div>
-																				<div class="_aspect">
-																					<%= f.select :color_rival, [["Rojo", "RED"], ["Azul", "BLUE"], ["Verde", "GREEN"], ["Amarillo", "YELLOW"], ["Naranja", "ORANGE"], ["Morado", "PURPLE"], ["Negro", "BLACK"], ["Blanco", "WHITE"]] %>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																<% end %>
+																<h3 class="_avant _f700 _uppercase"><i>Call-up</i></h3>
+																<br>
+																<div class="_table_members">
+																	<ul class="list-group list-group-flush">
+																		<% @local_users.each do |member| %>
+																			<%= render 'duels/shared/lists/users/private', member: member %>
+																		<% end %>
+																	</ul>
+																	<br>
+																</div>
 															</div>
 														</section>
 													</div>
-													<div class="tab-pane fade" id="pills-step5" role="tabpanel" aria-labelledby="pills-step5-tab" tabindex="0">
-														<section class="_banner">
+													<div class="tab-pane fade <%= 'show active' if @duel.color_local.present? && @duel.address.present? && @duel.price.present? && @duel.minimum_members_confirmed? && !@duel.rival_id.present? %>" id="pills-step5" role="tabpanel" aria-labelledby="pills-step5-tab" tabindex="0">
+														<section class="_banner _banner_rival">
 															<div class="_inner">
 																<h3 class="_avant _f700 _uppercase"><i>Call-up</i></h3>
 																<br>
@@ -306,7 +362,7 @@
 
 
 								
-								<% if @duel.responsibility == true %>
+								<% if @duel.responsibility == false %>
 									<div class="_body_console _2">
 										<div class="_cont">
 											<div class="_flexy">
@@ -354,11 +410,11 @@
 															</aside>
 														</div>
 														<figure class="_media _local">
-															<img src="<%= local.avatar %>">
+          										<%= image_tag local.avatar.variant(resize_to_limit: [300, 300]) %>
 														</figure>
 														<% if @duel.rival_id.present? %>
 															<figure class="_media _guess">
-																<img src="<%= guess.avatar %>">
+          											<%= image_tag guess.avatar.variant(resize_to_limit: [300, 300]) %>
 															</figure>
 														<% end %>
 											  	</div>
@@ -432,7 +488,7 @@
 																	<% if @duel.referee_id.present? %>
 																		<div class="_data">
 																			<div class="_image">
-																				<%= image_tag @referee.avatar.url(:medium), class: "_avatar" %>
+          															<%= image_tag @referee.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar" %>
 																			</div>
 																			<div class="_1">
 																				<h2 class="_text _avant _uppercase"><%= @referee.firstname %> <%= @referee.lastname %></h2>
@@ -627,7 +683,7 @@
 						<div class="_referee_profile">
 							<div class="_1">
 								<%= link_to user_path(@referee) do %>
-			            <%= image_tag @referee.avatar.url(:medium), class: "_avatar _4" %>
+									<%= image_tag @referee.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar _4" %>
 			            <p class="_name"><%= @referee.firstname %> <%= @referee.lastname %></p>
 			            <p class="_username"><%= @referee.slug %></p>
 			            <div class="text-center mt-1">
@@ -813,7 +869,7 @@
 											              data-position="<%= position %>">
 											          <% if member_with_position.present? %>
 											          	<div class="_minuser">
-											          		<%= image_tag member_with_position.avatar.url(:medium), class: "_avatar _2" %>
+																		<%= image_tag member_with_position.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar _2" %>
 											          	</div>
 											          <% end %>
 											        </span>

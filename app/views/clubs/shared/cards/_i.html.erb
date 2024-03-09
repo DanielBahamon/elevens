@@ -7,18 +7,19 @@
 		  </div>
 			<div class="splide__track">
 			  <ul class="splide__list">
-			  	<% if club.club_photos.count > 0 %>
-			  		<% photos = club.club_photos %>
-				  	<% photos.each do |photo| %>
-			        <li class="splide__slide <%= 'active' if photo.id == photos[0].id %>" >
-			          <%= image_tag photo.image.url(), class: "_coverpic" %>
-			        </li>
-			      <% end %>
-		      <% else %>
-			      <li class="splide__slide active">
-			      	<img class="_coverpic" src="https://dfqckra2c3mhq.cloudfront.net/assets/bg_coverpage.jpg">
-			      </li>
-		      <% end %>
+			  	<% if club.club_photos.attached? && club.club_photos.any? %>
+						<% photos = club.club_photos %>
+						<% photos.each do |photo| %>
+							<li class="splide__slide <%= 'active' if photo.id == photos.first.id %>" >
+								<%= image_tag photo.image, class: "_coverpic" if photo.image.attached? %>
+							</li>
+						<% end %>
+					<% else %>
+						<li class="splide__slide active">
+							<img class="_coverpic" src="https://dfqckra2c3mhq.cloudfront.net/assets/bg_coverpage.jpg">
+						</li>
+					<% end %>
+
 			  </ul>
 			</div>
 		</aside>

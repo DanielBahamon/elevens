@@ -18,6 +18,68 @@
 								<div class="col-lg-6 _1">
 									<aside>
 										<header class="_header_console _1">
+											<div class="_in justify-content-center">
+												<div class="_info">
+													<div>
+														<div class="_infoclub text-center">
+															<h3 class="_title"> 
+																<span>Main color</span>
+															</h3>
+														</div>
+													</div>
+												</div>
+											</div>
+										</header>
+										<div class="_body_console _1">
+											<div class="_cont _1">
+												<div class="_selectcolor text-center">
+													<h1><i class="fas fa-tshirt _shirt _mainshirt" style="<% if @club.main_color.present? %>color: <%= @club.main_color %><% end %>"></i></h1>
+													<%= f.text_field :main_color, value: f.object.main_color, class: "jscolor form-control jscolor_main", data: { jscolor: { palette: '#FE676E #FD8F52 #FD8F52 #FFBD71 #f55525 #FFDCA2 #FFEBD2 #FFA364 #FC7643 #AF4F41 #273248 #E63946 #F1FAEE #A8DACC #457B9D #1D3557 #283D3B #197278 #EDDDD4 #0081A7 #001B48 #018ABE #D70040 #DE3163 #D2042D #E0115F #630330 #FFC000 #F4BB44 #F4C430 #93C572 #FFAA33 #2E8B57 #009E60 #008000 #50C878 #0047AB #000080 #4169E1 #008080 #5D3FD3 #00A36C' }.to_json.html_safe } %>
+												</div>
+												<script>
+													$(document).on('change', '.jscolor_main', function() {
+														var color = $(this).val();
+														$('.fa-tshirt._shirt._mainshirt').css('color', '#' + color);
+													});
+												</script>
+											</div>
+										</div>
+									</aside>
+								</div>
+								<div class="col-lg-6 _1">
+									<aside>
+										<header class="_header_console _1">
+											<div class="_in justify-content-center">
+												<div class="_info">
+													<div>
+														<div class="_infoclub text-center">
+															<h3 class="_title"> 
+																<span>Second color</span>
+															</h3>
+														</div>
+													</div>
+												</div>
+											</div>
+										</header>
+										<div class="_body_console _1">
+											<div class="_cont _1">
+												<div class="_selectcolor text-center">
+													<h1><i class="fas fa-tshirt _shirt _secondshirt" style="<% if @club.second_color.present? %>color: <%= @club.second_color %><% end %>"></i></h1>
+													<%= f.text_field :second_color, value: f.object.second_color, class: "jscolor form-control jscolor_second", data: { jscolor: { palette: '#FE676E #FD8F52 #FD8F52 #FFBD71 #f55525 #FFDCA2 #FFEBD2 #FFA364 #FC7643 #AF4F41 #273248 #E63946 #F1FAEE #A8DACC #457B9D #1D3557 #283D3B #197278 #EDDDD4 #0081A7 #001B48 #018ABE #D70040 #DE3163 #D2042D #E0115F #630330 #FFC000 #F4BB44 #F4C430 #93C572 #FFAA33 #2E8B57 #009E60 #008000 #50C878 #0047AB #000080 #4169E1 #008080 #5D3FD3 #00A36C' }.to_json.html_safe } %>
+												</div>
+												<script>
+													$(document).on('change', '.jscolor_second', function() {
+														var color = $(this).val();
+														$('.fa-tshirt._shirt._secondshirt').css('color', '#' + color);
+													});
+												</script>
+											</div>
+										</div>
+									</aside>
+								</div>
+								<div class="col-lg-6 _1">
+									<aside>
+										<header class="_header_console _1">
 											<div class="_in">
 												<div class="_info">
 													<div>
@@ -284,7 +346,7 @@
 										<div class="row _1 _cover">
 											<div class="col-md-4 _1 offset-md-4">
 												<aside class="_in">
-													<%= image_tag @club.avatar.url(:medium), class: "_shield" %>
+													<%= image_tag @club.avatar.variant(resize_to_limit: [300, 300]), class: "_shield" %>
 													<a class="_coverlink" data-bs-toggle="modal" data-bs-target="#avatarModal">
 														<i class="bi bi-pencil-square "></i>
 													</a>
@@ -614,6 +676,24 @@
 			    		</div>
 			    	<% end %>
 					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					...
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Understood</button>
 				</div>
 			</div>
 		</div>

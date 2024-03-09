@@ -51,7 +51,7 @@
 														              data-bs-toggle="modal" data-bs-target="#player_<%= player_number %>">
 														          <% if member_with_position.present? %>
 														          	<div class="_minuser">
-														          		<%= image_tag member_with_position.avatar.url(:medium), class: "_avatar _5" %>
+														          		<%= image_tag member_with_position.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar _5" %>
 														          	</div>
 														          <% end %>
 														        </span>
@@ -148,7 +148,7 @@
 	                </div>
 	                <div class="_image">
 	                  <figure class="_avatar _1 m-left">
-	                    <%= image_tag member.avatar.url(:medium), class: "_avatar" %>
+	                    <%= image_tag member.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar" %>
 	                  </figure>
 	                </div>
 	                <div class="_info">
@@ -189,7 +189,7 @@
 		              </div>
 		              <div class="_image">
 		                <figure class="_avatar _1 m-left">
-		                  <%= image_tag line_to_update.member.avatar.url(:medium), class: "_avatar" %>
+		                  <%= image_tag line_to_update.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar" %>
 		                </figure>
 		              </div>
 		              <div class="_info">

@@ -59,7 +59,7 @@
 													    		<% if members.exists? %>
 														        <% members.each do |member| %>
 															        <%= link_to user_path(member), class: '_avatary', 'data-bs-toggle': 'tooltip', 'data-bs-placement': 'top', 'data-bs-title': 'Tooltip on top' do %>
-															          <%= image_tag member.avatar.url(:medium), class: "_avatarline"  %>
+															          <%= image_tag member.avatar.variant(resize_to_limit: [300, 300]), class: "_avatarline" %>
 															        <% end %>
 														        <% end %>
 														        <% if total_members > 2 %>
@@ -108,10 +108,10 @@
 													      </div>
 															</div>
 														<% end %>
-														<%= link_to dashboard_club_path(club), class: "_link_hide" do %><% end %>
+														<%= link_to direction_club_path(club), class: "_link_hide" do %><% end %>
 													</div>
 													<figure class="_logo">
-														<%= image_tag club.avatar.url(:medium), class: "_shield _1" %>
+														<%= image_tag club.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _1" %>
 													</figure>
 												</div>
 											<% end %>

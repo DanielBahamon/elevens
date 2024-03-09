@@ -32,7 +32,7 @@
 		</div>
 	</div>
 	<figure class="_shield">
-		<%= image_tag rival.avatar.url(:medium) %>
+		<%= image_tag rival.avatar.variant(resize_to_limit: [300, 300]) %>
 	</figure>
 	<%= link_to club_duel_path(club, duel), class: "_link_hide" do %><% end %>
 </article>

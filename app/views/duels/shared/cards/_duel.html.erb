@@ -12,7 +12,7 @@
 			<div class="_i">
 				<div class="_in">
 	        <%= link_to club_duel_path(local.id) do %>
-						<img src="<%= local.avatar %>" class="_shield _1">
+						<%= image_tag local.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _1" %>
 	        <% end %>
 	        <%= link_to club_duel_path(local.id), class: "_info" do %>
 						<h2><span><%= duel.local_score %></span></h2>
@@ -31,7 +31,7 @@
 						<h2><span><%= duel.rival_score %></span></h2>
 	        <% end %>
 	        <%= link_to club_duel_path(guess.id) do %>
-						<img src="<%= guess.avatar %>" class="_shield _1">
+						<%= image_tag guess.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _1" %>
 	        <% end %>
 				</div>
 			</div>

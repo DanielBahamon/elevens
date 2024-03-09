@@ -1,7 +1,7 @@
 <header class="_head">
 	<div class="_user">
     <%= link_to current_user, class: "_contavatar" do %>
-      <%= image_tag @club.avatar.url(:medium), class: "_shield _3" %>
+      <%= image_tag @club.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _3" %>
     <% end %>
     <div class="_data">
       <b><%= @club.club_name %></b>
@@ -14,7 +14,7 @@
       <i class="bi bi-bell"></i>
       <span class="_count"></span>
     <% end %>
-    <% is_ready = !@club.price.blank? && !@club.captain.blank? && !@club.avatar.blank? && !@club.sport_type.blank? && !@club.amenities.blank? && !@club.address.blank? && !@club.city.blank? && !@club.country.blank? && @club.memberships.where(active: true).count > 0  %>
+    <% is_ready = !@club.price.blank? && !@club.captain.blank? && @club.avatar.attached? && !@club.sport_type.blank? && !@club.amenities.blank? && !@club.address.blank? && !@club.city.blank? && !@club.country.blank? && @club.memberships.where(active: true).count > 0 %>
     <% if is_ready %>
       <%= link_to new_club_duel_path(@club), class: "_iconbtn" do %>
         <i class="bi bi-plus-circle"></i>

@@ -18,7 +18,7 @@ class PagesController < ApplicationController
   def calculate_progress(club)
     total_progress = 0
     total_tasks = 100
-    total_progress += 20 if club.avatar.present?
+    total_progress += 20 if club.avatar.attached?
     total_progress += 20 if club.services_ready?
     total_progress += 20 if club.latitude?
     total_progress += 10 if ClubPhoto.exists?(club_id: club.id)
@@ -99,8 +99,9 @@ class PagesController < ApplicationController
       club = Club.find_by(id: task.club_id) # Igualmente, usa find_by para seguridad
       rival = duel ? Club.find_by(id: duel.rival_id) : nil
       task.as_json.merge(
-        avatar: club&.avatar&.url, # Usa el avatar del club o la imagen por defecto
-        rival_avatar: rival&.avatar&.url  # Usa el avatar del rival o la imagen por defecto
+        avatar: club&.avatar&.attached? ? url_for(club.avatar) : "URL de tu imagen por defecto",
+        rival_avatar: rival&.avatar&.attached? ? url_for(rival.avatar) : "URL de tu imagen por defecto"
+
       )
     end
 
@@ -145,7 +146,7 @@ class PagesController < ApplicationController
   def load_tasks_user
     @clubs.each do |club|
       if calculate_progress(club) < 100
-        current_user.tasks.create(description: "Conclude #{club.club_name}", club_id: club.id, url: dashboard_club_path(club))
+        current_user.tasks.create(description: "Conclude #{club.club_name}", club_id: club.id, url: direction_club_path(club))
       end
     end
     if current_user.clubs.present?

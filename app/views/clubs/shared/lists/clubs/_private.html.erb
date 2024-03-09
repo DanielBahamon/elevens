@@ -1,7 +1,7 @@
 <li class="list-group-item d-flex justify-content-between _itemclub">
   <div class="_i">
 		<figure>
-			<%= link_to dashboard_club_path(club) do %><%= image_tag club.avatar.url(:medium), class: "_shield _2" %><% end %>
+			<%= link_to dashboard_club_path(club) do %><%= image_tag club.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _2" %><% end %>
 		</figure>
 		<div class="_data">
 			<h3 class="_name"><strong><%= link_to dashboard_club_path(club) do %><%= club.club_name %><% end %></strong></h3>
@@ -20,7 +20,7 @@
 
     		<% if @members.exists? %>
 	    		<% @members.each do |member| %>
-	    			<%= image_tag member.avatar.url(:medium), class: "_avatar _1" %>
+	    			<%= image_tag member.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar _1" %>
 	    		<% end %>
 	    	<% else %>
 	    		<small><mutted>Without members</mutted></small>

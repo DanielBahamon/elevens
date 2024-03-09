@@ -26,11 +26,11 @@
     <%= link_to front_club_path, class: "_item #{'active' if current_page?(front_club_path)}" do %>
       <i class="fad fa-presentation"></i>
       <span>Presentation</span>
-      <% if !@club.avatar.blank? %><i class="bi bi-check2-circle"></i><% end %>
+      <% if !@club.avatar.attached? %><i class="bi bi-check2-circle"></i><% end %>
     <% end %>
     <br>
 
-    <% is_ready = !@club.price.blank? && !@club.captain.blank? && !@club.avatar.blank? && !@club.sport_type.blank? && !@club.amenities.blank? && !@club.address.blank? && !@club.city.blank? && !@club.country.blank? && @club.memberships.where(active: true).count > 0  %>
+    <% is_ready = !@club.price.blank? && !@club.captain.blank? && !@club.avatar.attached? && !@club.sport_type.blank? && !@club.amenities.blank? && !@club.address.blank? && !@club.city.blank? && !@club.country.blank? && @club.memberships.where(active: true).count > 0  %>
     <% if is_ready %>
       <%= simple_form_for @club do |f| %>
         <%= f.hidden_field :active, value: true %>

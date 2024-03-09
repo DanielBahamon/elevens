@@ -15,7 +15,7 @@
 											<%= link_to control_club_path(@club), class: "_linkback" do %>
 												<i class="bi bi-chevron-left"></i>
 											<% end %>
-											<%= image_tag @club.avatar.url(:medium), class: "_shield _1" %>
+											<%= image_tag @club.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _1" %>
 											<div class="_infoclub">
 												<h3 class="_title"> 
 													<span>Duels</span>

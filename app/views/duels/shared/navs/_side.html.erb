@@ -1,16 +1,16 @@
 <nav class="_navside _duel">
   <div class="_cont _1">
     <div class="_duely">
-      <%= link_to dashboard_club_path(@local) do %>
+      <%= link_to direction_club_path(@club) do %>
         <figure class="_media _local">
-          <img src="<%= @local.avatar %>">
+          <%= image_tag @club.avatar.variant(resize_to_limit: [300, 300]) %>
         </figure>
       <% end %>
       <h5>VS</h5>
       <% if @duel.rival_id.present? %>
         <%= link_to club_path(@guess) do %>
           <figure class="_media _guess">
-            <img src="<%= @guess.avatar %>">
+            <%= image_tag @guess.avatar.variant(resize_to_limit: [300, 300]) %>
           </figure>
         <% end %>
       <% else %>
@@ -71,9 +71,9 @@
     <% end %>
     <hr>
     
-    <%= link_to dashboard_club_path(@club), data: { no_turbolink: true }, class: "_item " do %>
+    <%= link_to direction_club_path(@club), data: { no_turbolink: true }, class: "_item " do %>
       <i class="far fa-arrow-left"></i>
-      <span>Dashboard</span>
+      <span>Direction</span>
     <% end %>
   </div>
 </nav>

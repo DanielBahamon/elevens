@@ -1,14 +1,14 @@
-<% if @duel_photos.count > 0 %>
-	<% @duel_photos.each do |photo| %>
-		<div class="col-md-3">
-			<div class="card">
-			  <%= image_tag photo.image.url(), class: "card-img-top" %>
-			  <div class="card-body text-end">
-			  	<%= link_to team_duel_duel_photo_path(photo.duel_id, photo), remote: true, method: :delete, data: {confirm: "¿Ultima palabra?"} do %>
-			  		<i class="bi bi-trash"></i>
-			    <% end %>
-			  </div>
-			</div>
-		</div>
-	<% end %>
+<% if @duel_photos.any? %>
+  <% @duel_photos.each do |photo| %>
+    <div class="col-md-3">
+      <div class="card">
+        <%= image_tag photo.image, class: "card-img-top" if photo.image.attached? %>
+        <div class="card-body text-end">
+          <%= link_to team_duel_duel_photo_path(photo.duel_id, photo), remote: true, method: :delete, data: {confirm: "¿Ultima palabra?"} do %>
+            <i class="bi bi-trash"></i>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 <% end %>

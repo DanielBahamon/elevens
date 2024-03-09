@@ -33,7 +33,7 @@
 											      	<aside>
 											      		<div class="_1">
 												          <figure class="_shield">
-												            <%= image_tag rival.avatar.url(:medium), class: "_shield _1" %>
+																		<%= image_tag rival.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _1" %>
 												          </figure>
 												        </div>
 												        <div class="_2">
@@ -61,7 +61,7 @@
 											      <div class="_club">
 											        <div class="_1">
 											          <figure class="_shield">
-											            <%= image_tag rival.avatar.url(:medium), class: "_shield _1" %>
+																	<%= image_tag rival.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _1" %>
 											          </figure>
 											        </div>
 											        <div class="_2">
@@ -106,7 +106,7 @@
 											<div class="col-lg-12">
 												<div class="jumbotron _jumbo_1">
 													<div class="_in text-center">
-														<%= image_tag @club.avatar.url(:medium), class: "_shield _2 m-0-auto" %>
+														<%= image_tag @club.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _2 m-0-auto" %>
 														<br>
 														<div class="_infoclub">
 															<h1 class="_title"> 
@@ -154,11 +154,11 @@
 													<hr>
 													<div class="_flex _shields">
 														<%= link_to club_path(@local) do %>
-															<%= image_tag @local.avatar.url(:medium), class: "_shield _2 m-0-auto" %>
+															<%= image_tag @local.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _2 m-0-auto" %>
 														<% end %>
 														<h2>vs</h2>
 														<%= link_to club_path(@guess) do %>
-															<%= image_tag @guess.avatar.url(:medium), class: "_shield _2 m-0-auto" %>
+															<%= image_tag @guess.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _2 m-0-auto" %>
 														<% end %>
 													</div>
 													<br>

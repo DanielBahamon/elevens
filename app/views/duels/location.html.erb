@@ -380,6 +380,80 @@
 <%= render 'duels/layout/two' %>
 
 
+<script type="text/javascript">
+	
+
+	/* ========================================= */
+
+	$(document).ready(function() {
+	  var currentStep = 0;
+	  var $form = $('#edit_duel_<%= @duel.id %>');
+	  var $steps = $form.find('.step');
+	  var numSteps = $steps.length;
+	  // var $progressBar = $('._progress-bar');
+	  var $fields = $form.find('input._process');
+	  var numFields = $fields.length;
+
+	  function showStep(step) {
+	    $steps.removeClass('active');
+	    $steps.eq(step).addClass('active');
+	    if (step === 0) {
+	      $form.find('.prev').hide();
+	    } else {
+	      $form.find('.prev').show();
+	    }
+	    if (step === numSteps - 1) {
+	      // $form.find('.next').hide();
+	    } else {
+	      // $form.find('.next').show();
+	    }
+	  }
+
+	  showStep(currentStep);
+
+	  $form.find('.next').click(function() {
+	    var $currentStep = $steps.eq(currentStep);
+	    var isValid = true;
+
+	    $currentStep.find('input, select').each(function() {
+	      if ($(this).prop('required') && $(this).val() === '') {
+	        isValid = false;
+	        $(this).addClass('error');
+	      } else {
+	        $(this).removeClass('error');
+	      }
+	    });
+
+	    // Check if all inputs with class "_process" are completed
+	    var $requiredFields = $currentStep.find('input._process');
+	    $requiredFields.each(function() {
+	      if ($(this).val() === '') {
+	        isValid = false;
+	        $(this).addClass('error');
+	      } else {
+	        $(this).removeClass('error');
+	      }
+	    });
+
+	    if (isValid) {
+	      $currentStep.fadeOut(500).promise().done(function() {
+	        currentStep++;
+	        showStep(currentStep);
+	        $steps.eq(currentStep).fadeIn(500);
+	      });
+	    }
+	  });
+
+	  $form.find('.prev').click(function() {
+	    $steps.eq(currentStep).fadeOut(500).promise().done(function() {
+	      currentStep--;
+	      showStep(currentStep);
+	      $steps.eq(currentStep).fadeIn(500);
+	    });
+	  });
+	});
+
+</script>
 
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz-J87QC1qvkimHdAE55GcV4Qpt8STDzc"></script>
@@ -400,7 +474,7 @@
 	          console.log('The geolocation service failed.');
 	        });
 	      } else {
-	        location = { lat: 0, lng: 0 }; // Otra ubicación predeterminada si no se admite la geolocalización
+	        location = { lat: 0, lng: 0 }; 
 	        console.log('Your browser does not support geolocation.');
 	      }
 	    <% else %>
@@ -503,77 +577,4 @@
 	    details: '#duel_address-dropdown'
 	  });
 	});
-</script>
-<script type="text/javascript">
-	
-
-	/* ========================================= */
-
-	$(document).ready(function() {
-	  var currentStep = 0;
-	  var $form = $('#edit_duel_<%= @duel.id %>');
-	  var $steps = $form.find('.step');
-	  var numSteps = $steps.length;
-	  // var $progressBar = $('._progress-bar');
-	  var $fields = $form.find('input._process');
-	  var numFields = $fields.length;
-
-	  function showStep(step) {
-	    $steps.removeClass('active');
-	    $steps.eq(step).addClass('active');
-	    if (step === 0) {
-	      $form.find('.prev').hide();
-	    } else {
-	      $form.find('.prev').show();
-	    }
-	    if (step === numSteps - 1) {
-	      // $form.find('.next').hide();
-	    } else {
-	      // $form.find('.next').show();
-	    }
-	  }
-
-	  showStep(currentStep);
-
-	  $form.find('.next').click(function() {
-	    var $currentStep = $steps.eq(currentStep);
-	    var isValid = true;
-
-	    $currentStep.find('input, select').each(function() {
-	      if ($(this).prop('required') && $(this).val() === '') {
-	        isValid = false;
-	        $(this).addClass('error');
-	      } else {
-	        $(this).removeClass('error');
-	      }
-	    });
-
-	    // Check if all inputs with class "_process" are completed
-	    var $requiredFields = $currentStep.find('input._process');
-	    $requiredFields.each(function() {
-	      if ($(this).val() === '') {
-	        isValid = false;
-	        $(this).addClass('error');
-	      } else {
-	        $(this).removeClass('error');
-	      }
-	    });
-
-	    if (isValid) {
-	      $currentStep.fadeOut(500).promise().done(function() {
-	        currentStep++;
-	        showStep(currentStep);
-	        $steps.eq(currentStep).fadeIn(500);
-	      });
-	    }
-	  });
-
-	  $form.find('.prev').click(function() {
-	    $steps.eq(currentStep).fadeOut(500).promise().done(function() {
-	      currentStep--;
-	      showStep(currentStep);
-	      $steps.eq(currentStep).fadeIn(500);
-	    });
-	  });
-
 </script>

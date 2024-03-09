@@ -9,7 +9,7 @@
 							<div class="_in">
 								<div class="_1">
 			            <%= link_to club_path(@local.slug), class: "_shield" do %>
-										<img src="<%= @local.avatar %>">
+										<%= image_tag @local.avatar.variant(resize_to_limit: [300, 300]) %>
 			            <% end %>
 			            <%= link_to club_path(@local.slug), class: "_data" do %>
 										<b class="_clubname"><%= @local.club_name %></b>
@@ -71,7 +71,7 @@
 								<div class="_1">
 									<% if @duel.rival_id.present? %>
 										<%= link_to club_path(@guess.slug), class: "_shield" do %>
-											<img src="<%= @guess.avatar %>">
+											<%= image_tag @guess.avatar.variant(resize_to_limit: [300, 300]) %>
 				            <% end %>
 				            <%= link_to club_path(@guess.slug), class: "_data" do %>
 											<b class="_clubname"><%= @guess.club_name %></b>
@@ -119,7 +119,7 @@
 											      <th class="_number text-center" scope="row" ><%= member.number %></th>
 											      <td class="_avatary text-center">
 											      	<figure class="_avatar">
-												  			<%= image_tag member.avatar.url(:medium), class: "_avatar" %>
+																<%= image_tag member.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar" %>
 												  		</figure>
 											      </td>
 											      <td class="_info">
@@ -162,7 +162,7 @@
 											      <th class="_number text-center" scope="row" ><%= member.number %></th>
 											      <td class="_avatary text-center">
 											      	<figure class="_avatar">
-												  			<%= image_tag member.avatar.url(:medium), class: "_avatar" %>
+																<%= image_tag member.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar" %>
 												  		</figure>
 											      </td>
 											      <td class="_info">
@@ -265,7 +265,7 @@
 							      <th scope="row" class="text-center"><%= member.number %></th>
 							      <td class="text-center">
 							      	<figure class="_avatar">
-								  			<%= image_tag member.avatar.url(:medium), class: "_avatar" %>
+												<%= image_tag member.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar" %>
 								  		</figure>
 							      </td>
 							      <td>

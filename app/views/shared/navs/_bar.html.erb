@@ -13,7 +13,7 @@
         <% if user_signed_in? %>
           <div class="dropdown text-end">
             <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-              <%= image_tag avatar_url(current_user), class: "rounded-circle", width: "32", height: "32" %>
+              <%= image_tag current_user.avatar.variant(resize_to_limit: [300, 300]), class: "rounded-circle" %>
             </a>
             <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
               <li>

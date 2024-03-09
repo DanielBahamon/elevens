@@ -10,16 +10,16 @@
 		object-fit:cover;
 	}
 	section._club ._members>ul>li.list-group-item {
-	    padding: 10px 0;
-	    display: flex;
-    	align-items: center;
-	    justify-content: space-between;
+		padding: 10px 0;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 	}
 	section._club ._members > ul > li.list-group-item ._in {
-	    display: block;
+		display: block;
 	}
 	section._club ._members > ul > li.list-group-item ._in>a {
-	    display: block;
+		display: block;
 	}
 	section._club aside._info img._shield {
     border-radius: 9px;
@@ -51,45 +51,45 @@
 	    margin-bottom: 30px;
 	}
 	section._club._1 h3 {
-	    font-family: 'Causten', 'Sofia', sans-serif;
-	    font-weight: 800;
-	    margin-bottom: 5px;
-	    line-height: 1;
-	    display: block;
+		font-family: 'Causten', 'Sofia', sans-serif;
+		font-weight: 800;
+		margin-bottom: 5px;
+		line-height: 1;
+		display: block;
 	}
 	section._club._1 small{
-	    font-family: 'Causten', 'Sofia', sans-serif;
-	    font-weight: 700;
-	    line-height: 1;
-	    display: block;
+		font-family: 'Causten', 'Sofia', sans-serif;
+		font-weight: 700;
+		line-height: 1;
+		display: block;
 	}
 	section._club._1 > ._info > .row._1 > div._2 {
-	    align-self: center;
-	    padding-top: 1.5rem;
-	    padding-bottom: 1.5rem;
-	    padding-right: 0;
+		align-self: center;
+		padding-top: 1.5rem;
+		padding-bottom: 1.5rem;
+		padding-right: 0;
 	}
 	section._club._1 > ._info > .row._1 > div._2 ._actions{
-    	text-align: right;
+		text-align: right;
 	}
 	section._club._1 > aside._info {
-	    position: relative;
-	    z-index: 2;
+		position: relative;
+		z-index: 2;
 	}
 	section._club._1 aside._info > .row._3 > div {
-	    align-self: center;
+		align-self: center;
 	}
 	section._club._1 aside._info > .row._2 {
-	    margin-bottom: 25px;
+		margin-bottom: 25px;
 	}
 	section._club._1 ._data aside > p {
-	    font-family: 'Rubik', sans-serif;
-	    text-transform: uppercase;
-	    font-size: 0.7rem;
-	    text-overflow: ellipsis;
-	    width: 100%;
-	    display: block;
-	    margin-bottom: 0;
+		font-family: 'Rubik', sans-serif;
+		text-transform: uppercase;
+		font-size: 0.7rem;
+		text-overflow: ellipsis;
+		width: 100%;
+		display: block;
+		margin-bottom: 0;
 	}
 	body._light select.form-select,
 	body._light input.form-control,
@@ -122,9 +122,9 @@
 		margin-top:15px;
 	}
 	section._club._1 aside._info ._details > ._2 > ._in {
-	    display: flex;
-	    grid-gap: 20px;
-	    flex-wrap: wrap;
+		display: flex;
+		grid-gap: 20px;
+		flex-wrap: wrap;
 	}
 	section._club._1 > aside._info>div {
     padding-bottom: 15px;
@@ -144,33 +144,33 @@
 		height:100%;
 	}
 	section._club._2 > ._tabs > ul {
-	    justify-content: space-evenly;
+		justify-content: space-evenly;
 	}
 	._members > .list-group ._item_user_club > ._1 > h4 > span.badge {
-	    min-width: 70px;
-	    padding: 10px;
-	    display: flex;
-	    justify-content: center;
-    	grid-gap: 5px;
+		min-width: 70px;
+		padding: 10px;
+		display: flex;
+		justify-content: center;
+		grid-gap: 5px;
 	}
 	._item_user_club .badge > span._line {
-	    background: #ffffff;
-	    height: 19px;
-	    width: 2px;
-	    display: flex;
+		background: #ffffff;
+		height: 19px;
+		width: 2px;
+		display: flex;
 	}
 	._item_user_club > ._1 > b > span._number {
 	    padding-left: 5px;
 	}
 	._item_user_club > ._1 > b > span._line {
-	    height: 60%;
-	    background: white;
-	    width: 1px;
-	    position: absolute;
-	    display: inline-flex;
-	    bottom: 0;
-	    top: 0;
-	    margin: auto;
+		height: 60%;
+		background: white;
+		width: 1px;
+		position: absolute;
+		display: inline-flex;
+		bottom: 0;
+		top: 0;
+		margin: auto;
 	}
 	._item_user_club > ._2 > ._info {
 	    display: flex;
@@ -183,8 +183,6 @@
 	main._layout._1 > aside > section._clubedit {
 	  align-items: stretch;
 	}
-	main._layout._1 > aside > section._clubedit ._jumbo ._clubs {
-	}
 /* END SHOW */
 
 /* EDIT */
@@ -196,9 +194,6 @@
   main._layout._1 > aside._2 > section._clubedit > aside > form > ._cont{
     padding-left: 15px;
     padding-right: 15px;
-  }
-  main._layout._1 > aside._2 > section._clubedit > aside > ._cont._1,
-  main._layout._1 > aside._2 > section._clubedit > aside > form > ._cont._1{
   }
   main._layout._1 > aside._2 > section._clubedit > aside{
   	position: relative;
