@@ -34,9 +34,8 @@ class ClubsController < ApplicationController
     old_slug = @club.slug # guardar el slug antiguo
     
     if @club.update(club_params)
-      new_slug = @club.slug # guardar el nuevo slug
+      new_slug = @club.slug 
 
-      # comparar los valores del slug antiguo y nuevo
       if old_slug != new_slug
         flash[:notice] = "Saved!"
         redirect_to edit_club_path(@club), notice: "Done!"

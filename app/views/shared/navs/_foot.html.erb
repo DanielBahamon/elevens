@@ -2,12 +2,16 @@
   <div class="_cont _1">
     <% if user_signed_in? %>
       <div class="_item _icon_action _userlink d-xxl-none">
-        <%= image_tag current_user.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar _3" %>
+        <% if current_user.avatar.attached? %>
+          <%= image_tag current_user.avatar.variant(resize_to_limit: [300, 300]), class: "avatar_3" %>
+        <% end %>
         <span class="_1">Mi cuenta</span>
         <div class="_cont _1 _user">
           <div class="_1">
-            <%= link_to current_user do %>
-              <%= image_tag current_user.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar _1" %>
+            <% if current_user.avatar.attached? %>
+              <%= link_to current_user do %>
+                <%= image_tag current_user.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar _1" %>
+              <% end %>
             <% end %>
           </div>
           <div class="_2">

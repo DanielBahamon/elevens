@@ -44,82 +44,87 @@
 							</header>
 							<div class="_body_console _1">
 								<div class="_inner">
-									<% if @clubs.present? %>
-										<fieldset class="_clubes">
-											<% @clubs.each do |club| %>
-												<div class="_club _1">
-													<div class="_content">
-														<div class="_fila _1">
-															<div class="_1">
-																<div class="_avataries">
-																	<% progress = calculate_progress(club) %> 
-																	<% members = User.joins(:memberships).where("memberships.club_id = ? AND memberships.status = 1", club.id).limit(2) %>
-													    		<% total_members = club.memberships.where(status: 1).count %>
-
-													    		<% if members.exists? %>
-														        <% members.each do |member| %>
-															        <%= link_to user_path(member), class: '_avatary', 'data-bs-toggle': 'tooltip', 'data-bs-placement': 'top', 'data-bs-title': 'Tooltip on top' do %>
-															          <%= image_tag member.avatar.variant(resize_to_limit: [300, 300]), class: "_avatarline" %>
-															        <% end %>
-														        <% end %>
-														        <% if total_members > 2 %>
-														          <span class="_avatary_number">+<%= total_members - 2 %></span>
-														        <% end %>
-														    	<% else %>
-														    		<small><mutted>Without members</mutted></small>
-														    	<% end %>
-																</div>
-															</div>
-															<div class="_2">
-																<div class="dropdown">
-																  <button class="dropdown-toggle _options" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-																		<i class="bi bi-three-dots-vertical"></i>
-																  </button>
-																  <ul class="dropdown-menu">
-																    <li><a class="dropdown-item" href="#">Action</a></li>
-																    <li><a class="dropdown-item" href="#">Another action</a></li>
-																    <li><a class="dropdown-item" href="#">Something else here</a></li>
-																  </ul>
-																</div>
-															</div>
-														</div>
-														<div class="_fila _2">
-															<div class="_1">
-																<h2 class="_name"><%= club.club_name %></h2>
-															</div>
-														</div>
-														<div class="_fila _3">
-															<div class="_1">
-																<% if club.user.id == current_user.id %>
-																	<p class="_type">Director </p>
-																  <% unless progress > 99 %>
-																    <p><%= progress %>%</p>
-																  <% end %>
-																<% else %>
-																	<p class="_type">Miembro</p>
-																<% end %>
-
-															</div>
-														</div>
-														<% unless progress > 99 %>
-															<div class="_fila _4">
-													      <div class="progress" role="progressbar" aria-label="Example 20px high" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100" style="height: 5px">
-													        <div class="progress-bar" style="width: <%= progress %>%"></div>
-													      </div>
-															</div>
-														<% end %>
-														<%= link_to direction_club_path(club), class: "_link_hide" do %><% end %>
-													</div>
-													<figure class="_logo">
-														<%= image_tag club.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _1" %>
-													</figure>
-												</div>
-											<% end %>
-										</fieldset>
-									<% end %>
 									<fieldset class="_tasks">
 										<div class="row">
 											<div class="col-md-6 _1">
+												<% if @clubs.present? %>
+													<fieldset class="_clubes">
+														<% @clubs.each do |club| %>
+															<div class="_club _1">
+																<div class="_content">
+																	<div class="_fila _1">
+																		<div class="_1">
+																			<div class="_avataries">
+																				<% progress = calculate_progress(club) %> 
+																				<% members = User.joins(:memberships).where("memberships.club_id = ? AND memberships.status = 1", club.id).limit(2) %>
+																				<% total_members = club.memberships.where(status: 1).count %>
+
+																				<% if members.exists? %>
+																					<% members.each do |member| %>
+																						<%= link_to user_path(member), class: '_avatary', 'data-bs-toggle': 'tooltip', 'data-bs-placement': 'top', 'data-bs-title': 'Tooltip on top' do %>
+																							
+																							<% if member.avatar.attached? %>
+																								<%= image_tag member.avatar.variant(resize_to_limit: [300, 300]), class: "_avatarline" %>
+																							<% else %>
+																								<i class="fal fa-user-circle"></i>
+																							<% end %>
+																						<% end %>
+																					<% end %>
+																					<% if total_members > 2 %>
+																						<span class="_avatary_number">+<%= total_members - 2 %></span>
+																					<% end %>
+																				<% else %>
+																					<small><mutted>Without members</mutted></small>
+																				<% end %>
+																			</div>
+																		</div>
+																		<div class="_2">
+																			<div class="dropdown">
+																				<button class="dropdown-toggle _options" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+																					<i class="bi bi-three-dots-vertical"></i>
+																				</button>
+																				<ul class="dropdown-menu">
+																					<li><a class="dropdown-item" href="#">Action</a></li>
+																					<li><a class="dropdown-item" href="#">Another action</a></li>
+																					<li><a class="dropdown-item" href="#">Something else here</a></li>
+																				</ul>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="_fila _2">
+																		<div class="_1">
+																			<h2 class="_name"><%= club.club_name %></h2>
+																		</div>
+																	</div>
+																	<div class="_fila _3">
+																		<div class="_1">
+																			<% if club.user.id == current_user.id %>
+																				<p class="_type">Director </p>
+																				<% unless progress > 99 %>
+																					<p><%= progress %>%</p>
+																				<% end %>
+																			<% else %>
+																				<p class="_type">Miembro</p>
+																			<% end %>
+
+																		</div>
+																	</div>
+																	<% unless progress > 99 %>
+																		<div class="_fila _4">
+																			<div class="progress" role="progressbar" aria-label="Example 20px high" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100" style="height: 5px">
+																				<div class="progress-bar" style="width: <%= progress %>%"></div>
+																			</div>
+																		</div>
+																	<% end %>
+																	<%= link_to direction_club_path(club), class: "_link_hide" do %><% end %>
+																</div>
+																<figure class="_logo">
+																	<%= image_tag club.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _1" %>
+																</figure>
+															</div>
+														<% end %>
+													</fieldset>
+												<% end %>
 												<% if @tasks.present? %>
 													<div class="_tasks">
 														<h4 class="_title">Upcoming events</h4>
@@ -143,12 +148,7 @@
 															</article>
 														<% end %>
 													</div>
-												<% else %>
-													<% if current_user.clubs.present? %>
-														<div class="_notasks">
-															<p>There are no tasks available</p>
-														</div>
-													<% end %>
+													
 												<% end %>
 											</div>
 											<div class="col-md-6 _2">

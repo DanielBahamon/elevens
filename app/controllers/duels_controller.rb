@@ -23,6 +23,19 @@ class DuelsController < ApplicationController
     else
       @selected_date = nil
     end
+    
+    # @active_club_ids = @clubs.map(&:id) 
+    @tasks = Task.joins(:club).where(club_id: @club.id)
+    @tasks_with_clubs = @tasks.map do |task|
+      duel = Duel.find_by(id: task.duel_id)
+      club = Club.find_by(id: task.club_id) 
+      rival = duel ? Club.find_by(id: duel.rival_id) : nil
+      task.as_json.merge(
+        avatar: club&.avatar&.attached? ? url_for(club.avatar) : "URL de tu imagen por defecto",
+        rival_avatar: rival&.avatar&.attached? ? url_for(rival.avatar) : "URL de tu imagen por defecto"
+
+      )
+    end
   end
 
   def create
@@ -1390,6 +1403,6 @@ class DuelsController < ApplicationController
                                     :sport_bib, :digital_counter,:streaming, :snacks, :referee_price, :referee_freelance, 
                                     :club_id, :user_id, :rival_id, :duel_total,:local_score, :rival_score, :referee_id, 
                                     :latitude, :longitude, :responsibility, :substitutes, :formation, :serviceconfirmation, 
-                                    :showformation, :time_type, :ready_time, :color_local, :color_rival)
+                                    :showformation, :time_type, :ready_time, :color_local, :color_rival, :hunted)
     end
 end

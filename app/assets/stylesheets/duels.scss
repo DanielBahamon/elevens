@@ -53,11 +53,12 @@
     opacity:0.7;
   }
   ._options ._option {
-    max-width: 100%;
     position: relative;
     max-width: 100%;
+    width:max-content;
     border: 1px solid transparent;
     cursor:pointer;
+    padding:0;
     transition: transform 0.3s cubic-bezier(0, 1.26, 0.78, 1.21);
     margin-bottom: 1px;
   }
@@ -113,7 +114,7 @@
     height: 70px;
     padding: 10px;
     border-radius: 999px;
-    border: 3px solid black;
+    border: 2px solid black;
     display: flex;
     align-items: center;
   }
@@ -162,6 +163,13 @@
   ._options ._option ._info ._data ._description {
     display: flex;
     align-items: center;
+  }
+  ._hunted._options ._option {
+    margin: 0 auto 1rem;
+  }
+  ._options ._option ._info ._icon i {
+    font-size: 2rem;
+    width: 100%;
   }
   body._light ._options ._option.blocked ._note{
     background: #060909b5

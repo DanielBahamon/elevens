@@ -118,7 +118,10 @@
 
 													  <% @clubs.each do |club| %>
 														  <tr>
-													      <td scope="row"><%= image_tag club.avatar.url(:medium), class: "_shield" %></th>
+													      <td scope="row">
+																	
+																	<%= image_tag club.avatar.variant(resize_to_limit: [300, 300]), class: "_shield" %>
+																</th>
 													      <td><%= club.club_name %></td>
 													      <td><%= club.champions %></td>
 													      <td>Follow</td>
@@ -274,8 +277,8 @@
 										  </div>
 											<div class="splide__track">
 											  <ul class="splide__list">
-									        <li class="splide__slide" >
-									          <%= image_tag @user.coverpage.url(:large), class: "_coverpic" %>
+									        <li class="splide__slide" ></li>
+														<%= image_tag @user.coverpage.variant(resize_to_limit: [300, 300]), class: "_coverpic" %>
 									        </li>
 											  </ul>
 											</div>

@@ -15,4 +15,13 @@ module ApplicationHelper
       "https://www.gravatar.com/avatar/#{gravatar_id}.jpg?d=identicon&s=150"
     end
   end
+
+  
+  def cloudfront_url_for(blob)
+    return unless blob.attached?
+
+    # Reemplaza 'my_distribution_id.cloudfront.net' con tu propio ID de distribución de CloudFront
+    cloudfront_host = 'da2k6p53nda1n.cloudfront.net'
+    url_for(blob).sub(URI.parse(url_for(blob)).host, cloudfront_host)
+  end
 end

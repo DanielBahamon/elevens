@@ -333,7 +333,7 @@
 										      <% end %>
 									      <% else %>
 									      	<li class="splide__slide">
-									      		<img src="https://dfqckra2c3mhq.cloudfront.net/assets/bg_coverpage.jpg">
+									      		<img src="https://da2k6p53nda1n.cloudfront.net/assets/bg/double-bubble-outline.jpg">
 									      	</li>
 									      <% end %>
 										  </ul>
@@ -346,7 +346,12 @@
 										<div class="row _1 _cover">
 											<div class="col-md-4 _1 offset-md-4">
 												<aside class="_in">
-													<%= image_tag @club.avatar.variant(resize_to_limit: [300, 300]), class: "_shield" %>
+													<% if @club.avatar.attached? %>
+														<%= image_tag @club.avatar.variant(resize_to_limit: [300, 300]), class: "_shield" %>
+													<% else %>
+														<i class="fal fa-user-circle"></i>
+													<% end %>
+
 													<a class="_coverlink" data-bs-toggle="modal" data-bs-target="#avatarModal">
 														<i class="bi bi-pencil-square "></i>
 													</a>

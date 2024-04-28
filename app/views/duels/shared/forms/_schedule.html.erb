@@ -2,7 +2,206 @@
   <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.hidden_field :time_type, value: 'Schedule' %>
 
-  <fieldset class="step active p-3">
+  <fieldset class="step active p-3 _hunted">
+    <aside class="_content">
+      <div class="_head">
+        <div class="_in">
+          <h1 class="display-6">Agreed Duel or Free Adventure?</h1>
+					<% if @duel.errors.any? %>
+						<div id="error_explanation">
+							<h2><%= pluralize(@duel.errors.count, "error") %> impidieron que se creara el duelo:</h2>
+							<ul>
+							<% @duel.errors.full_messages.each do |message| %>
+								<li><%= message %></li>
+							<% end %>
+							</ul>
+						</div>
+				<% end %>
+        </div>
+      </div>
+      <div class="_hunted _options">
+					<div class="row no-m">
+						<div class="_option">
+							<div class="_info">
+								<div class="_data">
+									<figure class="_icon text-center">
+										<i class="fal fa-handshake"></i>
+									</figure>
+									<div class="_description">
+										<div class="_inner">
+											<h5 class="m-0">Agreed Duel</h5>
+											<p></p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<%= f.radio_button :hunted, true, {class: 'form-check-input next', required: true, id: "duel_hunted_true"} %>
+						</div>
+						<div class="_option">
+							<div class="_info">
+								<div class="_data">
+									<figure class="_icon text-center">
+										<i class="fal fa-dice"></i>
+									</figure>
+									<div class="_description">
+										<div class="_inner">
+											<h5 class="m-0">Free Duel</h5>
+											<p></p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<%= f.radio_button :hunted, false, {class: 'form-check-input next more_1_step', required: true, id: "duel_hunted_true"} %>
+						</div>
+					</div>
+						
+      </div>
+    </aside>
+  </fieldset>
+	
+  <fieldset class="step p-3 _clubs">
+    <aside class="_content">
+      <div class="_head">
+        <div class="_in">
+          <h1 class="display-6">Choose your rival</h1>
+        </div>
+      </div>
+			<div class="_body">
+				<div class="_clubs">
+					<% if @available_clubs.present? %>
+						<div class="_clubs">
+							<% @available_clubs.each do |rival| %>
+								<div class="_club">
+									<aside>
+										<div class="_1">
+											<figure class="_shield">
+												<%= image_tag rival.avatar.variant(resize_to_limit: [300, 300]), class: "_shield _1" %>
+											</figure>
+										</div>
+										<div class="_2">
+											<h4 class="_name"><%= rival.club_name %></h4>
+											<p class="_location"><%= rival.city %>, <%= rival.country %></p>
+										</div>
+									</aside>
+									<aside>
+										<div class="_3">
+											<%= link_to challenge_club_duel_rivals_path(club_id: @club.id, duel_id: @duel.id, id: @duel.id, rival_id: rival.id), class: "_morebtn button--sacnite _2 _btn m-0-auto close _small _btn_more_create", method: :post do %>
+												<i class="fal fa-plus button__icon"></i>
+											<% end %>
+										</div>
+									</aside>
+								</div>
+							<% end %>
+						</div>
+						<%= will_paginate @available_clubs %>
+					<% else %>
+					<div class="_noclubs">
+						<h1>No clubs yet</h1>
+					</div>
+					<% end %>
+				</div>
+			</div>
+    </aside>
+  </fieldset>
+
+  <fieldset class="step p-3 _schedule">
+		<aside class="_back">
+		</aside>
+  	<aside class="_content _scheduled_time">
+  		<div class="_head">
+		    <div class="_in">
+		      <h1 class="display-6">Select the date and time for your duel</h1>
+		      <p class="lead">Great! You've already chosen the discipline for your duel. Now, we need to know the date and time of your duel. Please select a date and time that works for you and your team. Make sure to choose a date that allows enough time to prepare for the duel.</p>
+		    </div>
+		  </div>
+		  <div class="_body">
+	      <div class="input-group mb-3">
+					<div id="calendar"></div>
+					<% if @selected_date.present? %>
+						<%= f.datetime_field :start_date, value: @selected_date.strftime('%Y-%m-%dT%H:%M'), placeholder: "DD/MM/AAAA HH:MM", class: "form-control _process", id: "start-date_2" %>
+					<% else %>
+						<%= f.datetime_field :start_date, placeholder: "DD/MM/AAAA HH:MM", class: "form-control _process", id: "start-date_2" %>
+					<% end %>
+					
+					
+					<div class="modal fade newEventModal" id="newEventModal" tabindex="-1" aria-labelledby="newEventModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="newEventModalLabel">New event</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+							
+									<div class="_list"></div>
+									<input class="timepicker _time" id="timeSelector">
+								</div>
+								<div class="modal-footer">
+									<% if current_user.clubs.present? %>
+										<%= link_to new_club_duel_path(current_user.clubs.first), class: "btn btn-primary", id: "createDuelLink" do %>
+											<span>New duel</span>
+										<% end %>
+									<% end %>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade newEventTodayModal" id="newEventTodayModal" tabindex="-1" aria-labelledby="newEventTodayModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="newEventModalLabel">Nuevo event</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<div class="_list"></div>
+								</div>
+								<div class="modal-footer">
+									<% if @clubs.present? %>
+										<%= link_to new_club_duel_path(@clubs.first), class: "btn btn-primary", id: "createDuelLink" do %>
+											<span>New duel</span>
+										<% end %>
+									<% end %>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	      <div class="mb-3">
+	      	<div class="_inputactions">
+	      		<a href="#" class="_btn button--sacnite _btn-minus-time_2">
+		      		<i class="bi bi-dash"></i>
+						</a>
+						<div class="_input_number">
+							<%= f.number_field :duration_time, placeholder: "1", class: "form-control _process", id: "duration-time", min: "30", placeholder: "90", max: "360" %>
+							<div class="_block"></div>
+						</div>
+						<a href="#" class="_btn button--sacnite _btn-plus-time_2">
+		      		<i class="bi bi-plus-lg"></i>
+						</a>
+	      	</div>
+	    		<%= f.datetime_field :end_date, id: "end-date_2", class: "_process d-none" %>
+	      </div>
+		  </div>
+			<div class="_foot">
+			  <div class="alert alert-info" role="alert">
+				  Every minute counts! Enter the approximate duration of your match in minutes. Remember, it must be at least 30 minutes, but no more than 6 hours (360 minutes) for your match to be valid.
+				</div>
+			</div>
+			<div class="_action">
+				<button type="button" class="prev button--shikoba _2 prev_1_step">
+					<span>Back</span>
+					<i class="button__icon fal fa-arrow-left"></i>
+				</button>
+				<button type="button" class="next button--shikoba _2" id="follow-button">
+					<span>Next</span>
+					<i class="button__icon fal fa-arrow-right"></i>
+				</button>
+			</div>
+  	</aside>
+  </fieldset>
+
+  <fieldset class="step p-3 _discipline">
     <aside class="_content">
       <div class="_head">
         <div class="_in">
@@ -35,149 +234,102 @@
 				].reverse %>
 				<% approved_members_count = @club.memberships.where(status: 1).count %>
 				<div class="_sports _options">
-				  <% sports.each do |sport| %>
-				    <% sport_name, sport_id, members_required = sport %>
-				    <% disable_sport = approved_members_count < members_required %>
-				    <div class="_sport _option <% if disable_sport %> blocked <% end %>">
-				      <div class="_info">
-				        <div class="_data">
-				          <figure class="_icon">
-				            <img src="//d2ivxtccd0p0sz.cloudfront.net/assets/images/futicons/<%= sport_id %>.png">
-				          </figure>
-				          <div class="_description">
-			          		<div class="_inner">
-			          			<h5 class="m-0"><%= sport_name %></h5>
-					            <p>
-								      <% case sport_id %>
-								        <% when "Legends" %>
-								          1 x 1
-								        <% when "Kings" %>
-								          2 x 2
-								        <% when "Bancas" %>
-								          3 x 3
-								        <% when "Microfutbol" %>
-								          4 x 4
-								        <% when "Futbol5" %>
-								          5 x 5
-								        <% when "Futbol6" %>
-								          6 x 6
-								        <% when "Futbol7" %>
-								          7 x 7
-								        <% when "Futbol8" %>
-								          8 x 8
-								        <% when "Futbol9" %>
-								          9 x 9
-								        <% when "Futbol10" %>
-								          10 x 10
-								        <% when "Futbol11" %>
-								          11 x 11
-								      <% end %></p>
-			          		</div>
-				          </div>
-				        </div>
-				      </div>
-				      <%= f.radio_button :sport, sport_id, {class: 'form-check-input next', required: true, id: "duel_sport_#{sport_id}", disabled: disable_sport } %>
-							<div class="_note">
-								<% if disable_sport %>
-									<p>You don't have enough players</p>
-								<% else %>
-									<p>Seleccionar</p>
-								<% end %>
+					<div class="row">
+						<% sports.each do |sport| %>
+							<% sport_name, sport_id, members_required = sport %>
+							<% disable_sport = approved_members_count < members_required %>
+							<div class="
+													<% case sport_id %>
+														<% when "Futbol11" %>
+															col-lg-12
+														<% else %>
+															col-lg-6 
+													<% end %>
+							">
+								<div class="_sport _option <% if disable_sport %> blocked <% end %>">
+									<div class="_info">
+										<div class="_data">
+											<figure class="_icon text-center">
+												<h5>
+													<% case sport_id %>
+														<% when "Legends" %>
+															1 x 1
+														<% when "Kings" %>
+															2 x 2
+														<% when "Bancas" %>
+															3 x 3
+														<% when "Microfutbol" %>
+															4 x 4
+														<% when "Futbol5" %>
+															5 x 5
+														<% when "Futbol6" %>
+															6 x 6
+														<% when "Futbol7" %>
+															7 x 7
+														<% when "Futbol8" %>
+															8 x 8
+														<% when "Futbol9" %>
+															9 x 9
+														<% when "Futbol10" %>
+															10 x 10
+														<% when "Futbol11" %>
+															11 x 11
+													<% end %>
+												</h5>
+											</figure>
+											<div class="_description">
+												<div class="_inner">
+													<h5 class="m-0"><%= sport_name %></h5>
+													<p>
+													<% case sport_id %>
+														<% when "Legends" %>
+															1 x 1
+														<% when "Kings" %>
+															2 x 2
+														<% when "Bancas" %>
+															3 x 3
+														<% when "Microfutbol" %>
+															4 x 4
+														<% when "Futbol5" %>
+															5 x 5
+														<% when "Futbol6" %>
+															6 x 6
+														<% when "Futbol7" %>
+															7 x 7
+														<% when "Futbol8" %>
+															8 x 8
+														<% when "Futbol9" %>
+															9 x 9
+														<% when "Futbol10" %>
+															10 x 10
+														<% when "Futbol11" %>
+															11 x 11
+													<% end %></p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<%= f.radio_button :sport, sport_id, {class: 'form-check-input next', required: true, id: "duel_sport_#{sport_id}", disabled: disable_sport } %>
+									<div class="_note">
+										<% if disable_sport %>
+											<p>You don't have enough players</p>
+										<% else %>
+											<p>Seleccionar</p>
+										<% end %>
+									</div>
+								</div>
 							</div>
-				    </div>
-				  <% end %>
+						<% end %>
+					</div>
+						
 				</div>
       </div>
 			<div class="_action text-center">
-				<button class="_back_step button--shikoba _2">
-					<span>Back</span>
-					<i class="button__icon fal fa-arrow-left"></i>
-				</button>
 			</div>
     </aside>
   </fieldset>
-	
-  <fieldset class="step p-3">
-		<aside class="_back">
-		</aside>
-  	<aside class="_content _scheduled_time">
-  		<div class="_head">
-		    <div class="_in">
-		      <h1 class="display-6">Select the date and time for your duel</h1>
-		      <p class="lead">Great! You've already chosen the discipline for your duel. Now, we need to know the date and time of your duel. Please select a date and time that works for you and your team. Make sure to choose a date that allows enough time to prepare for the duel.</p>
-		    </div>
-		  </div>
-		  <div class="_body">
-	      <div class="input-group mb-3">
-				<% if @selected_date.present? %>
-  				<%= f.datetime_field :start_date, value: @selected_date.strftime('%Y-%m-%dT%H:%M'), placeholder: "DD/MM/AAAA HH:MM", class: "form-control _process", id: "start-date_2" %>
-	      <% else %>
-  				<%= f.datetime_field :start_date, placeholder: "DD/MM/AAAA HH:MM", class: "form-control _process", id: "start-date_2" %>
-				<% end %>
-				</div>
-		  </div>
-		  <div class="_foot"></div>
-			<div class="_action">
-				<button type="button" class="prev button--shikoba _2">
-					<span>Back</span>
-					<i class="button__icon fal fa-arrow-left"></i>
-				</button>
-				<button type="button" class="next button--shikoba _2" id="follow-button">
-					<span>Next</span>
-					<i class="button__icon fal fa-arrow-right"></i>
-				</button>
-			</div>
-  	</aside>
-  </fieldset>
   
-  <fieldset class="step p-3">
-		<aside class="_back">
-  		<a href="#" class="_btn button--sacnite prev">
-				<i class="bi bi-chevron-left"></i>
-			</a>
-		</aside>
-		<aside class="_content">
-			<div class="_head">
-				<div class="_in">
-				  <h1 class="display-6">Determine the duration of the match.</h1>
-				  <p class="lead">Great! Now, we need to determine how long the match will last. Select the match duration in minutes to ensure that both teams have enough time to compete and showcase their skills:</p>
-				</div>
-		  </div>
-	    <div class="_body">
-	      <div class="mb-3">
-	      	<div class="_inputactions">
-	      		<a href="#" class="_btn button--sacnite _btn-minus-time_2">
-		      		<i class="bi bi-dash"></i>
-						</a>
-						<div class="_input_number">
-							<%= f.number_field :duration_time, placeholder: "1", class: "form-control _process", id: "duration-time", min: "30", placeholder: "90", max: "360" %>
-							<div class="_block"></div>
-						</div>
-						<a href="#" class="_btn button--sacnite _btn-plus-time_2">
-		      		<i class="bi bi-plus-lg"></i>
-						</a>
-	      	</div>
-	    		<%= f.datetime_field :end_date, id: "end-date_2", class: "_process d-none" %>
-	      </div>
-	    </div>
-			<div class="_foot">
-			  <div class="alert alert-info" role="alert">
-				  Every minute counts! Enter the approximate duration of your match in minutes. Remember, it must be at least 30 minutes, but no more than 6 hours (360 minutes) for your match to be valid.
-				</div>
-			</div>
-			<div class="_action">
-				<div></div>
-				<div class="_btns">
-			    <a href="#" class="button--naira _1 fit _btnnext next">
-			    	<span>Next</span>
-						<i class="button__icon bi bi-check2"></i>
-			  	</a>
-				</div>
-			</div>
-		</aside>
-  </fieldset>
-  
-  <fieldset class="step p-3">
+  <fieldset class="step p-3 _referee">
 		<aside class="_back">
   		<a href="#" class="_btn button--sacnite prev">
 				<i class="bi bi-chevron-left"></i>
@@ -222,7 +374,7 @@
 		</aside>
   </fieldset>
   
-  <fieldset class="step p-3">
+  <fieldset class="step p-3 _bet">
 		<aside class="_back">
   		<a href="#" class="_btn button--sacnite prev">
 				<i class="bi bi-chevron-left"></i>
@@ -267,7 +419,7 @@
 		</aside>
   </fieldset>
 
-  <fieldset class="step p-3">
+  <fieldset class="step p-3 _responsibility">
 		<aside class="_back">
   		<a href="#" class="_btn button--sacnite prev">
 				<i class="bi bi-chevron-left"></i>
@@ -299,7 +451,7 @@
 
 <script type="text/javascript">
 	(function() {
-		/* ================== DATETIME I ======================= */
+		/* ================== CALENDAR ======================= */
 			$(function() {
 				const startDate = $('#start-date_2');
 				const durationHours = $('#duration-time');
@@ -345,9 +497,9 @@
 					updateEndDate();
 				});
 			});
-		/* ==================== END DATETIME I ===================== */
+		/* ==================== END CALENDAR ===================== */
 
-		/* ==================== BARRA DE PROGRESO ===================== */
+		/* ==================== PROGRESS ===================== */
 			$(document).ready(function() {
 				var currentStep = 0;
 				var $form = $('.new_duel');
@@ -375,64 +527,80 @@
 					var $currentStep = $steps.eq(currentStep);
 					var isValid = true;
 			
-					// Check if there are radio buttons in the current step
 					var $radioButtons = $currentStep.find('input[type="radio"]');
 					if ($radioButtons.length > 0) {
-							// Check if a radio button is selected
 							var $selectedRadio = $radioButtons.filter(':checked');
 							if ($selectedRadio.length === 0) {
-									isValid = false;
-									$radioButtons.addClass('error');
+                isValid = false;
+                $radioButtons.addClass('error');
 							} else {
-									$radioButtons.removeClass('error');
+                $radioButtons.removeClass('error');
+                var additionalSteps = 0;
+                if ($selectedRadio.hasClass('more_1_step')) {
+                    additionalSteps = 1;
+                } else if ($selectedRadio.hasClass('more_2_step')) {
+                    additionalSteps = 2;
+                }
+                currentStep += additionalSteps; 
 							}
 					}
 			
 					if (isValid) {
-							$currentStep.fadeOut(500).promise().done(function() {
-									currentStep++;
-									showStep(currentStep);
-									$steps.eq(currentStep).fadeIn(500);
-							});
+						$currentStep.fadeOut(500).promise().done(function() {
+							currentStep++;
+							showStep(currentStep);
+							$steps.eq(currentStep).fadeIn(500);
+						});
 					}
 				});
 
+
 				$form.find('.prev').click(function() {
+						// Determinar cuántos pasos retroceder basado en la clase del botón prev
+						var stepsBack = 1; // Valor predeterminado: retrocede 1 paso
+
+						// Verificar las clases del botón presionado
+						if ($(this).hasClass('prev_1_step')) {
+								stepsBack += 1; // Suma 1 adicional para retroceder 2 pasos en total
+						} else if ($(this).hasClass('prev_2_step')) {
+								stepsBack += 2; // Suma 2 adicionales para retroceder 3 pasos en total
+						}
+
 						$steps.eq(currentStep).fadeOut(500).promise().done(function() {
-								currentStep--;
+								// Asegurarse de no retroceder más allá del inicio
+								currentStep = Math.max(0, currentStep - stepsBack);
 								showStep(currentStep);
 								$steps.eq(currentStep).fadeIn(500);
 						});
 				});
+
+
 			});
 
 			function updateProgressBar() {
-					var steps = document.querySelectorAll('.step');
-					var progress = document.getElementById('_progress-bar');
-					var stepCount = steps.length;
-					var currentStep = 0;
+				var steps = document.querySelectorAll('.step');
+				var progress = document.getElementById('_progress-bar');
+				var stepCount = steps.length;
+				var currentStep = 0;
 
-					// Encontrar el paso actual
-					for (var i = 0; i < steps.length; i++) {
-							if (steps[i].classList.contains('active')) {
-							currentStep = i;
-							break;
-							}
-					}
+				for (var i = 0; i < steps.length; i++) {
+						if (steps[i].classList.contains('active')) {
+						currentStep = i;
+						break;
+						}
+				}
 
-					// Actualizar la barra de progreso
-					var percent = ((currentStep + 1) / stepCount) * 100;
-					progress.style.width = percent + '%';
+				var percent = ((currentStep + 1) / stepCount) * 100;
+				progress.style.width = percent + '%';
 			}
 
 			var nextButtons = document.querySelectorAll('.next');
 			for (var i = 0; i < nextButtons.length; i++) {
 				nextButtons[i].addEventListener('click', function() {
-						updateProgressBar();
+					updateProgressBar();
 				});
 			}
 
-		/* ==================== END BARRA DE PROGRESO ===================== */
-		
+		/* ==================== END PROGRESS ===================== */
 	})();
 </script>

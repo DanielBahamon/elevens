@@ -106,6 +106,8 @@ gem 'timezone'
 gem 'will_paginate', '~> 4.0'
 gem 'fabricjs-rails', '~> 2.0'
 gem 'jquery-timepicker-rails' 
+gem 'image_processing'
+
 
 gem "jekyll"
 

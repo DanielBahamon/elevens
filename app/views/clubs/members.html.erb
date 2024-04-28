@@ -23,7 +23,13 @@
 											<li class="list-group-item d-flex justify-content-between _itemuser">
 												<div class="_i">
 													<figure>
-														<%= link_to user_path(player) do %><%= image_tag player.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar _1" %><% end %>
+														<%= link_to user_path(player) do %>
+															<% if player.avatar.attached? %>
+																<%= image_tag player.avatar.variant(resize_to_limit: [300, 300]), class: "_avatar _1" %>
+															<% else %>
+																<i class="fal fa-user-circle"></i>
+															<% end %>
+														<% end %>
 														<div class="_status">
 															<% if player.status == true %>
 															  <span class="_pointstatus bg-success"></span>

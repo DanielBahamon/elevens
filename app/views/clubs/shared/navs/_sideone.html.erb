@@ -1,7 +1,11 @@
 <nav class="_navside _club">
   <div class="_cont _1">
     <%= link_to console_path, data: { no_turbolink: true }, class: "_logo _1 _item" do %>
-      <%= image_tag @club.avatar.variant(resize_to_limit: [300, 300]), class: "_light" %>
+      <% if @club.avatar.attached? %>
+        <%= image_tag @club.avatar.variant(resize_to_limit: [300, 300]), class: "_light" %>
+      <% else %>
+      <% end %>
+
       <span><%= @club.club_name %></span> 
     <% end %>
     <% if user_signed_in? %>

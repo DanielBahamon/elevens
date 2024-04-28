@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_03_09_194112) do
+ActiveRecord::Schema.define(version: 2024_03_16_193242) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -210,6 +210,7 @@ ActiveRecord::Schema.define(version: 2024_03_09_194112) do
     t.boolean "ready", default: false
     t.string "color_local"
     t.string "color_rival"
+    t.boolean "hunted", default: false
     t.index ["club_id"], name: "index_duels_on_club_id"
     t.index ["clubs_id"], name: "index_duels_on_clubs_id"
     t.index ["user_id"], name: "index_duels_on_user_id"
