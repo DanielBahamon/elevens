@@ -1,0 +1,2 @@
+s/your_google_client_id/GOOGLE_OAUTH_CLIENT_ID/g
+s/your_google_client_secret/GOOGLE_OAUTH_CLIENT_SECRET/g
