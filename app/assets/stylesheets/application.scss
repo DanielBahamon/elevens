@@ -194,7 +194,7 @@
     display: flex;
     align-items: center;
     position: relative;
-    padding: 20px;
+    padding: 1rem;
     width: 100%;
     font-size: 1rem;
     font-weight: 800;
@@ -358,8 +358,13 @@
   }
 
 /* NAVSIDE */
+  nav._navside > ._cont ._logo{
+    margin-bottom: 0;
+  }
+  nav._navside > ._cont ._item._logos {
+  grid-gap: 1rem;
+  }
   nav._navside > ._cont._1 ._logo {
-    margin-bottom: 20px;
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;

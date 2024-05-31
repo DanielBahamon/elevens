@@ -1523,6 +1523,10 @@ GEM
       warden (~> 1.2.3)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     dragonfly (1.4.0)
       addressable (~> 2.3)
       multi_json (~> 1.0)
@@ -1864,6 +1868,7 @@ DEPENDENCIES
   coffee-script (~> 2.3)
   country_select
   devise
+  dotenv-rails
   fabricjs-rails (~> 2.0)
   ffmpeg (~> 0.2.5)
   ffprober
